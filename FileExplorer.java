@@ -9,19 +9,19 @@ public class FileExplorer {
   }
   
   // Returns the file at the given path
-  public File GetFile(string path) {
+  public File GetFile(String path) {
     
     return null;
   }
   
   // Adds the file at the given path
-  public void AddFile(string path, File file) {
+  public void AddFile(String path, File file) {
     
     return;
   }
   
   // Returns whether that path exists in the file explorer
-  public boolean PathExists(string path) {
+  public boolean PathExists(String path) {
     
     return false;
   }
