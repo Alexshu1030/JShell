@@ -34,16 +34,16 @@ import java.util.Scanner;
 
 public class JShell {
   
-  public static ArrayList<String> commandLog = new ArrayList<String>();
+  public ArrayList<String> commandLog = new ArrayList<String>();
 
-  private static String prompt = "/# ";
-  private static String errorMessage = "Invalid command, please try again";
+  private String prompt = "/# ";
+  private String errorMessage = "Invalid command, please try again";
 
-  private static String[] commandNames = new String[] {"exit", "mkdir", "cd", 
+  private String[] commandNames = new String[] {"exit", "mkdir", "cd", 
       "ls", "pwd", "mv", "cp", "cat", "get", "echo"};
-  private static int[] commandArgs = new int[] {0, 1, 1, 0, 0, 2, 2, 1, 1, 3};
+  private int[] commandArgs = new int[] {0, 1, 1, 0, 0, 2, 2, 1, 1, 3};
 
-  public static void main(String[] args) {
+  public runJShell() {
     // TODO Auto-generated method stub
 
     Scanner in = new Scanner(System.in);
