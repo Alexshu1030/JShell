@@ -114,7 +114,7 @@ public class JShell {
           if (text.charAt(i) != ' ')
             atTextEnd = false;
         }
-        if (text.charAt(i) == ' ' || i == text.length() - 1) {
+        if (text.charAt(i) == ' ' && !atTextEnd || i == text.length() - 1) {
           atTextEnd = true;
           splits++;
         }
