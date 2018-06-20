@@ -5,10 +5,10 @@
 // UT Student #: 1003796859
 // Author: Ciaran Hogan
 //
-// Student2:
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student2: Jeremy Tanuan
+// UTORID user_name: tanuanje
+// UT Student #: 1003939982
+// Author: Jeremy Tanuan
 //
 // Student3:
 // UTORID user_name:
