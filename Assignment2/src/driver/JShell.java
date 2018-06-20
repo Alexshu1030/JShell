@@ -43,6 +43,9 @@ public class JShell {
       "ls", "pwd", "mv", "cp", "cat", "get", "echo"};
   private int[] commandArgs = new int[] {0, 1, 1, 0, 0, 2, 2, 1, 1, 3};
 
+  public JShell() {  
+  }
+
   public runJShell() {
     // TODO Auto-generated method stub
 
