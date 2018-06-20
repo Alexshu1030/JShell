@@ -95,8 +95,12 @@ public class JShell {
       }
     }
   }
+  
+  public ArrayList<String> getCommandLog() {
+    return commandLog;
+  }
 
-  private static String[] Split(String text) {
+  private String[] Split(String text) {
 
     boolean inQuotes = false;
     boolean atTextEnd = false;
@@ -168,7 +172,7 @@ public class JShell {
     return splitText;
   }
 
-  private static boolean IsValidCommand(String[] input) {
+  private boolean IsValidCommand(String[] input) {
 
     boolean isCommand = false;
     int inputLen = input.length;
