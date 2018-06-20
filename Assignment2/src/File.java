@@ -1,8 +1,8 @@
-public class File {
-  private String fileName = "";
-  private String fileDirectory = "";
-  private String fileContents = "";
-  public File(String name, String directory, String contents) {
+public class File<T> {
+  private String fileName;
+  private Directory fileDirectory;
+  private T fileContents;
+  public File(String name, String directory, T contents) {
     // Constructor for file class
     setFileName(name);
     setFileDirectory(directory);
@@ -12,10 +12,10 @@ public class File {
   private void setFileName(String name) {
     this.fileName = name;
   }
-  private void setFileDirectory(String directory) {
+  private void setFileDirectory(Directory directory) {
     this.fileDirectory = directory;
   }
-  private void setFileContents(String contents) {
+  private void setFileContents(T contents) {
     this.fileContents = contents;
   }
   
@@ -23,7 +23,7 @@ public class File {
     return this.fileName;
   }
   
-  public String getFileDirectory() {
+  public Object getFileDirectory() {
     return this.fileDirectory;
   }
   public String getFileContents() {
