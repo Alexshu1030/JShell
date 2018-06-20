@@ -29,9 +29,12 @@
 // *********************************************************
 package driver;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JShell {
+  
+  public static ArrayList<String> commandLog = new ArrayList<String>();
 
   private static String prompt = "/# ";
   private static String errorMessage = "Invalid command, please try again";
@@ -51,6 +54,7 @@ public class JShell {
       System.out.print(prompt);
       String input = in.nextLine();
       input = input.trim();
+      commandLog.add(input);
       String[] splitInput = Split(input);
 
       int argumentsLen = splitInput.length;
