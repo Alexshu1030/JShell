@@ -14,8 +14,8 @@ public class Directory extends File {
     String listOfFiles = (String) this.fileContents;
     this.fileContents = listOfFiles.replaceAll(fileName + " ", "");
   }
+  
   public boolean isDirectory() {
     return true;
   }
-  
 }
