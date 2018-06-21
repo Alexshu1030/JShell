@@ -40,8 +40,8 @@ public class JShell {
   private static String errorMessage = "Invalid command, please try again";
 
   private static String[] commandNames = new String[] {"exit", "mkdir", "cd", 
-      "ls", "pwd", "mv", "cp", "cat", "get", "echo"};
-  private static int[] commandArgs = new int[] {0, 1, 1, 0, 0, 2, 2, 1, 1, 3};
+      "ls", "pwd", "pushd", "popd", "history", "cat", "echo", "man"};
+  private static int[] commandArgs = new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 3, 1};
 
   public static void main(String[] args) {
     // TODO Auto-generated method stub
@@ -94,6 +94,7 @@ public class JShell {
         System.out.println(errorMessage);
       }
     }
+    in.close();
   }
 
   private static String[] Split(String text) {
