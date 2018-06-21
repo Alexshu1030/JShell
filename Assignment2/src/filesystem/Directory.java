@@ -2,8 +2,8 @@ package filesystem;
 
 public class Directory extends File {
   
-  public Directory (String name, String directory) {
-    super(name, directory, "");
+  public Directory (String name, Directory parentDirectory) {
+    super(name, parentDirectory, null);
   }
   
   public void addFile(File file) {
