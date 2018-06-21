@@ -14,13 +14,11 @@ public class Directory extends File {
   // add a file to the arraylist of files
   public void addFile(File file) {
     listOfFiles.add(file);
-    this.fileContents = listOfFiles;
   }
   
   // remove a file from the arraylist of files
   public void removeFile(File file) {
     listOfFiles.remove(file);
-    this.fileContents = listOfFiles;
   }
   
   // return true since the object is a directory
