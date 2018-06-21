@@ -27,23 +27,31 @@ public class Path {
     
     if (firstSlash != -1)
       result = path.substring(0, firstSlash);
+    else {
+      if (getFileExtension(path) == "")
+        result = path;
+    }
     
     return result;
   }
   
   public static String getFileName(String path) {
         
-    int decimalIndex = path.indexOf('.');
     int nameStartIndex = path.lastIndexOf('/') + 1;
     
-    return path.substring(nameStartIndex, decimalIndex);
+    return path.substring(nameStartIndex);
   }
   
   public static String getFileExtension(String path) {
 
     int decimalIndex = path.indexOf('.');
     
-    return path.substring(decimalIndex);
+    String result = "";
+    
+    if (decimalIndex != -1)
+      result = path.substring(decimalIndex);
+      
+    return result;
   }
   
   public static boolean isAbsolute(String path) {
@@ -53,5 +61,12 @@ public class Path {
    
     // If the first character is a slash then it is an absolute path.
     return firstChar == '/';
+  }
+  
+  public static String removeFileName(String path) {
+    
+    int nameStartIndex = path.lastIndexOf('/');
+    
+    return path.substring(0, nameStartIndex);
   }
 }
