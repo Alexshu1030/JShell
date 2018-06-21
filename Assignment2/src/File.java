@@ -28,9 +28,9 @@
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
 public class File {
-  private String fileName;
-  private Directory fileDirectory;
-  private Object fileContents;
+  protected String fileName;
+  protected Directory fileDirectory;
+  protected Object fileContents;
   public File(String name, String directory, Object contents) {
     // Constructor for file class
     setFileName(name);
