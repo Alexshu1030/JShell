@@ -21,13 +21,11 @@ public class Directory extends File {
     listOfFiles.remove(file);
   }
   
-  public File getFile(File file) {
+  public File getFile(String fileName) {
     // iterate through list of files to find the destination file
     int index = 0;
     // set the file to be returned to be null
     File nextFile = null;
-    // get the filename of the file provided
-    String fileName = file.getFileName();
     // Iterate over the current directory looking for the file with the name
     // of the next directory
     while (index < listOfFiles.size() && nextFile == null) {
