@@ -52,7 +52,7 @@ public class File {
     return this.fileName;
   }
   
-  public Object getFileDirectory() {
+  public Directory getFileDirectory() {
     return this.fileDirectory;
   }
   public Object getFileContents() {
