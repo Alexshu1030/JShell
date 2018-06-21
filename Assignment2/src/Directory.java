@@ -14,6 +14,7 @@ public class Directory extends File {
   
   public void removeFile(File file) {
     listOfFiles.remove(file);
+    this.fileContents = listOfFiles;
   }
   
   public boolean isDirectory() {
