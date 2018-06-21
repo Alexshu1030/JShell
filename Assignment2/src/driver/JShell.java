@@ -46,7 +46,7 @@ public class JShell {
   public JShell() {  
   }
 
-  public runJShell() {
+  public void runJShell() {
     // TODO Auto-generated method stub
 
     Scanner in = new Scanner(System.in);
