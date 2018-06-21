@@ -31,7 +31,7 @@ public class File {
   protected String fileName;
   protected Directory fileDirectory;
   protected Object fileContents;
-  public File(String name, String directory, Object contents) {
+  public File(String name, Directory directory, Object contents) {
     // Constructor for file class
     setFileName(name);
     setFileDirectory(directory);
