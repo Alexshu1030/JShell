@@ -15,10 +15,10 @@
 // UT Student #: 1004175117
 // Author: Aster Wu
 //
-// Student4:
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student4: Yan Chen Huang
+// UTORID user_name: huan1085
+// UT Student #: 1004325857
+// Author: Yan Chen Huang
 //
 //
 // Honor Code: I pledge that this program represents my own
