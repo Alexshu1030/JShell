@@ -10,10 +10,10 @@
 // UT Student #: 1003939982
 // Author: Jeremy Tanuan
 //
-// Student3: 
-// UTORID user_name:
-// UT Student #:
-// Author:
+// Student3: Aster Wu
+// UTORID user_name: wuaster
+// UT Student #: 1004175117
+// Author: Aster Wu
 //
 // Student4:
 // UTORID user_name:
