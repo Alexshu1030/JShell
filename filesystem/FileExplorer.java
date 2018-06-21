@@ -32,50 +32,62 @@ public class FileExplorer {
   // Returns the file at the given path
   public File getFile(String path) {
     
-    String nextDirectory = Path.getRootDirectory(path);
-    String subPath = Path.getSubPath(path);
+    // This is the directory containing the file at the path.
+    File file;
     
     if (Path.isAbsolute(path)) {
       // Then the path is relative to the rootDirectory
+      file = getFileHelper(rootDirectory, path);
     }
     else {
       // The path is relative to the workingDirectory
+      file = getFileHelper(workingDirectory, path);
     }
     
-    return null;
+    return file;
   }
   
-  private Directory getDirectory(Directory startDirectory, String relativePath) {
+  private File getFileHelper(File file, String relativePath) {
     
-    String nextDirName = Path.getRootDirectory(relativePath);
-    String subPath = Path.getSubPath(relativePath);
+    File result = null;
     
-    ArrayList<File> files = (ArrayList<File>)startDirectory.getFileContents();
-    
-    int index = 0;
-    Directory nextDirectory = null;
-    
-    // Iterate over the current directory looking for the file with the name
-    // of the next directory
-    while (index < files.size() && nextDirectory == null) {
+    if (file.isDirectory()) {
       
-      // Get the name of the current file we are looking at
-      String fileName = files.get(index).getFileName();
+      Directory dir = (Directory)file;
       
-      // If we have found the next directory exit the loop. Otherwise go to
-      // the next file in the current directory.
-      if (fileName.equals(nextDirName))       
-        nextDirectory = (Directory)files.get(index);
-      else
-        index++;
+      String nextFileName = Path.getRootDirectory(relativePath);
+      
+      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+      
+      int index = 0;
+      File nextFile = null;
+      
+      // Iterate over the current directory looking for the file with the name
+      // of the next directory
+      while (index < files.size() && nextFile == null) {
+        
+        // Get the name of the current file we are looking at
+        String fileName = files.get(index).getFileName();
+        
+        // If we have found the next directory exit the loop. Otherwise go to
+        // the next file in the current directory.
+        if (fileName.equals(nextFileName))       
+          nextFile = files.get(index);
+        else
+          index++;
+      }
+      
+      // If we were able to find the next file then go to it. Otherwise the
+      // path does not exist.     
+      if (nextFile != null) {
+        String subPath = Path.getSubPath(relativePath);
+        result = getFileHelper(nextFile, subPath);
+      }
     }
-    
-    // If we were able to find the next directory then go to it. Otherwise the
-    // path does not exist.
-    Directory result = null;
-    
-    if (nextDirectory != null)
-      result = getDirectory(nextDirectory, subPath);
+    else {
+      if (file.getFileName().equals(relativePath))
+        result = file;
+    }
     
     return result;
   }
