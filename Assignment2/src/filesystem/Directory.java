@@ -21,6 +21,31 @@ public class Directory extends File {
     listOfFiles.remove(file);
   }
   
+  public File getFile(File file) {
+    // iterate through list of files to find the destination file
+    int index = 0;
+    // set the file to be returned to be null
+    File nextFile = null;
+    // get the filename of the file provided
+    String fileName = file.getFileName();
+    // Iterate over the current directory looking for the file with the name
+    // of the next directory
+    while (index < listOfFiles.size() && nextFile == null) {
+
+      // Get the name of the current file we are looking at
+      String nextFileName = listOfFiles.get(index).getFileName();
+
+      // If we have found the next directory exit the loop. Otherwise go to
+      // the next file in the current directory.
+      if (fileName.equals(nextFileName))
+        nextFile = listOfFiles.get(index);
+      else
+        index++;
+    }
+    // return the found file, or null if nothing is found
+    return nextFile;
+  }
+  
   // return true since the object is a directory
   public boolean isDirectory() {
     return true;
