@@ -31,15 +31,9 @@ package filesystem;
 
 public class FileExplorer {
 
-  private static Directory rootDirectory;
+  private static Directory rootDirectory = new Directory("", null);
   
   private Directory workingDirectory;
-  
-  // Default constructor
-  public FileExplorer() {
-    
-    //root = new Directory();
-  }
   
   public static Directory getRootDirectory() {
     
