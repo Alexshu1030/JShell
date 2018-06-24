@@ -34,19 +34,16 @@ import java.util.Scanner;
 
 public class JShell {
   
-  public ArrayList<String> commandLog = new ArrayList<String>();
+  public static ArrayList<String> commandLog = new ArrayList<String>();
 
-  private String prompt = "/# ";
-  private String errorMessage = "Invalid command, please try again";
+  private static String prompt = "/# ";
+  private static String errorMessage = "Invalid command, please try again";
 
-  private String[] commandNames = new String[] {"exit", "mkdir", "cd", 
-      "ls", "pwd", "mv", "cp", "cat", "get", "echo"};
-  private int[] commandArgs = new int[] {0, 1, 1, 0, 0, 2, 2, 1, 1, 3};
+  private static String[] commandNames = new String[] {"exit", "mkdir", "cd", 
+      "ls", "pwd", "pushd", "popd", "history", "cat", "echo", "man"};
+  private static int[] commandArgs = new int[] {0, 1, 1, 0, 0, 1, 0, 0, 1, 3, 1};
 
-  public JShell() {  
-  }
-
-  public void runJShell() {
+  public static void main(String[] args) {
     // TODO Auto-generated method stub
 
     Scanner in = new Scanner(System.in);
@@ -97,13 +94,10 @@ public class JShell {
         System.out.println(errorMessage);
       }
     }
-  }
-  
-  public ArrayList<String> getCommandLog() {
-    return commandLog;
+    in.close();
   }
 
-  private String[] Split(String text) {
+  private static String[] Split(String text) {
 
     boolean inQuotes = false;
     boolean atTextEnd = false;
@@ -175,7 +169,7 @@ public class JShell {
     return splitText;
   }
 
-  private boolean IsValidCommand(String[] input) {
+  private static boolean IsValidCommand(String[] input) {
 
     boolean isCommand = false;
     int inputLen = input.length;
