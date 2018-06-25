@@ -73,7 +73,7 @@ public class Path {
   
   public static String getFileExtension(String path) {
 
-    int decimalIndex = path.indexOf('.');
+    int decimalIndex = path.lastIndexOf('.');
     
     String result = "";
     
