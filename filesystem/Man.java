@@ -74,7 +74,7 @@ public class Man {
           + " An optional parameter.");
       System.out.println("  [PATH] - The path that the user wants the "
           + "directory(ies) to be created in. The path may be a relative"
-          + " path or a full path. An optional parameter.);
+          + " path or a full path. An optional parameter.");
       System.out.println("RETURNS:");
       System.out.println("  This command does not return anything.");
       System.out.println("EXAMPLE USAGE:");
@@ -161,7 +161,7 @@ public class Man {
       System.out.println("    will terminate JShell because"
           + " JShell will ignore excess spaces.");
     }
-    else if (cmd = "pushd") {
+    else if (cmd == "pushd") {
       System.out.println("NAME:");
       System.out.println("  pushd DIR - Pushes the current working directory"
           + " into a stack, then change the current working directory"
@@ -183,7 +183,7 @@ public class Man {
       System.out.println("    will add the current working directory to"
           + " the stack and change the current working directory to Dir1.");
     }
-    else if (cmd = "popd") {
+    else if (cmd == "popd") {
       System.out.println("NAME:");
       System.out.println("  popd - Sets the current working directory "
           + "to the one at the top of the directory stack.");
@@ -198,15 +198,15 @@ public class Man {
       System.out.println("  Will return an error message if the "
           + "directory stack is empty.");
       System.out.println("EXAMPLE USAGE:");
-      System.out.println("If the directory stack is not empty.")
+      System.out.println("If the directory stack is not empty.");
       System.out.println("  /#: popd");
       System.out.println("    will change the current working directory to "
           + "the one at the top of the stack.");
       System.out.println("If the directory stack is empty.");
       System.out.println("  /#: popd");
-      System.out.println("    Will return an error message.")
+      System.out.println("    Will return an error message.");
     }
-    else if (cmd = "history") {
+    else if (cmd == "history") {
       System.out.println("NAME:");
       System.out.println("  history [number] - Prints recent commands"
           + " entered");
@@ -222,7 +222,7 @@ public class Man {
       System.out.println("RETURNS:");
       System.out.println("  Will return a list of commands entered.");
       System.out.println("EXAMPLE USAGE:");
-      System.out.println("If no other command was entered.")
+      System.out.println("If no other command was entered.");
       System.out.println("  /#: history");
       System.out.println("    1. history");
       System.out.println("If we were to enter the pwd command first.");
@@ -234,7 +234,7 @@ public class Man {
       System.out.println("    1. pwd");
       System.out.println("    2. history");
     }
-    else if (cmd = "cat") {
+    else if (cmd == "cat") {
       System.out.println("NAME:");
       System.out.println("  cat FILE1 [FILE2 ...] - Displays the contents"
           + " in the given file(s)");
@@ -245,21 +245,21 @@ public class Man {
       System.out.println("PARAMETERS:");
       System.out.println("  FILE1 - The file with the contents to be"
           + " displayed.");
-      System.out.println(("  FILE2 - A subsequent file with the contents "
+      System.out.println("  FILE2 - A subsequent file with the contents "
           + "to be displayed by concatenating it to FILE1. An optional"
           + " parameter.");
       System.out.println("RETURNS:");
       System.out.println("  Will display the contents of the given files.");
       System.out.println("EXAMPLE USAGE:");
-      System.out.println("If FILE1 contains 'hello'")
+      System.out.println("If FILE1 contains 'hello'");
       System.out.println("  /#: cat FILE1");
       System.out.println("    will return 'hello'");
       System.out.println("If FILE1 contains 'hello' and FILE2 contains "
           + "'there'");
       System.out.println("  /#: cat FILE1 FILE2");
-      System.out.println("    Will return 'hellothere'.")
+      System.out.println("    Will return 'hellothere'.");
     }
-    else if (cmd = "echo") {
+    else if (cmd == "echo") {
       System.out.println("NAME:");
       System.out.println("  echo STRING [> OUTFILE |>> OUTFILE] - "
           + "Print or add STRING to standard output");
@@ -283,18 +283,18 @@ public class Man {
       System.out.println("  Will print STRING if STRING is the only "
           + "parameter.");
       System.out.println("EXAMPLE USAGE:");
-      System.out.println("  /#: echo \"Hello\"").
+      System.out.println("  /#: echo \"Hello\"");
       System.out.println("    will display Hello");
       System.out.println("If FILE1 contains 'hello'");
       System.out.println("  /#: echo \"Hello\" > FILE1");
       System.out.println("    FILE1 will contain Hello");
       System.out.println("If FILE1 contains 'hello'");
       System.out.println("  /#: echo \"Hello\" >> FILE1");
-      System.out.println("    FILE1 will contain helloHello.")
+      System.out.println("    FILE1 will contain helloHello.");
     }
-    else if (cmd = "man") {
+    else if (cmd == "man") {
       System.out.println("NAME:");
-      System.out.println("  man CMD - Displays documentation for CMD ")
+      System.out.println("  man CMD - Displays documentation for CMD ");
       System.out.println("DESCRIPTION:");
       System.out.println("  Displays name, description, possible parameters"
           + " possible return messages, and example usage of cmd");
@@ -308,12 +308,12 @@ public class Man {
       System.out.println("    will display documentation for man.");
       System.out.println("  /#: man nam");
       System.out.println("    Will return an error message because nam"
-          + " is not a valid command.")
+          + " is not a valid command.");
     }
-    else if (cmd = "find") {
+    else if (cmd == "find") {
       System.out.println("NAME:");
       System.out.println("  find PATH ... -type [f|d] -name \"STRING\""
-          + " - Displays all files or directories with name STRING in PATH.")
+          + " - Displays all files or directories with name STRING in PATH.");
       System.out.println("DESCRIPTION:");
       System.out.println("  If -type f then it will find all files with "
           + "name STRING in PATH and display it. If type -d then it will"
@@ -337,7 +337,7 @@ public class Man {
       System.out.println("    will display all directories in Desktop \"\n" + 
           "named \"b\".");
     }
-    else if (cmd = "tree") {
+    else if (cmd == "tree") {
       System.out.println("NAME:");
       System.out.println("  tree - Displays the entire file system as a "
           + "tree");
@@ -357,14 +357,14 @@ public class Man {
       System.out.println("If the root directory contains 2 subdirectories A"
           + " and B.");
       System.out.println("  /#: tree");
-      System.out.println("   will return: ")
+      System.out.println("   will return: ");
       System.out.println("   /");
       System.out.println("      A");
       System.out.println("      B");
       System.out.println("If the root directory contains 2 subdirectories A"
           + " and B with a sub directory C in A");
       System.out.println("  /#: tree");
-      System.out.println("   will return: ")
+      System.out.println("   will return: ");
       System.out.println("   /");
       System.out.println("      A");
       System.out.println("          C");
