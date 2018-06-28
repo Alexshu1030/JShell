@@ -13,7 +13,6 @@ public class Mkdir implements Command {
     
     String path = arguments.get(0);
     Directory parentDir = explorer.getDirectory(path);
-    System.out.println(parentDir.getFileName());
     String dirName = Path.getFileName(path);
     
     Directory newDir = new Directory(dirName, parentDir);
