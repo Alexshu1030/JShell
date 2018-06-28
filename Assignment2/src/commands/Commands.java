@@ -3,27 +3,31 @@ package commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import driver.JShell;
+import shell.JShellWindow;
 
 public class Commands {
 
   private static Command[] commands = new Command[] {new Pwd()};
   
-  public static void Run(JShell jShell, String command) {
+  public static boolean Run(JShellWindow jShell, String command) {
     
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
         Split(command)));
     
     int i = 0;
     boolean found = false;
+    boolean succeeded = false;
    
     while (i < commands.length && !found) {
       if (commands[i].IsValidCommand(arguments)) {
-        commands[i].Run(jShell, arguments);
+        succeeded = commands[i].Run(jShell, arguments);
         found = true;
       }
       else
         i++;
     }
+    
+    return succeeded;
   }
   
   public static boolean IsValidCommand(String command) {
