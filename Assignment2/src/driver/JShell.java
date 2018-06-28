@@ -32,6 +32,8 @@ package driver;
 import java.util.ArrayList;
 import java.util.Scanner;
 import commands.Commands;
+import filesystem.Directory;
+import filesystem.File;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
 
@@ -65,8 +67,6 @@ public class JShell {
       commandLog.add(input);
       
       Commands.Run(window, input);
-      
-      
       
       /*
       String[] splitInput = Split(input);
