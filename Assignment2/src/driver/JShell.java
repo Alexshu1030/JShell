@@ -31,8 +31,11 @@ package driver;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import filesystem.FileExplorer;
 
 public class JShell {
+  
+  private FileExplorer fileExplorer = new FileExplorer();
 
   public static ArrayList<String> commandLog = new ArrayList<String>();
 
@@ -236,5 +239,10 @@ public class JShell {
       }
     }
     return isCommand;
+  }
+  
+  public FileExplorer GetFileExplorer() {
+    
+    return fileExplorer;
   }
 }
