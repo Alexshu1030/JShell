@@ -35,6 +35,11 @@ public class FileExplorer {
   
   private Directory workingDirectory;
   
+  public FileExplorer() {
+    
+    setWorkingDirectory(rootDirectory);
+  }
+  
   public static Directory getRootDirectory() {
     
     return rootDirectory;
