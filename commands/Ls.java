@@ -3,8 +3,17 @@ import java.util.ArrayList;
 import filesystem.*;
 public class Ls {
   public Ls(ArrayList<filesystem.File> folders) {
+    ArrayList<filesystem.File> currentFolderContents = pwd().getFileContents();
     for (int i = 0; i < folders.size(); i++) {
-      if (folders.get(i).isDirectory() == true) {
+      boolean found = false;
+      for (int h = 0; h < currentFolderContents.size(); h++) {
+        if (!found) {
+          if (folders.get(i) == currentFolderContents.get(h)) {
+            found = true;
+          }
+        }
+      }
+      if (found && folders.get(i).isDirectory() == true) {
         ArrayList<filesystem.File> listOfFiles = 
             (ArrayList<File>) folders.get(i).getFileContents();
         System.out.print(folders.get(i).getFileName() + ": ");
@@ -14,7 +23,9 @@ public class Ls {
         System.out.println("");
       }
       else {
-        System.out.println(folders.get(i).getFileName());
+        if (found) {
+          System.out.println(folders.get(i).getFileName());
+        }
       }
     }
   }
