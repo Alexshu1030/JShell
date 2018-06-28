@@ -201,10 +201,8 @@ public class JShell {
                 }
                 isCommand = true;
               }
-            } else if (i == 8) {
-              if (inputLen >= 2) {
+            } else if (i == 8 && inputLen >= 2) {
                 isCommand = true;
-              } 
             } else if (i == 9) {
               if (inputLen == 2) {
                 int secArgLen = input[1].length();
