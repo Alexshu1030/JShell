@@ -16,10 +16,15 @@ public class Ls implements Command{
       Directory dir = jShell.GetFileExplorer().getWorkingDirectory();
       
       ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+      String fileNames = "";
       
       for (int i = 0; i < files.size(); i++) {
-        System.out.println(files.get(i).getFileName());
+        fileNames += files.get(i).getFileName();
+        if (i != files.size() - 1)
+          fileNames += " ";
       }
+      
+      System.out.println(fileNames);
       
       successful = true;
     }
@@ -34,10 +39,15 @@ public class Ls implements Command{
         if (dir != null) {
           
           ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+          String fileNames = "";
           
           for (int i = 0; i < files.size(); i++) {
-            System.out.println(files.get(i).getFileName());
+            fileNames += files.get(i).getFileName();
+            if (i != files.size() - 1)
+              fileNames += " ";
           }
+          
+          System.out.println(fileNames);
           
           successful = true;
         }
