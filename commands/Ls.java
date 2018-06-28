@@ -1,7 +1,81 @@
 package commands;
 import java.util.ArrayList;
 import filesystem.*;
-public class Ls {
+import shell.JShellWindow;
+public class Ls implements Command{
+  
+  private String commandName = "ls";
+  private String helpText = "Not finished...";
+
+  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+    
+    boolean successful = false;
+    
+    if (arguments.size() == 0) {
+      
+      Directory dir = jShell.GetFileExplorer().getWorkingDirectory();
+      
+      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+      
+      for (int i = 0; i < files.size(); i++) {
+        System.out.println(files.get(i).getFileName());
+      }
+      
+      successful = true;
+    }
+    else {
+      
+      String path = arguments.get(0);
+      
+      if (Path.isDirectory(path)) {
+        
+        Directory dir = jShell.GetFileExplorer().getDirectory(path);
+        
+        if (dir != null) {
+          
+          ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+          
+          for (int i = 0; i < files.size(); i++) {
+            System.out.println(files.get(i).getFileName());
+          }
+          
+          successful = true;
+        }
+      }
+      else {
+        
+        File file = jShell.GetFileExplorer().getFile(path);
+        
+        if (file != null) {
+          System.out.println(file.getFileName());          
+          successful = true;
+        }
+      }
+    }
+    
+    return successful;
+  }
+
+  public String GetCommandName() {
+    
+    return commandName;
+  }
+  
+  public boolean IsValidCommand(String commandName, ArrayList<String> arguments) {
+    
+    boolean hasCorrectName = this.commandName.equals(commandName);
+    // Get rid of magic numbers
+    boolean hasCorrectNumOfArgs = arguments.size() == 0 || arguments.size() == 1;
+    
+    return hasCorrectName && hasCorrectNumOfArgs;
+  }
+
+  public String GetHelpText() {
+    
+    return helpText;
+  }
+  
+  /*
   public Ls(ArrayList<filesystem.File> folders) {
     ArrayList<filesystem.File> currentFolderContents = pwd().getFileContents();
     for (int i = 0; i < folders.size(); i++) {
@@ -30,4 +104,5 @@ public class Ls {
       }
     }
   }
+  */
 }
