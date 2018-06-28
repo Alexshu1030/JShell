@@ -6,28 +6,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cd implements Command {
+  
   private int numOfArguments = 0;
   private String commandName = "cd";
   public Cd (String path) {
    
   }
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
-    Directory currentDirectory = FileExplorer.getWorkingDirectory();
+    
+    FileExplorer explorer = jShell.GetFileExplorer();
+    Directory currentDirectory = explorer.getWorkingDirectory();
+    
+    String path = arguments.get(0);
+    boolean succeeded = false;
+    
     if (path == "..") {
-      FileExplorer.setWorkingDirectory(currentDirectory.getFileDirectory());
+      explorer.setWorkingDirectory(currentDirectory.getFileDirectory());
     }
     else {
       boolean valid = true;
       ArrayList<String> pathFolders = new ArrayList<String>();
       pathFolders = (ArrayList<String>) Arrays.asList(path.split("\\"));
-      FileExplorer.setWorkingDirectory(FileExplorer.getRootDirectory());
+      explorer.setWorkingDirectory(FileExplorer.getRootDirectory());
       for (int i = 0; i < pathFolders.size(); i++) {
         if (valid) {
           boolean found = false;
-          filesystem.File[] currentContents = (File[]) FileExplorer.getWorkingDirectory().getFileContents();
+          ArrayList<File> currentContents = (ArrayList<File>) explorer.getWorkingDirectory().getFileContents();
           for (int j = 0; j < currentContents.size(); j++) {
-            if (currentContents[j].getFileName() == pathFolders.get(i)) {
-              FileExplorer.setWorkingDirectory(currentContents[j]);
+            if (currentContents.get(j).getFileName() == pathFolders.get(i)) {
+              explorer.setWorkingDirectory((Directory)currentContents.get(j));
+              succeeded = true;
               found = true;
             }
             if (!found) {
@@ -38,6 +46,8 @@ public class Cd implements Command {
         }
       }
     }
+    
+    return succeeded;
   }
   
   
@@ -56,5 +66,7 @@ public class Cd implements Command {
   
   public String GetHelpText() {
     Man.manCd();
+    
+    return "";
   }
 }
