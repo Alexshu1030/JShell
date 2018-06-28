@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Cd implements Command {
   
-  private int numOfArguments = 0;
+  private int numOfArguments = 1;
   private String commandName = "cd";
   
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
@@ -18,31 +18,19 @@ public class Cd implements Command {
     String path = arguments.get(0);
     boolean succeeded = false;
     
-    if (path == "..") {
-      explorer.setWorkingDirectory(currentDirectory.getFileDirectory());
+    if (path.equals("..")) {
+      Directory workingDir = explorer.getWorkingDirectory();
+      if (!workingDir.isRootDirectory()) {
+        Directory newDir = workingDir.getFileDirectory();
+        explorer.setWorkingDirectory(newDir);
+      }
+    }
+    else if (path.equals(".")) {
+      succeeded = true;
     }
     else {
-      boolean valid = true;
-      ArrayList<String> pathFolders = new ArrayList<String>();
-      pathFolders = (ArrayList<String>) Arrays.asList(path.split("\\"));
-      explorer.setWorkingDirectory(FileExplorer.getRootDirectory());
-      for (int i = 0; i < pathFolders.size(); i++) {
-        if (valid) {
-          boolean found = false;
-          ArrayList<File> currentContents = (ArrayList<File>) explorer.getWorkingDirectory().getFileContents();
-          for (int j = 0; j < currentContents.size(); j++) {
-            if (currentContents.get(j).getFileName() == pathFolders.get(i)) {
-              explorer.setWorkingDirectory((Directory)currentContents.get(j));
-              succeeded = true;
-              found = true;
-            }
-            if (!found) {
-              i = pathFolders.size();
-              System.out.println("Folder not found");
-            }
-          }
-        }
-      }
+      Directory newDir = (Directory)explorer.getFile(path);
+      explorer.setWorkingDirectory(newDir);
     }
     
     return succeeded;
