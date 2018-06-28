@@ -28,7 +28,7 @@
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
 
-package filesystem;
+package commands;
 public class Man {
 
   public Man(String cmd) {
