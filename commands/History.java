@@ -1,6 +1,8 @@
 package commands;
 import java.util.ArrayList;
+
 public class History {
+  
   ArrayList<String> commands = new ArrayList<String>();
   private History() {
 
