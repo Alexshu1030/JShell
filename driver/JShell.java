@@ -39,7 +39,7 @@ public class JShell {
   private static String prompt = "/# ";
   private static String errorMessage = "Invalid command, please try again";
 
-  private static String[] commandNames = new String[] {"exit", "mkdir", "cd", 
+  private static String[] commandNames = new String[] {"exit", "mkdir", "cd",
       "ls", "pwd", "pushd", "popd", "history", "cat", "echo", "man"};
   private static int specificCase = -1;
   private static int[] commandArgs = new int[] {0, specificCase, 1, specificCase, 0, 1, 0, specificCase, specificCase, specificCase, 1};
@@ -61,7 +61,7 @@ public class JShell {
       int argumentsLen = splitInput.length;
 
       // Check if the input is a valid command
-      if (IsValidCommand(splitInput)) {        
+      if (IsValidCommand(splitInput)) {
         // It is the exit command. Leave the loop.
         if (splitInput[0].equals(commandNames[0])) {
           terminate = true;
@@ -158,14 +158,14 @@ public class JShell {
           }
           else {
             if (text.charAt(i) == ' ') {
-              atTextEnd = true;        
-              splitText[currentSplit] = text.substring(beginIndex, i);              
+              atTextEnd = true;
+              splitText[currentSplit] = text.substring(beginIndex, i);
               currentSplit++;
             }
           }
 
         }
-        if (i == text.length() - 1) {    
+        if (i == text.length() - 1) {
           splitText[currentSplit] = text.substring(beginIndex);
         }
       }
