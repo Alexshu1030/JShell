@@ -31,7 +31,9 @@ package driver;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import commands.Commands;
 import filesystem.FileExplorer;
+import shell.JShellWindow;
 
 public class JShell {
   
@@ -50,6 +52,8 @@ public class JShell {
   public static void main(String[] args) {
     // TODO Auto-generated method stub
 
+    JShellWindow window = new JShellWindow();
+    
     Scanner in = new Scanner(System.in);
     boolean terminate = false;
 
@@ -59,6 +63,12 @@ public class JShell {
       String input = in.nextLine();
       input = input.trim();
       commandLog.add(input);
+      
+      Commands.Run(window, input);
+      
+      
+      
+      /*
       String[] splitInput = Split(input);
 
       int argumentsLen = splitInput.length;
@@ -97,6 +107,7 @@ public class JShell {
         // The command is not valid. Print the error message.
         System.out.println(errorMessage);
       }
+      */
     }
     in.close();
   }
