@@ -22,10 +22,11 @@ public class Ls {
         }
         System.out.println("");
       }
+      else if (found && folders.get(i).isDirectory() == false) {
+        System.out.println(folders.get(i).getFileName());
+      }
       else {
-        if (found) {
-          System.out.println(folders.get(i).getFileName());
-        }
+        System.out.println("File not found");
       }
     }
   }
