@@ -1,6 +1,7 @@
 package commands;
 
 import filesystem.*;
+import shell.JShellWindow;
 import java.util.ArrayList;
 import java.util.Arrays;
 
