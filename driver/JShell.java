@@ -67,7 +67,6 @@ public class JShell {
       commandLog.add(input);
       
       Commands.Run(window, input);
-      
       /*
       String[] splitInput = Split(input);
 
