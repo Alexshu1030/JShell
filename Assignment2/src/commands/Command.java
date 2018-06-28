@@ -10,7 +10,8 @@ public interface Command {
   
   public String GetCommandName();
   
-  public boolean IsValidCommand(ArrayList<String> arguments);
+  public boolean IsValidCommand(String commandName,
+      ArrayList<String> arguments);
   
   public String GetHelpText();
 }
