@@ -64,6 +64,11 @@ public class Path {
     return result;
   }
   
+  public static boolean isDirectory(String path) {
+    
+    return getFileExtension(path).equals("");
+  }
+  
   public static String getFileName(String path) {
         
     int nameStartIndex = path.lastIndexOf('/') + 1;
