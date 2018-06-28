@@ -81,8 +81,8 @@ public class Ls implements Command{
   }
 
   public String GetHelpText() {
-    
-    return helpText;
+    Man.manLs();
+    return "";
   }
   
   /*
