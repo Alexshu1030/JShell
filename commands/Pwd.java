@@ -8,7 +8,7 @@ import shell.JShellWindow;
 public class Pwd implements Command {
 
   private String commandName = "pwd";
-  private int numOfArguments = 1;
+  private int numOfArguments = 0;
   private String helpText = "NAME:\n"
       + "  pwd - Prints current working directory\n"
       + "DESCRIPTION:\n"
@@ -28,7 +28,7 @@ public class Pwd implements Command {
       + "    will terminate JShell because\n"
       + " JShell will ignore excess spaces.\n";
   
-  public boolean IsValidCommand(ArrayList<String> arguments) {
+  public boolean IsValidCommand(String commandName, ArrayList<String> arguments) {
     
     boolean isValid = false;
     
