@@ -44,7 +44,7 @@ public class Directory extends File {
   // add a file to the arraylist of files
   public void addFile(File file) {
     listOfFiles.add(file);
-  }
+  }     
   
   // remove a file from the arraylist of files
   public void removeFile(File file) {
@@ -77,5 +77,10 @@ public class Directory extends File {
   // return true since the object is a directory
   public boolean isDirectory() {
     return true;
+  }
+  
+  public boolean isRootDirectory() {
+    
+    return fileDirectory == null;
   }
 }
