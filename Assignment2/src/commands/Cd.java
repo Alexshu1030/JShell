@@ -9,9 +9,7 @@ public class Cd implements Command {
   
   private int numOfArguments = 0;
   private String commandName = "cd";
-  public Cd (String path) {
-   
-  }
+  
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     
     FileExplorer explorer = jShell.GetFileExplorer();
