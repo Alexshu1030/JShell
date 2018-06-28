@@ -40,6 +40,9 @@ public class Directory extends File {
     this.fileContents = listOfFiles;
   }
   
+  public ArrayList<File> getContents() {
+    return listOfFiles;
+  }
   // add a file to the arraylist of files
   public void addFile(File file) {
     listOfFiles.add(file);
