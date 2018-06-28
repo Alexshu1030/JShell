@@ -42,6 +42,7 @@ public class Mkdir implements Command {
 
   public String GetHelpText() {
    
-    return helpText;
+    Man.manMkdir();
+    return "";
   }
 }
