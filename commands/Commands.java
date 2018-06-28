@@ -14,17 +14,23 @@ public class Commands {
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
         Split(command)));
     
-    int i = 0;
-    boolean found = false;
     boolean succeeded = false;
-   
-    while (i < commands.length && !found) {
-      if (commands[i].IsValidCommand(arguments)) {
-        succeeded = commands[i].Run(jShell, arguments);
-        found = true;
+    
+    if (arguments.size() > 0) {
+      
+      String commandName = arguments.remove(0);
+      
+      int i = 0;
+      boolean found = false;
+     
+      while (i < commands.length && !found) {
+        if (commands[i].IsValidCommand(commandName, arguments)) {
+          succeeded = commands[i].Run(jShell, arguments);
+          found = true;
+        }
+        else
+          i++;
       }
-      else
-        i++;
     }
     
     return succeeded;
@@ -35,14 +41,20 @@ public class Commands {
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
         Split(command)));
     
-    int i = 0;
     boolean isValid = false;
-   
-    while (i < commands.length && !isValid) {
-      if (commands[i].IsValidCommand(arguments))
-        isValid = true;
-      else
-        i++;
+    
+    if (arguments.size() > 0) {
+      
+      String commandName = arguments.remove(0);
+    
+      int i = 0;
+     
+      while (i < commands.length && !isValid) {
+        if (commands[i].IsValidCommand(commandName, arguments))
+          isValid = true;
+        else
+          i++;
+      }
     }
     
     return isValid;
