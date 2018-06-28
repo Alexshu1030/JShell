@@ -3,6 +3,7 @@ package commands;
 import java.util.ArrayList;
 import driver.JShell;
 import filesystem.FileExplorer;
+import shell.JShellWindow;
 
 public class Pwd implements Command {
 
@@ -32,9 +33,7 @@ public class Pwd implements Command {
     boolean isValid = false;
     
     if (arguments.size() == numOfArguments) {
-      if (arguments.get(0).equals(commandName)) {
-        isValid = true;
-      }
+      isValid = true;
     }
     
     return isValid;
@@ -45,12 +44,19 @@ public class Pwd implements Command {
     return helpText;
   }
 
-  public void Run(JShell jShell, ArrayList<String> arguments) {
+  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     
     FileExplorer fileExplorer = jShell.GetFileExplorer();
     
     String workingDirPath = fileExplorer.getWorkingDirectory().GetFullPath();
     
     System.out.println(workingDirPath);
+    
+    return true;
+  }
+
+  public String GetCommandName() {
+    
+    return commandName;
   }
 }
