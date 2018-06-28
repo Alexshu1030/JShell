@@ -63,4 +63,8 @@ public class File {
     return false; 
   }
   
+  public String GetFullPath() {
+    
+    return "RECURSIVELYGETPREVPATHHERE/" + this.getFileName();
+  }
 }
