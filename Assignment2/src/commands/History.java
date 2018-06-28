@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class History {
   
+  /*
   ArrayList<String> commands = new ArrayList<String>();
   private History() {
 
@@ -20,4 +21,5 @@ public class History {
       System.out.println(i + ". " + commands[i-1]);
     }
   }
+  */
 }
