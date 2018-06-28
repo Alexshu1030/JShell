@@ -32,8 +32,10 @@ public class Pwd implements Command {
     
     boolean isValid = false;
     
-    if (arguments.size() == numOfArguments) {
-      isValid = true;
+    if (this.commandName.equals(commandName)) {
+      if (arguments.size() == numOfArguments) {
+        isValid = true;
+      }
     }
     
     return isValid;
