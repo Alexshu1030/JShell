@@ -34,10 +34,9 @@ public class Echo {
     return command;
   }
   
-  public boolean IsValidCommand(String commandName,
-      ArrayList<String> arguments) {
-    return (commandName == command && arguments.size() <= 3 && 
-        arguments.size() >= 1)
+  public boolean AreValidArguments(ArrayList<String> arguments) {
+    
+    return (arguments.size() <= 3 && arguments.size() >= 1);
   }
     
   
