@@ -28,17 +28,9 @@ public class Pwd implements Command {
       + "    will terminate JShell because\n"
       + " JShell will ignore excess spaces.\n";
   
-  public boolean IsValidCommand(String commandName, ArrayList<String> arguments) {
+  public boolean AreValidArguments(ArrayList<String> arguments) {
     
-    boolean isValid = false;
-    
-    if (this.commandName.equals(commandName)) {
-      if (arguments.size() == numOfArguments) {
-        isValid = true;
-      }
-    }
-    
-    return isValid;
+    return arguments.size() == numOfArguments;
   }
 
   public String GetHelpText() {
