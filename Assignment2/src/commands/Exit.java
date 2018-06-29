@@ -6,7 +6,6 @@ import shell.JShellWindow;
 public class Exit implements Command{
 
   private String commandName = "exit";
-  private String helpText = "Not finished... Terminates the shell";
 
   @Override
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
@@ -31,7 +30,8 @@ public class Exit implements Command{
 
   @Override
   public String GetHelpText() {
-    return helpText;
+    Man.manExit();
+    return "";
   }
 
 }
