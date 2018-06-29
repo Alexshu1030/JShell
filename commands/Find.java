@@ -5,7 +5,6 @@ import shell.JShellWindow;
 import filesystem.*;
 
 public class Find implements Command {
-
   String commandName = "find";
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     String result = "";
@@ -17,7 +16,6 @@ public class Find implements Command {
     for (int i = 1; i < size-4; i++) {
       folders.add(arguments.get(i));
     }
-    
     for (int j = 0; j < folders.size(); j++) {
       Directory dir = explorer.getDirectory(folders.get(j));
       if (dir.getFile(fileName) != null) {
@@ -33,7 +31,6 @@ public class Find implements Command {
         }
       }
     }
-
     if (result == "") {
       System.out.println("File not found");
     }
@@ -47,7 +44,8 @@ public class Find implements Command {
     return commandName;
   }
 
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean IsValidCommand(String commandName,
+      ArrayList<String> arguments) {
     boolean valid = false;
     int size = arguments.size();
     if (arguments.get(size-1).startsWith("\"") &&
