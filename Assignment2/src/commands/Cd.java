@@ -71,8 +71,8 @@ public class Cd implements Command {
     return commandName;
   }
   
-  public boolean IsValidCommand(String commandName, 
-      ArrayList<String> arguments) {
+  public boolean AreValidArguments(ArrayList<String> arguments) {
+    
     boolean isValid = false;
     if (arguments.size() == numOfArguments) {
       isValid = true;
