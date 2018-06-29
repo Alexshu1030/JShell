@@ -64,7 +64,7 @@ public class Ls implements Command{
       
       if (Path.isDirectory(path)) {
         
-        Directory dir = jShell.GetFileExplorer().getDirectory(path);
+        Directory dir = jShell.GetFileExplorer().getParentDirectory(path);
         
         if (dir != null) {
           
@@ -101,48 +101,13 @@ public class Ls implements Command{
     return commandName;
   }
   
-  public boolean IsValidCommand(String commandName, ArrayList<String> arguments) {
+  public boolean AreValidArguments(ArrayList<String> arguments) {
     
-    boolean hasCorrectName = this.commandName.equals(commandName);
-    // Get rid of magic numbers
-    boolean hasCorrectNumOfArgs = arguments.size() == 0 || arguments.size() == 1;
-    
-    return hasCorrectName && hasCorrectNumOfArgs;
+    return arguments.size() == 0 || arguments.size() == 1;
   }
 
   public String GetHelpText() {
-    Man.manLs();
-    return "";
+    
+    return helpText;
   }
-  
-  /*
-  public Ls(ArrayList<filesystem.File> folders) {
-    ArrayList<filesystem.File> currentFolderContents = pwd().getFileContents();
-    for (int i = 0; i < folders.size(); i++) {
-      boolean found = false;
-      for (int h = 0; h < currentFolderContents.size(); h++) {
-        if (!found) {
-          if (folders.get(i) == currentFolderContents.get(h)) {
-            found = true;
-          }
-        }
-      }
-      if (found && folders.get(i).isDirectory() == true) {
-        ArrayList<filesystem.File> listOfFiles = 
-            (ArrayList<File>) folders.get(i).getFileContents();
-        System.out.print(folders.get(i).getFileName() + ": ");
-        for (int j = 0; j < listOfFiles.size(); j++) {
-          System.out.print(listOfFiles.get(j));
-        }
-        System.out.println("");
-      }
-      else if (found && folders.get(i).isDirectory() == false) {
-        System.out.println(folders.get(i).getFileName());
-      }
-      else {
-        System.out.println("File not found");
-      }
-    }
-  }
-  */
 }
