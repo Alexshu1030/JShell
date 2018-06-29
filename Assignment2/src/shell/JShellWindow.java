@@ -42,6 +42,10 @@ public class JShellWindow {
   public void addInputtoLog(String input) {
     log.add(input);
   }
+  
+  public ArrayList<String> getLog() {
+    return log;
+  }
 
   public void setTerminate(boolean terminate) {
     this.terminate = terminate;
@@ -55,9 +59,5 @@ public class JShellWindow {
     
     return fileExplorer;
   }
-  
-  public ArrayList<String> getLog() {
-    
-    return null;
-  }
+
 }
