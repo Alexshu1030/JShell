@@ -55,4 +55,9 @@ public class JShellWindow {
     
     return fileExplorer;
   }
+  
+  public ArrayList<String> getLog() {
+    
+    return null;
+  }
 }
