@@ -17,7 +17,7 @@ public class Find implements Command {
       folders.add(arguments.get(i));
     }
     for (int j = 0; j < folders.size(); j++) {
-      Directory dir = explorer.getDirectory(folders.get(j));
+      Directory dir = explorer.getParentDirectory(folders.get(j));
       if (dir.getFile(fileName) != null) {
         if (arguments.get(size-3) == "f") {
           if (dir.getFile(fileName).isDirectory() == false) {
