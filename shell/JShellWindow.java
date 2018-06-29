@@ -31,11 +31,17 @@ package shell;
 import java.util.Scanner;
 import commands.Commands;
 import filesystem.FileExplorer;
+import java.util.ArrayList;
 
 public class JShellWindow {
   
   private FileExplorer fileExplorer = new FileExplorer();
   private boolean terminate = false;
+  private ArrayList<String> log = new ArrayList<String>();
+  
+  public void addInputtoLog(String input) {
+    log.add(input);
+  }
 
   public void setTerminate(boolean terminate) {
     this.terminate = terminate;
