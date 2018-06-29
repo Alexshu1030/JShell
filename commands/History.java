@@ -1,8 +1,51 @@
 package commands;
 import java.util.ArrayList;
+import shell.JShellWindow;
 
-public class History {
+public class History implements Command{
   
+  private String commandName = "history";
+
+  @Override
+  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+
+    ArrayList<String> log = jShell.getLog();
+    
+    return false;
+  }
+
+  @Override
+  public String GetCommandName() {
+
+    return commandName;
+  }
+
+  @Override
+  public boolean IsValidCommand(String commandName,
+      ArrayList<String> arguments) {
+
+    boolean isValid = false;
+    if (arguments.size() == 1) {
+      isValid = true;
+      // check if argument is an integer
+    } else if (arguments.size() == 2) {
+      try {
+        Integer.parseInt(arguments.get(1));
+      } catch (Exception NumberFormatException) {
+        return isValid;
+      }
+      isValid = true;
+    }
+    return isValid;
+  }
+
+  @Override
+  public String GetHelpText() {
+
+    Man.manHistory();
+    return "";
+  }
+
   /*
   ArrayList<String> commands = new ArrayList<String>();
   private History() {
@@ -21,5 +64,5 @@ public class History {
       System.out.println(i + ". " + commands[i-1]);
     }
   }
-  */
+   */
 }
