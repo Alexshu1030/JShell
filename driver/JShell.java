@@ -35,11 +35,10 @@ import commands.Commands;
 import filesystem.Directory;
 import filesystem.File;
 import filesystem.FileExplorer;
+import filesystem.Path;
 import shell.JShellWindow;
 
 public class JShell {
-  
-  private FileExplorer fileExplorer = new FileExplorer();
 
   private static String prompt = "/# ";
   private static String errorMessage = "Invalid command, please try again";
@@ -65,6 +64,7 @@ public class JShell {
       window.addInputtoLog(input);
       
       Commands.Run(window, input);
+      System.out.println(window.GetFileExplorer().getParentDirectory("/test"));
       /*
       String[] splitInput = Split(input);
 
@@ -247,10 +247,5 @@ public class JShell {
       }
     }
     return isCommand;
-  }
-  
-  public FileExplorer GetFileExplorer() {
-    
-    return fileExplorer;
   }
 }
