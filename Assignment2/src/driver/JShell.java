@@ -41,8 +41,6 @@ public class JShell {
   
   private FileExplorer fileExplorer = new FileExplorer();
 
-  public static ArrayList<String> commandLog = new ArrayList<String>();
-
   private static String prompt = "/# ";
   private static String errorMessage = "Invalid command, please try again";
 
@@ -64,7 +62,7 @@ public class JShell {
       System.out.print(prompt);
       String input = in.nextLine();
       input = input.trim();
-      commandLog.add(input);
+      window.addInputtoLog(input);
       
       Commands.Run(window, input);
       /*
