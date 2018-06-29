@@ -8,12 +8,14 @@ public class Cat {
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     for (int i = 0; i < arguments.size(); i++) {
       // We need to replace the argument at i with a File object
-      System.out.println(arguments.get(i).getFileContents());
+      //System.out.println(arguments.get(i).getFileContents());
       // make sure we are not at the last file
       if (i != arguments.size()-1) {
         System.out.print("\n\n\n");
       }
     }
+    
+    return false;
   }
   
   public String GetCommandName() {
