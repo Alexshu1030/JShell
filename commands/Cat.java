@@ -19,9 +19,9 @@ public class Cat {
   public String GetCommandName() {
     return command;
   }
-  public boolean IsValidCommand(String commandName,
-      ArrayList<String> arguments) {
-    return (command == commandName && arguments.size() >= 1);
+  public boolean AreValidArguments(ArrayList<String> arguments) {
+    
+    return (arguments.size() >= 1);
   }
   
   public void GetHelpText() {
