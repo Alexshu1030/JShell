@@ -8,15 +8,19 @@ public class History implements Command{
 
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     ArrayList<String> log = jShell.getLog();
-    int truncAmount;
-    if (arguments.isEmpty()) {
-      truncAmount = log.size();
-    } else {
-      truncAmount = (Integer.parseInt((arguments.get(0))));
+    int totalInputs = log.size();
+    int truncAmount = 0;
+
+
+    if (!arguments.isEmpty()) {
+      truncAmount = totalInputs - Integer.parseInt((arguments.get(0)));
     }
-    for (int i = truncAmount; i >= 0; i--) {
-      System.out.println(truncAmount - i + ". " + log.get(i));
-    }
+
+    for (int i = 1; i <= totalInputs; i++) {
+      if (truncAmount < i) {
+        System.out.println(i + ". " + log.get(i - 1));
+      }
+    } 
     return true;
   }
 
@@ -34,7 +38,7 @@ public class History implements Command{
       // check if argument is an integer
     } else if (arguments.size() == 1) {
       try {
-        Integer.parseInt(arguments.get(1));
+        Integer.parseInt(arguments.get(0));
       } catch (Exception NumberFormatException) {
         return isValid;
       }
