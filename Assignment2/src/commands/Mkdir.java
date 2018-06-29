@@ -42,7 +42,7 @@ public class Mkdir implements Command {
     FileExplorer explorer = jShell.GetFileExplorer();
     
     String path = arguments.get(0);
-    Directory parentDir = explorer.getDirectory(path);
+    Directory parentDir = explorer.getParentDirectory(path);
     String dirName = Path.getFileName(path);
     
     Directory newDir = new Directory(dirName, parentDir);
@@ -56,15 +56,12 @@ public class Mkdir implements Command {
     return commandName;
   }
 
-  public boolean IsValidCommand(String commandName,
-      ArrayList<String> arguments) {
+  public boolean AreValidArguments(ArrayList<String> arguments) {
     
     boolean isValid = false;
     
-    if (this.commandName.equals(commandName)) {
-      if (arguments.size() == 1) {
+    if (arguments.size() == 1) {
         isValid = true;
-      }
     }
     
     return isValid;
