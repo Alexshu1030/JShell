@@ -35,7 +35,16 @@ import filesystem.FileExplorer;
 public class JShellWindow {
   
   private FileExplorer fileExplorer = new FileExplorer();
+  private boolean terminate = false;
+
+  public void setTerminate(boolean terminate) {
+    this.terminate = terminate;
+  }
   
+  public boolean getTerminate() {
+    return terminate;
+  }
+
   public FileExplorer GetFileExplorer() {
     
     return fileExplorer;
