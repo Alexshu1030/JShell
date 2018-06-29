@@ -6,7 +6,6 @@ public class History implements Command{
 
   private String commandName = "history";
 
-  @Override
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     ArrayList<String> log = jShell.getLog();
     int truncAmount;
@@ -21,13 +20,11 @@ public class History implements Command{
     return true;
   }
 
-  @Override
   public String GetCommandName() {
 
     return commandName;
   }
 
-  @Override
   public boolean AreValidArguments(ArrayList<String> arguments) {
 
     boolean isValid = false;
@@ -46,30 +43,9 @@ public class History implements Command{
     return isValid;
   }
 
-  @Override
   public String GetHelpText() {
 
     Man.manHistory();
     return "";
   }
-
-  /*
-  ArrayList<String> commands = new ArrayList<String>();
-  private History() {
-
-  }
-  public static void addCommand(String command) {
-    this.commands.add(0, command);
-  }
-  public static void outputHistory(int n) {
-    for (int i = n; i<=this.commands.size(); i++) {
-      System.out.println(i + ". " + commands[i-1]);
-    }
-  }
-  public static void outputHistory() {
-    for (int i = 1; i <= commands.size(); i++) {
-      System.out.println(i + ". " + commands[i-1]);
-    }
-  }
-   */
 }
