@@ -17,24 +17,23 @@ public class Find implements Command {
     for (int i = 1; i < size-4; i++) {
       folders.add(arguments.get(i));
     }
-    if (arguments.get(size-3) == "f") {
-      for (int j = 0; j < folders.size(); j++) {
-        Directory dir = explorer.getDirectory(folders.get(j));
-        if (dir.getFile(fileName) != null && 
-            !dir.getFile(fileName).isDirectory()) {
-          result += (folders.get(j) + fileName + " ");
+    
+    for (int j = 0; j < folders.size(); j++) {
+      Directory dir = explorer.getDirectory(folders.get(j));
+      if (dir.getFile(fileName) != null) {
+        if (arguments.get(size-3) == "f") {
+          if (dir.getFile(fileName).isDirectory() == false) {
+            result += (folders.get(j) + fileName + " ");
+          }
+        }
+        else if (arguments.get(size-3) == "d") {
+          if (dir.getFile(fileName).isDirectory() == true) {
+            result += (folders.get(j) + fileName + " ");
+          }
         }
       }
     }
-    else if (arguments.get(size-3) == "d") {
-      for (int k = 0; k < folders.size(); k++) {
-        Directory dir = explorer.getDirectory(folders.get(k));
-        if (dir.getFile(fileName) != null && 
-            dir.getFile(fileName).isDirectory()) {
-          result += (folders.get(k) + fileName + " ");
-        }
-      }
-    }
+
     if (result == "") {
       System.out.println("File not found");
     }
