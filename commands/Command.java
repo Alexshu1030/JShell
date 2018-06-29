@@ -39,7 +39,7 @@ public interface Command {
   
   public String GetCommandName();
   
-  public boolean IsValidCommand(String commandName, ArrayList<String> arguments);
+  public boolean AreValidArguments(ArrayList<String> arguments);
   
   public String GetHelpText();
 }
