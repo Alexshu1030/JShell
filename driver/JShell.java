@@ -42,12 +42,7 @@ public class JShell {
 
   private static String prompt = "/# ";
   private static String errorMessage = "Invalid command, please try again";
-
-  private static String[] commandNames = new String[] {"exit", "mkdir", "cd",
-      "ls", "pwd", "pushd", "popd", "history", "cat", "echo", "man"};
-  private static int specificCase = -1;
-  private static int[] commandArgs = new int[] {0, specificCase, 1, specificCase, 0, 1, 0, specificCase, specificCase, specificCase, 1};
-
+  
   public static void main(String[] args) {
     // TODO Auto-generated method stub
 
@@ -64,126 +59,12 @@ public class JShell {
       window.addInputtoLog(input);
       
       Commands.Run(window, input);
-      System.out.println(window.GetFileExplorer().getParentDirectory("/test"));
-      /*
-      String[] splitInput = Split(input);
-
-      int argumentsLen = splitInput.length;
-
-      // Check if the input is a valid command
-      if (IsValidCommand(splitInput)) {
-        // It is the exit command. Leave the loop.
-        if (splitInput[0].equals(commandNames[0])) {
-          terminate = true;
-        } else {
-          // Print the command
-          System.out.println(splitInput[0]);
-
-          if (argumentsLen > 1) {
-            for (int i = 1; i < argumentsLen; i++) {
-
-              System.out.print(splitInput[i]);
-
-              // Adds spaces between the arguments
-              if (i < argumentsLen - 1) {
-                System.out.print(" ");
-              }
-            }
-
-            // End this line
-            System.out.println();
-          }
-          else {
-            // The command has no arguments and we need to
-            // print a blank line
-            System.out.println();
-          }
-        }
-      }
-      else {
-        // The command is not valid. Print the error message.
-        System.out.println(errorMessage);
-      }
-      */
     }
+    
     in.close();
   }
 
-  private static String[] Split(String text) {
-
-    boolean inQuotes = false;
-    boolean atTextEnd = false;
-
-    int splits = 0;
-
-    for (int i = 0; i < text.length(); i++) {
-
-      if (text.charAt(i) == '"') {
-
-        if (!inQuotes && atTextEnd)
-          atTextEnd = false;
-
-        inQuotes = !inQuotes;
-      }
-
-      if (!inQuotes) {
-        if (atTextEnd) {
-          if (text.charAt(i) != ' ')
-            atTextEnd = false;
-        }
-        if (text.charAt(i) == ' ' && !atTextEnd || i == text.length() - 1) {
-          atTextEnd = true;
-          splits++;
-        }
-      }
-    }
-
-
-    inQuotes = false;
-    atTextEnd = false;
-
-    int currentSplit = 0;
-    String[] splitText = new String[splits];
-
-    int beginIndex = 0;
-    int numQuotes = text.length() - text.replace("\"", "").length();
-    if (numQuotes%2 == 0) {
-
-      for (int i = 0; i < text.length(); i++) {
-
-        if (text.charAt(i) == '"') {
-
-          if (!inQuotes) {
-            atTextEnd = false;
-            beginIndex = i;
-          }
-          inQuotes = !inQuotes;
-        }
-
-        if (!inQuotes) {
-          if (atTextEnd) {
-            if (text.charAt(i) != ' ') {
-              beginIndex = i;
-              atTextEnd = false;
-            }
-          }
-          else {
-            if (text.charAt(i) == ' ') {
-              atTextEnd = true;
-              splitText[currentSplit] = text.substring(beginIndex, i);
-              currentSplit++;
-            }
-          }
-
-        }
-        if (i == text.length() - 1) {
-          splitText[currentSplit] = text.substring(beginIndex);
-        }
-      }
-    }
-    return splitText;
-  }
-
+  /*
   private static boolean IsValidCommand(String[] input) {
 
     boolean isCommand = false;
@@ -248,4 +129,5 @@ public class JShell {
     }
     return isCommand;
   }
+  */
 }
