@@ -44,8 +44,7 @@ public class Find implements Command {
     return commandName;
   }
 
-  public boolean IsValidCommand(String commandName,
-      ArrayList<String> arguments) {
+  public boolean AreValidArguments(ArrayList<String> arguments) {
     boolean valid = false;
     int size = arguments.size();
     if (arguments.get(size-1).startsWith("\"") &&
