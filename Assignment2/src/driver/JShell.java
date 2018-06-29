@@ -57,9 +57,9 @@ public class JShell {
     JShellWindow window = new JShellWindow();
     
     Scanner in = new Scanner(System.in);
-    boolean terminate = false;
 
-    while (!terminate) {
+    while (!window.getTerminate()) {
+      
 
       System.out.print(prompt);
       String input = in.nextLine();
