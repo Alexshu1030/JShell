@@ -36,19 +36,34 @@ import shell.JShellWindow;
 public class Tree implements Command {
 
   private String commandName = "tree";
-  private int numOfArguments = 0;
   private String helpText = "No done yet...";
-  
+
+  /**
+   * Returns true if there are no arguments given
+   * @return isValid this is true if there are no arguments, o/w false
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
-    
-    return arguments.size() == numOfArguments;
+    boolean isValid = arguments.isEmpty();
+    return isValid;
   }
 
+  
+  /**
+   * Prints help text that includes documentation of History
+   */
   public String getHelpText() {
     
     return helpText;
   }
 
+  
+  /**
+   * Returns true if execution of "tree" is successful. Execution
+   * prints a diagram of the directory hierarchy in the shell
+   * @param jShell this is the window that will be printed on
+   * @param arguments this a list containing null
+   * @return true this is true if execution is successful
+   */
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Directory rootDir = FileExplorer.getRootDirectory();
@@ -59,6 +74,12 @@ public class Tree implements Command {
     return true;
   }
   
+  /**
+   * Returns the string representation of the tree directory hierarchy
+   * @param file this is the current directory
+   * @param depth this is the depth of the current directory
+   * @return text this is the string representation of the tree
+   */
   private String getTreeRepresentation(File file, int depth) {
 
     // Indent the line according to the depth and then added the file name
@@ -83,6 +104,13 @@ public class Tree implements Command {
     return text;
   }
   
+  /**
+   * Returns a string containing sufficient indentations to build string
+   * representation of the depth of the current directory
+   * @param string this is "\t"
+   * @param times this is the amount of indents
+   * @return newString this is the final string with appropriate indents
+   */
   private String repeat(String string, int times) {
     
     String newString = "";
@@ -95,6 +123,10 @@ public class Tree implements Command {
     return newString;
   }
 
+  /**
+   * Returns the command name, "tree"
+   * @return commandName this is the command name
+   */
   public String getCommandName() {
     
     return commandName;
