@@ -35,8 +35,29 @@ import filesystem.Directory;
 import shell.JShellWindow;
 
 public class Pushd implements Command {
+  
   private int numOfArguments = 1;
-  @Override
+  private String helpText = "NAME:" +
+      "  pushd DIR - Pushes the current working directory"
+      + " into a stack, then change the current working directory"
+      + " to DIR." +
+  "DESCRIPTION:" +
+  "  Saves the current working directory into a "
+      + "stack of directories, then changes the current working "
+      + "directory to DIR so that the old working directory could be"
+      + "returned. The directory stack is dynamic and changes "
+      + "depending on pushd and popd commands." +
+  "PARAMETERS:" +
+  "  DIR - The new current working directory that the"
+      + " user may eventually want to return to through the directory"
+      + " stack." +
+  "RETURNS:" +
+  "  This command does not return anything." +
+  "EXAMPLE USAGE:" +
+  "  /#: pushd Dir1" +
+  "    will add the current working directory to"
+      + " the stack and change the current working directory to Dir1.";
+  
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
     // Tells directory stack to push this directory on to the stack
@@ -44,24 +65,18 @@ public class Pushd implements Command {
     return true;
   }
 
-  @Override
   public String getCommandName() {
     // TODO Auto-generated method stub
     return "pushd";
   }
 
-  @Override
   public boolean areValidArguments(ArrayList<String> arguments) {
     return arguments.size() == numOfArguments;
   }
 
-  @Override
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manPushd();
-    return "";
+    
+    return helpText;
   }
 
 }
