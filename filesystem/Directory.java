@@ -41,16 +41,29 @@ public class Directory extends File {
   }
   
 
-  // add a file to the arraylist of files
+  /**
+   * Adds the file into this directory.
+   * @param file this is the file that will be added to the directory
+   */
   public void addFile(File file) {
     listOfFiles.add(file);
   }     
   
-  // remove a file from the arraylist of files
+  
+  /**
+   * Removes the file from this directory
+   * @param file this is the file to be removed from the directory
+   */
   public void removeFile(File file) {
     listOfFiles.remove(file);
   }
   
+  /**
+   * Finds and returns the file with the specified name.
+   * @param fileName the name of the file you are looking for
+   * @return Returns the file with the specified name if found. Otherwise
+   * it returns null.
+   */
   public File getFile(String fileName) {
     // iterate through list of files to find the destination file
     int index = 0;
@@ -74,11 +87,17 @@ public class Directory extends File {
     return nextFile;
   }
   
-  // return true since the object is a directory
+  /**
+   * Returns whether or not this is a directory
+   */
   public boolean isDirectory() {
     return true;
   }
   
+  /**
+   * Returns whether or not this is the root directory.
+   * @return returns true if this is the root directory and false if it is not
+   */
   public boolean isRootDirectory() {
     
     return fileDirectory == null;
