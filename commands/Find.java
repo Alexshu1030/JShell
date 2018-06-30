@@ -48,7 +48,7 @@ public class Find implements Command {
     // set up a folders string arraylist, add each of the folders specified
     // in the arguments to it
     ArrayList<String> folders = new ArrayList<String>();
-    for (int i = 1; i < size-4; i++) {
+    for (int i = 0; i < size-4; i++) {
       folders.add(arguments.get(i));
     }
     // for each folder in the arraylist
@@ -99,7 +99,7 @@ public class Find implements Command {
           // if the 4th last argument is -type
           if (arguments.get(size-4) == "-type") {
             // if arguments have >= 6 elements
-            if (arguments.size() >= 6) {
+            if (arguments.size() >= 5) {
               // the command is valid
               valid = true;
             }
