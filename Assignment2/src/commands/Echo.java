@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import shell.JShellWindow;
 import filesystem.FileExplorer;
 import filesystem.File;
-public class Echo {
+public class Echo implements Command {
   private String command = "echo";
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     if (arguments.size() == 1) {
       System.out.println(arguments.get(0));
     }
@@ -30,17 +30,18 @@ public class Echo {
     return true;
   }
   
-  public String GetCommandName() {
+  public String getCommandName() {
     return command;
   }
   
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     
     return (arguments.size() <= 3 && arguments.size() >= 1);
   }
     
   
-  public void GetHelpText() {
+  public String getHelpText() {
     Man.manEcho();
+    return "";
   }
 }
