@@ -34,7 +34,40 @@ import shell.JShellWindow;
 import filesystem.FileExplorer;
 import filesystem.File;
 public class Echo implements Command {
+  
   private String command = "echo";
+  private String helpText = "NAME:" +
+      "  echo STRING [> OUTFILE |>> OUTFILE] - "
+      + "Print or add STRING to standard output" +
+  "DESCRIPTION:" +
+  "  Prints STRING to the JShell if STRING is the"
+      + " only parameter provided. If OUTFILE is provided, STRING will"
+      + " overwrite whatever is in OUTFILE if > is used, or append "
+      + "to OUTFILE if >> is used. If OUTFILE does not exist, it "
+      + "will be created." +
+  "PARAMETERS:" +
+  "  STRING - The string that will be sent to"
+      + " standard output. Must be surrounded by double quotes" +
+  "  >  - Overwrite OUTFILE's contents with STRING. "
+      + "Optional parameter." +
+  "  >>  - Append OUTFILE's contents with STRING. "
+      + "Optional parameter." +
+  "  OUTFILE  - The file that STRING will output to"
+      + "depending on whether > or >> is used. OUTFILE will be created"
+      + " if it does not already exist. Optional parameter" +
+  "RETURNS:" +
+  "  Will print STRING if STRING is the only "
+      + "parameter." +
+  "EXAMPLE USAGE:" +
+  "  /#: echo \"Hello\"" +
+  "    will display Hello" +
+  "If FILE1 contains 'hello'" +
+  "  /#: echo \"Hello\" > FILE1" +
+  "    FILE1 will contain Hello" +
+  "If FILE1 contains 'hello'" +
+  "  /#: echo \"Hello\" >> FILE1" +
+  "    FILE1 will contain helloHello.";
+  
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     if (arguments.size() == 1) {
       System.out.println(arguments.get(0));
@@ -70,10 +103,7 @@ public class Echo implements Command {
     
   
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manEcho();
-    return "";
+    
+    return helpText;
   }
 }

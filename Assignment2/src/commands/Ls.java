@@ -35,7 +35,30 @@ import shell.JShellWindow;
 public class Ls implements Command{
   
   private String commandName = "ls";
-
+  private String helpText = "NAME:" +
+      "  ls [PATH ...]"
+      + " - Lists files and directories" +
+  "DESCRIPTION:" +
+  " Recursively lists all files and directories"
+      + " inside the given paths, or inside the current directory"
+      + " if no directory is given." +
+  "PARAMETERS:" +
+  "  PATH - The relative or full path that the user"
+      + " wants to perform ls on." +
+  "RETURNS:" +
+  "  This command returns all files and directories"
+      + " inside." +
+  "EXAMPLE USAGE:" +
+  "  /#: ls" +
+  "    will recursively return all files and"
+      + "directories in the current directory." +
+  "  /#: ls /PATH/" +
+  "    will recursively return all files and"
+      + "directories in the directory /PATH/." +
+  "  /#: ls /PATH1/ /PATH2/" +
+      "    will recursively return all files and"
+          + "directories in the directory /PATH1/ and /PATH2/.";
+  
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
     boolean successful = false;
@@ -106,10 +129,7 @@ public class Ls implements Command{
   }
 
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manLs();
-    return "";
+
+    return helpText;
   }
 }
