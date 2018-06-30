@@ -1,4 +1,3 @@
-package filesystem;
 // **********************************************************
 // Assignment2:
 // Student1: Ciaran Hogan
@@ -28,6 +27,7 @@ package filesystem;
 // I have also read the plagiarism section in the course info
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
+package filesystem;
 public class File {
   protected String fileName;
   protected Directory fileDirectory;
