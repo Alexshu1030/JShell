@@ -65,6 +65,22 @@ public class File {
   
   public String GetFullPath() {
     
-    return "RECURSIVELYGETPREVPATHHERE/" + this.getFileName();
+    String path = "/";
+    
+    if (this.getFileDirectory() != null)
+      path = GetFullPathHelper(this);
+      
+    return path;
+  }
+  
+  private String GetFullPathHelper(File file) {
+    
+    String path = file.getFileName();
+    
+    if (file.getFileDirectory() != null) {    
+      path = GetFullPathHelper(file.getFileDirectory()) + "/" + path;
+    }
+
+    return path;
   }
 }
