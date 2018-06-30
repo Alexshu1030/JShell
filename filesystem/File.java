@@ -39,30 +39,66 @@ public class File {
     setFileContents(contents);
   }
   
+  /**
+   * Sets the name of this file
+   * @param name this is the new name of the file
+   */
   private void setFileName(String name) {
     this.fileName = name;
   }
+  
+  /**
+   * Sets the directory that this file is in
+   * @param directory the new directory the file is in
+   */
   private void setFileDirectory(Directory directory) {
     this.fileDirectory = directory;
   }
+  
+  /**
+   * Sets the contents of the file
+   * @param contents the new contents of the file
+   */
   private void setFileContents(Object contents) {
     this.fileContents = contents;
   }
   
+  /**
+   * Gets the name of this file
+   * @return returns the name of this file
+   */
   public String getFileName() {
     return this.fileName;
   }
   
+  /**
+   * Gets the directory that this file is in
+   * @return Returns the directory this file is in
+   */
   public Directory getFileDirectory() {
     return this.fileDirectory;
   }
+  
+  /**
+   * Gets the contents of this file
+   * @return the contents of this file
+   */
   public Object getFileContents() {
     return this.fileContents;
   }
+  
+  /**
+   * Returns whether or not this file is a directory
+   * @return true if this file is a directory and false if it is not
+   */
   public boolean isDirectory() {
     return false; 
   }
   
+  /**
+   * Returns the path to this file from the root directory
+   * @return returns the path to this file from the root directory
+   */
   public String getFullPath() {
     
     String path = "/";
