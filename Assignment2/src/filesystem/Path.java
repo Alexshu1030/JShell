@@ -31,6 +31,13 @@ package filesystem;
 
 public class Path {
   
+  /**
+   * Returns the path relative to the root folder of the path. i.e. 
+   * //home//me//test goes to //me//test
+   * @param path the path to be shortened
+   * @return returns the sub path or an empty string if the path contains one
+   * or fewer files
+   */
   public static String getSubPath(String path) {
     
     // Get the first slash in the path.
@@ -46,6 +53,11 @@ public class Path {
     return result;
   }
   
+  /**
+   * Returns the root directory of the path.
+   * @param path the path you want to root directory of
+   * @return the root directory
+   */
   public static String getRootDirectory(String path) {
     
     // If the path is absolute then we want to ignore the first character
@@ -74,12 +86,23 @@ public class Path {
     return result;
   }
   
+  
+  /**
+   * Determines whether the specified path is a directory
+   * @param path the path that you want to know whether it is a directory
+   * @return true if it is a directory and false otherwise
+   */
   public static boolean isDirectory(String path) {
     
     // If the file has no extension then it is a folder
     return getFileExtension(path).equals("");
   }
   
+  /**
+   * Gets the name of the file (including the extension) specified by the path
+   * @param path the path to the file
+   * @return the name of the file
+   */
   public static String getFileName(String path) {
        
     // Get the last slash in the path. The name starts at the next index. Also
@@ -90,6 +113,12 @@ public class Path {
     return path.substring(nameStartIndex);
   }
   
+  /**
+   * Returns the extension of the file at the specified path. If it is a
+   * folder then an empty string will be returned.
+   * @param path the path to the file
+   * @return the extension of the file
+   */
   public static String getFileExtension(String path) {
 
     // Get the last decimal in the path.
@@ -105,6 +134,12 @@ public class Path {
     return result;
   }
   
+  /**
+   * Returns whether the path is absolute or not. i.e. whether or not the path
+   * starts from the root directory of the file system.
+   * @param path the path
+   * @return returns true if the path is absolute and false otherwise
+   */
   public static boolean isAbsolute(String path) {
     
     boolean isAbs = false;
@@ -119,6 +154,11 @@ public class Path {
     return isAbs;
   }
   
+  /**
+   * Returns the path without the last file name.
+   * @param path the path to the file
+   * @return the path without the last file name
+   */
   public static String removeFileName(String path) {
     
     // Get the last slash in the path
