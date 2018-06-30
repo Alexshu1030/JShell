@@ -3,9 +3,10 @@ package commands;
 import java.util.ArrayList;
 import shell.JShellWindow;
 
-public class Cat {
+public class Cat implements Command{
   private String command = "cat";
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     for (int i = 0; i < arguments.size(); i++) {
       // We need to replace the argument at i with a File object
       //System.out.println(arguments.get(i).getFileContents());
@@ -18,15 +19,16 @@ public class Cat {
     return false;
   }
   
-  public String GetCommandName() {
+  public String getCommandName() {
     return command;
   }
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     
     return (arguments.size() >= 1);
   }
   
-  public void GetHelpText() {
+  public String getHelpText() {
     Man.manCat();
+    return "";
   }
 }
