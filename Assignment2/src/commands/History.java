@@ -22,16 +22,16 @@ public class History implements Command{
     int totalInputs = log.size();
     int truncAmount = 0;
 
-
+    // Set truncation amount based on input integer
     if (!arguments.isEmpty()) {
       truncAmount = totalInputs - Integer.parseInt((arguments.get(0)));
     }
-
+    // iterate through each input in log and print if within truncation
     for (int i = 1; i <= totalInputs; i++) {
       if (truncAmount < i) {
         System.out.println(i + ". " + log.get(i - 1));
       }
-    } 
+    }
     return true;
   }
 
@@ -54,13 +54,15 @@ public class History implements Command{
   public boolean AreValidArguments(ArrayList<String> arguments) {
 
     boolean isValid = false;
-
+    // there is no argument parameter, it is valid
     if (arguments.isEmpty()) {
       isValid = true;
-      // check if argument is an integer
+      // check if argument is a, single, integer
     } else if (arguments.size() == singleArg) {
+      // try parsing argument parameter into integer, if success -> int
       try {
         Integer.parseInt(arguments.get(0));
+        // otherwise, it is not an integer and is not valid
       } catch (Exception NumberFormatException) {
         return isValid;
       }
