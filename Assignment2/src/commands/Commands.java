@@ -7,8 +7,8 @@ import shell.JShellWindow;
 public class Commands {
 
   // This is a list of the valid commands
-  private static Command[] commands = new Command[] {new History(), new Exit(), new Pwd(), new Ls(), 
-      new Mkdir(), new Cd()};
+  private static Command[] commands = new Command[] {new History(), new Exit(),
+      new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree()};
   
   public static boolean Run(JShellWindow jShell, String commandText) {
     
