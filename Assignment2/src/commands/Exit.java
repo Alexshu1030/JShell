@@ -35,7 +35,28 @@ import shell.JShellWindow;
 public class Exit implements Command{
 
   private String commandName = "exit";
-
+  private String helpText = "NAME:" +
+      "  exit - Terminates the current JShell"
+      + " process." +
+  "DESCRIPTION:" +
+  "  Prevents any other code in JShell from"
+      + " being run by reaching the exit condition in"
+      + " the while loop. The exit condition is if command 'exit'"
+      + " is entered by user" +
+  "PARAMETERS:" +
+  "  There are no parameters available for"
+      + " this command." +
+  "RETURNS:" +
+  "  This command does not return anything." +
+  "EXAMPLE USAGE:" +
+  "  /#: exit" +
+  "    will successfully terminate JShell." +
+  "  /#: exit p" +
+  "    will not terminate JShell because of the"
+      + " additional parameter 'p'." +
+  "  /#:              exit" +
+  "    will terminate JShell because"
+      + " JShell will ignore excess spaces.";
 
   /**
    * Returns true if successfully terminated the jShell
@@ -72,10 +93,7 @@ public class Exit implements Command{
    * Prints help text that includes documentation of Exit
    */
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manExit();
-    return "";
+    
+    return helpText;
   }
 }
