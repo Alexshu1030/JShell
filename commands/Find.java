@@ -23,8 +23,7 @@ public class Find implements Command {
           if (dir.getFile(fileName).isDirectory() == false) {
             result += (folders.get(j) + fileName + " ");
           }
-        }
-        else if (arguments.get(size-3) == "d") {
+        } else if (arguments.get(size-3) == "d") {
           if (dir.getFile(fileName).isDirectory() == true) {
             result += (folders.get(j) + fileName + " ");
           }
@@ -33,8 +32,7 @@ public class Find implements Command {
     }
     if (result == "") {
       System.out.println("File not found");
-    }
-    else {
+    } else {
       System.out.println(result);
     }
     return true;
