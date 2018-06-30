@@ -30,31 +30,38 @@
 package commands;
 
 import java.util.ArrayList;
-import filesystem.Directory;
 import filesystem.FileExplorer;
+import filesystem.Directory;
 import shell.JShellWindow;
-public class DirectoryStack {
-  private ArrayList<Directory> directoryStack = new ArrayList<Directory>();
-  
-  public void pushd(JShellWindow jShell, Directory directory) {
+
+public class Pushd implements Command {
+  private int numOfArguments = 1;
+  @Override
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
-    // Add the current directory to the top of the stack 
-    directoryStack.add(0,explorer.getWorkingDirectory());
-    // Sets the current directory to the one we added
-    explorer.setWorkingDirectory(directory);
+    // Tells directory stack to push this directory on to the stack
+    //DirectoryStack.stack.pushd(jShell, directory);
+    return true;
   }
-  public void popd(JShellWindow jShell) {
-    FileExplorer explorer = jShell.getFileExplorer();
-    
-    if (directoryStack.isEmpty()) {
-      System.out.println("The directory stack is empty. Can't pop");
-    }
-    else {
-      // Sets the directory at the top of the stack to be the current directory
-      explorer.setWorkingDirectory(directoryStack.get(0));
-      // Remove the directory at the top of the stack
-      directoryStack.remove(0);
-    }
+
+  @Override
+  public String getCommandName() {
+    // TODO Auto-generated method stub
+    return "pushd";
   }
-  
+
+  @Override
+  public boolean areValidArguments(ArrayList<String> arguments) {
+    return arguments.size() == numOfArguments;
+  }
+
+  @Override
+  public String getHelpText() {
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manPushd();
+    return "";
+  }
+
 }
