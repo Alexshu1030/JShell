@@ -4,6 +4,7 @@ import shell.JShellWindow;
 
 public class History implements Command{
 
+  private int singleArg = 1;
   private String commandName = "history";
 
   /**
@@ -57,7 +58,7 @@ public class History implements Command{
     if (arguments.isEmpty()) {
       isValid = true;
       // check if argument is an integer
-    } else if (arguments.size() == 1) {
+    } else if (arguments.size() == singleArg) {
       try {
         Integer.parseInt(arguments.get(0));
       } catch (Exception NumberFormatException) {
