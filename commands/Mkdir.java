@@ -33,17 +33,20 @@ import java.util.ArrayList;
 import filesystem.*;
 import shell.JShellWindow;
 public class Mkdir implements Command {
-
+  // set the command name as mkdir to be used for calling
   private String commandName = "mkdir";
+  private String helpText = "Not finished...";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+    // get the instance of explorer
     FileExplorer explorer = jShell.getFileExplorer();
-    
+    // the path to be created is the first argument
     String path = arguments.get(0);
+    // get the parent dir of the specified path
     Directory parentDir = explorer.getParentDirectory(path);
+    // get the dir name to be added
     String dirName = Path.getFileName(path);
-    
+    // add the directory and make it the child of the parentdir
     Directory newDir = new Directory(dirName, parentDir);
     parentDir.addFile(newDir);
     
@@ -51,14 +54,14 @@ public class Mkdir implements Command {
   }
 
   public String getCommandName() {
-    
+    // return the command name
     return commandName;
   }
 
   public boolean areValidArguments(ArrayList<String> arguments) {
     
     boolean isValid = false;
-    
+    // if the argument has 1 arg return true
     if (arguments.size() == 1) {
         isValid = true;
     }
