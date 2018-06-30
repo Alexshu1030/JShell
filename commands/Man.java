@@ -38,56 +38,62 @@ public class Man implements Command {
   private int numOfArguments = 1;
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     // Print documentation for 'exit' command
-    if (arguments.get(0) == "exit") {
+    String cmd = arguments.get(0);
+    if (cmd.equals("exit")) {
       manExit();
+
     }
     // Print documentation for 'mkdir' command
-    else if (arguments.get(0) == "mkdir") {
+    else if (cmd.equals("mkdir")) {
       manMkdir();
     }
     // Print documentation for 'cd' command
-    else if (arguments.get(0) == "cd") {
+    else if (cmd.equals("cd")) {
       manCd();
     }
     // Print documentation for 'ls' command
-    else if (arguments.get(0) == "ls") {
+    else if (cmd.equals("ls")) {
       manLs();
     }
     // Print documentation for 'pwd' command
-    else if (arguments.get(0) == "pwd") {
+    else if (cmd.equals("pwd")) {
       manPwd();
     }
     // Print documentation for 'pushd' command
-    else if (arguments.get(0) == "pushd") {
+    else if (cmd.equals("pushd")) {
       manPushd();
     }
     // Print documentation for 'popd' command
-    else if (arguments.get(0) == "popd") {
+    else if (cmd.equals("popd")) {
       manPopd();
     }
     // Print documentation for 'history' command
-    else if (arguments.get(0) == "history") {
+    else if (cmd.equals("history")) {
       manHistory();
     }
     // Print documentation for 'cat' command
-    else if (arguments.get(0) == "cat") {
+    else if (cmd.equals("cat")) {
       manCat();
     }
     // Print documentation for 'echo' command
-    else if (arguments.get(0) == "echo") {
+    else if (cmd.equals("echo")) {
       manEcho();
     }
     // Print documentation for 'man' command
-    else if (arguments.get(0) == "man") {
+    else if (cmd.equals("man")) {
       manMan();
     }
     // Print documentation for 'find' command
-    else if (arguments.get(0) == "find") {
+    else if (cmd.equals("find")) {
       manFind();
     }
     // Print documentation for 'tree' command
-    else if (arguments.get(0) == "tree") {
+    else if (cmd.equals("tree")) {
       manTree();
+    }
+    else {
+      
+      System.out.println("F");
     }
     return true;
   }
@@ -148,7 +154,7 @@ public class Man implements Command {
     System.out.println("    will create a directory named Dir1 inside the"
         + " directory named Dir2 that is located in the current"
         + " directory.");
-    System.out.println(" If Dir2 does not exist in the current directory,"
+    System.out.println("    If Dir2 does not exist in the current directory,"
         + " it will look for Dir2 in the root directory. If Dir2 can not "
         + "be found, the command will fail.");
   }
@@ -192,10 +198,10 @@ public class Man implements Command {
         + " inside.");
     System.out.println("EXAMPLE USAGE:");
     System.out.println("  /#: ls");
-    System.out.println("    will recursively return all files and"
+    System.out.println("    will recursively return all files and "
         + "directories in the current directory.");
     System.out.println("  /#: ls /PATH/");
-    System.out.println("    will recursively return all files and"
+    System.out.println("    will recursively return all files and "
         + "directories in the directory /PATH/.");
     System.out.println("  /#: ls /PATH1/ /PATH2/");
         System.out.println("    will recursively return all files and"
@@ -206,7 +212,7 @@ public class Man implements Command {
     System.out.println("NAME:");
     System.out.println("  pwd - Prints current working directory");
     System.out.println("DESCRIPTION:");
-    System.out.println("  Prints the full path of the current working"
+    System.out.println("  Prints the full path of the current working "
         + "directory.");
     System.out.println("PARAMETERS:");
     System.out.println("  There are no parameters available for"
@@ -232,7 +238,7 @@ public class Man implements Command {
     System.out.println("DESCRIPTION:");
     System.out.println("  Saves the current working directory into a "
         + "stack of directories, then changes the current working "
-        + "directory to DIR so that the old working directory could be"
+        + "directory to DIR so that the old working directory could be "
         + "returned. The directory stack is dynamic and changes "
         + "depending on pushd and popd commands.");
     System.out.println("PARAMETERS:");
@@ -361,6 +367,7 @@ public class Man implements Command {
   }
   // Documentation for 'man' command
   public void manMan() {
+    System.out.println("hi");
     System.out.println("NAME:");
     System.out.println("  man CMD - Displays documentation for CMD ");
     System.out.println("DESCRIPTION:");
@@ -403,7 +410,7 @@ public class Man implements Command {
     System.out.println("    will display all directories in Desktop "
         + "named 'a'.");
     System.out.println("  /#: find /user/Desktop -type f -name \"b\"");
-    System.out.println("    will display all directories in Desktop \"\n" + 
+    System.out.println("    will display all directories in Desktop " + 
         "named \"b\".");
   }
   // Documentation for 'tree' command
