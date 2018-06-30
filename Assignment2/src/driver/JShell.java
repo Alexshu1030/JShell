@@ -50,15 +50,26 @@ public class JShell {
     
     Scanner in = new Scanner(System.in);
 
+    Commands.Run(window, "mkdir A");
+    Commands.Run(window, "mkdir B");
+    Commands.Run(window, "mkdir C");
+    Commands.Run(window, "mkdir A/A1");
+    Commands.Run(window, "mkdir A/A2");
+    Commands.Run(window, "mkdir A/A1/A11");
+    Commands.Run(window, "mkdir A/A1/A12");
+    Commands.Run(window, "mkdir B/B1");
+    Commands.Run(window, "mkdir B/B2");
+    Commands.Run(window, "mkdir B/B3");
+    
     while (!window.getTerminate()) {
       
-
       System.out.print(prompt);
       String input = in.nextLine();
       input = input.trim();
       window.addInputtoLog(input);
       
       Commands.Run(window, input);
+      
     }
     
     in.close();
