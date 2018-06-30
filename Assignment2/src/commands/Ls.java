@@ -37,13 +37,13 @@ public class Ls implements Command{
   private String commandName = "ls";
   private String helpText = "Not finished...";
 
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
     boolean successful = false;
     
     if (arguments.size() == 0) {
       
-      Directory dir = jShell.GetFileExplorer().getWorkingDirectory();
+      Directory dir = jShell.getFileExplorer().getWorkingDirectory();
       
       ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
       String fileNames = "";
@@ -64,7 +64,7 @@ public class Ls implements Command{
       
       if (Path.isDirectory(path)) {
         
-        Directory dir = jShell.GetFileExplorer().getParentDirectory(path);
+        Directory dir = jShell.getFileExplorer().getParentDirectory(path);
         
         if (dir != null) {
           
@@ -84,7 +84,7 @@ public class Ls implements Command{
       }
       else {
         
-        File file = jShell.GetFileExplorer().getFile(path);
+        File file = jShell.getFileExplorer().getFile(path);
         
         if (file != null) {
           System.out.println(file.getFileName());          
@@ -96,17 +96,17 @@ public class Ls implements Command{
     return successful;
   }
 
-  public String GetCommandName() {
+  public String getCommandName() {
     
     return commandName;
   }
   
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     
     return arguments.size() == 0 || arguments.size() == 1;
   }
 
-  public String GetHelpText() {
+  public String getHelpText() {
     
     return helpText;
   }

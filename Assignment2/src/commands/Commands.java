@@ -10,12 +10,12 @@ public class Commands {
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree()};
   
-  public static boolean Run(JShellWindow jShell, String commandText) {
+  public static boolean run(JShellWindow jShell, String commandText) {
     
     // Split the command into it's parts (i.e. separate blocks of text, quotes
     // and etc. )
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
-        Split(commandText)));
+        split(commandText)));
     
     boolean succeeded = false;
     
@@ -25,13 +25,13 @@ public class Commands {
       
       // The command name must be the first element
       String commandName = arguments.remove(0);
-      Command command = GetCommand(commandName);
+      Command command = getCommand(commandName);
       
       if (command != null) {
-        if (command.AreValidArguments(arguments)) {
+        if (command.areValidArguments(arguments)) {
           // We have found the command and it's arguments are valid. We can
           // now run the command
-          succeeded = command.Run(jShell, arguments);
+          succeeded = command.run(jShell, arguments);
         }
       }
     }
@@ -39,7 +39,7 @@ public class Commands {
     return succeeded;
   }
   
-  public static Command GetCommand(String name) {
+  public static Command getCommand(String name) {
     
     int i = 0;
     boolean found = false;
@@ -48,7 +48,7 @@ public class Commands {
     // Iterate over the commands until the correct one has been found
     while (i < commands.length && !found) {
       // Check if the name of the current command is the one we want
-      if (commands[i].GetCommandName().equals(name)) {
+      if (commands[i].getCommandName().equals(name)) {
         // It is. We can now exit the loop
         command = commands[i];
         found = true;
@@ -60,7 +60,7 @@ public class Commands {
     return command;
   }
   
-  private static String[] Split(String text) {
+  private static String[] split(String text) {
 
     boolean inQuotes = false;
     boolean atTextEnd = false;

@@ -40,9 +40,9 @@ public class Cd implements Command {
   private int numOfArguments = 1;
   private String commandName = "cd";
   
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    FileExplorer explorer = jShell.GetFileExplorer();
+    FileExplorer explorer = jShell.getFileExplorer();
     Directory currentDirectory = explorer.getWorkingDirectory();
     
     String path = arguments.get(0);
@@ -67,11 +67,11 @@ public class Cd implements Command {
   }
   
   
-  public String GetCommandName() {
+  public String getCommandName() {
     return commandName;
   }
   
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     
     boolean isValid = false;
     if (arguments.size() == numOfArguments) {
@@ -80,7 +80,7 @@ public class Cd implements Command {
     return isValid;
   }
   
-  public String GetHelpText() {
+  public String getHelpText() {
     Man.manCd();
     
     return "";

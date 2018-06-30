@@ -37,14 +37,14 @@ public class DirectoryStack {
   private ArrayList<Directory> directoryStack = new ArrayList<Directory>();
   
   public void pushd(JShellWindow jShell, Directory directory) {
-    FileExplorer explorer = jShell.GetFileExplorer();
+    FileExplorer explorer = jShell.getFileExplorer();
     // Add the current directory to the top of the stack 
     directoryStack.add(0,explorer.getWorkingDirectory());
     // Sets the current directory to the one we added
     explorer.setWorkingDirectory(directory);
   }
   public void popd(JShellWindow jShell) {
-    FileExplorer explorer = jShell.GetFileExplorer();
+    FileExplorer explorer = jShell.getFileExplorer();
     
     if (directoryStack.isEmpty()) {
       System.out.println("The directory stack is empty. Can't pop");

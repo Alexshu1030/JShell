@@ -7,10 +7,10 @@ import filesystem.*;
 public class Find implements Command {
   // set the command name
   String commandName = "find";
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     // set an empty string to be displayed at the end
     String result = "";
-    FileExplorer explorer = jShell.GetFileExplorer();
+    FileExplorer explorer = jShell.getFileExplorer();
     // get the # of arguments
     int size = arguments.size();
     // get the file name from the last element and substring it
@@ -53,11 +53,11 @@ public class Find implements Command {
     return true;
   }
 
-  public String GetCommandName() {
+  public String getCommandName() {
     return commandName;
   }
 
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     boolean valid = false;
     int size = arguments.size();
     // if the last arguments starts and ends with "
@@ -82,8 +82,7 @@ public class Find implements Command {
     return valid;
   }
 
-  @Override
-  public String GetHelpText() {
+  public String getHelpText() {
     Man.manFind();
     return "";
   }

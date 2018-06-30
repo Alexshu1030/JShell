@@ -17,7 +17,7 @@ public class History implements Command{
    * @param arguments this is a list containing either null or an int
    * @return true this is true if execution was successful, o/w false
    */
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     ArrayList<String> log = jShell.getLog();
     int totalInputs = log.size();
     int truncAmount = 0;
@@ -40,7 +40,7 @@ public class History implements Command{
    * Returns the name of this command, "history"
    * @return commandName this is the command's name
    */
-  public String GetCommandName() {
+  public String getCommandName() {
 
     return commandName;
   }
@@ -51,7 +51,7 @@ public class History implements Command{
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
    */
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
 
     boolean isValid = false;
     // there is no argument parameter, it is valid
@@ -75,7 +75,7 @@ public class History implements Command{
   /**
    * Prints help text that includes documentation of History
    */
-  public String GetHelpText() {
+  public String getHelpText() {
 
     Man.manHistory();
     return "";

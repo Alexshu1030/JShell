@@ -14,7 +14,7 @@ public class Exit implements Command{
    * @param arguments this is a list containing null
    * @return true this is true if execution was successful, o/w false
    */
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     jShell.setTerminate(true);
     return true;
   }
@@ -24,7 +24,7 @@ public class Exit implements Command{
    * Returns the name of this command, "exit"
    * @return commandName this is the command's name
    */
-  public String GetCommandName() {
+  public String getCommandName() {
     return commandName;
   }
 
@@ -34,7 +34,7 @@ public class Exit implements Command{
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
    */
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     boolean isValid = arguments.isEmpty();
     return isValid;
   }
@@ -42,7 +42,7 @@ public class Exit implements Command{
   /**
    * Prints help text that includes documentation of Exit
    */
-  public String GetHelpText() {
+  public String getHelpText() {
     Man.manExit();
     return "";
   }

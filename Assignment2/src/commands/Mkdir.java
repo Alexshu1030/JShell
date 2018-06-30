@@ -37,9 +37,9 @@ public class Mkdir implements Command {
   private String commandName = "mkdir";
   private String helpText = "Not finished...";
   
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    FileExplorer explorer = jShell.GetFileExplorer();
+    FileExplorer explorer = jShell.getFileExplorer();
     
     String path = arguments.get(0);
     Directory parentDir = explorer.getParentDirectory(path);
@@ -51,12 +51,12 @@ public class Mkdir implements Command {
     return true;
   }
 
-  public String GetCommandName() {
+  public String getCommandName() {
     
     return commandName;
   }
 
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     
     boolean isValid = false;
     
@@ -67,7 +67,7 @@ public class Mkdir implements Command {
     return isValid;
   }
 
-  public String GetHelpText() {
+  public String getHelpText() {
    
     Man.manMkdir();
     return "";

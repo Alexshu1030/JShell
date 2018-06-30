@@ -10,31 +10,31 @@ public class Tree implements Command {
   private int numOfArguments = 0;
   private String helpText = "No done yet...";
   
-  public boolean AreValidArguments(ArrayList<String> arguments) {
+  public boolean areValidArguments(ArrayList<String> arguments) {
     
     return arguments.size() == numOfArguments;
   }
 
-  public String GetHelpText() {
+  public String getHelpText() {
     
     return helpText;
   }
 
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Directory rootDir = FileExplorer.getRootDirectory();
     // The double back slashes are to add the backslash at the beginning
     // that represents the root directory
-    String treeRep = "\\" + GetTreeRepresentation(rootDir, 0);
+    String treeRep = "\\" + getTreeRepresentation(rootDir, 0);
     System.out.println(treeRep);
     return true;
   }
   
-  private String GetTreeRepresentation(File file, int depth) {
+  private String getTreeRepresentation(File file, int depth) {
 
     // Indent the line according to the depth and then added the file name
     // and go to the next line
-    String text = Repeat("\t", depth) + file.getFileName() + "\n";
+    String text = repeat("\t", depth) + file.getFileName() + "\n";
     
     // If the file is a directory then we need to print the sub files
     if (file.isDirectory()) {
@@ -47,14 +47,14 @@ public class Tree implements Command {
       // increased depth
       for (int i = 0; i < files.size(); i++) {
         
-        text += GetTreeRepresentation(files.get(i), depth + 1);
+        text += getTreeRepresentation(files.get(i), depth + 1);
       }
     }
     
     return text;
   }
   
-  private String Repeat(String string, int times) {
+  private String repeat(String string, int times) {
     
     String newString = "";
     
@@ -66,7 +66,7 @@ public class Tree implements Command {
     return newString;
   }
 
-  public String GetCommandName() {
+  public String getCommandName() {
     
     return commandName;
   }
