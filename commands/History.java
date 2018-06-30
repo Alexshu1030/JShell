@@ -105,8 +105,10 @@ public class History implements Command{
    * Prints help text that includes documentation of History
    */
   public String getHelpText() {
-
-    Man.manHistory();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manHistory();
     return "";
   }
 }

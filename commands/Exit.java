@@ -72,7 +72,10 @@ public class Exit implements Command{
    * Prints help text that includes documentation of Exit
    */
   public String getHelpText() {
-    Man.manExit();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manExit();
     return "";
   }
 }

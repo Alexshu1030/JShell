@@ -35,7 +35,6 @@ import shell.JShellWindow;
 public class Ls implements Command{
   
   private String commandName = "ls";
-  private String helpText = "Not finished...";
 
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
@@ -107,7 +106,10 @@ public class Ls implements Command{
   }
 
   public String getHelpText() {
-    
-    return helpText;
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manLs();
+    return "";
   }
 }

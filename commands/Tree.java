@@ -36,7 +36,6 @@ import shell.JShellWindow;
 public class Tree implements Command {
 
   private String commandName = "tree";
-  private String helpText = "No done yet...";
 
   /**
    * Returns true if there are no arguments given
@@ -52,8 +51,11 @@ public class Tree implements Command {
    * Prints help text that includes documentation of History
    */
   public String getHelpText() {
-    
-    return helpText;
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manTree();
+    return "";
   }
 
   

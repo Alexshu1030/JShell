@@ -57,7 +57,10 @@ public class Cat implements Command{
   }
   
   public String getHelpText() {
-    Man.manCat();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manCat();
     return "";
   }
 }

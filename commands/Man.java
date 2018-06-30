@@ -29,64 +29,70 @@
 // *********************************************************
 
 package commands;
-public class Man {
 
-  public Man(String cmd) {
+import java.util.ArrayList;
+import shell.JShellWindow;
+
+public class Man implements Command {
+  private String commandName = "man";
+  private int numOfArguments = 1;
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     // Print documentation for 'exit' command
-    if (cmd == "exit") {
+    if (arguments.get(0) == "exit") {
       manExit();
     }
     // Print documentation for 'mkdir' command
-    else if (cmd == "mkdir") {
+    else if (arguments.get(0) == "mkdir") {
       manMkdir();
     }
     // Print documentation for 'cd' command
-    else if (cmd == "cd") {
+    else if (arguments.get(0) == "cd") {
       manCd();
     }
     // Print documentation for 'ls' command
-    else if (cmd == "ls") {
+    else if (arguments.get(0) == "ls") {
       manLs();
     }
     // Print documentation for 'pwd' command
-    else if (cmd == "pwd") {
+    else if (arguments.get(0) == "pwd") {
       manPwd();
     }
     // Print documentation for 'pushd' command
-    else if (cmd == "pushd") {
+    else if (arguments.get(0) == "pushd") {
       manPushd();
     }
     // Print documentation for 'popd' command
-    else if (cmd == "popd") {
+    else if (arguments.get(0) == "popd") {
       manPopd();
     }
     // Print documentation for 'history' command
-    else if (cmd == "history") {
+    else if (arguments.get(0) == "history") {
       manHistory();
     }
     // Print documentation for 'cat' command
-    else if (cmd == "cat") {
+    else if (arguments.get(0) == "cat") {
       manCat();
     }
     // Print documentation for 'echo' command
-    else if (cmd == "echo") {
+    else if (arguments.get(0) == "echo") {
       manEcho();
     }
     // Print documentation for 'man' command
-    else if (cmd == "man") {
+    else if (arguments.get(0) == "man") {
       manMan();
     }
     // Print documentation for 'find' command
-    else if (cmd == "find") {
+    else if (arguments.get(0) == "find") {
       manFind();
     }
-    // Print documentation for 'find' command
-    else if (cmd == "tree") {
+    // Print documentation for 'tree' command
+    else if (arguments.get(0) == "tree") {
       manTree();
     }
+    return true;
   }
   // Documentation for 'exit' command
-  public static void manExit() {
+  public void manExit() {
     System.out.println("NAME:");
     System.out.println("  exit - Terminates the current JShell"
         + " process.");
@@ -111,7 +117,7 @@ public class Man {
         + " JShell will ignore excess spaces.");
   }
   // Documentation for 'mkdir' command
-  public static void manMkdir() {
+  public void manMkdir() {
     System.out.println("NAME:");
     System.out.println("  mkdir DIR1 [DIR2] ... [PATH] -"
         + " Create directories");
@@ -147,7 +153,7 @@ public class Man {
         + "be found, the command will fail.");
   }
   // Documentation for 'cd' command
-  public static void manCd() {
+  public void manCd() {
     System.out.println("NAME:");
     System.out.println("  cd DIR - Change the current directory");
     System.out.println("DESCRIPTION:");
@@ -170,7 +176,7 @@ public class Man {
         + "parent directory.");
   }
   // Documentation for 'ls' command
-  public static void manLs() {
+  public void manLs() {
     System.out.println("NAME:");
     System.out.println("  ls [PATH ...]"
         + " - Lists files and directories");
@@ -196,7 +202,7 @@ public class Man {
             + "directories in the directory /PATH1/ and /PATH2/.");
   }
   // Documentation for 'pwd' command
-  public static void manPwd() {
+  public void manPwd() {
     System.out.println("NAME:");
     System.out.println("  pwd - Prints current working directory");
     System.out.println("DESCRIPTION:");
@@ -218,7 +224,7 @@ public class Man {
         + " JShell will ignore excess spaces.");
   }
   // Documentation for 'pushd' command
-  public static void manPushd() {
+  public void manPushd() {
     System.out.println("NAME:");
     System.out.println("  pushd DIR - Pushes the current working directory"
         + " into a stack, then change the current working directory"
@@ -241,7 +247,7 @@ public class Man {
         + " the stack and change the current working directory to Dir1.");
   }
   // Documentation for 'popd' command
-  public static void manPopd() {
+  public void manPopd() {
     System.out.println("NAME:");
     System.out.println("  popd - Sets the current working directory "
         + "to the one at the top of the directory stack.");
@@ -265,7 +271,7 @@ public class Man {
     System.out.println("    Will return an error message.");
   }
   // Documentation for 'history' command
-  public static void manHistory() {
+  public void manHistory() {
     System.out.println("NAME:");
     System.out.println("  history [number] - Prints recent commands"
         + " entered");
@@ -294,7 +300,7 @@ public class Man {
     System.out.println("    2. history");
   }
   // Documentation for 'cat' command
-  public static void manCat() {
+  public void manCat() {
     System.out.println("NAME:");
     System.out.println("  cat FILE1 [FILE2 ...] - Displays the contents"
         + " in the given file(s)");
@@ -320,7 +326,7 @@ public class Man {
     System.out.println("    Will return 'hellothere'.");
   }
   // Documentation for 'echo' command
-  public static void manEcho() {
+  public void manEcho() {
     System.out.println("NAME:");
     System.out.println("  echo STRING [> OUTFILE |>> OUTFILE] - "
         + "Print or add STRING to standard output");
@@ -354,7 +360,7 @@ public class Man {
     System.out.println("    FILE1 will contain helloHello.");
   }
   // Documentation for 'man' command
-  public static void manMan() {
+  public void manMan() {
     System.out.println("NAME:");
     System.out.println("  man CMD - Displays documentation for CMD ");
     System.out.println("DESCRIPTION:");
@@ -373,7 +379,7 @@ public class Man {
         + " is not a valid command.");
   }
   // Documentation for 'find' command
-  public static void manFind() {
+  public void manFind() {
     System.out.println("NAME:");
     System.out.println("  find PATH ... -type [f|d] -name \"STRING\""
         + " - Displays all files or directories with name STRING in PATH.");
@@ -401,7 +407,7 @@ public class Man {
         "named \"b\".");
   }
   // Documentation for 'tree' command
-  public static void manTree() {
+  public void manTree() {
     System.out.println("NAME:");
     System.out.println("  tree - Displays the entire file system as a "
         + "tree");
@@ -433,6 +439,25 @@ public class Man {
     System.out.println("      A");
     System.out.println("          C");
     System.out.println("      B");
+  }
+
+  @Override
+  public String getCommandName() {
+    return commandName;
+  }
+  @Override
+  public boolean areValidArguments(ArrayList<String> arguments) {
+    boolean isValid = false;
+    if (arguments.size() == numOfArguments) {
+      isValid = true;
+    }
+    return isValid;
+  }
+  @Override
+  public String getHelpText() {
+    // Call the appropriate command
+    manMan();
+    return "";
   }
   
 }

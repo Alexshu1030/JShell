@@ -112,7 +112,10 @@ public class Find implements Command {
   }
 
   public String getHelpText() {
-    Man.manFind();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manFind();
     return "";
   }
   
