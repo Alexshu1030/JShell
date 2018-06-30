@@ -46,7 +46,7 @@ public class History implements Command{
 
   
   /**
-   * Returns true if arguments are valid for 'history', o/w false
+   * Returns true if arguments are valid for "history", o/w false
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
    */
