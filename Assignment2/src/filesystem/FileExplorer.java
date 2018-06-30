@@ -32,11 +32,8 @@ package filesystem;
 public class FileExplorer {
 
   // This is static so multiple instances of the FileExplorer will have
-  // access to the same directory.
+  // access to the same file system .
   private static Directory rootDirectory = new Directory("", null);
-  
-  // This is not static because each FileExplorer should be able to have a
-  // different working directory.
   private Directory workingDirectory;
   
   public FileExplorer() {
@@ -58,8 +55,7 @@ public class FileExplorer {
     
     workingDirectory = newWD;
   }
-  
-  // Returns the file at the given path.
+
   public File getFile(String path) {
     
     // Get the directory the file is in
@@ -74,19 +70,24 @@ public class FileExplorer {
   public Directory getParentDirectory(String path) {
     
     // Get the path of the directory that the file is in
+    // Note that at this point the file may not actually exist but we will
+    // still return the directory that it would be contained in as if it did.
     String dirPath = Path.removeFileName(path);
 
     Directory rootDir;
     
-    if (Path.isAbsolute(path))
+    if (Path.isAbsolute(path)) {
       // The path is absolute so we want to start at the root directory and
       // work our way to the file.
       rootDir = rootDirectory;
+      // Make the path relative to the root directory.
+      path = path.substring(1);
+    }
     else
-      // The path is relative so we want to start in the workign directory
+      // The path is relative so we want to start in the working directory
       // and work our way to the file.
       rootDir = workingDirectory;
-    
+
     // Use the helper method.
     return getDirectoryHelper(rootDir, dirPath);
   }
@@ -94,7 +95,7 @@ public class FileExplorer {
   private Directory getDirectoryHelper(Directory curDir, String relPath) {
     
     Directory dir;
-    
+    //System.out.println("Cur Dir: " + curDir.getFileName() + " - Path: " + relPath);
     if (relPath.equals("")) {
       // Base case. We are at the end of the relative path. The current
       // The current directory that we are in is the one we are looking for.
@@ -121,8 +122,6 @@ public class FileExplorer {
     return dir;
   }
 
-  
-  // Adds the file at the given path
   public void addFile(String path, File file) {
     
     // Get the parent directory path and then add the file into that
@@ -131,7 +130,6 @@ public class FileExplorer {
     dir.addFile(file);
   }
   
-  // Returns whether that path exists in the file explorer
   public boolean pathExists(String path) {
     
     //Get the file and check that it isn't null.
