@@ -55,7 +55,7 @@ public class JShellWindow {
     return terminate;
   }
 
-  public FileExplorer GetFileExplorer() {
+  public FileExplorer getFileExplorer() {
     
     return fileExplorer;
   }
