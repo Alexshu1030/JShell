@@ -51,7 +51,7 @@ public class Ls implements Command{
       for (int i = 0; i < files.size(); i++) {
         fileNames += files.get(i).getFileName();
         if (i != files.size() - 1)
-          fileNames += " ";
+          fileNames += "\n";
       }
       
       System.out.println(fileNames);
