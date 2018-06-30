@@ -35,11 +35,11 @@ import shell.JShellWindow;
 
 public interface Command {
 
-  public boolean Run(JShellWindow jShell, ArrayList<String> arguments);
+  public boolean run(JShellWindow jShell, ArrayList<String> arguments);
   
-  public String GetCommandName();
+  public String getCommandName();
   
-  public boolean AreValidArguments(ArrayList<String> arguments);
+  public boolean areValidArguments(ArrayList<String> arguments);
   
-  public String GetHelpText();
+  public String getHelpText();
 }
