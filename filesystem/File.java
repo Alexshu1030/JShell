@@ -63,22 +63,22 @@ public class File {
     return false; 
   }
   
-  public String GetFullPath() {
+  public String getFullPath() {
     
     String path = "/";
     
     if (this.getFileDirectory() != null)
-      path = GetFullPathHelper(this);
+      path = getFullPathHelper(this);
       
     return path;
   }
   
-  private String GetFullPathHelper(File file) {
+  private String getFullPathHelper(File file) {
     
     String path = file.getFileName();
     
     if (file.getFileDirectory() != null) {    
-      path = GetFullPathHelper(file.getFileDirectory()) + "/" + path;
+      path = getFullPathHelper(file.getFileDirectory()) + "/" + path;
     }
 
     return path;
