@@ -62,9 +62,11 @@ public class Commands {
           // We have found the command and it's arguments are valid. We can
           // now run the command
           succeeded = command.run(jShell, arguments);
+          
         }
       }
     }
+    
     
     return succeeded;
   }
