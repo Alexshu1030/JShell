@@ -39,6 +39,26 @@ public class Cd implements Command {
   
   private int numOfArguments = 1;
   private String commandName = "cd";
+  private String helpText = "NAME:" +
+      "  cd DIR - Change the current directory" +
+      "DESCRIPTION:" +
+      "  Changes the current directory to DIR." +
+      "PARAMETERS:" +
+      "  DIR - The directory to be changed to."
+          + " It may be a full path or a relative path." +
+      "RETURNS:" +
+      "  This command does not return anything." +
+      "EXAMPLE USAGE:" +
+      "  /#: cd /Dir1" +
+      "    will change the current directory to Dir1"
+          + " in the root directory." +
+      "  /#: cd ./Dir1/Dir2" +
+      "    will change the current directory to Dir2, "
+          + " which is located in Dir1 which is located in the current"
+          + "directory." +
+      "  /#: cd .." +
+      "    will change the current directory to its"
+          + "parent directory.";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
@@ -81,11 +101,7 @@ public class Cd implements Command {
   }
   
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manCd();
     
-    return "";
+    return helpText;
   }
 }

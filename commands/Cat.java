@@ -34,6 +34,29 @@ import shell.JShellWindow;
 
 public class Cat implements Command{
   private String command = "cat";
+  private String helpText = "NAME:" +
+      "  cat FILE1 [FILE2 ...] - Displays the contents"
+      + " in the given file(s)" +
+  "DESCRIPTION:" +
+  "  Displays the contents of the file and "
+      + "concatenates the contents of subsequent files to the contents"
+      + " of the first." +
+  "PARAMETERS:" +
+  "  FILE1 - The file with the contents to be"
+      + " displayed." +
+  "  FILE2 - A subsequent file with the contents "
+      + "to be displayed by concatenating it to FILE1. An optional"
+      + " parameter." +
+  "RETURNS:" +
+  "  Will display the contents of the given files." +
+  "EXAMPLE USAGE:" +
+  "If FILE1 contains 'hello'" +
+  "  /#: cat FILE1" +
+  "    will return 'hello'" +
+  "If FILE1 contains 'hello' and FILE2 contains "
+      + "'there'" +
+  "  /#: cat FILE1 FILE2" +
+  "    Will return 'hellothere'.";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     for (int i = 0; i < arguments.size(); i++) {
@@ -57,10 +80,7 @@ public class Cat implements Command{
   }
   
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manCat();
-    return "";
+    
+    return helpText;
   }
 }

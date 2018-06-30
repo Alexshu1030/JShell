@@ -35,7 +35,33 @@ import filesystem.*;
 
 public class Find implements Command {
   // set the command name
-  String commandName = "find";
+  private String commandName = "find";
+  private String helpText = "NAME:" +
+      "  find PATH ... -type [f|d] -name \"STRING\""
+      + " - Displays all files or directories with name STRING in PATH." +
+  "DESCRIPTION:" +
+  "  If -type f then it will find all files with "
+      + "name STRING in PATH and display it. If type -d then it will"
+      + " find all directories with name STRING in PATH." +
+  "PARAMETERS:" +
+  "  PATH - The path to find STRING in." +
+  "  STRING - The name of the file/directory "
+      + "the user is looking for" +
+  "  -type [f|d] - f will find files named STRING "
+      + "in PATH, d will find directories named STRING in PATH" +
+  " -name - parameter to specify STRING as the "
+      + "name of the file tehey are looking for." +
+  "RETURNS:" +
+  "  A list of all files/directories in PATH named "
+      + "STRING" +
+  "EXAMPLE USAGE:" +
+  "  /#: find /user/Desktop -type d -name \"a\"" +
+  "    will display all directories in Desktop "
+      + "named 'a'." +
+  "  /#: find /user/Desktop -type f -name \"b\"" +
+  "    will display all directories in Desktop \"\n" + 
+      "named \"b\".";
+  
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     // set an empty string to be displayed at the end
     String result = "";
@@ -112,11 +138,8 @@ public class Find implements Command {
   }
 
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manFind();
-    return "";
+
+    return helpText;
   }
   
 }

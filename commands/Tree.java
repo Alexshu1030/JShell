@@ -36,6 +36,37 @@ import shell.JShellWindow;
 public class Tree implements Command {
 
   private String commandName = "tree";
+  private String helpText = "NAME:" +
+      "  tree - Displays the entire file system as a "
+      + "tree" +
+  "DESCRIPTION:" +
+  "Displays the entire file system as a "
+      + "tree starting from the root directory. For each level of "
+      + "the tree, the subtree is indented" +
+  "PARAMETERS:" +
+  "  There are no parameters available for this"
+      + " command." +
+  "RETURNS:" +
+  "  A text representation of the file system" +
+  "EXAMPLE USAGE:" +
+  "If the root directory contains no subdirectories" +
+  "  /#: tree" +
+  "    will return /" +
+  "If the root directory contains 2 subdirectories A"
+      + " and B." +
+  "  /#: tree" +
+  "   will return: " +
+  "   /" +
+  "      A" +
+  "      B" +
+  "If the root directory contains 2 subdirectories A"
+      + " and B with a sub directory C in A" +
+  "  /#: tree" +
+  "   will return: " +
+  "   /" +
+  "      A" +
+  "          C" +
+  "      B";
 
   /**
    * Returns true if there are no arguments given
@@ -51,11 +82,8 @@ public class Tree implements Command {
    * Prints help text that includes documentation of History
    */
   public String getHelpText() {
-    // Create a Man object to access the man commands
-    Man man = new Man();
-    // Call the appropriate command
-    man.manTree();
-    return "";
+    
+    return helpText;
   }
 
   
