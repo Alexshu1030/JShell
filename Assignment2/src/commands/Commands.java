@@ -38,7 +38,7 @@ public class Commands {
   // This is a list of the valid commands
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
-      new Find(), new Cat()};
+      new Find(), new Cat(), new Man()};
   
   public static boolean run(JShellWindow jShell, String commandText) {
     

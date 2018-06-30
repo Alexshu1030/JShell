@@ -35,7 +35,6 @@ import shell.JShellWindow;
 public class Mkdir implements Command {
 
   private String commandName = "mkdir";
-  private String helpText = "Not finished...";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     
@@ -68,8 +67,10 @@ public class Mkdir implements Command {
   }
 
   public String getHelpText() {
-   
-    Man.manMkdir();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manMkdir();
     return "";
   }
 }

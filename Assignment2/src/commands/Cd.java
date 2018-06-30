@@ -81,7 +81,10 @@ public class Cd implements Command {
   }
   
   public String getHelpText() {
-    Man.manCd();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manCd();
     
     return "";
   }

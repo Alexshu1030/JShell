@@ -70,7 +70,10 @@ public class Echo implements Command {
     
   
   public String getHelpText() {
-    Man.manEcho();
+    // Create a Man object to access the man commands
+    Man man = new Man();
+    // Call the appropriate command
+    man.manEcho();
     return "";
   }
 }
