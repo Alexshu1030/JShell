@@ -6,6 +6,16 @@ public class History implements Command{
 
   private String commandName = "history";
 
+  /**
+   * Returns true if execution of command terminates. 
+   * With no parameter, execution prints the whole list of the log of
+   * inputs.
+   * With parameter, execution prints the truncated list according to
+   * the amount specified in integer parameter.
+   * @param jShell this is the window that will be printed on
+   * @param arguments this is a list containing either null or an int
+   * @return true this is true if execution was successful, o/w false
+   */
   public boolean Run(JShellWindow jShell, ArrayList<String> arguments) {
     ArrayList<String> log = jShell.getLog();
     int totalInputs = log.size();
@@ -24,11 +34,22 @@ public class History implements Command{
     return true;
   }
 
+  
+  /**
+   * Returns the name of this command, "history"
+   * @return commandName this is the command's name
+   */
   public String GetCommandName() {
 
     return commandName;
   }
 
+  
+  /**
+   * Returns true if arguments are valid for 'history', o/w false
+   * @param arguments this is a list containing the arguments input
+   * @return isValid this is true if arguments are valid, o/w false
+   */
   public boolean AreValidArguments(ArrayList<String> arguments) {
 
     boolean isValid = false;
@@ -47,6 +68,10 @@ public class History implements Command{
     return isValid;
   }
 
+  
+  /**
+   * Prints help text that includes documentation of History
+   */
   public String GetHelpText() {
 
     Man.manHistory();
