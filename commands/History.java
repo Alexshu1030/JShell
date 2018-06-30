@@ -44,7 +44,7 @@ public class History implements Command{
    * the amount specified in integer parameter.
    * @param jShell this is the window that will be printed on
    * @param arguments this is a list containing either null or an int
-   * @return true this is true if execution was successful, o/w false
+   * @return true this is true if execution was successful
    */
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     ArrayList<String> log = jShell.getLog();
