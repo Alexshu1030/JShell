@@ -41,21 +41,38 @@ public class FileExplorer {
     setWorkingDirectory(rootDirectory);
   }
   
+  /**
+   * Gets the root directory of the FileExplorer
+   * @return returns the root directory
+   */
   public static Directory getRootDirectory() {
     
     return rootDirectory;
   }
   
+  /**
+   * Gets the working directory for this FileExplorer
+   * @return returns the working directory
+   */
   public Directory getWorkingDirectory() {
     
     return workingDirectory;
   }
   
+  /**
+   * Sets the working directory for this FileExplorer
+   * @param newWD the new working directory
+   */
   public void setWorkingDirectory(Directory newWD) {
     
     workingDirectory = newWD;
   }
 
+  /**
+   * Gets the file at the specified path
+   * @param path the path of the file
+   * @return the file at that path
+   */
   public File getFile(String path) {
     
     // Get the directory the file is in
@@ -67,6 +84,11 @@ public class FileExplorer {
     return file;
   }
   
+  /**
+   * Returns the directory that the file at the specified path is in.
+   * @param path the path of the file
+   * @return the directory that the file is in
+   */
   public Directory getParentDirectory(String path) {
     
     // Get the path of the directory that the file is in
@@ -122,6 +144,11 @@ public class FileExplorer {
     return dir;
   }
 
+  /**
+   * Adds the file into the FileExplorer at the specified path
+   * @param path the path to the directory you want to add the file in
+   * @param file the file being added to the FileExplorer
+   */
   public void addFile(String path, File file) {
     
     // Get the parent directory path and then add the file into that
@@ -130,6 +157,11 @@ public class FileExplorer {
     dir.addFile(file);
   }
   
+  /**
+   * Returns whether the specified path exists
+   * @param path the path you want to check exists
+   * @return is true if the path exists and false otherwise
+   */
   public boolean pathExists(String path) {
     
     //Get the file and check that it isn't null.
