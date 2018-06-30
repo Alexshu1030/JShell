@@ -38,26 +38,48 @@ public class JShellWindow {
   private FileExplorer fileExplorer = new FileExplorer();
   private boolean terminate = false;
   private ArrayList<String> log = new ArrayList<String>();
-  
+
+  /**
+   * Appends input to the log ArrayList
+   * @param input this is the entry from the command line
+   */
   public void addInputtoLog(String input) {
     log.add(input);
   }
-  
+
+
+  /**
+   * Returns the log of the entries from the command line
+   * @return log this is ArrayList holding the entries from command line
+   */
   public ArrayList<String> getLog() {
     return log;
   }
 
+  
+  /**
+   * Changes termination state of this window to true if parameter is
+   * true, else; false
+   * @param terminate this is the state of termination
+   */
   public void setTerminate(boolean terminate) {
     this.terminate = terminate;
   }
-  
+
+  /**
+   * Returns the state of termination of this window
+   * @return
+   */
   public boolean getTerminate() {
     return terminate;
   }
 
+  /**
+   * Returns the file explorer system used by this window
+   * @return fileExplorer this is the file explorer system
+   */
   public FileExplorer getFileExplorer() {
     
     return fileExplorer;
   }
-
 }
