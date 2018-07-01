@@ -72,6 +72,7 @@ public class Mkdir implements Command {
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     int numOfArgs = arguments.size();
     if (arguments.size() == 1) {
+      
       // get the instance of explorer
       FileExplorer explorer = jShell.getFileExplorer();
       // the path to be created is the first argument
@@ -80,8 +81,23 @@ public class Mkdir implements Command {
       Directory parentDir = explorer.getParentDirectory(path);
       // get the dir name to be added
       String dirName = Path.getFileName(path);
-      // add the directory and make it the child of the parentdir
+      
       Directory newDir = new Directory(dirName, parentDir);
+      if (path.charAt(0) == '/') {
+        
+        Directory currDir = explorer.getWorkingDirectory();
+        // Change to the root directory
+        explorer.setWorkingDirectory(FileExplorer.getRootDirectory());
+        ArrayList<String> absolutePath = new ArrayList<String>();
+        // Make a directory as a relative path in the root directory
+        absolutePath.add(path.substring(1));
+        
+        run(jShell, absolutePath);
+        // Change the working directory back to the original directory
+        explorer.setWorkingDirectory(currDir);
+        return true;
+      }
+      // add the directory and make it the child of the parentdir
       try {
         parentDir.addFile(newDir);
       } catch (Exception NullPointerException) {
@@ -89,6 +105,7 @@ public class Mkdir implements Command {
       }
       return true;
     } else {
+
       ArrayList<String> part1 =
           new ArrayList<String>(arguments.subList(0, 1));
       ArrayList<String> tail =
