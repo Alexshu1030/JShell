@@ -130,7 +130,7 @@ public class Ls implements Command{
       isValid = true;
     }
 
-    return arguments.size() == 0 || arguments.size() == 1;
+    return isValid;
   }
 
   public String getHelpText() {
