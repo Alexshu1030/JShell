@@ -70,46 +70,48 @@ public class Echo implements Command {
   "    FILE1 will contain helloHello.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+    int numOfArgs = arguments.size();
+    String arg1 = arguments.get(0);
+    int lastQuoteMark = arg1.length() - 1;
+    arg1 = arg1.substring(1, lastQuoteMark);
+
     FileExplorer explorer = jShell.getFileExplorer();
-    if (arguments.size() == 1) {
-      System.out.println(arguments.get(0));
-    }
-    else if (arguments.size() == 2) {
-      if (arguments.get(1).equals(">")|| arguments.get(1).equals(">>")){
-        System.out.println(arguments.get(0));
-      }
-    }
-    else if (arguments.size() == 3) {
-      if (arguments.get(1).equals(">")){
+    if (numOfArgs == 1) {
+      System.out.println(arg1);
+    } else if (numOfArgs == 3) {
+      String arg2 = arguments.get(1);
+      String arg3 = arguments.get(2);
+
+      if (arg2.equals(">")){
         Directory dir = explorer.getWorkingDirectory();
         // If the file exists
-        if (dir.getFile(arguments.get(2)) != null) {
+        if (dir.getFile(arg3) != null) {
           // Get the file at the given name and overwrite file contents
-          File outfile = dir.getFile(arguments.get(2));
-          outfile.setFileContents(arguments.get(1));
+          File outfile = dir.getFile(arg3);
+          outfile.setFileContents(arg2);
         }
         else {
           // Create a new file with the new contents in the current directory
-          File outfile = new File(arguments.get(0),dir, arguments.get(2));
+          File outfile = new File(arg3, dir, arg1);
         }
         
       }
-      else if (arguments.get(1).equals(">>")) {
+      else if (arg2.equals(">>")) {
         Directory dir = explorer.getWorkingDirectory();
         // If the file exists
-        if (dir.getFile(arguments.get(2)) != null) {
+        if (dir.getFile(arg3) != null) {
           // Get the file at the given name and in the current directory
           // and overwrite file contents
-          File outfile = dir.getFile(arguments.get(2));
+          File outfile = dir.getFile(arg3);
           String contents = (String) outfile.getFileContents();
-          contents.concat(arguments.get(0));
+          contents.concat(arg1);
           outfile.setFileContents(contents);
         }
         else {
           // Create a new file with the given name and no contents
-          File outfile = new File(arguments.get(0),dir, "");
+          File outfile = new File(arg3, dir, "");
           // Set the file to the contents to be appended
-          outfile.setFileContents(arguments.get(0));
+          outfile.setFileContents(arg1);
         }
         
       }
