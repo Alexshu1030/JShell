@@ -32,6 +32,7 @@ package commands;
 import java.util.ArrayList;
 import filesystem.FileExplorer;
 import filesystem.Directory;
+import filesystem.DirectoryStack;
 import shell.JShellWindow;
 
 public class Pushd implements Command {
@@ -60,8 +61,11 @@ public class Pushd implements Command {
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
-    // Tells directory stack to push this directory on to the stack
-    //DirectoryStack.stack.pushd(jShell, directory);
+    // Get the path of the directory that we want to push
+    String path = arguments.get(0);
+    // Get the directory at the path
+    Directory newDir = (Directory)explorer.getFile(path);
+    DirectoryStack.stack.pushd(jShell, newDir);
     return true;
   }
 
