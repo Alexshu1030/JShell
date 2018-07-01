@@ -93,6 +93,11 @@ public class Echo implements Command {
         else {
           // Create a new file with the new contents in the current directory
           File outfile = new File(arg3, dir, arg1);
+          try {
+            dir.addFile(outfile);
+          } catch (Exception NullPointerException) {
+            return false;
+          }
         }
         
       }
