@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cd implements Command {
-  
+
   private int numOfArguments = 1;
   private String commandName = "cd";
   private String helpText = "NAME:" +
@@ -45,29 +45,29 @@ public class Cd implements Command {
       "  Changes the current directory to DIR.\n" +
       "PARAMETERS:\n" +
       "  DIR - The directory to be changed to.\n"
-          + " It may be a full path or a relative path.\n" +
+      + " It may be a full path or a relative path.\n" +
       "RETURNS:\n" +
       "  This command does not return anything.\n" +
       "EXAMPLE USAGE:\n" +
       "  /#: cd /Dir1\n" +
       "    will change the current directory to Dir1"
-          + " in the root directory.\n" +
+      + " in the root directory.\n" +
       "  /#: cd ./Dir1/Dir2\n" +
       "    will change the current directory to Dir2, "
-          + " which is located in Dir1 which is located in the current"
-          + "directory.\n" +
+      + " which is located in Dir1 which is located in the current"
+      + "directory.\n" +
       "  /#: cd ..\n" +
       "    will change the current directory to its"
-          + "parent directory.\n";
-  
+      + "parent directory.\n";
+
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     FileExplorer explorer = jShell.getFileExplorer();
     Directory currentDirectory = explorer.getWorkingDirectory();
-    
+
     String path = arguments.get(0);
     boolean succeeded = false;
-    
+
     if (path.equals("..")) {
       Directory workingDir = explorer.getWorkingDirectory();
       if (!workingDir.isRootDirectory()) {
@@ -79,29 +79,35 @@ public class Cd implements Command {
       succeeded = true;
     }
     else {
-      Directory newDir = (Directory)explorer.getFile(path);
-      explorer.setWorkingDirectory(newDir);
+      try {
+        if (!explorer.getFile(path).equals(null)) {
+          Directory newDir = (Directory)explorer.getFile(path);
+          explorer.setWorkingDirectory(newDir);
+        }
+      } catch (Exception NullPointerException) {
+        succeeded = false;
+      }
     }
-    
+
     return succeeded;
   }
-  
-  
+
+
   public String getCommandName() {
     return commandName;
   }
-  
+
   public boolean areValidArguments(ArrayList<String> arguments) {
-    
+
     boolean isValid = false;
     if (arguments.size() == numOfArguments) {
       isValid = true;
     }
     return isValid;
   }
-  
+
   public String getHelpText() {
-    
+
     return helpText;
   }
 }
