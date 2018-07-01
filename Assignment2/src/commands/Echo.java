@@ -36,37 +36,37 @@ import filesystem.File;
 public class Echo implements Command {
   
   private String command = "echo";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  echo STRING [> OUTFILE |>> OUTFILE] - "
-      + "Print or add STRING to standard output" +
-  "DESCRIPTION:" +
+      + "Print or add STRING to standard output\n" +
+  "DESCRIPTION:\n" +
   "  Prints STRING to the JShell if STRING is the"
       + " only parameter provided. If OUTFILE is provided, STRING will"
       + " overwrite whatever is in OUTFILE if > is used, or append "
       + "to OUTFILE if >> is used. If OUTFILE does not exist, it "
-      + "will be created." +
-  "PARAMETERS:" +
+      + "will be created.\n" +
+  "PARAMETERS:\n" +
   "  STRING - The string that will be sent to"
-      + " standard output. Must be surrounded by double quotes" +
+      + " standard output. Must be surrounded by double quotes\n" +
   "  >  - Overwrite OUTFILE's contents with STRING. "
-      + "Optional parameter." +
+      + "Optional parameter.\n" +
   "  >>  - Append OUTFILE's contents with STRING. "
-      + "Optional parameter." +
+      + "Optional parameter.\n" +
   "  OUTFILE  - The file that STRING will output to"
       + "depending on whether > or >> is used. OUTFILE will be created"
-      + " if it does not already exist. Optional parameter" +
-  "RETURNS:" +
+      + " if it does not already exist. Optional parameter\n" +
+  "RETURNS:\n" +
   "  Will print STRING if STRING is the only "
-      + "parameter." +
-  "EXAMPLE USAGE:" +
-  "  /#: echo \"Hello\"" +
-  "    will display Hello" +
-  "If FILE1 contains 'hello'" +
-  "  /#: echo \"Hello\" > FILE1" +
-  "    FILE1 will contain Hello" +
-  "If FILE1 contains 'hello'" +
-  "  /#: echo \"Hello\" >> FILE1" +
-  "    FILE1 will contain helloHello.";
+      + "parameter.\n" +
+  "EXAMPLE USAGE:\n" +
+  "  /#: echo \"Hello\"\n" +
+  "    will display Hello\n" +
+  "If FILE1 contains 'hello'\n" +
+  "  /#: echo \"Hello\" > FILE1\n" +
+  "    FILE1 will contain Hello\n" +
+  "If FILE1 contains 'hello'\n" +
+  "  /#: echo \"Hello\" >> FILE1\n" +
+  "    FILE1 will contain helloHello.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     if (arguments.size() == 1) {

@@ -37,26 +37,26 @@ import shell.JShellWindow;
 public class Pushd implements Command {
   
   private int numOfArguments = 1;
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  pushd DIR - Pushes the current working directory"
       + " into a stack, then change the current working directory"
-      + " to DIR." +
-  "DESCRIPTION:" +
+      + " to DIR.\n" +
+  "DESCRIPTION:\n" +
   "  Saves the current working directory into a "
       + "stack of directories, then changes the current working "
       + "directory to DIR so that the old working directory could be"
       + "returned. The directory stack is dynamic and changes "
-      + "depending on pushd and popd commands." +
-  "PARAMETERS:" +
+      + "depending on pushd and popd commands.\n" +
+  "PARAMETERS:\n" +
   "  DIR - The new current working directory that the"
       + " user may eventually want to return to through the directory"
-      + " stack." +
-  "RETURNS:" +
-  "  This command does not return anything." +
-  "EXAMPLE USAGE:" +
-  "  /#: pushd Dir1" +
+      + " stack.\n" +
+  "RETURNS:\n" +
+  "  This command does not return anything.\n" +
+  "EXAMPLE USAGE:\n" +
+  "  /#: pushd Dir1\n" +
   "    will add the current working directory to"
-      + " the stack and change the current working directory to Dir1.";
+      + " the stack and change the current working directory to Dir1.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();

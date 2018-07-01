@@ -6,27 +6,27 @@ import shell.JShellWindow;
 
 public class Popd implements Command{
   
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  popd - Sets the current working directory "
-      + "to the one at the top of the directory stack." +
-  "DESCRIPTION:" +
+      + "to the one at the top of the directory stack.\n" +
+  "DESCRIPTION:\n" +
   "  Removes the directory at the top of the "
       + "directory stack and sets the current working directory to "
-      + "that directory." +
-  "PARAMETERS:" +
+      + "that directory.\n" +
+  "PARAMETERS:\n" +
   "  There are no parameters available for this"
-      + " command." +
-  "RETURNS:" +
+      + " command.\n" +
+  "RETURNS:\n" +
   "  Will return an error message if the "
-      + "directory stack is empty." +
-  "EXAMPLE USAGE:" +
-  "If the directory stack is not empty." +
-  "  /#: popd" +
+      + "directory stack is empty.\n" +
+  "EXAMPLE USAGE:\n" +
+  "If the directory stack is not empty.\n" +
+  "  /#: popd\n" +
   "    will change the current working directory to "
-      + "the one at the top of the stack." +
-  "If the directory stack is empty." +
-  "  /#: popd" +
-  "    Will return an error message.";
+      + "the one at the top of the stack.\n" +
+  "If the directory stack is empty.\n" +
+  "  /#: popd\n" +
+  "    Will return an error message.\n";
 
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     DirectoryStack.stack.popd(jShell);

@@ -37,25 +37,25 @@ public class Pwd implements Command {
 
   private String commandName = "pwd";
   private int numOfArguments = 0;
-  private String helpText = "NAME:" +
-      "  pwd - Prints current working directory" +
-      "DESCRIPTION:" +
+  private String helpText = "NAME:\n" +
+      "  pwd - Prints current working directory\n" +
+      "DESCRIPTION:\n" +
       "  Prints the full path of the current working"
-          + "directory." +
-      "PARAMETERS:" +
+          + "directory.\n" +
+      "PARAMETERS:\n" +
       "  There are no parameters available for"
-          + " this command." +
-      "RETURNS:" +
-      "  This command does not return anything." +
-      "EXAMPLE USAGE:" +
-      "  /#: exit" +
-      "    will successfully terminate JShell." +
-      "  /#: exit p" +
+          + " this command.\n" +
+      "RETURNS:\n" +
+      "  This command does not return anything.\n" +
+      "EXAMPLE USAGE:\n" +
+      "  /#: exit\n" +
+      "    will successfully terminate JShell.\n" +
+      "  /#: exit p\n" +
       "    will not terminate JShell because of the"
-          + " additional parameter 'p'." +
-      "  /#:              exit" +
+          + " additional parameter 'p'.\n" +
+      "  /#:              exit\n" +
       "    will terminate JShell because"
-          + " JShell will ignore excess spaces.";
+          + " JShell will ignore excess spaces.\n";
 
   public boolean areValidArguments(ArrayList<String> arguments) {
 
