@@ -89,8 +89,7 @@ public class Echo implements Command {
           // Get the file at the given name and overwrite file contents
           File outfile = dir.getFile(arg3);
           outfile.setFileContents(arg1);
-        }
-        else {
+        } else {
           // Create a new file with the new contents in the current directory
           File outfile = new File(arg3, dir, arg1);
           try {
@@ -99,9 +98,7 @@ public class Echo implements Command {
             return false;
           }
         }
-
-      }
-      else if (arg2.equals(">>")) {
+      } else if (arg2.equals(">>")) {
         Directory dir = explorer.getWorkingDirectory();
         // If the file exists
         if (dir.getFile(arg3) != null) {
@@ -111,8 +108,7 @@ public class Echo implements Command {
           String contents = (String) outfile.getFileContents();
           String newContents = contents.concat(arg1);
           outfile.setFileContents(newContents);
-        }
-        else {
+        } else {
           return false;
         }
       }
@@ -148,7 +144,6 @@ public class Echo implements Command {
         }
       }
     }
-
     return isValid;
   }
 
