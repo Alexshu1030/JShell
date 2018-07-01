@@ -122,8 +122,31 @@ public class Echo implements Command {
   }
   
   public boolean areValidArguments(ArrayList<String> arguments) {
+    boolean isValid = false;
+    int numOfArgs = arguments.size();
+    if (numOfArgs == 1) {
+      String arg = arguments.get(0);
+      int secArgLen = arg.length();
+      // echo's STRING input must have quotations around it
+      if (arg.substring(0, 1).equals("\"") &&
+          arg.substring(secArgLen - 1, secArgLen).equals("\"")) {
+        isValid = true;
+      }
+    } else if (numOfArgs == 3) {
+      String arg1 = arguments.get(0);
+      String arg2 = arguments.get(1);
+      // Otherwise the second argument must be the > or >>
+      int secArgLen = arg1.length();
+      if (arg2.equals(">>") || arg2.equals(">")) {
+        // echo's STRING input must have quotations around it
+        if (arg1.substring(0, 1).equals("\"") &&
+            arg1.substring(secArgLen - 1, secArgLen).equals("\"")) {
+          isValid = true;
+        }
+      }
+    }
     
-    return (arguments.size() <= 3 && arguments.size() >= 1);
+    return isValid;
   }
     
   
