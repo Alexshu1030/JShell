@@ -33,106 +33,103 @@ import java.util.ArrayList;
 import filesystem.*;
 import shell.JShellWindow;
 public class Ls implements Command{
-  
+
   private String commandName = "ls";
   private String helpText = "NAME:\n" +
       "  ls [PATH ...]"
       + " - Lists files and directories\n" +
-  "DESCRIPTION:\n" +
-  " Recursively lists all files and directories"
+      "DESCRIPTION:\n" +
+      " Recursively lists all files and directories"
       + " inside the given paths, or inside the current directory"
       + " if no directory is given.\n" +
-  "PARAMETERS:\n" +
-  "  PATH - The relative or full path that the user"
+      "PARAMETERS:\n" +
+      "  PATH - The relative or full path that the user"
       + " wants to perform ls on.\n" +
-  "RETURNS:\n" +
-  "  This command returns all files and directories"
+      "RETURNS:\n" +
+      "  This command returns all files and directories"
       + " inside.\n" +
-  "EXAMPLE USAGE:\n" +
-  "  /#: ls\n" +
-  "    will recursively return all files and"
-      + "directories in the current directory.\n" +
-  "  /#: ls /PATH/\n" +
-  "    will recursively return all files and"
-      + "directories in the directory /PATH/.\n" +
-  "  /#: ls /PATH1/ /PATH2/\n" +
+      "EXAMPLE USAGE:\n" +
+      "  /#: ls\n" +
       "    will recursively return all files and"
-          + "directories in the directory /PATH1/ and /PATH2/.\n";
-  
+      + "directories in the current directory.\n" +
+      "  /#: ls /PATH/\n" +
+      "    will recursively return all files and"
+      + "directories in the directory /PATH/.\n" +
+      "  /#: ls /PATH1/ /PATH2/\n" +
+      "    will recursively return all files and"
+      + "directories in the directory /PATH1/ and /PATH2/.\n";
+
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     boolean successful = false;
-    
+
     if (arguments.size() == 0) {
-      
+
       Directory dir = jShell.getFileExplorer().getWorkingDirectory();
-      
+
       ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
       String fileNames = "";
-      
+
       for (int i = 0; i < files.size(); i++) {
         fileNames += files.get(i).getFileName();
         if (i != files.size() - 1)
           fileNames += "\n";
       }
-      
+
       System.out.println(fileNames);
-      
+
       successful = true;
     }
     else {
-      
+
       String path = arguments.get(0);
-      
+
       if (Path.isDirectory(path)) {
-        
+
         Directory dir = jShell.getFileExplorer().getParentDirectory(path);
-        
+
         if (dir != null) {
-          
+
           ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
           String fileNames = "";
-          
+
           for (int i = 0; i < files.size(); i++) {
             fileNames += files.get(i).getFileName();
             if (i != files.size() - 1)
               fileNames += "\n";
           }
-          
+
           System.out.println(fileNames);
-          
+
           successful = true;
         }
       }
       else {
-        
+
         File file = jShell.getFileExplorer().getFile(path);
-        
+
         if (file != null) {
           System.out.println(file.getFileName());          
           successful = true;
         }
       }
     }
-    
+
     return successful;
   }
 
   public String getCommandName() {
-    
+
     return commandName;
   }
-  
+
   public boolean areValidArguments(ArrayList<String> arguments) {
     boolean isValid = false;
     int numOfArgs = arguments.size();
-    if (numOfArgs == 0) {
-      isValid = true;
-    } else if (numOfArgs >= 1) {
-      // TODO: check if parameters are REAL paths
+    if (numOfArgs >= 0) {
       isValid = true;
     }
-    
+
     return arguments.size() == 0 || arguments.size() == 1;
   }
 
