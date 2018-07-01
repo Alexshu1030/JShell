@@ -88,7 +88,7 @@ public class Echo implements Command {
         if (dir.getFile(arg3) != null) {
           // Get the file at the given name and overwrite file contents
           File outfile = dir.getFile(arg3);
-          outfile.setFileContents(arg2);
+          outfile.setFileContents(arg1);
         }
         else {
           // Create a new file with the new contents in the current directory
@@ -114,9 +114,12 @@ public class Echo implements Command {
         }
         else {
           // Create a new file with the given name and no contents
-          File outfile = new File(arg3, dir, "");
-          // Set the file to the contents to be appended
-          outfile.setFileContents(arg1);
+          File outfile = new File(arg3, dir, arg1);
+          try {
+            dir.addFile(outfile);
+          } catch (Exception NullPointerException) {
+            return false;
+          }
         }
         
       }
