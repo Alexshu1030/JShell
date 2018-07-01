@@ -70,19 +70,25 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
-    // get the instance of explorer
-    FileExplorer explorer = jShell.getFileExplorer();
-    // the path to be created is the first argument
-    String path = arguments.get(0);
-    // get the parent dir of the specified path
-    Directory parentDir = explorer.getParentDirectory(path);
-    // get the dir name to be added
-    String dirName = Path.getFileName(path);
-    // add the directory and make it the child of the parentdir
-    Directory newDir = new Directory(dirName, parentDir);
-    parentDir.addFile(newDir);
+    if (arguments.size() == 1) {
+      // get the instance of explorer
+      FileExplorer explorer = jShell.getFileExplorer();
+      // the path to be created is the first argument
+      String path = arguments.get(0);
+      // get the parent dir of the specified path
+      Directory parentDir = explorer.getParentDirectory(path);
+      // get the dir name to be added
+      String dirName = Path.getFileName(path);
+      // add the directory and make it the child of the parentdir
+      Directory newDir = new Directory(dirName, parentDir);
+      parentDir.addFile(newDir);
 
-    return true;
+      return true;
+    } else {
+      ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
+      ArrayList<String> tail = new ArrayList<String>(arguments.subList(1, arguments.size()));
+      return run(jShell, part1) && run(jShell, tail);
+    }
   }
 
   public String getCommandName() {
@@ -96,11 +102,12 @@ public class Mkdir implements Command {
     // if the argument has 1 arg return true
     if (arguments.size() == 1) {
       String name = arguments.get(0); 
-      if (name.matches("[A-Za-z0-9]")) {
+      if (name.matches("[A-Za-z0-9]+")) {
         isValid = true;
       }
     }
-
+    //testing
+    isValid = true;
     return isValid;
   }
 
