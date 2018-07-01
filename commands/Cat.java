@@ -30,6 +30,9 @@
 package commands;
 
 import java.util.ArrayList;
+import filesystem.Directory;
+import filesystem.File;
+import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class Cat implements Command{
@@ -59,10 +62,14 @@ public class Cat implements Command{
   "    Will return 'hellothere'.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+    FileExplorer explorer = jShell.getFileExplorer();
     for (int i = 0; i < arguments.size(); i++) {
       // We need to replace the argument at i with a File object
-      //System.out.println(arguments.get(i).getFileContents());
-      // make sure we are not at the last file
+      String path = arguments.get(i);
+      // Get the file at the given path and print it's contents
+      File file = explorer.getFile(path);
+      System.out.println(file.getFileContents());
+      // make sure we do not print 3 line breaks for the last file
       if (i != arguments.size()-1) {
         System.out.print("\n\n\n");
       }

@@ -32,6 +32,7 @@ package commands;
 import java.util.ArrayList;
 import shell.JShellWindow;
 import filesystem.FileExplorer;
+import filesystem.Directory;
 import filesystem.File;
 public class Echo implements Command {
   
@@ -69,24 +70,48 @@ public class Echo implements Command {
   "    FILE1 will contain helloHello.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+    FileExplorer explorer = jShell.getFileExplorer();
     if (arguments.size() == 1) {
       System.out.println(arguments.get(0));
     }
     else if (arguments.size() == 2) {
-      if (arguments.get(1) == ">" || arguments.get(1) == ">>") {
+      if (arguments.get(1).equals(">")|| arguments.get(1).equals(">>")){
         System.out.println(arguments.get(0));
       }
     }
     else if (arguments.size() == 3) {
-      if (arguments.get(1) == ">") {
-       // We need to see if the file/argument3 exists in the current folder then 
-       // set its contents to the first argument i.e. arguments.get(0)
+      if (arguments.get(1).equals(">")){
+        Directory dir = explorer.getWorkingDirectory();
+        // If the file exists
+        if (dir.getFile(arguments.get(2)) != null) {
+          // Get the file at the given name and overwrite file contents
+          File outfile = dir.getFile(arguments.get(2));
+          outfile.setFileContents(arguments.get(1));
+        }
+        else {
+          // Create a new file with the new contents in the current directory
+          File outfile = new File(arguments.get(0),dir, arguments.get(2));
+        }
+        
       }
-      else if (arguments.get(1) == ">>") {
-     // We need to see if the file/argument3 exists in the current folder then
-     // put the current contents in a string and append a line separator to
-     // it (which is a requirement) then append argument1 to the string.
-     // Finally set the contents of the file to be the string
+      else if (arguments.get(1).equals(">>")) {
+        Directory dir = explorer.getWorkingDirectory();
+        // If the file exists
+        if (dir.getFile(arguments.get(2)) != null) {
+          // Get the file at the given name and in the current directory
+          // and overwrite file contents
+          File outfile = dir.getFile(arguments.get(2));
+          String contents = (String) outfile.getFileContents();
+          contents.concat(arguments.get(0));
+          outfile.setFileContents(contents);
+        }
+        else {
+          // Create a new file with the given name and no contents
+          File outfile = new File(arguments.get(0),dir, "");
+          // Set the file to the contents to be appended
+          outfile.setFileContents(arguments.get(0));
+        }
+        
       }
     }
     return true;
