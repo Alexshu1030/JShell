@@ -35,32 +35,32 @@ public class History implements Command{
 
   private int singleArg = 1;
   private String commandName = "history";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  history [number] - Prints recent commands"
-      + " entered" +
-  "DESCRIPTION:" +
+      + " entered\n" +
+  "DESCRIPTION:\n" +
   "  Prints recent commands with each command on "
       + "their own line. There will be two columns. The first column "
       + "numbers the commands where the most recent is the highest"
-      + " number. The second column contains the commands." +
-  "PARAMETERS:" +
+      + " number. The second column contains the commands.\n" +
+  "PARAMETERS:\n" +
   "  number - This parameter lets the user return "
       + "the last 'number' commands entered rather than all commands."
-      + " An optional parameter." +
-  "RETURNS:" +
-  "  Will return a list of commands entered." +
-  "EXAMPLE USAGE:" +
-  "If no other command was entered." +
-  "  /#: history" +
-  "    1. history" +
-  "If we were to enter the pwd command first." +
-  "  /#: history" +
-  "    1. pwd" +
-  "    2. history" +
-  "If we were to enter the pwd command twice first." +
-  "  /#: history 2" +
-  "    1. pwd" +
-  "    2. history";
+      + " An optional parameter.\n" +
+  "RETURNS:\n" +
+  "  Will return a list of commands entered.\n" +
+  "EXAMPLE USAGE:\n" +
+  "If no other command was entered.\n" +
+  "  /#: history\n" +
+  "    1. history\n" +
+  "If we were to enter the pwd command first.\n" +
+  "  /#: history\n" +
+  "    1. pwd\n" +
+  "    2. history\n" +
+  "If we were to enter the pwd command twice first.\n" +
+  "  /#: history 2\n" +
+  "    1. pwd\n" +
+  "    2. history\n";
 
   /**
    * Returns true if execution of command terminates. 

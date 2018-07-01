@@ -40,25 +40,25 @@ public class Cd implements Command {
   private int numOfArguments = 1;
   private String commandName = "cd";
   private String helpText = "NAME:" +
-      "  cd DIR - Change the current directory" +
-      "DESCRIPTION:" +
-      "  Changes the current directory to DIR." +
-      "PARAMETERS:" +
-      "  DIR - The directory to be changed to."
-          + " It may be a full path or a relative path." +
-      "RETURNS:" +
-      "  This command does not return anything." +
-      "EXAMPLE USAGE:" +
-      "  /#: cd /Dir1" +
+      "  cd DIR - Change the current directory\n" +
+      "DESCRIPTION:\n" +
+      "  Changes the current directory to DIR.\n" +
+      "PARAMETERS:\n" +
+      "  DIR - The directory to be changed to.\n"
+          + " It may be a full path or a relative path.\n" +
+      "RETURNS:\n" +
+      "  This command does not return anything.\n" +
+      "EXAMPLE USAGE:\n" +
+      "  /#: cd /Dir1\n" +
       "    will change the current directory to Dir1"
-          + " in the root directory." +
-      "  /#: cd ./Dir1/Dir2" +
+          + " in the root directory.\n" +
+      "  /#: cd ./Dir1/Dir2\n" +
       "    will change the current directory to Dir2, "
           + " which is located in Dir1 which is located in the current"
-          + "directory." +
-      "  /#: cd .." +
+          + "directory.\n" +
+      "  /#: cd ..\n" +
       "    will change the current directory to its"
-          + "parent directory.";
+          + "parent directory.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     

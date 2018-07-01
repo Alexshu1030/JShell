@@ -34,29 +34,29 @@ import shell.JShellWindow;
 
 public class Cat implements Command{
   private String command = "cat";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  cat FILE1 [FILE2 ...] - Displays the contents"
-      + " in the given file(s)" +
-  "DESCRIPTION:" +
+      + " in the given file(s)\n" +
+  "DESCRIPTION:\n" +
   "  Displays the contents of the file and "
       + "concatenates the contents of subsequent files to the contents"
-      + " of the first." +
-  "PARAMETERS:" +
+      + " of the first.\n" +
+  "PARAMETERS:\n" +
   "  FILE1 - The file with the contents to be"
-      + " displayed." +
+      + " displayed.\n" +
   "  FILE2 - A subsequent file with the contents "
       + "to be displayed by concatenating it to FILE1. An optional"
-      + " parameter." +
-  "RETURNS:" +
-  "  Will display the contents of the given files." +
-  "EXAMPLE USAGE:" +
-  "If FILE1 contains 'hello'" +
-  "  /#: cat FILE1" +
-  "    will return 'hello'" +
+      + " parameter.\n" +
+  "RETURNS:\n" +
+  "  Will display the contents of the given files.\n" +
+  "EXAMPLE USAGE:\n" +
+  "If FILE1 contains 'hello'\n" +
+  "  /#: cat FILE1\n" +
+  "    will return 'hello'\n" +
   "If FILE1 contains 'hello' and FILE2 contains "
-      + "'there'" +
-  "  /#: cat FILE1 FILE2" +
-  "    Will return 'hellothere'.";
+      + "'there'\n" +
+  "  /#: cat FILE1 FILE2\n" +
+  "    Will return 'hellothere'.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     for (int i = 0; i < arguments.size(); i++) {

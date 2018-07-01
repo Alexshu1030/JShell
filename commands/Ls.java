@@ -35,29 +35,29 @@ import shell.JShellWindow;
 public class Ls implements Command{
   
   private String commandName = "ls";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  ls [PATH ...]"
-      + " - Lists files and directories" +
-  "DESCRIPTION:" +
+      + " - Lists files and directories\n" +
+  "DESCRIPTION:\n" +
   " Recursively lists all files and directories"
       + " inside the given paths, or inside the current directory"
-      + " if no directory is given." +
-  "PARAMETERS:" +
+      + " if no directory is given.\n" +
+  "PARAMETERS:\n" +
   "  PATH - The relative or full path that the user"
-      + " wants to perform ls on." +
-  "RETURNS:" +
+      + " wants to perform ls on.\n" +
+  "RETURNS:\n" +
   "  This command returns all files and directories"
-      + " inside." +
-  "EXAMPLE USAGE:" +
-  "  /#: ls" +
+      + " inside.\n" +
+  "EXAMPLE USAGE:\n" +
+  "  /#: ls\n" +
   "    will recursively return all files and"
-      + "directories in the current directory." +
-  "  /#: ls /PATH/" +
+      + "directories in the current directory.\n" +
+  "  /#: ls /PATH/\n" +
   "    will recursively return all files and"
-      + "directories in the directory /PATH/." +
-  "  /#: ls /PATH1/ /PATH2/" +
+      + "directories in the directory /PATH/.\n" +
+  "  /#: ls /PATH1/ /PATH2/\n" +
       "    will recursively return all files and"
-          + "directories in the directory /PATH1/ and /PATH2/.";
+          + "directories in the directory /PATH1/ and /PATH2/.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     

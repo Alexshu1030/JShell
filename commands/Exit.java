@@ -35,28 +35,28 @@ import shell.JShellWindow;
 public class Exit implements Command{
 
   private String commandName = "exit";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  exit - Terminates the current JShell"
-      + " process." +
-  "DESCRIPTION:" +
+      + " process.\n" +
+  "DESCRIPTION:\n" +
   "  Prevents any other code in JShell from"
       + " being run by reaching the exit condition in"
       + " the while loop. The exit condition is if command 'exit'"
-      + " is entered by user" +
-  "PARAMETERS:" +
+      + " is entered by user\n" +
+  "PARAMETERS:\n" +
   "  There are no parameters available for"
-      + " this command." +
-  "RETURNS:" +
-  "  This command does not return anything." +
-  "EXAMPLE USAGE:" +
-  "  /#: exit" +
-  "    will successfully terminate JShell." +
-  "  /#: exit p" +
+      + " this command.\n" +
+  "RETURNS:\n" +
+  "  This command does not return anything.\n" +
+  "EXAMPLE USAGE:\n" +
+  "  /#: exit\n" +
+  "    will successfully terminate JShell.\n" +
+  "  /#: exit p\n" +
   "    will not terminate JShell because of the"
-      + " additional parameter 'p'." +
-  "  /#:              exit" +
+      + " additional parameter 'p'.\n" +
+  "  /#:              exit\n" +
   "    will terminate JShell because"
-      + " JShell will ignore excess spaces.";
+      + " JShell will ignore excess spaces.\n";
 
   /**
    * Returns true if successfully terminated the jShell

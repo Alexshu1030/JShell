@@ -35,39 +35,39 @@ import shell.JShellWindow;
 public class Mkdir implements Command {
   // set the command name as mkdir to be used for calling
   private String commandName = "mkdir";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  mkdir DIR1 [DIR2] ... [PATH] -"
-      + " Create directories" +
-  "DESCRIPTION:" +
+      + " Create directories\n" +
+  "DESCRIPTION:\n" +
   "  Creates a directory named in the first parameter"
       + " in the location of the directory given in the optional second"
       + " parameter. If no second parameter is given, the directory is"
-      + " created in the current directory." +
-  "PARAMETERS:" +
+      + " created in the current directory.\n" +
+  "PARAMETERS:\n" +
   "  DIR1 - The name of the directory. The only valid"
-      + " characters for the name are from a-z, A-Z, 0-9." +
+      + " characters for the name are from a-z, A-Z, 0-9.\n" +
   "  DIR2 - The name of a second directory."
-      + " An optional parameter." +
+      + " An optional parameter.\n" +
   "  [PATH] - The path that the user wants the "
       + "directory(ies) to be created in. The path may be a relative"
-      + " path or a full path. An optional parameter." +
-  "RETURNS:" +
-  "  This command does not return anything." +
-  "EXAMPLE USAGE:" +
-  "  /#: mkdir Dir1" +
+      + " path or a full path. An optional parameter.\n" +
+  "RETURNS:\n" +
+  "  This command does not return anything.\n" +
+  "EXAMPLE USAGE:\n" +
+  "  /#: mkdir Dir1\n" +
   "    will create a directory named Dir1 in the"
-      + " current directory." +
-  "  /#: mkdir Dir1 Dir2 Dir3" +
+      + " current directory.\n" +
+  "  /#: mkdir Dir1 Dir2 Dir3\n" +
   "    will create a directory named Dir1, "
       + "a directory named Dir2, a directory named Dir3 in the"
-      + " current directory." +
-  "  /#: mkdir Dir1 /Dir2/" +
+      + " current directory.\n" +
+  "  /#: mkdir Dir1 /Dir2/\n" +
   "    will create a directory named Dir1 inside the"
       + " directory named Dir2 that is located in the current"
-      + " directory." +
+      + " directory.\n" +
   " If Dir2 does not exist in the current directory,"
       + " it will look for Dir2 in the root directory. If Dir2 can not "
-      + "be found, the command will fail.";
+      + "be found, the command will fail.\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     // get the instance of explorer

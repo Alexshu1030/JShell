@@ -36,37 +36,37 @@ import shell.JShellWindow;
 public class Tree implements Command {
 
   private String commandName = "tree";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  tree - Displays the entire file system as a "
-      + "tree" +
-  "DESCRIPTION:" +
+      + "tree\n" +
+  "DESCRIPTION:\n" +
   "Displays the entire file system as a "
       + "tree starting from the root directory. For each level of "
-      + "the tree, the subtree is indented" +
-  "PARAMETERS:" +
+      + "the tree, the subtree is indented\n" +
+  "PARAMETERS:\n" +
   "  There are no parameters available for this"
-      + " command." +
-  "RETURNS:" +
-  "  A text representation of the file system" +
-  "EXAMPLE USAGE:" +
-  "If the root directory contains no subdirectories" +
-  "  /#: tree" +
-  "    will return /" +
+      + " command.\n" +
+  "RETURNS:\n" +
+  "  A text representation of the file system\n" +
+  "EXAMPLE USAGE:\n" +
+  "If the root directory contains no subdirectories\n" +
+  "  /#: tree\n" +
+  "    will return /\n" +
   "If the root directory contains 2 subdirectories A"
-      + " and B." +
-  "  /#: tree" +
-  "   will return: " +
-  "   /" +
-  "      A" +
-  "      B" +
+      + " and B.\n" +
+  "  /#: tree\n" +
+  "   will return: \n" +
+  "   /\n" +
+  "      A\n" +
+  "      B\n" +
   "If the root directory contains 2 subdirectories A"
-      + " and B with a sub directory C in A" +
-  "  /#: tree" +
-  "   will return: " +
-  "   /" +
-  "      A" +
-  "          C" +
-  "      B";
+      + " and B with a sub directory C in A\n" +
+  "  /#: tree\n" +
+  "   will return: \n" +
+  "   /\n" +
+  "      A\n" +
+  "          C\n" +
+  "      B\n";
 
   /**
    * Returns true if there are no arguments given

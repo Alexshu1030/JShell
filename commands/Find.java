@@ -36,31 +36,31 @@ import filesystem.*;
 public class Find implements Command {
   // set the command name
   private String commandName = "find";
-  private String helpText = "NAME:" +
+  private String helpText = "NAME:\n" +
       "  find PATH ... -type [f|d] -name \"STRING\""
-      + " - Displays all files or directories with name STRING in PATH." +
-  "DESCRIPTION:" +
+      + " - Displays all files or directories with name STRING in PATH.\n" +
+  "DESCRIPTION:\n" +
   "  If -type f then it will find all files with "
       + "name STRING in PATH and display it. If type -d then it will"
-      + " find all directories with name STRING in PATH." +
-  "PARAMETERS:" +
-  "  PATH - The path to find STRING in." +
+      + " find all directories with name STRING in PATH.\n" +
+  "PARAMETERS:\n" +
+  "  PATH - The path to find STRING in.\n" +
   "  STRING - The name of the file/directory "
-      + "the user is looking for" +
+      + "the user is looking for\n" +
   "  -type [f|d] - f will find files named STRING "
-      + "in PATH, d will find directories named STRING in PATH" +
+      + "in PATH, d will find directories named STRING in PATH\n" +
   " -name - parameter to specify STRING as the "
-      + "name of the file tehey are looking for." +
-  "RETURNS:" +
+      + "name of the file tehey are looking for.\n" +
+  "RETURNS:\n" +
   "  A list of all files/directories in PATH named "
-      + "STRING" +
-  "EXAMPLE USAGE:" +
-  "  /#: find /user/Desktop -type d -name \"a\"" +
+      + "STRING\n" +
+  "EXAMPLE USAGE:\n" +
+  "  /#: find /user/Desktop -type d -name \"a\"\n" +
   "    will display all directories in Desktop "
-      + "named 'a'." +
-  "  /#: find /user/Desktop -type f -name \"b\"" +
-  "    will display all directories in Desktop \"\n" + 
-      "named \"b\".";
+      + "named 'a'.\n" +
+  "  /#: find /user/Desktop -type f -name \"b\"\n" +
+  "    will display all directories in Desktop \"\n\n" + 
+      "named \"b\".\n";
   
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     // set an empty string to be displayed at the end
