@@ -65,7 +65,7 @@ public class Man implements Command {
       System.out.println(command.getHelpText());
       successful = true;
     }
-    return true;
+    return successful;
   }
   
   public String getCommandName() {
