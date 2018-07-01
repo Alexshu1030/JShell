@@ -83,7 +83,7 @@ public class Mkdir implements Command {
       // add the directory and make it the child of the parentdir
       Directory newDir = new Directory(dirName, parentDir);
       try {
-      parentDir.addFile(newDir);
+        parentDir.addFile(newDir);
       } catch (Exception NullPointerException) {
         return false;
       }
@@ -111,13 +111,13 @@ public class Mkdir implements Command {
       if (name.matches("[A-Za-z0-9-/]+")) {
         isValid = true;
         // recursive step: intersection of first arg and tail
-      } else {
-        ArrayList<String> part1 =
-            new ArrayList<String>(arguments.subList(0, 1));
-        ArrayList<String> tail =
-            new ArrayList<String>(arguments.subList(1, numOfArgs));
-        isValid = areValidArguments(part1) && areValidArguments(tail);
-      }
+      } 
+    } else {
+      ArrayList<String> part1 =
+          new ArrayList<String>(arguments.subList(0, 1));
+      ArrayList<String> tail =
+          new ArrayList<String>(arguments.subList(1, numOfArgs));
+      isValid = areValidArguments(part1) && areValidArguments(tail);
     }
     return isValid;
   }
