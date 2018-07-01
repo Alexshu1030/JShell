@@ -41,7 +41,8 @@ public class Commands {
       new Find(), new Cat(), new Man(), new Pushd(), new Popd()};
   
   public static boolean run(JShellWindow jShell, String commandText) {
-    
+    // split at quotations for echo parameter 1
+    commandText.split("\"");
     // Split the command into it's parts (i.e. separate blocks of text, quotes
     // and etc.)
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
