@@ -124,6 +124,14 @@ public class Ls implements Command{
   }
   
   public boolean areValidArguments(ArrayList<String> arguments) {
+    boolean isValid = false;
+    int numOfArgs = arguments.size();
+    if (numOfArgs == 0) {
+      isValid = true;
+    } else if (numOfArgs >= 1) {
+      // TODO: check if parameters are REAL paths
+      isValid = true;
+    }
     
     return arguments.size() == 0 || arguments.size() == 1;
   }
