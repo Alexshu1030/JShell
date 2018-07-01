@@ -43,7 +43,7 @@ public class File {
    * Sets the name of this file
    * @param name this is the new name of the file
    */
-  private void setFileName(String name) {
+  public void setFileName(String name) {
     this.fileName = name;
   }
   
@@ -51,7 +51,7 @@ public class File {
    * Sets the directory that this file is in
    * @param directory the new directory the file is in
    */
-  private void setFileDirectory(Directory directory) {
+  public void setFileDirectory(Directory directory) {
     this.fileDirectory = directory;
   }
   
@@ -59,7 +59,7 @@ public class File {
    * Sets the contents of the file
    * @param contents the new contents of the file
    */
-  private void setFileContents(Object contents) {
+  public void setFileContents(Object contents) {
     this.fileContents = contents;
   }
   
