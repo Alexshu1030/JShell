@@ -43,7 +43,7 @@ public class Commands {
   public static boolean run(JShellWindow jShell, String commandText) {
     
     // Split the command into it's parts (i.e. separate blocks of text, quotes
-    // and etc. )
+    // and etc.)
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
         split(commandText)));
     
@@ -66,8 +66,6 @@ public class Commands {
         }
       }
     }
-    
-    
     return succeeded;
   }
   
