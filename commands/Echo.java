@@ -106,11 +106,11 @@ public class Echo implements Command {
         // If the file exists
         if (dir.getFile(arg3) != null) {
           // Get the file at the given name and in the current directory
-          // and overwrite file contents
+          // and append file contents
           File outfile = dir.getFile(arg3);
           String contents = (String) outfile.getFileContents();
-          contents.concat(arg1);
-          outfile.setFileContents(contents);
+          String newContents = contents.concat(arg1);
+          outfile.setFileContents(newContents);
         }
         else {
           // Create a new file with the given name and no contents
