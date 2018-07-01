@@ -119,6 +119,9 @@ public class Mkdir implements Command {
           new ArrayList<String>(arguments.subList(1, numOfArgs));
       isValid = areValidArguments(part1) && areValidArguments(tail);
     }
+    if (!isValid) {
+      System.out.println("Erorr, invalid character(s)");
+    }
     return isValid;
   }
 
