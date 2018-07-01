@@ -74,15 +74,14 @@ public class Cd implements Command {
         Directory newDir = workingDir.getFileDirectory();
         explorer.setWorkingDirectory(newDir);
       }
-    }
-    else if (path.equals(".")) {
+    } else if (path.equals(".")) {
       succeeded = true;
-    }
-    else {
+    } else {
       try {
         if (!explorer.getFile(path).equals(null)) {
           Directory newDir = (Directory)explorer.getFile(path);
           explorer.setWorkingDirectory(newDir);
+          succeeded = true;
         }
       } catch (Exception NullPointerException) {
         succeeded = false;
