@@ -69,6 +69,7 @@ public class Cd implements Command {
     boolean succeeded = false;
 
     if (path.equals("..")) {
+      succeeded = true;
       Directory workingDir = explorer.getWorkingDirectory();
       if (!workingDir.isRootDirectory()) {
         Directory newDir = workingDir.getFileDirectory();
