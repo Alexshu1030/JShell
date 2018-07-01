@@ -35,40 +35,40 @@ import filesystem.FileExplorer;
 import filesystem.Directory;
 import filesystem.File;
 public class Echo implements Command {
-  
+
   private String command = "echo";
   private String helpText = "NAME:\n" +
       "  echo STRING [> OUTFILE |>> OUTFILE] - "
       + "Print or add STRING to standard output\n" +
-  "DESCRIPTION:\n" +
-  "  Prints STRING to the JShell if STRING is the"
+      "DESCRIPTION:\n" +
+      "  Prints STRING to the JShell if STRING is the"
       + " only parameter provided. If OUTFILE is provided, STRING will"
       + " overwrite whatever is in OUTFILE if > is used, or append "
       + "to OUTFILE if >> is used. If OUTFILE does not exist, it "
       + "will be created.\n" +
-  "PARAMETERS:\n" +
-  "  STRING - The string that will be sent to"
+      "PARAMETERS:\n" +
+      "  STRING - The string that will be sent to"
       + " standard output. Must be surrounded by double quotes\n" +
-  "  >  - Overwrite OUTFILE's contents with STRING. "
+      "  >  - Overwrite OUTFILE's contents with STRING. "
       + "Optional parameter.\n" +
-  "  >>  - Append OUTFILE's contents with STRING. "
+      "  >>  - Append OUTFILE's contents with STRING. "
       + "Optional parameter.\n" +
-  "  OUTFILE  - The file that STRING will output to"
+      "  OUTFILE  - The file that STRING will output to"
       + "depending on whether > or >> is used. OUTFILE will be created"
       + " if it does not already exist. Optional parameter\n" +
-  "RETURNS:\n" +
-  "  Will print STRING if STRING is the only "
+      "RETURNS:\n" +
+      "  Will print STRING if STRING is the only "
       + "parameter.\n" +
-  "EXAMPLE USAGE:\n" +
-  "  /#: echo \"Hello\"\n" +
-  "    will display Hello\n" +
-  "If FILE1 contains 'hello'\n" +
-  "  /#: echo \"Hello\" > FILE1\n" +
-  "    FILE1 will contain Hello\n" +
-  "If FILE1 contains 'hello'\n" +
-  "  /#: echo \"Hello\" >> FILE1\n" +
-  "    FILE1 will contain helloHello.\n";
-  
+      "EXAMPLE USAGE:\n" +
+      "  /#: echo \"Hello\"\n" +
+      "    will display Hello\n" +
+      "If FILE1 contains 'hello'\n" +
+      "  /#: echo \"Hello\" > FILE1\n" +
+      "    FILE1 will contain Hello\n" +
+      "If FILE1 contains 'hello'\n" +
+      "  /#: echo \"Hello\" >> FILE1\n" +
+      "    FILE1 will contain helloHello.\n";
+
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
     int numOfArgs = arguments.size();
     String arg1 = arguments.get(0);
@@ -99,7 +99,7 @@ public class Echo implements Command {
             return false;
           }
         }
-        
+
       }
       else if (arg2.equals(">>")) {
         Directory dir = explorer.getWorkingDirectory();
@@ -113,24 +113,17 @@ public class Echo implements Command {
           outfile.setFileContents(newContents);
         }
         else {
-          // Create a new file with the given name and no contents
-          File outfile = new File(arg3, dir, arg1);
-          try {
-            dir.addFile(outfile);
-          } catch (Exception NullPointerException) {
-            return false;
-          }
+          return false;
         }
-        
       }
     }
     return true;
   }
-  
+
   public String getCommandName() {
     return command;
   }
-  
+
   public boolean areValidArguments(ArrayList<String> arguments) {
     boolean isValid = false;
     int numOfArgs = arguments.size();
@@ -155,13 +148,13 @@ public class Echo implements Command {
         }
       }
     }
-    
+
     return isValid;
   }
-    
-  
+
+
   public String getHelpText() {
-    
+
     return helpText;
   }
 }
