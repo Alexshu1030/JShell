@@ -81,8 +81,11 @@ public class Mkdir implements Command {
       String dirName = Path.getFileName(path);
       // add the directory and make it the child of the parentdir
       Directory newDir = new Directory(dirName, parentDir);
+      try {
       parentDir.addFile(newDir);
-
+      } catch (Exception NullPointerException) {
+        return false;
+      }
       return true;
     } else {
       ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
@@ -102,12 +105,14 @@ public class Mkdir implements Command {
     // if the argument has 1 arg return true
     if (arguments.size() == 1) {
       String name = arguments.get(0); 
-      if (name.matches("[A-Za-z0-9]+")) {
+      if (name.matches("[A-Za-z0-9-/]+")) {
         isValid = true;
+      } else {
+        ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
+        ArrayList<String> tail = new ArrayList<String>(arguments.subList(1, arguments.size()));
+        isValid = areValidArguments(part1) && areValidArguments(tail);
       }
     }
-    //testing
-    isValid = true;
     return isValid;
   }
 
