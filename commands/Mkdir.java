@@ -70,6 +70,7 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+    int numOfArgs = arguments.size();
     if (arguments.size() == 1) {
       // get the instance of explorer
       FileExplorer explorer = jShell.getFileExplorer();
@@ -88,8 +89,10 @@ public class Mkdir implements Command {
       }
       return true;
     } else {
-      ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
-      ArrayList<String> tail = new ArrayList<String>(arguments.subList(1, arguments.size()));
+      ArrayList<String> part1 =
+          new ArrayList<String>(arguments.subList(0, 1));
+      ArrayList<String> tail =
+          new ArrayList<String>(arguments.subList(1, numOfArgs));
       return run(jShell, part1) && run(jShell, tail);
     }
   }
@@ -100,16 +103,19 @@ public class Mkdir implements Command {
   }
 
   public boolean areValidArguments(ArrayList<String> arguments) {
-
+    int numOfArgs = arguments.size();
     boolean isValid = false;
-    // if the argument has 1 arg return true
+    // base case: 1 arg and contains alphanumeric chars
     if (arguments.size() == 1) {
       String name = arguments.get(0); 
       if (name.matches("[A-Za-z0-9-/]+")) {
         isValid = true;
+        // recursive step: intersection of first arg and tail
       } else {
-        ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
-        ArrayList<String> tail = new ArrayList<String>(arguments.subList(1, arguments.size()));
+        ArrayList<String> part1 =
+            new ArrayList<String>(arguments.subList(0, 1));
+        ArrayList<String> tail =
+            new ArrayList<String>(arguments.subList(1, numOfArgs));
         isValid = areValidArguments(part1) && areValidArguments(tail);
       }
     }
