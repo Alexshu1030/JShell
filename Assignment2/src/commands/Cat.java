@@ -60,6 +60,14 @@ public class Cat implements Command{
   "  /#: cat FILE1 FILE2\n" +
   "    Will return 'hellothere'.\n";
   
+  /**
+   * Returns true if execution of "cat" is successful. Execution
+   * returns the contents of the file specified in arguments
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the file whose contents are 
+   * to be returned
+   * @return result the contents of the file in arguments
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     
     FileExplorer explorer = jShell.getFileExplorer();
@@ -81,14 +89,29 @@ public class Cat implements Command{
     return message;
   }
   
+  /**
+   * Returns the command name, "cat"
+   * @return commandName the command name
+   */
   public String getCommandName() {
     return command;
   }
+  
+  /**
+   * Checks if the arguments given to the command is valid
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
     
-    return (arguments.size() >= 1);
+    boolean isValid = (arguments.size() >= 1);
+    return isValid;
   }
   
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "cat"
+   */
   public String getHelpText() {
     
     return helpText;
