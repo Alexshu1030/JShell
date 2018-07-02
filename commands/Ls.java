@@ -120,8 +120,8 @@ public class Ls implements Command{
         }
       }
     }
-    String result = messages;
-    return result;
+    
+    return messages + "\n";
   }
 
   /**
