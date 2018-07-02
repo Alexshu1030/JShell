@@ -65,34 +65,68 @@ public class Find implements Command {
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     
+    FileExplorer explorer = jShell.getFileExplorer();
+    
     int numOfPaths = arguments.size() - 4;
-    String[] paths = new String[numOfPaths];
+    ArrayList<Directory> directories = new ArrayList<Directory>();
     
     for (int i = 0; i < numOfPaths; i++) {
-      paths[i] = arguments.get(i);
+      Directory dir = explorer.getDirectory(arguments.get(i));
+      
+      if (dir != null)
+        directories.add(dir);
+      else
+        System.out.println("The directory " + arguments.get(i) + 
+            " does not exist");
     }
     
     String type = arguments.get(arguments.size() - 3);
     String name = arguments.get(arguments.size() - 1);
+    // We need to remove the quotations around the name
+    name = name.substring(1, name.length() - 1);
     
-    FileExplorer explorer = jShell.getFileExplorer();
+    boolean isDir = type.equals("d");
     
-    return "";
+    String message = "";
+    
+    for (int i = 0; i < directories.size(); i++) {
+      
+      Directory dir = directories.get(i);   
+      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+      
+      // Iterate over the files in each directory and check if the meet our
+      // requirements
+      for (int f = 0; f < files.size(); f++) {
+        File file = files.get(f);
+        if (file.isDirectory() && isDir || !file.isDirectory() && !isDir) {
+          // The file matches the type we want
+          if (file.getFileName().equals(name)) {
+            // The file has the same name.
+            message += file.getFullPath() + "\n";
+          }
+        }
+      }
+    }
+    
+    return message;
   }
 
   public String getCommandName() {
+    
     return commandName;
   }
 
   public boolean areValidArguments(ArrayList<String> arguments) {
+    
     boolean valid = false;
     int size = arguments.size();
+    
     // if the 2nd last argument is -name
-    if (arguments.get(size-2) == "-name") {
+    if (arguments.get(size-2).equals("-name")) {
       // if the 3rd last argument is either d or f
-      if (arguments.get(size-3) == "d" || arguments.get(size-3) == "f") {
+      if (arguments.get(size-3).equals("d") || arguments.get(size-3).equals("f")) {
         // if the 4th last argument is -type
-        if (arguments.get(size-4) == "-type") {
+        if (arguments.get(size-4).equals("-type")) {
           // if arguments have >= 6 elements
           if (arguments.size() >= 5) {
             // the command is valid
@@ -104,9 +138,9 @@ public class Find implements Command {
     // return the valid bool
     return valid;
   }
-
+  
   public String getHelpText() {
-
+    
     return helpText;
   }
   
