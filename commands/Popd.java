@@ -29,19 +29,17 @@ public class Popd implements Command{
   "    Will return an error message.\n";
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    // Returns "success" if it succeeds
+    // Returns "" if it succeeds
     String messages = DirectoryStack.stack.popd(jShell);
     return messages + "\n";
   }
 
 
   public String getCommandName() {
-    // TODO Auto-generated method stub
     return "popd";
   }
 
   public boolean areValidArguments(ArrayList<String> arguments) {
-    // TODO Auto-generated method stub
     return arguments.size() == 0;
   }
 
