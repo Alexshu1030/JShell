@@ -63,9 +63,11 @@ public class JShell {
       window.addInputtoLog(input);
       
       // Attempt to run the command. If it fails print the error message.
-      if (!Commands.run(window, input)) {
+      String message = Commands.run(window, input);
+      if (message != null)
+        System.out.println(message);
+      else
         System.out.println(errorMessage);
-      }
     }
     
     in.close();
