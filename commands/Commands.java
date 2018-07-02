@@ -98,7 +98,7 @@ public class Commands {
     boolean atTextEnd = false;
 
     int splits = 0;
-
+ 
     for (int i = 0; i < text.length(); i++) {
 
       if (text.charAt(i) == '"') {

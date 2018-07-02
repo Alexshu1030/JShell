@@ -70,6 +70,8 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    // if null is returned then there was an error.
+    // if "" was returned it succeeded
     String messages = null;
     int numOfArgs = arguments.size();
     if (arguments.size() == 1) {
@@ -81,10 +83,9 @@ public class Mkdir implements Command {
       Directory parentDir = explorer.getParentDirectory(path);
       // get the dir name to be added
       String dirName = Path.getFileName(path);
-      
       Directory newDir = new Directory(dirName, parentDir);
+      // Check if we are given an absolute path
       if (path.charAt(0) == '/') {
-        
         Directory currDir = explorer.getWorkingDirectory();
         // Change to the root directory
         explorer.setWorkingDirectory(FileExplorer.getRootDirectory());
@@ -95,7 +96,7 @@ public class Mkdir implements Command {
         run(jShell, absolutePath);
         // Change the working directory back to the original directory
         explorer.setWorkingDirectory(currDir);
-        return messages;
+        return "";
       }
       // add the directory and make it the child of the parentdir
       try {
@@ -103,9 +104,9 @@ public class Mkdir implements Command {
       } catch (Exception NullPointerException) {
         return null;
       }
-      return null;
+      return "";
     } else {
-
+      // Recursively run mkdir on the first arg and the rest of the args
       ArrayList<String> part1 =
           new ArrayList<String>(arguments.subList(0, 1));
       ArrayList<String> tail =
@@ -123,20 +124,26 @@ public class Mkdir implements Command {
   public boolean areValidArguments(ArrayList<String> arguments) {
     int numOfArgs = arguments.size();
     boolean isValid = false;
+    // if there was no argument given
+    if (arguments.size() == 0) {
+      return false;
+    }
     // base case: 1 arg and contains alphanumeric chars
     if (arguments.size() == 1) {
       String name = arguments.get(0); 
       if (name.matches("[A-Za-z0-9-/]+")) {
         isValid = true;
-        // recursive step: intersection of first arg and tail
+        
       } 
     } else {
+      // recursive step: run on first argument and the rest of the arguments
       ArrayList<String> part1 =
           new ArrayList<String>(arguments.subList(0, 1));
       ArrayList<String> tail =
           new ArrayList<String>(arguments.subList(1, numOfArgs));
       return areValidArguments(part1) && areValidArguments(tail);
     }
+    // If the argument was not valid
     if (!isValid) {
       System.out.println("Error, invalid character(s)");
     }
