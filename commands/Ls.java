@@ -60,8 +60,7 @@ public class Ls implements Command{
       + "directories in the directory /PATH1/ and /PATH2/.\n";
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-
-    boolean successful = false;
+    String messages = null;
 
     if (arguments.size() == 0) {
 
@@ -76,9 +75,8 @@ public class Ls implements Command{
           fileNames += "\n";
       }
 
-      System.out.println(fileNames);
+      messages = fileNames;
 
-      successful = true;
     }
     else {
 
@@ -99,9 +97,8 @@ public class Ls implements Command{
               fileNames += "\n";
           }
 
-          System.out.println(fileNames);
+          messages = fileNames;
 
-          successful = true;
         }
       }
       else {
@@ -109,13 +106,13 @@ public class Ls implements Command{
         File file = jShell.getFileExplorer().getFile(path);
 
         if (file != null) {
-          System.out.println(file.getFileName());          
-          successful = true;
+          messages = file.getFileName();          
+
         }
       }
     }
 
-    return successful;
+    return messages + "\n";
   }
 
   public String getCommandName() {
