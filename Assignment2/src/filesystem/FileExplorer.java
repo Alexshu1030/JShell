@@ -93,9 +93,10 @@ public class FileExplorer {
     
     // Get the path of the directory that the file is in
     // Note that at this point the file may not actually exist but we will
-    // still return the directory that it would be contained in as if it did.
+    // still return the directory that it would be contai   ned in as if it did.
     String dirPath = Path.removeFileName(path);
-
+    
+    // Stores the root directory of this path
     Directory rootDir;
     
     if (Path.isAbsolute(path)) {
@@ -103,13 +104,14 @@ public class FileExplorer {
       // work our way to the file.
       rootDir = rootDirectory;
       // Make the path relative to the root directory.
-      path = path.substring(1);
+      dirPath = dirPath.substring(1);
     }
-    else
+    else {
       // The path is relative so we want to start in the working directory
       // and work our way to the file.
       rootDir = workingDirectory;
-
+    }
+    
     // Use the helper method.
     return getDirectoryHelper(rootDir, dirPath);
   }
