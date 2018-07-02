@@ -95,7 +95,7 @@ public class Echo implements Command {
           try {
             dir.addFile(outfile);
           } catch (Exception NullPointerException) {
-            return false;
+            return null;
           }
         }
       } else if (arg2.equals(">>")) {
@@ -109,11 +109,11 @@ public class Echo implements Command {
           String newContents = contents.concat(arg1);
           outfile.setFileContents(newContents);
         } else {
-          return false;
+          return null;
         }
       }
     }
-    return true;
+    return "";
   }
 
   public String getCommandName() {

@@ -89,7 +89,7 @@ public class Cd implements Command {
       }
     }
 
-    return succeeded;
+    return "";
   }
 
 

@@ -73,6 +73,7 @@ public class History implements Command{
    * @return true this is true if execution was successful
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
     ArrayList<String> log = jShell.getLog();
     int totalInputs = log.size();
     int truncAmount = 0;
@@ -81,13 +82,17 @@ public class History implements Command{
     if (!arguments.isEmpty()) {
       truncAmount = totalInputs - Integer.parseInt((arguments.get(0)));
     }
+    
+    String message = "";
+    
     // iterate through each input in log and print if within truncation
     for (int i = 1; i <= totalInputs; i++) {
       if (truncAmount < i) {
-        System.out.println(i + ". " + log.get(i - 1));
+        message += i + ". " + log.get(i - 1) + "\n";
       }
     }
-    return true;
+    
+    return message;
   }
 
   
