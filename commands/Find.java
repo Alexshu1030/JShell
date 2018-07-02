@@ -29,6 +29,7 @@
 // *********************************************************
 package commands;
 
+import java.awt.List;
 import java.util.ArrayList;
 import shell.JShellWindow;
 import filesystem.*;
@@ -63,52 +64,20 @@ public class Find implements Command {
       "named \"b\".\n";
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-   
-    // set an empty string to be displayed at the end
-    String result = "";
+    
+    int numOfPaths = arguments.size() - 4;
+    String[] paths = new String[numOfPaths];
+    
+    for (int i = 0; i < numOfPaths; i++) {
+      paths[i] = arguments.get(i);
+    }
+    
+    String type = arguments.get(arguments.size() - 3);
+    String name = arguments.get(arguments.size() - 1);
+    
     FileExplorer explorer = jShell.getFileExplorer();
-    // get the # of arguments
-    int size = arguments.size();
-    // get the file name from the last element and substring it
-    String fileName = arguments.get(size-1);
-    fileName = fileName.substring(1, fileName.length()-1);
-    // set up a folders string arraylist, add each of the folders specified
-    // in the arguments to it
-    ArrayList<String> folders = new ArrayList<String>();
-    for (int i = 0; i < size-4; i++) {
-      folders.add(arguments.get(i));
-    }
-    // for each folder in the arraylist
-    for (int j = 0; j < folders.size(); j++) {
-      // get the directory specified by the folder path
-      Directory dir = (Directory) explorer.getFile(folders.get(j));
-      // if the file is found within the folder
-      if (dir.getFile(fileName) != null) {
-        // if we are looking for a file
-        if (arguments.get(size-3) == "f") {
-          // if the file found is a file, add its path to result
-          if (dir.getFile(fileName).isDirectory() == false) {
-            result += (folders.get(j) + fileName + " ");
-          }
-       // if we are looking for a directory
-        } else if (arguments.get(size-3) == "d") {
-       // if the file found is a directory, add its path to result
-          if (dir.getFile(fileName).isDirectory() == true) {
-            result += (folders.get(j) + fileName + " ");
-          }
-        }
-      }
-    }
-    String message;
-    // if the result is empty, output error message
-    if (result == "") {
-      //System.out.println("File not found");
-      message = null;
-    // otherwise output the filepaths
-    } else {
-      message = result;
-    }
-    return message;
+    
+    return "";
   }
 
   public String getCommandName() {
@@ -118,20 +87,16 @@ public class Find implements Command {
   public boolean areValidArguments(ArrayList<String> arguments) {
     boolean valid = false;
     int size = arguments.size();
-    // if the last arguments starts and ends with "
-    if (arguments.get(size-1).startsWith("\"") &&
-        arguments.get(size-1).endsWith("\"")) {
-      // if the 2nd last argument is -name
-      if (arguments.get(size-2) == "-name") {
-        // if the 3rd last argument is either d or f
-        if (arguments.get(size-3) == "d" || arguments.get(size-3) == "f") {
-          // if the 4th last argument is -type
-          if (arguments.get(size-4) == "-type") {
-            // if arguments have >= 6 elements
-            if (arguments.size() >= 5) {
-              // the command is valid
-              valid = true;
-            }
+    // if the 2nd last argument is -name
+    if (arguments.get(size-2) == "-name") {
+      // if the 3rd last argument is either d or f
+      if (arguments.get(size-3) == "d" || arguments.get(size-3) == "f") {
+        // if the 4th last argument is -type
+        if (arguments.get(size-4) == "-type") {
+          // if arguments have >= 6 elements
+          if (arguments.size() >= 5) {
+            // the command is valid
+            valid = true;
           }
         }
       }
