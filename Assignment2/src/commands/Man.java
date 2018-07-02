@@ -55,17 +55,13 @@ public class Man implements Command {
           + " is not a valid command.\n";
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+    String messages = null;
     String cmdName = arguments.get(0);
     Command command = Commands.getCommand(cmdName);
-    
-    boolean successful = false;
-    
     if (command != null) {
-      System.out.println(command.getHelpText());
-      successful = true;
+      messages = command.getHelpText();
     }
-    return successful;
+    return messages + "\n";
   }
   
   public String getCommandName() {

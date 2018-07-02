@@ -70,6 +70,7 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    String messages = null;
     int numOfArgs = arguments.size();
     if (arguments.size() == 1) {
       // get the instance of explorer
@@ -94,22 +95,23 @@ public class Mkdir implements Command {
         run(jShell, absolutePath);
         // Change the working directory back to the original directory
         explorer.setWorkingDirectory(currDir);
-        return true;
+        return messages;
       }
       // add the directory and make it the child of the parentdir
       try {
         parentDir.addFile(newDir);
       } catch (Exception NullPointerException) {
-        return false;
+        return null;
       }
-      return true;
+      return null;
     } else {
 
       ArrayList<String> part1 =
           new ArrayList<String>(arguments.subList(0, 1));
       ArrayList<String> tail =
           new ArrayList<String>(arguments.subList(1, numOfArgs));
-      return run(jShell, part1) && run(jShell, tail);
+          messages = run(jShell, part1) + run(jShell, tail);
+      return messages + "\n";
     }
   }
 
@@ -136,7 +138,7 @@ public class Mkdir implements Command {
       return areValidArguments(part1) && areValidArguments(tail);
     }
     if (!isValid) {
-      System.out.println("Erorr, invalid character(s)");
+      System.out.println("Error, invalid character(s)");
     }
     return isValid;
   }

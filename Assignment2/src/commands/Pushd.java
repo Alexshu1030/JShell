@@ -61,12 +61,13 @@ public class Pushd implements Command {
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
+    String messages = null;
     // Get the path of the directory that we want to push
     String path = arguments.get(0);
     // Get the directory at the path
     Directory newDir = (Directory)explorer.getFile(path);
-    DirectoryStack.stack.pushd(jShell, newDir);
-    return true;
+    messages = DirectoryStack.stack.pushd(jShell, newDir);
+    return messages + "\n";
   }
 
   public String getCommandName() {

@@ -68,15 +68,15 @@ public class Pwd implements Command {
   }
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-
+    String messages = null;
     // Get the file explorer
     FileExplorer fileExplorer = jShell.getFileExplorer();
     // Get the path to the working directory
     String workingDirPath = fileExplorer.getWorkingDirectory().getFullPath();
     // Print this path
-    System.out.println(workingDirPath);
+    messages = workingDirPath;
 
-    return true;
+    return messages + "\n";
   }
 
   public String getCommandName() {

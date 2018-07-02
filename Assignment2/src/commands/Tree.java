@@ -100,8 +100,8 @@ public class Tree implements Command {
     // The double back slashes are to add the backslash at the beginning
     // that represents the root directory
     String treeRep = "\\" + getTreeRepresentation(rootDir, 0);
-    System.out.println(treeRep);
-    return true;
+    String messages = treeRep + "\n";
+    return messages + "\n";
   }
   
   /**
