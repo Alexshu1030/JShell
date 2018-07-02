@@ -30,7 +30,8 @@ public class Popd implements Command{
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     // Returns "" if it succeeds
-    String messages = DirectoryStack.stack.popd(jShell);
+    DirectoryStack.stack.popd(jShell);
+    String messages = "";
     return messages + "\n";
   }
 
