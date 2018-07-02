@@ -59,6 +59,14 @@ public class Ls implements Command{
       "    will recursively return all files and"
       + "directories in the directory /PATH1/ and /PATH2/.\n";
 
+  /**
+   * Returns true if execution of "ls" is successful. Execution
+   * prints all of the files and directories in the provided
+   * list of directories.
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directories to be listed
+   * @return result true if execution was successful
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     String messages = null;
     // If no argument was given, list all files and directories
@@ -112,8 +120,8 @@ public class Ls implements Command{
         }
       }
     }
-
-    return messages + "\n";
+    String result = messages + "\n";
+    return result;
   }
 
   public String getCommandName() {
