@@ -32,7 +32,7 @@ public class Popd implements Command{
     // Returns "" if it succeeds
     DirectoryStack.stack.popd(jShell);
     String messages = "";
-    return messages + "\n";
+    return messages;
   }
 
 
