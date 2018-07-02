@@ -124,11 +124,20 @@ public class Ls implements Command{
     return result;
   }
 
+  /**
+   * Returns the command name, "ls"
+   * @return commandName the command name
+   */
   public String getCommandName() {
 
     return commandName;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
     boolean isValid = false;
     int numOfArgs = arguments.size();
@@ -139,6 +148,10 @@ public class Ls implements Command{
     return isValid;
   }
 
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "ls"
+   */
   public String getHelpText() {
 
     return helpText;
