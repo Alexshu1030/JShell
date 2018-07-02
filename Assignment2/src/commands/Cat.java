@@ -61,20 +61,24 @@ public class Cat implements Command{
   "    Will return 'hellothere'.\n";
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
     FileExplorer explorer = jShell.getFileExplorer();
+    
+    String message = "";
+    
     for (int i = 0; i < arguments.size(); i++) {
       // We need to replace the argument at i with a File object
       String path = arguments.get(i);
       // Get the file at the given path and print it's contents
       File file = explorer.getFile(path);
-      System.out.println(file.getFileContents());
+      message += file.getFileContents() + "\n";
       // make sure we do not print 3 line breaks for the last file
       if (i != arguments.size()-1) {
-        System.out.print("\n\n\n");
+        message += "\n\n\n";
       }
     }
     
-    return false;
+    return message;
   }
   
   public String getCommandName() {
