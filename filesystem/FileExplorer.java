@@ -103,8 +103,10 @@ public class FileExplorer {
       // The path is absolute so we want to start at the root directory and
       // work our way to the file.
       rootDir = rootDirectory;
-      // Make the path relative to the root directory.
-      dirPath = dirPath.substring(1);
+      // Make the path relative to the root directory. If the path is of
+      // length 0, then it is the root directory.
+      if (dirPath.length() > 0)
+        dirPath = dirPath.substring(1);
     }
     else {
       // The path is relative so we want to start in the working directory
@@ -153,15 +155,21 @@ public class FileExplorer {
    */
   public void addFile(String dirPath, File file) {
     
+    // The full path of the file
+    String path = dirPath + "/" + file.getFileName();
     // Makes sure there isn't already a file with the same name at that path
-    if (!pathExists(dirPath + "/" + file.getFileName())) {
+    if (!pathExists(path)) {
       // Get the parent directory path and then add the file into that
       // directory.
-      Directory dir = getParentDirectory(dirPath);
+      Directory dir = getParentDirectory(path);
       dir.addFile(file);
     }
   }
   
+  /**
+   * Adds the directory into the FileExplorer at the specified path
+   * @param path the path to the directory
+   */
   public void addDirectory(String path) {
     
     String dirName = Path.getFileName(path);
@@ -170,7 +178,7 @@ public class FileExplorer {
     // path
     if (!pathExists(path)) {
       // Get the parent directory path and then add the new directory into it
-      Directory parentDir = getParentDirectory(dirPath);
+      Directory parentDir = getParentDirectory(path);
       Directory childDir = new Directory(dirName, parentDir);
       
       parentDir.addFile(childDir);
