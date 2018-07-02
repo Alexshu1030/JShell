@@ -65,7 +65,7 @@ public class JShell {
       // Attempt to run the command. If it fails print the error message.
       String message = Commands.run(window, input);
       if (message != null)
-        System.out.println(message);
+        System.out.print(message);
       else
         System.out.println(errorMessage);
     }
