@@ -40,7 +40,7 @@ public class Commands {
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
       new Find(), new Cat(), new Man(), new Pushd(), new Popd()};
   
-  public static boolean run(JShellWindow jShell, String commandText) {
+  public static String run(JShellWindow jShell, String commandText) {
     // split at quotations for echo parameter 1
     commandText.split("\"");
     // Split the command into it's parts (i.e. separate blocks of text, quotes
@@ -48,7 +48,7 @@ public class Commands {
     ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
         split(commandText)));
     
-    boolean succeeded = false;
+    String message = null;
     
     // There must be at least one element in the arguments for it to be a
     // valid command
@@ -62,12 +62,13 @@ public class Commands {
         if (command.areValidArguments(arguments)) {
           // We have found the command and it's arguments are valid. We can
           // now run the command
-          succeeded = command.run(jShell, arguments);
+          message = command.run(jShell, arguments);
           
         }
       }
     }
-    return succeeded;
+    
+    return message;
   }
   
   public static Command getCommand(String name) {
