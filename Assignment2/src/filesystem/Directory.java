@@ -89,6 +89,7 @@ public class Directory extends File {
   
   /**
    * Returns whether or not this is a directory
+   * @return    true
    */
   public boolean isDirectory() {
     return true;
@@ -96,10 +97,11 @@ public class Directory extends File {
   
   /**
    * Returns whether or not this is the root directory.
-   * @return returns true if this is the root directory and false if it is not
+   * @return result true if this is the root directory and false if it is not
    */
   public boolean isRootDirectory() {
     
-    return fileDirectory == null;
+    boolean result = (fileDirectory == null);
+    return result;
   }
 }
