@@ -28,7 +28,7 @@ public class Popd implements Command{
   "  /#: popd\n" +
   "    Will return an error message.\n";
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     DirectoryStack.stack.popd(jShell);
     return true;
   }

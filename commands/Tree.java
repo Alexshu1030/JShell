@@ -94,7 +94,7 @@ public class Tree implements Command {
    * @param arguments this a list containing null
    * @return true this is true if execution is successful
    */
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Directory rootDir = FileExplorer.getRootDirectory();
     // The double back slashes are to add the backslash at the beginning

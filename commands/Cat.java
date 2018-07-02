@@ -60,7 +60,7 @@ public class Cat implements Command{
   "  /#: cat FILE1 FILE2\n" +
   "    Will return 'hellothere'.\n";
   
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
     for (int i = 0; i < arguments.size(); i++) {
       // We need to replace the argument at i with a File object

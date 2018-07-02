@@ -59,7 +59,7 @@ public class Ls implements Command{
       "    will recursively return all files and"
       + "directories in the directory /PATH1/ and /PATH2/.\n";
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
     boolean successful = false;
 

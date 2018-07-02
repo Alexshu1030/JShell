@@ -69,7 +69,7 @@ public class Echo implements Command {
       "  /#: echo \"Hello\" >> FILE1\n" +
       "    FILE1 will contain helloHello.\n";
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     int numOfArgs = arguments.size();
     String arg1 = arguments.get(0);
     int lastQuoteMark = arg1.length() - 1;

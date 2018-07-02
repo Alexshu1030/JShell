@@ -54,7 +54,7 @@ public class Man implements Command {
       "    Will return an error message because nam"
           + " is not a valid command.\n";
   
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     
     String cmdName = arguments.get(0);
     Command command = Commands.getCommand(cmdName);

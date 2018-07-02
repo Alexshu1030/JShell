@@ -59,7 +59,7 @@ public class Pushd implements Command {
   "    will add the current working directory to"
       + " the stack and change the current working directory to Dir1.\n";
   
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
     // Get the path of the directory that we want to push
     String path = arguments.get(0);
