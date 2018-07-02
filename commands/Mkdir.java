@@ -70,50 +70,21 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    // if null is returned then there was an error.
-    // if "" was returned it succeeded
-    String messages = null;
-    int numOfArgs = arguments.size();
-    if (arguments.size() == 1) {
-      // get the instance of explorer
-      FileExplorer explorer = jShell.getFileExplorer();
-      // the path to be created is the first argument
-      String path = arguments.get(0);
-      // get the parent dir of the specified path
-      Directory parentDir = explorer.getParentDirectory(path);
-      // get the dir name to be added
-      String dirName = Path.getFileName(path);
-      Directory newDir = new Directory(dirName, parentDir);
-      // Check if we are given an absolute path
-      if (path.charAt(0) == '/') {
-        Directory currDir = explorer.getWorkingDirectory();
-        // Change to the root directory
-        explorer.setWorkingDirectory(FileExplorer.getRootDirectory());
-        ArrayList<String> absolutePath = new ArrayList<String>();
-        // Make a directory as a relative path in the root directory
-        absolutePath.add(path.substring(1));
-        
-        run(jShell, absolutePath);
-        // Change the working directory back to the original directory
-        explorer.setWorkingDirectory(currDir);
-        return "";
+    
+    FileExplorer explorer = jShell.getFileExplorer();
+    
+    for (int i = 0; i < arguments.size(); i++) {
+      String path = arguments.get(i);
+      if (Path.isDirectory(path)) {
+        explorer.addDirectory(path);
       }
-      // add the directory and make it the child of the parentdir
-      try {
-        parentDir.addFile(newDir);
-      } catch (Exception NullPointerException) {
+      else {
+        //ERROR THE PATH IS NOT A DIRECTORY
         return null;
       }
-      return "";
-    } else {
-      // Recursively run mkdir on the first arg and the rest of the args
-      ArrayList<String> part1 =
-          new ArrayList<String>(arguments.subList(0, 1));
-      ArrayList<String> tail =
-          new ArrayList<String>(arguments.subList(1, numOfArgs));
-          messages = run(jShell, part1) + run(jShell, tail);
-      return messages + "\n";
     }
+    
+    return "";
   }
 
   public String getCommandName() {
