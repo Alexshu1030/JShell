@@ -120,7 +120,7 @@ public class Ls implements Command{
         }
       }
     }
-    String result = messages + "\n";
+    String result = messages;
     return result;
   }
 
