@@ -93,7 +93,7 @@ public class FileExplorer {
     
     // Get the path of the directory that the file is in
     // Note that at this point the file may not actually exist but we will
-    // still return the directory that it would be contai   ned in as if it did.
+    // still return the directory that it would be contained in as if it did.
     String dirPath = Path.removeFileName(path);
     
     // Stores the root directory of this path
@@ -119,7 +119,7 @@ public class FileExplorer {
   private Directory getDirectoryHelper(Directory curDir, String relPath) {
     
     Directory dir;
-    //System.out.println("Cur Dir: " + curDir.getFileName() + " - Path: " + relPath);
+
     if (relPath.equals("")) {
       // Base case. We are at the end of the relative path. The current
       // The current directory that we are in is the one we are looking for.
@@ -148,15 +148,37 @@ public class FileExplorer {
 
   /**
    * Adds the file into the FileExplorer at the specified path
-   * @param path the path to the directory you want to add the file in
+   * @param dirPath the path to the directory you want to add the file in
    * @param file the file being added to the FileExplorer
    */
-  public void addFile(String path, File file) {
+  public void addFile(String dirPath, File file) {
     
-    // Get the parent directory path and then add the file into that
-    // directory.
-    Directory dir = getParentDirectory(path);
-    dir.addFile(file);
+    // Makes sure there isn't already a file with the same name at that path
+    if (!pathExists(dirPath + "/" + file.getFileName())) {
+      // Get the parent directory path and then add the file into that
+      // directory.
+      Directory dir = getParentDirectory(dirPath);
+      dir.addFile(file);
+    }
+  }
+  
+  /**
+   * Creates a file at the specified path with null contents. This method is
+   * useful for creating directories quickly.
+   * @param path the path of the file
+   */
+  public void addFile(String path) {
+    
+    String fileName = Path.getFileName(path);
+    String dirPath = Path.removeFileName(path);
+    // Makes sure there isn't already a file with the same name at that path
+    if (!pathExists(path)) {
+      // Get the parent directory path and then add the file into that
+      // directory.
+      Directory dir = getParentDirectory(dirPath);
+      File file = new File(fileName, dir, null);
+      dir.addFile(file);
+    }
   }
   
   /**
