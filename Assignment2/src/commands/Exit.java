@@ -66,7 +66,7 @@ public class Exit implements Command{
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     jShell.setTerminate(true);
-    return true;
+    return "";
   }
 
 

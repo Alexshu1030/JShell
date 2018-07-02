@@ -63,6 +63,7 @@ public class Find implements Command {
       "named \"b\".\n";
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+   
     // set an empty string to be displayed at the end
     String result = "";
     FileExplorer explorer = jShell.getFileExplorer();
@@ -98,14 +99,16 @@ public class Find implements Command {
         }
       }
     }
+    String message;
     // if the result is empty, output error message
     if (result == "") {
-      System.out.println("File not found");
+      //System.out.println("File not found");
+      message = null;
     // otherwise output the filepaths
     } else {
-      System.out.println(result);
+      message = result;
     }
-    return true;
+    return message;
   }
 
   public String getCommandName() {
