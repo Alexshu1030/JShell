@@ -85,6 +85,22 @@ public class FileExplorer {
   }
   
   /**
+   * Gets the directory at the specified path
+   * @param path the path of the directory
+   * @return the directory at that path
+   */
+  public Directory getDirectory(String path) {
+    
+    File file = getFile(path);
+    Directory dir = null;
+    
+    if (file.isDirectory())
+      dir = (Directory)file;
+    
+    return dir;
+  }
+  
+  /**
    * Returns the directory that the file at the specified path is in.
    * @param path the path of the file
    * @return the directory that the file is in
