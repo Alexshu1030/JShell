@@ -162,22 +162,18 @@ public class FileExplorer {
     }
   }
   
-  /**
-   * Creates a file at the specified path with null contents. This method is
-   * useful for creating directories quickly.
-   * @param path the path of the file
-   */
-  public void addFile(String path) {
+  public void addDirectory(String path) {
     
-    String fileName = Path.getFileName(path);
+    String dirName = Path.getFileName(path);
     String dirPath = Path.removeFileName(path);
-    // Makes sure there isn't already a file with the same name at that path
+    // Makes sure there isn't already a directory with the same name at that
+    // path
     if (!pathExists(path)) {
-      // Get the parent directory path and then add the file into that
-      // directory.
-      Directory dir = getParentDirectory(dirPath);
-      File file = new File(fileName, dir, null);
-      dir.addFile(file);
+      // Get the parent directory path and then add the new directory into it
+      Directory parentDir = getParentDirectory(dirPath);
+      Directory childDir = new Directory(dirName, parentDir);
+      
+      parentDir.addFile(childDir);
     }
   }
   
