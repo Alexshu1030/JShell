@@ -40,6 +40,14 @@ public class Commands {
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
       new Find(), new Cat(), new Man(), new Pushd(), new Popd()};
   
+  /**
+   * Returns true if execution of this class is successful. Execution
+   * print or add string to standard output, or overwrites or appends a string
+   * to a file
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directories to be listed
+   * @return result true if execution was successful
+   */
   public static String run(JShellWindow jShell, String commandText) {
     // split at quotations for echo parameter 1
     commandText.split("\"");

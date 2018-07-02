@@ -65,7 +65,7 @@ public class Ls implements Command{
    * list of directories.
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be listed
-   * @return result true if execution was successful
+   * @return result the list of files/dirs in arguments
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     String messages = null;
@@ -121,7 +121,8 @@ public class Ls implements Command{
       }
     }
     
-    return messages + "\n";
+    String result = messages + "\n";
+    return result;
   }
 
   /**
