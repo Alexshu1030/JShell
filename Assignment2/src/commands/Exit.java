@@ -64,7 +64,7 @@ public class Exit implements Command{
    * @param arguments this is a list containing null
    * @return true this is true if execution was successful, o/w false
    */
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     jShell.setTerminate(true);
     return true;
   }

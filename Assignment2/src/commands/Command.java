@@ -35,7 +35,7 @@ import shell.JShellWindow;
 
 public interface Command {
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments);
+  public String run(JShellWindow jShell, ArrayList<String> arguments);
   
   public String getCommandName();
   

@@ -72,7 +72,7 @@ public class History implements Command{
    * @param arguments this is a list containing either null or an int
    * @return true this is true if execution was successful
    */
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     ArrayList<String> log = jShell.getLog();
     int totalInputs = log.size();
     int truncAmount = 0;

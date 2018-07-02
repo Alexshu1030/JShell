@@ -62,7 +62,7 @@ public class Find implements Command {
   "    will display all directories in Desktop \"\n\n" + 
       "named \"b\".\n";
   
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     // set an empty string to be displayed at the end
     String result = "";
     FileExplorer explorer = jShell.getFileExplorer();

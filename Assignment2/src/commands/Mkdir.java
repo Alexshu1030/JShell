@@ -69,10 +69,16 @@ public class Mkdir implements Command {
       + " it will look for Dir2 in the root directory. If Dir2 can not "
       + "be found, the command will fail.\n";
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
     int numOfArgs = arguments.size();
     if (arguments.size() == 1) {
-      
+      FileExplorer explorer = jShell.getFileExplorer();
+      String path = arguments.get(0);
+      Directory parentDir = explorer.getParentDirectory(path);
+      String dirName = Path.getFileName(path);
+      parentDir.addFile(new Directory(dirName, parentDir));
+      return true;
+      /*
       // get the instance of explorer
       FileExplorer explorer = jShell.getFileExplorer();
       // the path to be created is the first argument
@@ -104,6 +110,7 @@ public class Mkdir implements Command {
         return false;
       }
       return true;
+      */
     } else {
 
       ArrayList<String> part1 =

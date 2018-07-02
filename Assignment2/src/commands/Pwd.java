@@ -67,12 +67,13 @@ public class Pwd implements Command {
     return helpText;
   }
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    // Get the file explorer
     FileExplorer fileExplorer = jShell.getFileExplorer();
-
+    // Get the path to the working directory
     String workingDirPath = fileExplorer.getWorkingDirectory().getFullPath();
-
+    // Print this path
     System.out.println(workingDirPath);
 
     return true;

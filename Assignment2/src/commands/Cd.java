@@ -60,7 +60,7 @@ public class Cd implements Command {
       "    will change the current directory to its"
       + "parent directory.\n";
 
-  public boolean run(JShellWindow jShell, ArrayList<String> arguments) {
+  public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
     FileExplorer explorer = jShell.getFileExplorer();
     Directory currentDirectory = explorer.getWorkingDirectory();
