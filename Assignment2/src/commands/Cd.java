@@ -67,18 +67,22 @@ public class Cd implements Command {
 
     String path = arguments.get(0);
     boolean succeeded = false;
-
+    // If the user wants to change to the parent directory
     if (path.equals("..")) {
       succeeded = true;
-      Directory workingDir = explorer.getWorkingDirectory();
+      Directory workingDir = currentDirectory;
       if (!workingDir.isRootDirectory()) {
+        // Get the parent directory of the working directory
         Directory newDir = workingDir.getFileDirectory();
+        // Set the working directory to be the parent directory
         explorer.setWorkingDirectory(newDir);
       }
+    // If the user wants to change to the current directory
     } else if (path.equals(".")) {
       succeeded = true;
     } else {
       try {
+        // Set the working directory to the directory given by the path
         if (!explorer.getFile(path).equals(null)) {
           Directory newDir = (Directory)explorer.getFile(path);
           explorer.setWorkingDirectory(newDir);

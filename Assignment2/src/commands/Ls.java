@@ -61,11 +61,11 @@ public class Ls implements Command{
 
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     String messages = null;
-
+    // If no argument was given, list all files and directories
     if (arguments.size() == 0) {
 
       Directory dir = jShell.getFileExplorer().getWorkingDirectory();
-
+      // Get the contents of the current working directory
       ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
       String fileNames = "";
 
@@ -79,7 +79,7 @@ public class Ls implements Command{
 
     }
     else {
-
+      // Get the contents of the given path
       String path = arguments.get(0);
 
       if (Path.isDirectory(path)) {
@@ -101,6 +101,7 @@ public class Ls implements Command{
 
         }
       }
+      // If the path is not a directory, return the file instead.
       else {
 
         File file = jShell.getFileExplorer().getFile(path);

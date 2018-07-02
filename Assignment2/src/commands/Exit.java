@@ -65,6 +65,7 @@ public class Exit implements Command{
    * @return true this is true if execution was successful, o/w false
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    // Terminate
     jShell.setTerminate(true);
     return "";
   }
