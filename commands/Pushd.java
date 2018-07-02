@@ -66,7 +66,8 @@ public class Pushd implements Command {
     String path = arguments.get(0);
     // Get the directory at the path
     Directory newDir = (Directory)explorer.getFile(path);
-    messages = DirectoryStack.stack.pushd(jShell, newDir);
+    DirectoryStack.stack.pushd(jShell, newDir);
+    messages = "";
     return messages + "\n";
   }
 
