@@ -61,7 +61,7 @@ public class Man implements Command {
     if (command != null) {
       messages = command.getHelpText();
     }
-    return messages + "\n";
+    return messages;
   }
   
   public String getCommandName() {
