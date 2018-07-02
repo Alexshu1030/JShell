@@ -56,17 +56,34 @@ public class Pwd implements Command {
       "  /#:              exit\n" +
       "    will terminate JShell because"
           + " JShell will ignore excess spaces.\n";
-
+  
+  /**
+  * Checks if the arguments given to the command is valid
+  * @param arguments the list of str arguments passed to the command
+  * @return isValid true if the command is valid and vice versa
+  */
   public boolean areValidArguments(ArrayList<String> arguments) {
-
-    return arguments.size() == numOfArguments;
+    // if there are 0 arguments return true
+    boolean isValid = arguments.size() == numOfArguments;
+    return isValid;
   }
 
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "pwd"
+   */
   public String getHelpText() {
 
     return helpText;
   }
 
+  /**
+   * Returns true if execution of "pwd" is successful. Execution
+   * prints the current working directory path
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directories to be listed
+   * @return result true if execution was successful
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     String messages = null;
     // Get the file explorer
@@ -79,6 +96,10 @@ public class Pwd implements Command {
     return messages;
   }
 
+  /**
+   * Returns the command name, "pwd"
+   * @return commandName the command name
+   */
   public String getCommandName() {
 
     return commandName;

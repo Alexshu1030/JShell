@@ -140,6 +140,7 @@ public class Ls implements Command{
    */
   public boolean areValidArguments(ArrayList<String> arguments) {
     boolean isValid = false;
+    // if there are 0 or more arguments return true
     int numOfArgs = arguments.size();
     if (numOfArgs >= 0) {
       isValid = true;

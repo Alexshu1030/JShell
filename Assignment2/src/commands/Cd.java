@@ -60,6 +60,13 @@ public class Cd implements Command {
       "    will change the current directory to its"
       + "parent directory.\n";
 
+  /**
+   * Returns true if execution of "cd" is successful. Execution
+   * changes current directory to the one specified in arguments
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directory to be changed into
+   * @return result true if execution was successful
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
     FileExplorer explorer = jShell.getFileExplorer();
@@ -96,20 +103,33 @@ public class Cd implements Command {
     return "";
   }
 
-
+  /**
+   * Returns the command name, "cd"
+   * @return commandName the command name
+   */
   public String getCommandName() {
     return commandName;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
 
     boolean isValid = false;
+    // if there is 1 argument return true
     if (arguments.size() == numOfArguments) {
       isValid = true;
     }
     return isValid;
   }
 
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "cd"
+   */
   public String getHelpText() {
 
     return helpText;

@@ -36,7 +36,7 @@ import filesystem.DirectoryStack;
 import shell.JShellWindow;
 
 public class Pushd implements Command {
-  
+  private String commandName = "pushd";
   private int numOfArguments = 1;
   private String helpText = "NAME:\n" +
       "  pushd DIR - Pushes the current working directory"
@@ -59,6 +59,14 @@ public class Pushd implements Command {
   "    will add the current working directory to"
       + " the stack and change the current working directory to Dir1.\n";
   
+  /**
+   * Returns true if execution of "cd" is successful. Execution
+   * pushes current working directory into a stack and cds into
+   * a specified directory given in arguments
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directories to be pushed
+   * @return result true if execution was successful
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
     String messages = null;
@@ -71,15 +79,30 @@ public class Pushd implements Command {
     return messages + "\n";
   }
 
+  /**
+   * Returns the command name, "pushd"
+   * @return commandName the command name
+   */
   public String getCommandName() {
     // TODO Auto-generated method stub
-    return "pushd";
+    return commandName;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
-    return arguments.size() == numOfArguments;
+    // return true if there are 1 arguments
+    boolean isValid = arguments.size() == numOfArguments;
+    return isValid;
   }
 
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "pushd"
+   */
   public String getHelpText() {
     
     return helpText;

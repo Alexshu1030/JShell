@@ -69,10 +69,17 @@ public class Mkdir implements Command {
       + " it will look for Dir2 in the root directory. If Dir2 can not "
       + "be found, the command will fail.\n";
 
+  /**
+   * Returns true if execution of "cd" is successful. Execution
+   * creates new directories for each argument passed in the arguments
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directories to be created
+   * @return result true if execution was successful
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     
     FileExplorer explorer = jShell.getFileExplorer();
-    
+    // for each element in arguments, create a new directory
     for (int i = 0; i < arguments.size(); i++) {
       String path = arguments.get(i);
       if (Path.isDirectory(path)) {
@@ -87,11 +94,20 @@ public class Mkdir implements Command {
     return "";
   }
 
+  /**
+   * Returns the command name, "mkdir"
+   * @return commandName the command name
+   */
   public String getCommandName() {
     // return the command name
     return commandName;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
     int numOfArgs = arguments.size();
     boolean isValid = false;
@@ -121,6 +137,10 @@ public class Mkdir implements Command {
     return isValid;
   }
 
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "mkdir"
+   */
   public String getHelpText() {
 
     return helpText;
