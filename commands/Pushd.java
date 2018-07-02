@@ -60,7 +60,7 @@ public class Pushd implements Command {
       + " the stack and change the current working directory to Dir1.\n";
   
   /**
-   * Returns true if execution of "cd" is successful. Execution
+   * Returns true if execution of "pushd" is successful. Execution
    * pushes current working directory into a stack and cds into
    * a specified directory given in arguments
    * @param jShell the window that will be printed on

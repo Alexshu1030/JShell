@@ -69,7 +69,16 @@ public class Echo implements Command {
       "  /#: echo \"Hello\" >> FILE1\n" +
       "    FILE1 will contain helloHello.\n";
 
+  /**
+   * Returns true if execution of "echo" is successful. Execution
+   * print or add string to standard output, or overwrites or appends a string
+   * to a file
+   * @param jShell the window that will be printed on
+   * @param arguments a list containing the directories to be listed
+   * @return result true if execution was successful
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    String result = "";
     int numOfArgs = arguments.size();
     String arg1 = arguments.get(0);
     int lastQuoteMark = arg1.length() - 1;
@@ -95,7 +104,8 @@ public class Echo implements Command {
           try {
             dir.addFile(outfile);
           } catch (Exception NullPointerException) {
-            return null;
+            result = null;
+            return result;
           }
         }
       } else if (arg2.equals(">>")) {
@@ -109,17 +119,27 @@ public class Echo implements Command {
           String newContents = contents.concat(arg1);
           outfile.setFileContents(newContents);
         } else {
-          return null;
+          result = null;
+          return result;
         }
       }
     }
-    return "";
+    return result;
   }
 
+  /**
+   * Returns the command name, "echo"
+   * @return commandName the command name
+   */
   public String getCommandName() {
     return command;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
     boolean isValid = false;
     int numOfArgs = arguments.size();
@@ -147,7 +167,10 @@ public class Echo implements Command {
     return isValid;
   }
 
-
+  /**
+   * Gets the help text of the command
+   * @return helpText the help text of command "echo"
+   */
   public String getHelpText() {
 
     return helpText;
