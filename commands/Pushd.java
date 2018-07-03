@@ -86,7 +86,7 @@ public class Pushd implements Command {
     Directory newDir = (Directory) explorer.getFile(path);
     DirectoryStack.stack.pushd(jShell, newDir);
     messages = "";
-    return messages + "\n";
+    return messages;
   }
 
   /**
