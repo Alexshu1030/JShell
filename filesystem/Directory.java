@@ -33,6 +33,9 @@ import java.util.ArrayList;
 
 public class Directory extends File {
   // make a new arraylist of files
+  /**
+   * listOfFiles a list of files in the directory
+   */
   ArrayList<File> listOfFiles = new ArrayList<File>();
 
   // construct a new directory with its contents as the list of files

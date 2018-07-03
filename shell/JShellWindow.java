@@ -35,9 +35,15 @@ import filesystem.FileExplorer;
 import java.util.ArrayList;
 
 public class JShellWindow {
-
+  /**
+   * fileExplorer the FileExplorer that is used to perform tasks with files
+   * or directories
+   */
   private FileExplorer fileExplorer = new FileExplorer();
   private boolean terminate = false;
+  /**
+   * log a log of the tasks that we have performed in the window
+   */
   private ArrayList<String> log = new ArrayList<String>();
 
   /**

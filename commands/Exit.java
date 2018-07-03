@@ -33,8 +33,13 @@ import java.util.ArrayList;
 import shell.JShellWindow;
 
 public class Exit implements Command{
-
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "exit";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  exit - Terminates the current JShell"
       + " process.\n" +

@@ -36,8 +36,17 @@ import filesystem.DirectoryStack;
 import shell.JShellWindow;
 
 public class Pushd implements Command {
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "pushd";
+  /**
+   * numOfArguments The correct number of args in the current class
+   */
   private int numOfArguments = 1;
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  pushd DIR - Pushes the current working directory"
       + " into a stack, then change the current working directory"

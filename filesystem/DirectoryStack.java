@@ -35,6 +35,9 @@ import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class DirectoryStack {
+  /**
+   * directoryStack a stack of directories
+   */
   private ArrayList<Directory> directoryStack = new ArrayList<Directory>();
   public static DirectoryStack stack = new DirectoryStack();
 

@@ -34,9 +34,17 @@ import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class Pwd implements Command {
-
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "pwd";
+  /**
+   * numOfArguments The correct number of args in the current class
+   */
   private int numOfArguments = 0;
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  pwd - Prints current working directory\n" +
       "DESCRIPTION:\n" +

@@ -33,8 +33,13 @@ import java.util.ArrayList;
 import filesystem.*;
 import shell.JShellWindow;
 public class Ls implements Command{
-
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "ls";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  ls [PATH ...]"
       + " - Lists files and directories\n" +

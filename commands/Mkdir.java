@@ -34,7 +34,13 @@ import filesystem.*;
 import shell.JShellWindow;
 public class Mkdir implements Command {
   // set the command name as mkdir to be used for calling
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "mkdir";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  mkdir DIR1 [DIR2] ... [PATH] -"
       + " Create directories\n" +

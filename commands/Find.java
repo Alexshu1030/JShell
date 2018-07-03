@@ -36,7 +36,13 @@ import filesystem.*;
 
 public class Find implements Command {
   // set the command name
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "find";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  find PATH ... -type [f|d] -name \"STRING\""
       + " - Displays all files or directories with name STRING in PATH.\n" +

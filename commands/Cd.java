@@ -36,9 +36,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cd implements Command {
-
+  /**
+   * numOfArguments The correct number of args in the current class
+   */
   private int numOfArguments = 1;
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "cd";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:"
       + "  cd DIR - Change the current directory\n" + "DESCRIPTION:\n"
       + "  Changes the current directory to DIR.\n" + "PARAMETERS:\n"

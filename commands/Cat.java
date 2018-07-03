@@ -35,7 +35,13 @@ import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class Cat implements Command {
+  /**
+   * command The command name of the current class
+   */
   private String command = "cat";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText =
       "NAME:\n" + "  cat FILE1 [FILE2 ...] - Displays the contents"
           + " in the given file(s)\n" + "DESCRIPTION:\n"

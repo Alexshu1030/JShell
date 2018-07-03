@@ -34,9 +34,17 @@ import java.util.ArrayList;
 import shell.JShellWindow;
 
 public class Man implements Command {
-  
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "man";
+  /**
+   * command The command name of the current class
+   */
   private int numOfArguments = 1;
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  man CMD - Displays documentation for CMD \n" +
       "DESCRIPTION:\n" +
