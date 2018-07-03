@@ -131,8 +131,9 @@ public class Ls implements Command{
   }
 
   /**
-   * Returns the command name, "ls"
-   * @return commandName the command name
+   * Returns the name of this command
+   * 
+   * @return commandName this is the command's name
    */
   public String getCommandName() {
 

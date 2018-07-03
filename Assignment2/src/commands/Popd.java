@@ -50,9 +50,9 @@ public class Popd implements Command{
   }
 
   /**
-   * Returns the command name, "popd"
+   * Returns the name of this command
    * 
-   * @return commandName the command name
+   * @return commandName this is the command's name
    */
   public String getCommandName() {
     return commandName;

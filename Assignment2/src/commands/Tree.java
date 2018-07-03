@@ -85,7 +85,9 @@ public class Tree implements Command {
 
 
   /**
-   * Prints help text that includes documentation of History
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
    */
   public String getHelpText() {
 
@@ -163,9 +165,9 @@ public class Tree implements Command {
   }
 
   /**
-   * Returns the help text for this command.
+   * Returns the name of this command
    * 
-   * @return the help text for this command
+   * @return commandName this is the command's name
    */
   public String getCommandName() {
 
