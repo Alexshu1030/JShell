@@ -89,7 +89,7 @@ public class Echo implements Command {
     FileExplorer explorer = jShell.getFileExplorer();
     
     if (numOfArgs == 1) {
-      result = text;
+      result = text + "\n";
     } 
     else if (numOfArgs == 3) {
       // Assign arguments from the arraylist to proper variables
