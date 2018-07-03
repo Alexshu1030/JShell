@@ -84,10 +84,14 @@ public class FileExplorer {
 
     // Get the directory the file is in
     Directory dir = getParentDirectory(path);
-    // Get the name of the file and get it from the directory.
-    String fileName = Path.getFileName(path);
-    File file = dir.getFile(fileName);
-
+    File file = null;
+    
+    if (dir != null) {
+      // Get the name of the file and get it from the directory.
+      String fileName = Path.getFileName(path);
+      file = dir.getFile(fileName);
+    }
+    
     return file;
   }
 
@@ -101,10 +105,11 @@ public class FileExplorer {
 
     File file = getFile(path);
     Directory dir = null;
-
-    if (file.isDirectory())
+    
+    if (file != null && file.isDirectory()) {
       dir = (Directory) file;
-
+    }
+    
     return dir;
   }
 
@@ -203,9 +208,11 @@ public class FileExplorer {
     if (!pathExists(path)) {
       // Get the parent directory path and then add the new directory into it
       Directory parentDir = getParentDirectory(path);
-      Directory childDir = new Directory(dirName, parentDir);
-
-      parentDir.addFile(childDir);
+      // Check if the parent directory exists.
+      if (parentDir != null) {
+        Directory childDir = new Directory(dirName, parentDir);
+        parentDir.addFile(childDir);
+      }
     }
   }
 
