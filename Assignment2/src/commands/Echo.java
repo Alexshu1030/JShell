@@ -69,7 +69,7 @@ public class Echo implements Command {
           + "    FILE1 will contain helloHello.\n";
 
   /**
-   * Returns true if execution of "echo" is successful. Execution print or add
+   * Returns true if execution of command is successful. Execution print or add
    * string to standard output, or overwrites or appends a string to a file
    * 
    * @param jShell the window that will be printed on
@@ -121,9 +121,9 @@ public class Echo implements Command {
   }
 
   /**
-   * Returns the name of this command
+   * Returns the command name
    * 
-   * @return commandName this is the command's name
+   * @return commandName the command name
    */
   public String getCommandName() {
     return command;

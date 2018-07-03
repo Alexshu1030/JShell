@@ -76,7 +76,7 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   /**
-   * Returns true if execution of "mkdir" is successful. Execution creates new
+   * Returns true if execution of command is successful. Execution creates new
    * directories for each argument passed in the arguments
    * 
    * @param jShell the window that will be printed on

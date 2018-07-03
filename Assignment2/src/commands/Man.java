@@ -63,7 +63,7 @@ public class Man implements Command {
           + " is not a valid command.\n";
   
   /**
-   * Returns true if execution of "man" is successful. Execution prints the
+   * Returns true if execution of command is successful. Execution prints the
    * manual of the command in arguments
    * 
    * @param jShell the window that will be printed on

@@ -35,7 +35,7 @@ public class Popd implements Command{
   "    Will return an error message.\n";
 
   /**
-   * Returns true if execution of "popd" is successful. Execution sets current
+   * Returns true if execution of command is successful. Execution sets current
    * working directory to the top of the directory stack
    * 
    * @param jShell the window that will be printed on
