@@ -35,7 +35,7 @@ import shell.JShellWindow;
 import filesystem.*;
 
 public class Find implements Command {
-  // set the command name
+  
   /**
    * commandName The command name of the current class
    */
@@ -69,6 +69,15 @@ public class Find implements Command {
   "    will display all directories in Desktop \"\n\n" + 
       "named \"b\".\n";
   
+  /**
+   * Returns the text in the arguments if there is not outfile is specified.
+   * Otherwise returns an empty string.
+   * 
+   * @param jShell the window that will be printed on
+   * @param arguments a list of arguments used to change the behavior of the
+   * command
+   * @return the result to be printed to the JShell
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
     FileExplorer explorer = jShell.getFileExplorer();
@@ -117,11 +126,23 @@ public class Find implements Command {
     return message;
   }
 
+  /**
+   * Returns the name of this command
+   * 
+   * @return commandName this is the command's name
+   */
   public String getCommandName() {
 
     return commandName;
   }
 
+  /**
+   * Returns whether the arguments meet the base requirements for the
+   * command.
+   * 
+   * @param arguments the list of arguments for the command
+   * @return is true if the args are valid. Otherwise false.
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
 
     boolean valid = false;
@@ -146,6 +167,11 @@ public class Find implements Command {
     return valid;
   }
 
+  /**
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
+   */
   public String getHelpText() {
 
     return helpText;
