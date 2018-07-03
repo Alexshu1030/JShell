@@ -36,8 +36,8 @@ import shell.JShellWindow;
 public interface Command {
 
   /**
-   * Runs a command using the given arguments and the shell window to
-   * returns the output of the command.
+   * Runs a command using the given arguments and the shell window to returns
+   * the output of the command.
    * 
    * @param jShell the window that called the command
    * @param arguments a list of arguments for the command
@@ -53,8 +53,8 @@ public interface Command {
   public String getCommandName();
 
   /**
-   * Returns whether the specified arguments are valid. i.e. if there are
-   * the correct number of args, they are in the correct format, etc.
+   * Returns whether the specified arguments are valid. i.e. if there are the
+   * correct number of args, they are in the correct format, etc.
    * 
    * @param arguments the arguments
    * @return true if the args are valid and false otherwise.

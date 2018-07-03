@@ -41,37 +41,22 @@ public class Tree implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  tree - Displays the entire file system as a "
-      + "tree\n" +
-  "DESCRIPTION:\n" +
-  "Displays the entire file system as a "
-      + "tree starting from the root directory. For each level of "
-      + "the tree, the subtree is indented\n" +
-  "PARAMETERS:\n" +
-  "  There are no parameters available for this"
-      + " command.\n" +
-  "RETURNS:\n" +
-  "  A text representation of the file system\n" +
-  "EXAMPLE USAGE:\n" +
-  "If the root directory contains no subdirectories\n" +
-  "  /#: tree\n" +
-  "    will return /\n" +
-  "If the root directory contains 2 subdirectories A"
-      + " and B.\n" +
-  "  /#: tree\n" +
-  "   will return: \n" +
-  "   /\n" +
-  "      A\n" +
-  "      B\n" +
-  "If the root directory contains 2 subdirectories A"
-      + " and B with a sub directory C in A\n" +
-  "  /#: tree\n" +
-  "   will return: \n" +
-  "   /\n" +
-  "      A\n" +
-  "          C\n" +
-  "      B\n";
+  private String helpText =
+      "NAME:\n" + "  tree - Displays the entire file system as a " + "tree\n"
+          + "DESCRIPTION:\n" + "Displays the entire file system as a "
+          + "tree starting from the root directory. For each level of "
+          + "the tree, the subtree is indented\n" + "PARAMETERS:\n"
+          + "  There are no parameters available for this" + " command.\n"
+          + "RETURNS:\n" + "  A text representation of the file system\n"
+          + "EXAMPLE USAGE:\n"
+          + "If the root directory contains no subdirectories\n"
+          + "  /#: tree\n" + "    will return /\n"
+          + "If the root directory contains 2 subdirectories A" + " and B.\n"
+          + "  /#: tree\n" + "   will return: \n" + "   /\n" + "      A\n"
+          + "      B\n" + "If the root directory contains 2 subdirectories A"
+          + " and B with a sub directory C in A\n" + "  /#: tree\n"
+          + "   will return: \n" + "   /\n" + "      A\n" + "          C\n"
+          + "      B\n";
 
   /**
    * Returns true if there are no arguments given

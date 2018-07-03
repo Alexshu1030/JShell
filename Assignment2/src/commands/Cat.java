@@ -47,8 +47,7 @@ public class Cat implements Command {
           + " in the given file(s)\n" + "DESCRIPTION:\n"
           + "  Displays the contents of the file and "
           + "concatenates the contents of subsequent files to the contents"
-          + "with three lines inbetween."
-          + " of the first.\n" + "PARAMETERS:\n"
+          + "with three lines inbetween." + " of the first.\n" + "PARAMETERS:\n"
           + "  FILE1 - The file with the contents to be" + " displayed.\n"
           + "  FILE2 - A subsequent file with the contents "
           + "to be displayed by concatenating it to FILE1. An optional"
@@ -85,8 +84,7 @@ public class Cat implements Command {
         if (i != arguments.size() - 1) {
           message += "\n\n\n";
         }
-      }
-      else {
+      } else {
         System.out.println("The file does not exist.");
       }
     }

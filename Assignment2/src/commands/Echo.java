@@ -77,21 +77,20 @@ public class Echo implements Command {
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     String result = "";
     int numOfArgs = arguments.size();
-    
+
     String text = arguments.get(0);
-    
+
     // Remove the quotation marks from the argument
     text = text.substring(1, text.length() - 1);
-    
+
     FileExplorer explorer = jShell.getFileExplorer();
-    
+
     if (numOfArgs == 1) {
       result = text + "\n";
-    } 
-    else if (numOfArgs == 3) {
+    } else if (numOfArgs == 3) {
       // Assign arguments from the arraylist to proper variables
       String operationType = arguments.get(1);
       String outFilePath = arguments.get(2);
@@ -112,11 +111,11 @@ public class Echo implements Command {
       }
       // If the file exists and we want to append
       else if (operationType.equals(">>")) {
-        String currentContents = (String)outFile.getFileContents();
+        String currentContents = (String) outFile.getFileContents();
         outFile.setFileContents(currentContents + text);
       }
     }
-    
+
     return result;
   }
 
@@ -136,10 +135,10 @@ public class Echo implements Command {
    * @return isValid true if the command is valid and vice versa
    */
   public boolean areValidArguments(ArrayList<String> arguments) {
-    
+
     boolean isValid = false;
     int numOfArgs = arguments.size();
-    
+
     if (numOfArgs == 1) {
       String arg = arguments.get(0);
       int secArgLen = arg.length();
@@ -148,9 +147,8 @@ public class Echo implements Command {
           && arg.substring(secArgLen - 1, secArgLen).equals("\"")) {
         isValid = true;
       }
-    } 
-    else if (numOfArgs == 3) {
-      
+    } else if (numOfArgs == 3) {
+
       String arg1 = arguments.get(0);
       String arg2 = arguments.get(1);
       // Otherwise the second argument must be the > or >>

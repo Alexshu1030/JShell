@@ -35,7 +35,7 @@ import shell.JShellWindow;
 import filesystem.*;
 
 public class Find implements Command {
-  
+
   /**
    * commandName The command name of the current class
    */
@@ -43,39 +43,32 @@ public class Find implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  find PATH ... -type [f|d] -name \"STRING\""
-      + " - Displays all files or directories with name STRING in PATH.\n" +
-  "DESCRIPTION:\n" +
-  "  If -type f then it will find all files with "
+  private String helpText = "NAME:\n"
+      + "  find PATH ... -type [f|d] -name \"STRING\""
+      + " - Displays all files or directories with name STRING in PATH.\n"
+      + "DESCRIPTION:\n" + "  If -type f then it will find all files with "
       + "name STRING in PATH and display it. If type -d then it will"
-      + " find all directories with name STRING in PATH.\n" +
-  "PARAMETERS:\n" +
-  "  PATH - The path to find STRING in.\n" +
-  "  STRING - The name of the file/directory "
-      + "the user is looking for\n" +
-  "  -type [f|d] - f will find files named STRING "
-      + "in PATH, d will find directories named STRING in PATH\n" +
-  " -name - parameter to specify STRING as the "
-      + "name of the file tehey are looking for.\n" +
-  "RETURNS:\n" +
-  "  A list of all files/directories in PATH named "
-      + "STRING\n" +
-  "EXAMPLE USAGE:\n" +
-  "  /#: find /user/Desktop -type d -name \"a\"\n" +
-  "    will display all directories in Desktop "
-      + "named 'a'.\n" +
-  "  /#: find /user/Desktop -type f -name \"b\"\n" +
-  "    will display all directories in Desktop \"\n\n" + 
-      "named \"b\".\n";
-  
+      + " find all directories with name STRING in PATH.\n" + "PARAMETERS:\n"
+      + "  PATH - The path to find STRING in.\n"
+      + "  STRING - The name of the file/directory "
+      + "the user is looking for\n"
+      + "  -type [f|d] - f will find files named STRING "
+      + "in PATH, d will find directories named STRING in PATH\n"
+      + " -name - parameter to specify STRING as the "
+      + "name of the file tehey are looking for.\n" + "RETURNS:\n"
+      + "  A list of all files/directories in PATH named " + "STRING\n"
+      + "EXAMPLE USAGE:\n" + "  /#: find /user/Desktop -type d -name \"a\"\n"
+      + "    will display all directories in Desktop " + "named 'a'.\n"
+      + "  /#: find /user/Desktop -type f -name \"b\"\n"
+      + "    will display all directories in Desktop \"\n\n" + "named \"b\".\n";
+
   /**
    * Returns the text in the arguments if there is not outfile is specified.
    * Otherwise returns an empty string.
    * 
    * @param jShell the window that will be printed on
    * @param arguments a list of arguments used to change the behavior of the
-   * command
+   *        command
    * @return the result to be printed to the JShell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
@@ -137,8 +130,7 @@ public class Find implements Command {
   }
 
   /**
-   * Returns whether the arguments meet the base requirements for the
-   * command.
+   * Returns whether the arguments meet the base requirements for the command.
    * 
    * @param arguments the list of arguments for the command
    * @return is true if the args are valid. Otherwise false.

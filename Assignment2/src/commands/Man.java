@@ -45,23 +45,17 @@ public class Man implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  man CMD - Displays documentation for CMD \n" +
-      "DESCRIPTION:\n" +
-      "  Displays name, description, possible parameters"
-          + " possible return messages, and example usage of cmd\n" +
-      "PARAMETERS:\n" +
-      "  CMD - The command for which the documentation "
-          + "will be displayed.\n" +
-      "RETURNS:\n" +
-      "  Documentation for CMD\n" +
-      "EXAMPLE USAGE:\n" +
-      "  /#: man man\n" +
-      "    will display documentation for man.\n" +
-      "  /#: man nam\n" +
-      "    Will return an error message because nam"
-          + " is not a valid command.\n";
-  
+  private String helpText = "NAME:\n"
+      + "  man CMD - Displays documentation for CMD \n" + "DESCRIPTION:\n"
+      + "  Displays name, description, possible parameters"
+      + " possible return messages, and example usage of cmd\n"
+      + "PARAMETERS:\n" + "  CMD - The command for which the documentation "
+      + "will be displayed.\n" + "RETURNS:\n" + "  Documentation for CMD\n"
+      + "EXAMPLE USAGE:\n" + "  /#: man man\n"
+      + "    will display documentation for man.\n" + "  /#: man nam\n"
+      + "    Will return an error message because nam"
+      + " is not a valid command.\n";
+
   /**
    * Returns true if execution of command is successful. Execution prints the
    * manual of the command in arguments
