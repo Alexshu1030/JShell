@@ -28,10 +28,11 @@
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
 package commands;
+
 import java.util.ArrayList;
 import shell.JShellWindow;
 
-public class History implements Command{
+public class History implements Command {
   /**
    * singleArg the correct num of arguments (1)
    */
@@ -43,32 +44,21 @@ public class History implements Command{
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  history [number] - Prints recent commands"
-      + " entered\n" +
-  "DESCRIPTION:\n" +
-  "  Prints recent commands with each command on "
-      + "their own line. There will be two columns. The first column "
-      + "numbers the commands where the most recent is the highest"
-      + " number. The second column contains the commands.\n" +
-  "PARAMETERS:\n" +
-  "  number - This parameter lets the user return "
-      + "the last 'number' commands entered rather than all commands."
-      + " An optional parameter.\n" +
-  "RETURNS:\n" +
-  "  Will return a list of commands entered.\n" +
-  "EXAMPLE USAGE:\n" +
-  "If no other command was entered.\n" +
-  "  /#: history\n" +
-  "    1. history\n" +
-  "If we were to enter the pwd command first.\n" +
-  "  /#: history\n" +
-  "    1. pwd\n" +
-  "    2. history\n" +
-  "If we were to enter the pwd command twice first.\n" +
-  "  /#: history 2\n" +
-  "    1. pwd\n" +
-  "    2. history\n";
+  private String helpText =
+      "NAME:\n" + "  history [number] - Prints recent commands" + " entered\n"
+          + "DESCRIPTION:\n" + "  Prints recent commands with each command on "
+          + "their own line. There will be two columns. The first column "
+          + "numbers the commands where the most recent is the highest"
+          + " number. The second column contains the commands.\n"
+          + "PARAMETERS:\n" + "  number - This parameter lets the user return "
+          + "the last 'number' commands entered rather than all commands."
+          + " An optional parameter.\n" + "RETURNS:\n"
+          + "  Will return a list of commands entered.\n" + "EXAMPLE USAGE:\n"
+          + "If no other command was entered.\n" + "  /#: history\n"
+          + "    1. history\n" + "If we were to enter the pwd command first.\n"
+          + "  /#: history\n" + "    1. pwd\n" + "    2. history\n"
+          + "If we were to enter the pwd command twice first.\n"
+          + "  /#: history 2\n" + "    1. pwd\n" + "    2. history\n";
 
   /**
    * Returns true if execution of command terminates. With no parameter,

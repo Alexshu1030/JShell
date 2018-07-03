@@ -47,27 +47,22 @@ public class Pushd implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  pushd DIR - Pushes the current working directory"
+  private String helpText = "NAME:\n"
+      + "  pushd DIR - Pushes the current working directory"
       + " into a stack, then change the current working directory"
-      + " to DIR.\n" +
-  "DESCRIPTION:\n" +
-  "  Saves the current working directory into a "
+      + " to DIR.\n" + "DESCRIPTION:\n"
+      + "  Saves the current working directory into a "
       + "stack of directories, then changes the current working "
       + "directory to DIR so that the old working directory could be"
       + "returned. The directory stack is dynamic and changes "
-      + "depending on pushd and popd commands.\n" +
-  "PARAMETERS:\n" +
-  "  DIR - The new current working directory that the"
+      + "depending on pushd and popd commands.\n" + "PARAMETERS:\n"
+      + "  DIR - The new current working directory that the"
       + " user may eventually want to return to through the directory"
-      + " stack.\n" +
-  "RETURNS:\n" +
-  "  This command does not return anything.\n" +
-  "EXAMPLE USAGE:\n" +
-  "  /#: pushd Dir1\n" +
-  "    will add the current working directory to"
+      + " stack.\n" + "RETURNS:\n"
+      + "  This command does not return anything.\n" + "EXAMPLE USAGE:\n"
+      + "  /#: pushd Dir1\n" + "    will add the current working directory to"
       + " the stack and change the current working directory to Dir1.\n";
-  
+
   /**
    * Returns true if execution of the command is successful. Execution pushes
    * current working directory into a stack and cds into a specified directory
@@ -78,7 +73,7 @@ public class Pushd implements Command {
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     FileExplorer explorer = jShell.getFileExplorer();
     String messages = null;
     // Get the path of the directory that we want to push
@@ -90,7 +85,7 @@ public class Pushd implements Command {
       DirectoryStack.stack.pushd(jShell, newDir);
     else
       System.out.println("The directory does not exist.");
-    
+
     return "";
   }
 

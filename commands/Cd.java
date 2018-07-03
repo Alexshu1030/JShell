@@ -61,7 +61,7 @@ public class Cd implements Command {
       + "    will change the current directory to its" + "parent directory.\n";
 
   /**
-   * Returns true if execution of the command  is successful. Execution changes
+   * Returns true if execution of the command is successful. Execution changes
    * current directory to the one specified in arguments
    * 
    * @param jShell the window that will be printed on
@@ -95,8 +95,7 @@ public class Cd implements Command {
         if (newDir != null) {
           explorer.setWorkingDirectory(newDir);
           succeeded = true;
-        }
-        else {
+        } else {
           System.out.println("The path does not exist.");
         }
       } catch (Exception NullPointerException) {

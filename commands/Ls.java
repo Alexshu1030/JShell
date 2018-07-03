@@ -29,10 +29,12 @@
 // *********************************************************
 
 package commands;
+
 import java.util.ArrayList;
 import filesystem.*;
 import shell.JShellWindow;
-public class Ls implements Command{
+
+public class Ls implements Command {
   /**
    * commandName The command name of the current class
    */
@@ -40,47 +42,39 @@ public class Ls implements Command{
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  ls [PATH ...]"
-      + " - Lists files and directories\n" +
-      "DESCRIPTION:\n" +
-      " Recursively lists all files and directories"
+  private String helpText = "NAME:\n" + "  ls [PATH ...]"
+      + " - Lists files and directories\n" + "DESCRIPTION:\n"
+      + " Recursively lists all files and directories"
       + " inside the given paths, or inside the current directory"
-      + " if no directory is given.\n" +
-      "PARAMETERS:\n" +
-      "  PATH - The relative or full path that the user"
-      + " wants to perform ls on.\n" +
-      "RETURNS:\n" +
-      "  This command returns all files and directories"
-      + " inside.\n" +
-      "EXAMPLE USAGE:\n" +
-      "  /#: ls\n" +
-      "    will recursively return all files and"
-      + "directories in the current directory.\n" +
-      "  /#: ls /PATH/\n" +
-      "    will recursively return all files and"
-      + "directories in the directory /PATH/.\n" +
-      "  /#: ls /PATH1/ /PATH2/\n" +
-      "    will recursively return all files and"
+      + " if no directory is given.\n" + "PARAMETERS:\n"
+      + "  PATH - The relative or full path that the user"
+      + " wants to perform ls on.\n" + "RETURNS:\n"
+      + "  This command returns all files and directories" + " inside.\n"
+      + "EXAMPLE USAGE:\n" + "  /#: ls\n"
+      + "    will recursively return all files and"
+      + "directories in the current directory.\n" + "  /#: ls /PATH/\n"
+      + "    will recursively return all files and"
+      + "directories in the directory /PATH/.\n" + "  /#: ls /PATH1/ /PATH2/\n"
+      + "    will recursively return all files and"
       + "directories in the directory /PATH1/ and /PATH2/.\n";
 
   /**
-   * Returns true if execution of the command is successful. Execution
-   * prints all of the files and directories in the provided
-   * list of directories.
+   * Returns true if execution of the command is successful. Execution prints
+   * all of the files and directories in the provided list of directories.
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be listed
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     String messages = "";
     // If no argument was given, list all files and directories
     if (arguments.size() == 0) {
 
       Directory dir = jShell.getFileExplorer().getWorkingDirectory();
       // Get the contents of the current working directory
-      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+      ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
       String fileNames = "";
 
       for (int i = 0; i < files.size(); i++) {
@@ -89,23 +83,22 @@ public class Ls implements Command{
 
       messages = fileNames;
 
-    }
-    else {
+    } else {
       // Get the contents of the given path
       String path = arguments.get(0);
       File file = jShell.getFileExplorer().getFile(path);
-      
+
       // Check that the file exists
       if (file == null)
         System.out.println("The path does not exist.");
       // Check if the file is a directory
       else if (file.isDirectory()) {
 
-        Directory dir = (Directory)file;
-        
-        ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+        Directory dir = (Directory) file;
+
+        ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
         String fileNames = "";
-        
+
         // Iterate over the file contents and print the file names
         for (int i = 0; i < files.size(); i++) {
           fileNames += files.get(i).getFileName() + "\n";
@@ -115,10 +108,10 @@ public class Ls implements Command{
       }
       // If the path is not a directory, return the file instead.
       else {
-          messages = file.getFileName();          
+        messages = file.getFileName();
       }
     }
-    
+
     return messages;
   }
 
@@ -134,6 +127,7 @@ public class Ls implements Command{
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */

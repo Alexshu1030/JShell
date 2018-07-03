@@ -45,25 +45,17 @@ public class Pwd implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "NAME:\n" +
-      "  pwd - Prints current working directory\n" +
-      "DESCRIPTION:\n" +
-      "  Prints the full path of the current working"
-          + "directory.\n" +
-      "PARAMETERS:\n" +
-      "  There are no parameters available for"
-          + " this command.\n" +
-      "RETURNS:\n" +
-      "  This command does not return anything.\n" +
-      "EXAMPLE USAGE:\n" +
-      "  /#: exit\n" +
-      "    will successfully terminate JShell.\n" +
-      "  /#: exit p\n" +
-      "    will not terminate JShell because of the"
-          + " additional parameter 'p'.\n" +
-      "  /#:              exit\n" +
-      "    will terminate JShell because"
-          + " JShell will ignore excess spaces.\n";
+  private String helpText = "NAME:\n"
+      + "  pwd - Prints current working directory\n" + "DESCRIPTION:\n"
+      + "  Prints the full path of the current working" + "directory.\n"
+      + "PARAMETERS:\n" + "  There are no parameters available for"
+      + " this command.\n" + "RETURNS:\n"
+      + "  This command does not return anything.\n" + "EXAMPLE USAGE:\n"
+      + "  /#: exit\n" + "    will successfully terminate JShell.\n"
+      + "  /#: exit p\n" + "    will not terminate JShell because of the"
+      + " additional parameter 'p'.\n" + "  /#:              exit\n"
+      + "    will terminate JShell because"
+      + " JShell will ignore excess spaces.\n";
 
   /**
    * Checks if the arguments given to the command is valid

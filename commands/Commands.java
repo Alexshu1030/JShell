@@ -107,9 +107,9 @@ public class Commands {
   }
 
   /**
-   * Splits the text by spaces and groups it by quotations. Blocks of text
-   * in quotations will be kept as one group. These groups are then split
-   * by whitespace.
+   * Splits the text by spaces and groups it by quotations. Blocks of text in
+   * quotations will be kept as one group. These groups are then split by
+   * whitespace.
    * 
    * @param text the text to be split
    * @return the text split into groups
@@ -128,12 +128,12 @@ public class Commands {
         // matter what
         String split = text.substring(lastSplitIndex, text.length());
         splits.add(split);
-        
+
       } else if (currentChar == ' ') {
-        
+
         String split = text.substring(lastSplitIndex, i);
         splits.add(split);
-        
+
         // The current char is a space. We want to skip to the next non-space
         while (currentChar == ' ' && i != text.length() - 1) {
           currentChar = text.charAt(++i);
@@ -144,7 +144,7 @@ public class Commands {
         // one index. When the loop ends it will iterate back to the current
         // index.
         i--;
-        
+
       } else if (currentChar == '"') {
 
         // We want to get the next quotation mark *after* this one so go to
@@ -155,7 +155,7 @@ public class Commands {
         while (currentChar != '"' && i != text.length() - 1) {
           currentChar = text.charAt(++i);
         }
-        
+
         // If we are at the end of the string then we want to create a split.
         if (i == text.length() - 1) {
           String split = text.substring(lastSplitIndex, text.length());
@@ -163,7 +163,7 @@ public class Commands {
         }
       }
     }
-    
+
     return splits;
   }
 }
