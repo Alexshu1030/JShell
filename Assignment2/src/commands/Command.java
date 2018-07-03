@@ -35,11 +35,36 @@ import shell.JShellWindow;
 
 public interface Command {
 
+  /**
+   * Runs a command using the given arguments and the shell window to
+   * returns the output of the command.
+   * 
+   * @param jShell the window that called the command
+   * @param arguments a list of arguments for the command
+   * @return the output of the command
+   */
   public String run(JShellWindow jShell, ArrayList<String> arguments);
 
+  /**
+   * Gets the name of the command.
+   * 
+   * @return the name of the command.
+   */
   public String getCommandName();
 
+  /**
+   * Returns whether the specified arguments are valid. i.e. if there are
+   * the correct number of args, they are in the correct format, etc.
+   * 
+   * @param arguments the arguments
+   * @return true if the args are valid and false otherwise.
+   */
   public boolean areValidArguments(ArrayList<String> arguments);
 
+  /**
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command.
+   */
   public String getHelpText();
 }
