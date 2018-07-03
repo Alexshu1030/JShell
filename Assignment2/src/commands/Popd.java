@@ -14,7 +14,8 @@ public class Popd implements Command {
    */
   private String helpText =
       "NAME:\n" + "  popd - Sets the current working directory "
-          + "to the one at the top of the directory stack.\n" + "DESCRIPTION:\n"
+          + "to the one at the top of the directory stack.\n" 
+          + "DESCRIPTION:\n"
           + "  Removes the directory at the top of the "
           + "directory stack and sets the current working directory to "
           + "that directory.\n" + "PARAMETERS:\n"
