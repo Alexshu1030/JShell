@@ -93,36 +93,29 @@ public class Ls implements Command{
     else {
       // Get the contents of the given path
       String path = arguments.get(0);
+      File file = jShell.getFileExplorer().getFile(path);
+      
+      // Check that the file exists
+      if (file == null)
+        System.out.println("The path does not exist.");
+      // Check if the file is a directory
+      else if (file.isDirectory()) {
 
-      if (Path.isDirectory(path)) {
-
-        Directory dir = jShell.getFileExplorer().getDirectory(path);
+        Directory dir = (Directory)file;
         
-        if (dir != null) {
-
-          ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
-          String fileNames = "";
-
-          for (int i = 0; i < files.size(); i++) {
-            fileNames += files.get(i).getFileName() + "\n";
-          }
-
-          messages = fileNames;
+        ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+        String fileNames = "";
+        
+        // Iterate over the file contents and print the file names
+        for (int i = 0; i < files.size(); i++) {
+          fileNames += files.get(i).getFileName() + "\n";
         }
-        else {
-          System.out.println("The path does not exist.");
-        }
+
+        messages = fileNames;
       }
       // If the path is not a directory, return the file instead.
       else {
-
-        File file = jShell.getFileExplorer().getFile(path);
-
-        if (file != null) {
           messages = file.getFileName();          
-        }
-        else
-          System.out.println("The path does not exist.");
       }
     }
     
