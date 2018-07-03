@@ -64,36 +64,36 @@ public class Find implements Command {
       "named \"b\".\n";
   
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     FileExplorer explorer = jShell.getFileExplorer();
-    
+
     int numOfPaths = arguments.size() - 4;
     ArrayList<Directory> directories = new ArrayList<Directory>();
-    
+
     for (int i = 0; i < numOfPaths; i++) {
       Directory dir = explorer.getDirectory(arguments.get(i));
-      
+
       if (dir != null)
         directories.add(dir);
       else
-        System.out.println("The directory " + arguments.get(i) + 
-            " does not exist");
+        System.out
+            .println("The directory " + arguments.get(i) + " does not exist");
     }
-    
+
     String type = arguments.get(arguments.size() - 3);
     String name = arguments.get(arguments.size() - 1);
     // We need to remove the quotations around the name
     name = name.substring(1, name.length() - 1);
-    
+
     boolean isDir = type.equals("d");
-    
+
     String message = "";
-    
+
     for (int i = 0; i < directories.size(); i++) {
-      
-      Directory dir = directories.get(i);   
-      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
-      
+
+      Directory dir = directories.get(i);
+      ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
+
       // Iterate over the files in each directory and check if the meet our
       // requirements
       for (int f = 0; f < files.size(); f++) {
@@ -107,26 +107,27 @@ public class Find implements Command {
         }
       }
     }
-    
+
     return message;
   }
 
   public String getCommandName() {
-    
+
     return commandName;
   }
 
   public boolean areValidArguments(ArrayList<String> arguments) {
-    
+
     boolean valid = false;
     int size = arguments.size();
-    
+
     // if the 2nd last argument is -name
-    if (arguments.get(size-2).equals("-name")) {
+    if (arguments.get(size - 2).equals("-name")) {
       // if the 3rd last argument is either d or f
-      if (arguments.get(size-3).equals("d") || arguments.get(size-3).equals("f")) {
+      if (arguments.get(size - 3).equals("d")
+          || arguments.get(size - 3).equals("f")) {
         // if the 4th last argument is -type
-        if (arguments.get(size-4).equals("-type")) {
+        if (arguments.get(size - 4).equals("-type")) {
           // if arguments have >= 6 elements
           if (arguments.size() >= 5) {
             // the command is valid
@@ -138,10 +139,10 @@ public class Find implements Command {
     // return the valid bool
     return valid;
   }
-  
+
   public String getHelpText() {
-    
+
     return helpText;
   }
-  
+
 }

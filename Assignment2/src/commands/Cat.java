@@ -34,46 +34,39 @@ import filesystem.File;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
 
-public class Cat implements Command{
+public class Cat implements Command {
   private String command = "cat";
-  private String helpText = "NAME:\n" +
-      "  cat FILE1 [FILE2 ...] - Displays the contents"
-      + " in the given file(s)\n" +
-  "DESCRIPTION:\n" +
-  "  Displays the contents of the file and "
-      + "concatenates the contents of subsequent files to the contents"
-      + " of the first.\n" +
-  "PARAMETERS:\n" +
-  "  FILE1 - The file with the contents to be"
-      + " displayed.\n" +
-  "  FILE2 - A subsequent file with the contents "
-      + "to be displayed by concatenating it to FILE1. An optional"
-      + " parameter.\n" +
-  "RETURNS:\n" +
-  "  Will display the contents of the given files.\n" +
-  "EXAMPLE USAGE:\n" +
-  "If FILE1 contains 'hello'\n" +
-  "  /#: cat FILE1\n" +
-  "    will return 'hello'\n" +
-  "If FILE1 contains 'hello' and FILE2 contains "
-      + "'there'\n" +
-  "  /#: cat FILE1 FILE2\n" +
-  "    Will return 'hellothere'.\n";
-  
+  private String helpText =
+      "NAME:\n" + "  cat FILE1 [FILE2 ...] - Displays the contents"
+          + " in the given file(s)\n" + "DESCRIPTION:\n"
+          + "  Displays the contents of the file and "
+          + "concatenates the contents of subsequent files to the contents"
+          + " of the first.\n" + "PARAMETERS:\n"
+          + "  FILE1 - The file with the contents to be" + " displayed.\n"
+          + "  FILE2 - A subsequent file with the contents "
+          + "to be displayed by concatenating it to FILE1. An optional"
+          + " parameter.\n" + "RETURNS:\n"
+          + "  Will display the contents of the given files.\n"
+          + "EXAMPLE USAGE:\n" + "If FILE1 contains 'hello'\n"
+          + "  /#: cat FILE1\n" + "    will return 'hello'\n"
+          + "If FILE1 contains 'hello' and FILE2 contains " + "'there'\n"
+          + "  /#: cat FILE1 FILE2\n" + "    Will return 'hellothere'.\n";
+
   /**
-   * Returns true if execution of "cat" is successful. Execution
-   * returns the contents of the file specified in arguments
+   * Returns true if execution of "cat" is successful. Execution returns the
+   * contents of the file specified in arguments
+   * 
    * @param jShell the window that will be printed on
-   * @param arguments a list containing the file whose contents are 
-   * to be returned
+   * @param arguments a list containing the file whose contents are to be
+   *        returned
    * @return result the contents of the file in arguments
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     FileExplorer explorer = jShell.getFileExplorer();
-    
+
     String message = "";
-    
+
     for (int i = 0; i < arguments.size(); i++) {
       // We need to replace the argument at i with a File object
       String path = arguments.get(i);
@@ -81,39 +74,41 @@ public class Cat implements Command{
       File file = explorer.getFile(path);
       message += file.getFileContents() + "\n";
       // make sure we do not print 3 line breaks for the last file
-      if (i != arguments.size()-1) {
+      if (i != arguments.size() - 1) {
         message += "\n\n\n";
       }
     }
-    
     return message;
   }
-  
+
   /**
    * Returns the command name, "cat"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
     return command;
   }
-  
+
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
   public boolean areValidArguments(ArrayList<String> arguments) {
-    
+
     boolean isValid = (arguments.size() >= 1);
     return isValid;
   }
-  
+
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "cat"
    */
   public String getHelpText() {
-    
+
     return helpText;
   }
 }

@@ -42,18 +42,18 @@ public class JShell {
 
   private static String prompt = "/# ";
   private static String errorMessage = "Invalid command";
-  
+
   public static void main(String[] args) {
     // TODO Auto-generated method stub
 
     JShellWindow window = new JShellWindow();
-    
+
     Scanner in = new Scanner(System.in);
 
     // While the window hasn't been terminated, continuously read user input
     // and attempt to run it as a command
     while (!window.getTerminate()) {
-      
+
       System.out.print(prompt);
       // Get user input
       String input = in.nextLine();
@@ -61,7 +61,7 @@ public class JShell {
       input = input.trim();
       // Log the input
       window.addInputtoLog(input);
-      
+
       // Attempt to run the command. If it fails print the error message.
       String message = Commands.run(window, input);
       if (message != null)
@@ -69,7 +69,7 @@ public class JShell {
       else
         System.out.println(errorMessage);
     }
-    
+
     in.close();
   }
 }

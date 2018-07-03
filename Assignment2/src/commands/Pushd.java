@@ -60,9 +60,10 @@ public class Pushd implements Command {
       + " the stack and change the current working directory to Dir1.\n";
   
   /**
-   * Returns true if execution of "pushd" is successful. Execution
-   * pushes current working directory into a stack and cds into
-   * a specified directory given in arguments
+   * Returns true if execution of "pushd" is successful. Execution pushes
+   * current working directory into a stack and cds into a specified directory
+   * given in arguments
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be pushed
    * @return result true if execution was successful
@@ -73,7 +74,7 @@ public class Pushd implements Command {
     // Get the path of the directory that we want to push
     String path = arguments.get(0);
     // Get the directory at the path
-    Directory newDir = (Directory)explorer.getFile(path);
+    Directory newDir = (Directory) explorer.getFile(path);
     DirectoryStack.stack.pushd(jShell, newDir);
     messages = "";
     return messages + "\n";
@@ -81,6 +82,7 @@ public class Pushd implements Command {
 
   /**
    * Returns the command name, "pushd"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
@@ -90,6 +92,7 @@ public class Pushd implements Command {
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
@@ -101,10 +104,11 @@ public class Pushd implements Command {
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "pushd"
    */
   public String getHelpText() {
-    
+
     return helpText;
   }
 

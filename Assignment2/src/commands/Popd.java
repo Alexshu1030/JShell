@@ -29,8 +29,9 @@ public class Popd implements Command{
   "    Will return an error message.\n";
 
   /**
-   * Returns true if execution of "popd" is successful. Execution
-   * sets current working directory to the top of the directory stack
+   * Returns true if execution of "popd" is successful. Execution sets current
+   * working directory to the top of the directory stack
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be popped
    * @return result true if execution was successful
@@ -44,6 +45,7 @@ public class Popd implements Command{
 
   /**
    * Returns the command name, "popd"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
@@ -52,6 +54,7 @@ public class Popd implements Command{
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
@@ -63,10 +66,11 @@ public class Popd implements Command{
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "popd"
    */
   public String getHelpText() {
-    
+
     return helpText;
   }
 

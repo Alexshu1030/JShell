@@ -55,8 +55,9 @@ public class Man implements Command {
           + " is not a valid command.\n";
   
   /**
-   * Returns true if execution of "man" is successful. Execution
-   * prints the manual of the command in arguments
+   * Returns true if execution of "man" is successful. Execution prints the
+   * manual of the command in arguments
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the command to have its manual printed
    * @return result true if execution was successful
@@ -70,23 +71,25 @@ public class Man implements Command {
     }
     return messages;
   }
-  
+
   /**
    * Returns the command name, "man"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
-    
+
     return commandName;
   }
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
   public boolean areValidArguments(ArrayList<String> arguments) {
-    
+
     boolean isValid = false;
     // return true if there is 1 argument
     if (arguments.size() == numOfArguments) {
@@ -97,11 +100,12 @@ public class Man implements Command {
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "man"
    */
   public String getHelpText() {
-    
+
     return helpText;
   }
-  
+
 }

@@ -36,10 +36,10 @@ import shell.JShellWindow;
 public interface Command {
 
   public String run(JShellWindow jShell, ArrayList<String> arguments);
-  
+
   public String getCommandName();
-  
+
   public boolean areValidArguments(ArrayList<String> arguments);
-  
+
   public String getHelpText();
 }
