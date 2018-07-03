@@ -88,7 +88,7 @@ public class Pwd implements Command {
   }
 
   /**
-   * Returns true if execution of "pwd" is successful. Execution prints the
+   * Returns true if execution of command is successful. Execution prints the
    * current working directory path
    * 
    * @param jShell the window that will be printed on

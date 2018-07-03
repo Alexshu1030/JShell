@@ -65,7 +65,7 @@ public class Ls implements Command{
       + "directories in the directory /PATH1/ and /PATH2/.\n";
 
   /**
-   * Returns true if execution of "ls" is successful. Execution
+   * Returns true if execution of the command is successful. Execution
    * prints all of the files and directories in the provided
    * list of directories.
    * @param jShell the window that will be printed on

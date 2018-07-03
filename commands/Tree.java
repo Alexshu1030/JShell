@@ -96,7 +96,7 @@ public class Tree implements Command {
 
 
   /**
-   * Returns true if execution of "tree" is successful. Execution prints a
+   * Returns true if execution of command is successful. Execution prints a
    * diagram of the directory hierarchy in the shell
    * 
    * @param jShell this is the window that will be printed on
