@@ -150,7 +150,7 @@ public class Path {
 
     boolean isAbs = false;
 
-    if (path != "") {
+    if (!path.equals("")) {
       // Get the first character in the path
       char firstChar = path.charAt(0);
       // If the first character is a slash then it is an absolute path.

@@ -92,21 +92,25 @@ public class Echo implements Command {
       result = text;
     } 
     else if (numOfArgs == 3) {
-      
+      // Assign arguments from the arraylist to proper variables
       String operationType = arguments.get(1);
       String outFilePath = arguments.get(2);
       File outFile = explorer.getFile(outFilePath);
 
       // No file exists at the path so we need to create our own
       if (outFile == null) {
+        // Create a new file with path as its name, parent directory, and
+        // empty contents
         String fileName = Path.getFileName(outFilePath);
         Directory parentDir = explorer.getParentDirectory(outFilePath);
         outFile = new File(fileName, parentDir, "");
         explorer.addFile(Path.removeFileName(outFilePath), outFile);
       }
+      // If the file exists and we want to overwrite
       if (operationType.equals(">")) {
         outFile.setFileContents(text);
       }
+      // If the file exists and we want to append
       else if (operationType.equals(">>")) {
         String currentContents = (String)outFile.getFileContents();
         outFile.setFileContents(currentContents + text);
