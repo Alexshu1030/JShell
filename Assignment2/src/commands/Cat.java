@@ -78,10 +78,15 @@ public class Cat implements Command {
       String path = arguments.get(i);
       // Get the file at the given path and print it's contents
       File file = explorer.getFile(path);
-      message += file.getFileContents() + "\n";
-      // make sure we do not print 3 line breaks for the last file
-      if (i != arguments.size() - 1) {
-        message += "\n\n\n";
+      if (file != null) {
+        message += file.getFileContents() + "\n";
+        // make sure we do not print 3 line breaks for the last file
+        if (i != arguments.size() - 1) {
+          message += "\n\n\n";
+        }
+      }
+      else {
+        System.out.println("Error, file not found.");
       }
     }
     return message;
@@ -109,9 +114,9 @@ public class Cat implements Command {
   }
 
   /**
-   * Gets the help text of the command
+   * Returns the help text for this command.
    * 
-   * @return helpText the help text of command "cat"
+   * @return the help text for this command
    */
   public String getHelpText() {
 

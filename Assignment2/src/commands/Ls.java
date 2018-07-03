@@ -156,8 +156,9 @@ public class Ls implements Command{
   }
 
   /**
-   * Gets the help text of the command
-   * @return helpText the help text of command "ls"
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
    */
   public String getHelpText() {
 
