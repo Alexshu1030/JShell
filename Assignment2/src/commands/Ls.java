@@ -84,9 +84,7 @@ public class Ls implements Command{
       String fileNames = "";
 
       for (int i = 0; i < files.size(); i++) {
-        fileNames += files.get(i).getFileName();
-        if (i != files.size() - 1)
-          fileNames += "\n";
+        fileNames += files.get(i).getFileName() + "\n";
       }
 
       messages = fileNames;
@@ -106,15 +104,13 @@ public class Ls implements Command{
           String fileNames = "";
 
           for (int i = 0; i < files.size(); i++) {
-            fileNames += files.get(i).getFileName();
-            if (i != files.size() - 1)
-              fileNames += "\n";
+            fileNames += files.get(i).getFileName() + "\n";
           }
 
           messages = fileNames;
         }
         else {
-          System.out.println("Path does not exist.");
+          System.out.println("The path does not exist.");
         }
       }
       // If the path is not a directory, return the file instead.
@@ -125,11 +121,12 @@ public class Ls implements Command{
         if (file != null) {
           messages = file.getFileName();          
         }
+        else
+          System.out.println("The path does not exist.");
       }
     }
     
-    String result = messages + "\n";
-    return result;
+    return messages;
   }
 
   /**
