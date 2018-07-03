@@ -151,6 +151,12 @@ public class Commands {
         while (currentChar != '"' && i != text.length() - 1) {
           currentChar = text.charAt(++i);
         }
+        
+        // If we are at the end of the string then we want to create a split.
+        if (i == text.length() - 1) {
+          String split = text.substring(lastSplitIndex, text.length());
+          splits.add(split);
+        }
       }
     }
     
