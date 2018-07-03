@@ -32,6 +32,7 @@ package commands;
 import java.util.ArrayList;
 import shell.JShellWindow;
 import filesystem.FileExplorer;
+import filesystem.Path;
 import filesystem.Directory;
 import filesystem.File;
 
@@ -76,50 +77,39 @@ public class Echo implements Command {
    * @return result true if execution was successful
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
     String result = "";
     int numOfArgs = arguments.size();
-    String arg1 = arguments.get(0);
-    int lastQuoteMark = arg1.length() - 1;
-    arg1 = arg1.substring(1, lastQuoteMark);
-
+    
+    String text = arguments.get(0);
+    
+    // Remove the quotation marks from the argument
+    text = text.substring(1, text.length() - 1);
+    
     FileExplorer explorer = jShell.getFileExplorer();
+    
     if (numOfArgs == 1) {
-      System.out.println(arg1);
-    } else if (numOfArgs == 3) {
-      String arg2 = arguments.get(1);
-      String arg3 = arguments.get(2);
+      result = text;
+    } 
+    else if (numOfArgs == 3) {
+      
+      String operationType = arguments.get(1);
+      String outFilePath = arguments.get(2);
+      File outFile = explorer.getFile(outFilePath);
 
-      if (arg2.equals(">")) {
-        Directory dir = explorer.getWorkingDirectory();
-        // If the file exists
-        if (dir.getFile(arg3) != null) {
-          // Get the file at the given name and overwrite file contents
-          File outfile = dir.getFile(arg3);
-          outfile.setFileContents(arg1);
-        } else {
-          // Create a new file with the new contents in the current directory
-          File outfile = new File(arg3, dir, arg1);
-          try {
-            dir.addFile(outfile);
-          } catch (Exception NullPointerException) {
-            result = null;
-            return result;
-          }
-        }
-      } else if (arg2.equals(">>")) {
-        Directory dir = explorer.getWorkingDirectory();
-        // If the file exists
-        if (dir.getFile(arg3) != null) {
-          // Get the file at the given name and in the current directory
-          // and append file contents
-          File outfile = dir.getFile(arg3);
-          String contents = (String) outfile.getFileContents();
-          String newContents = contents.concat(arg1);
-          outfile.setFileContents(newContents);
-        } else {
-          result = null;
-          return result;
-        }
+      // No file exists at the path so we need to create our own
+      if (outFile == null) {
+        String fileName = Path.getFileName(outFilePath);
+        Directory parentDir = explorer.getParentDirectory(outFilePath);
+        outFile = new File(fileName, parentDir, "");
+        explorer.addFile(Path.removeFileName(outFilePath), outFile);
+      }
+      if (operationType.equals(">")) {
+        outFile.setFileContents(text);
+      }
+      else if (operationType.equals(">>")) {
+        String currentContents = (String)outFile.getFileContents();
+        outFile.setFileContents(currentContents + text);
       }
     }
     return result;
