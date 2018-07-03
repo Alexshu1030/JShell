@@ -53,8 +53,7 @@ public class Commands {
     commandText.split("\"");
     // Split the command into it's parts (i.e. separate blocks of text, quotes
     // and etc.)
-    ArrayList<String> arguments = new ArrayList<String>(Arrays.asList(
-        split(commandText)));
+    ArrayList<String> arguments = split(commandText);
     
     String message = null;
     
@@ -100,6 +99,56 @@ public class Commands {
     return command;
   }
   
+  private static ArrayList<String> split(String text) {
+    
+    ArrayList<String> splits = new ArrayList<String>();
+    int lastSplitIndex = 0;
+    
+    for (int i = 0; i < text.length(); i++) {
+      
+      char currentChar = text.charAt(i);
+      
+      if (i == text.length() - 1) {
+        // If we are at the end of the string then we want to split here no
+        // matter what
+        String split = text.substring(lastSplitIndex, text.length());
+        splits.add(split);
+      }
+      else if (currentChar == ' ') {
+        String split = text.substring(lastSplitIndex, i);
+        splits.add(split);
+        // The current char is a space. We want to skip to the next non-space
+        while (currentChar == ' ') {
+          currentChar = text.charAt(++i);
+        }
+        
+        lastSplitIndex = i;
+        // Now that we have reached the end of the spaces we want to go back
+        // one index. When the loop ends it will iterate back to the current 
+        // index.
+        i--;
+      }
+      else if (currentChar == '"') {
+        
+        // We want to get the next quotation mark *after* this one so go to
+        // the next character.
+        currentChar = text.charAt(++i);
+        // The current char is a quotation mark. We want to skip to the end
+        // quotation mark.
+        while (currentChar != '"') {
+          currentChar = text.charAt(++i);
+        }
+        // Now that we have reached the end of the quote we want to go back
+        // one index. When the loop ends it will iterate back to the current
+        // index.
+        i--;
+      }
+    }
+    
+    return splits;
+  }
+  
+  /*
   private static String[] split(String text) {
 
     boolean inQuotes = false;
@@ -174,4 +223,5 @@ public class Commands {
     }
     return splitText;
   }
+  */
 }
