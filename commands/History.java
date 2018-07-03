@@ -105,7 +105,7 @@ public class History implements Command{
 
 
   /**
-   * Returns the name of this command, "history"
+   * Returns the name of this command
    * 
    * @return commandName this is the command's name
    */

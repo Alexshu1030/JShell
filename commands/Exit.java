@@ -78,7 +78,7 @@ public class Exit implements Command{
 
 
   /**
-   * Returns the name of this command, "exit"
+   * Returns the name of this command
    * 
    * @return commandName this is the command's name
    */
