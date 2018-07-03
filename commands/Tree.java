@@ -101,7 +101,7 @@ public class Tree implements Command {
    * 
    * @param jShell this is the window that will be printed on
    * @param arguments this a list containing null
-   * @return true this is true if execution is successful
+   * @return treeRep the output to the shell (representation of the tree)
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 

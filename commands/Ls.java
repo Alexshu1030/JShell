@@ -70,7 +70,7 @@ public class Ls implements Command{
    * list of directories.
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be listed
-   * @return result the list of files/dirs in arguments
+   * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     String messages = null;

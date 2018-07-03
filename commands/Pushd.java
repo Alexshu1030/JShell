@@ -75,7 +75,7 @@ public class Pushd implements Command {
    * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be pushed
-   * @return result true if execution was successful
+   * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();

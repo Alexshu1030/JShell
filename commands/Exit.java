@@ -68,7 +68,7 @@ public class Exit implements Command{
    * 
    * @param jShell this is the window that will be printed on
    * @param arguments this is a list containing null
-   * @return true this is true if execution was successful, o/w false
+   * @return true the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     // Terminate
