@@ -86,8 +86,7 @@ public class Mkdir implements Command {
         explorer.addDirectory(path);
       }
       else {
-        //ERROR THE PATH IS NOT A DIRECTORY
-        return null;
+        System.out.println("The path " + path + " is not a directory.");
       }
     }
     
