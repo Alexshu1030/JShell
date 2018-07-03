@@ -85,13 +85,13 @@ public class FileExplorer {
     // Get the directory the file is in
     Directory dir = getParentDirectory(path);
     File file = null;
-    
+
     if (dir != null) {
       // Get the name of the file and get it from the directory.
       String fileName = Path.getFileName(path);
       file = dir.getFile(fileName);
     }
-    
+
     return file;
   }
 
@@ -105,11 +105,11 @@ public class FileExplorer {
 
     File file = getFile(path);
     Directory dir = null;
-    
+
     if (file != null && file.isDirectory()) {
       dir = (Directory) file;
     }
-    
+
     return dir;
   }
 
