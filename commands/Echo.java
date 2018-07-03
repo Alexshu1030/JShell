@@ -116,6 +116,7 @@ public class Echo implements Command {
         outFile.setFileContents(currentContents + text);
       }
     }
+    
     return result;
   }
 
@@ -135,8 +136,10 @@ public class Echo implements Command {
    * @return isValid true if the command is valid and vice versa
    */
   public boolean areValidArguments(ArrayList<String> arguments) {
+    
     boolean isValid = false;
     int numOfArgs = arguments.size();
+    
     if (numOfArgs == 1) {
       String arg = arguments.get(0);
       int secArgLen = arg.length();
@@ -145,7 +148,9 @@ public class Echo implements Command {
           && arg.substring(secArgLen - 1, secArgLen).equals("\"")) {
         isValid = true;
       }
-    } else if (numOfArgs == 3) {
+    } 
+    else if (numOfArgs == 3) {
+      
       String arg1 = arguments.get(0);
       String arg2 = arguments.get(1);
       // Otherwise the second argument must be the > or >>
@@ -162,9 +167,9 @@ public class Echo implements Command {
   }
 
   /**
-   * Gets the help text of the command
+   * Returns the help text for this command.
    * 
-   * @return helpText the help text of command "echo"
+   * @return the help text for this command
    */
   public String getHelpText() {
 

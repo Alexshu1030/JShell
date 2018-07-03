@@ -99,7 +99,9 @@ public class Exit implements Command{
   }
 
   /**
-   * Prints help text that includes documentation of Exit
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
    */
   public String getHelpText() {
 

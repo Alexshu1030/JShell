@@ -143,7 +143,9 @@ public class History implements Command{
 
 
   /**
-   * Prints help text that includes documentation of History
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
    */
   public String getHelpText() {
 

@@ -108,9 +108,9 @@ public class Pwd implements Command {
   }
 
   /**
-   * Returns the command name, "pwd"
+   * Returns the help text for this command.
    * 
-   * @return commandName the command name
+   * @return the help text for this command
    */
   public String getCommandName() {
 

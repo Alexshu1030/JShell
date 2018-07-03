@@ -163,9 +163,9 @@ public class Tree implements Command {
   }
 
   /**
-   * Returns the command name, "tree"
+   * Returns the help text for this command.
    * 
-   * @return commandName this is the command name
+   * @return the help text for this command
    */
   public String getCommandName() {
 

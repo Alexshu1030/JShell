@@ -144,9 +144,9 @@ public class Mkdir implements Command {
   }
 
   /**
-   * Gets the help text of the command
+   * Returns the help text for this command.
    * 
-   * @return helpText the help text of command "mkdir"
+   * @return the help text for this command
    */
   public String getHelpText() {
 
