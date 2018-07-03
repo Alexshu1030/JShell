@@ -36,8 +36,8 @@ public class Path {
    * //home//me//test goes to //me//test
    * 
    * @param path the path to be shortened
-   * @return returns the sub path or an empty string if the path contains one or
-   *         fewer files
+   * @return returns the sub path or an empty string if the path contains one
+   *         or fewer files
    */
   public static String getSubPath(String path) {
 
