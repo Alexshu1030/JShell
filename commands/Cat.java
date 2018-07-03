@@ -59,7 +59,7 @@ public class Cat implements Command {
           + "  /#: cat FILE1 FILE2\n" + "    Will return 'hellothere'.\n";
 
   /**
-   * Returns true if execution of "cat" is successful. Execution returns the
+   * Returns true if execution of command is successful. Execution returns the
    * contents of the file specified in arguments
    * 
    * @param jShell the window that will be printed on
