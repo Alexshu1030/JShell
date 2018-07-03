@@ -104,7 +104,7 @@ public class Pwd implements Command {
     // Print this path
     messages = workingDirPath;
 
-    return messages + "/n";
+    return messages + "\n";
   }
 
   /**
