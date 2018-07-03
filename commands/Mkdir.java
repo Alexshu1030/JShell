@@ -90,7 +90,11 @@ public class Mkdir implements Command {
     for (int i = 0; i < arguments.size(); i++) {
       String path = arguments.get(i);
       if (Path.isDirectory(path)) {
-        explorer.addDirectory(path);
+        Directory parentDir = explorer.getParentDirectory(path);
+        if (parentDir != null)
+          explorer.addDirectory(path);
+        else
+          System.out.println("The parent directory does not exist.");
       } else {
         System.out.println("The path " + path + " is not a directory.");
       }
