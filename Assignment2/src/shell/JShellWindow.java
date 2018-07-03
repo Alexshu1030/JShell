@@ -36,8 +36,8 @@ import java.util.ArrayList;
 
 public class JShellWindow {
   /**
-   * fileExplorer the FileExplorer that is used to perform tasks with files
-   * or directories
+   * fileExplorer the FileExplorer that is used to perform tasks with files or
+   * directories
    */
   private FileExplorer fileExplorer = new FileExplorer();
   private boolean terminate = false;
