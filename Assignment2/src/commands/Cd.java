@@ -66,7 +66,7 @@ public class Cd implements Command {
    * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directory to be changed into
-   * @return result true if execution was successful
+   * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 

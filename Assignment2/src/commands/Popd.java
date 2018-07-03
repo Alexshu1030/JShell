@@ -40,7 +40,7 @@ public class Popd implements Command{
    * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be popped
-   * @return result true if execution was successful
+   * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     // Returns "" if it succeeds

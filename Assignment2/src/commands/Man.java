@@ -68,7 +68,7 @@ public class Man implements Command {
    * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the command to have its manual printed
-   * @return result true if execution was successful
+   * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     String messages = null;

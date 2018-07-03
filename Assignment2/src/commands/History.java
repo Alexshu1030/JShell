@@ -78,7 +78,7 @@ public class History implements Command{
    * 
    * @param jShell this is the window that will be printed on
    * @param arguments this is a list containing either null or an int
-   * @return true this is true if execution was successful
+   * @return message the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
