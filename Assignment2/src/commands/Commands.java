@@ -80,6 +80,12 @@ public class Commands {
     return message;
   }
 
+  /**
+   * Returns the command with the specified name.
+   * 
+   * @param name the name of the command
+   * @return the command with the specified name
+   */
   public static Command getCommand(String name) {
 
     int i = 0;
@@ -100,6 +106,14 @@ public class Commands {
     return command;
   }
 
+  /**
+   * Splits the text by spaces and groups it by quotations. Blocks of text
+   * in quotations will be kept as one group. These groups are then split
+   * by whitespace.
+   * 
+   * @param text the text to be split
+   * @return the text split into groups
+   */
   private static ArrayList<String> split(String text) {
 
     ArrayList<String> splits = new ArrayList<String>();
