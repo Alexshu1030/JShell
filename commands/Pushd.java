@@ -78,15 +78,20 @@ public class Pushd implements Command {
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
     FileExplorer explorer = jShell.getFileExplorer();
     String messages = null;
     // Get the path of the directory that we want to push
     String path = arguments.get(0);
     // Get the directory at the path
-    Directory newDir = (Directory) explorer.getFile(path);
-    DirectoryStack.stack.pushd(jShell, newDir);
-    messages = "";
-    return messages;
+    Directory newDir = explorer.getDirectory(path);
+    // If the directory exists then add it to the stack
+    if (newDir != null)
+      DirectoryStack.stack.pushd(jShell, newDir);
+    else
+      System.out.println("The directory does not exist.");
+    
+    return "";
   }
 
   /**
