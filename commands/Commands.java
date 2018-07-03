@@ -118,7 +118,7 @@ public class Commands {
         String split = text.substring(lastSplitIndex, i);
         splits.add(split);
         // The current char is a space. We want to skip to the next non-space
-        while (currentChar == ' ') {
+        while (currentChar == ' ' && i != text.length() - 1) {
           currentChar = text.charAt(++i);
         }
 
@@ -134,16 +134,16 @@ public class Commands {
         currentChar = text.charAt(++i);
         // The current char is a quotation mark. We want to skip to the end
         // quotation mark.
-        while (currentChar != '"') {
+        while (currentChar != '"' && i != text.length() - 1) {
           currentChar = text.charAt(++i);
         }
-        // Now that we have reached the end of the quote we want to go back
-        // one index. When the loop ends it will iterate back to the current
-        // index.
-        i--;
       }
     }
 
+    for (int i = 0; i < splits.size(); i++) {
+      System.out.println(splits.get(i));
+    }
+    
     return splits;
   }
 
