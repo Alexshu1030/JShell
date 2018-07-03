@@ -60,7 +60,8 @@ public class Find implements Command {
       + "EXAMPLE USAGE:\n" + "  /#: find /user/Desktop -type d -name \"a\"\n"
       + "    will display all directories in Desktop " + "named 'a'.\n"
       + "  /#: find /user/Desktop -type f -name \"b\"\n"
-      + "    will display all directories in Desktop \"\n\n" + "named \"b\".\n";
+      + "    will display all directories in Desktop \"\n\n" 
+      + "named \"b\".\n";
 
   /**
    * Returns the text in the arguments if there is not outfile is specified.
