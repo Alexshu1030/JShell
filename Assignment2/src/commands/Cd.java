@@ -90,11 +90,14 @@ public class Cd implements Command {
       succeeded = true;
     } else {
       try {
+        Directory newDir = explorer.getDirectory(path);
         // Set the working directory to the directory given by the path
-        if (!explorer.getFile(path).equals(null)) {
-          Directory newDir = (Directory) explorer.getFile(path);
+        if (newDir != null) {
           explorer.setWorkingDirectory(newDir);
           succeeded = true;
+        }
+        else {
+          System.out.println("The path does not exist.");
         }
       } catch (Exception NullPointerException) {
         succeeded = false;
