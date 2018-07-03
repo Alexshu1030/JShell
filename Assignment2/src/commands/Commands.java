@@ -57,7 +57,7 @@ public class Commands {
     // and etc.)
     ArrayList<String> arguments = split(commandText);
 
-    String message = null;
+    String message = "";
 
     // There must be at least one element in the arguments for it to be a
     // valid command
@@ -128,9 +128,12 @@ public class Commands {
         // matter what
         String split = text.substring(lastSplitIndex, text.length());
         splits.add(split);
+        
       } else if (currentChar == ' ') {
+        
         String split = text.substring(lastSplitIndex, i);
         splits.add(split);
+        
         // The current char is a space. We want to skip to the next non-space
         while (currentChar == ' ' && i != text.length() - 1) {
           currentChar = text.charAt(++i);
@@ -141,6 +144,7 @@ public class Commands {
         // one index. When the loop ends it will iterate back to the current
         // index.
         i--;
+        
       } else if (currentChar == '"') {
 
         // We want to get the next quotation mark *after* this one so go to

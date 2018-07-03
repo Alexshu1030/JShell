@@ -74,7 +74,7 @@ public class Ls implements Command{
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    String messages = null;
+    String messages = "";
     // If no argument was given, list all files and directories
     if (arguments.size() == 0) {
 
@@ -99,7 +99,7 @@ public class Ls implements Command{
       if (Path.isDirectory(path)) {
 
         Directory dir = jShell.getFileExplorer().getDirectory(path);
-
+        
         if (dir != null) {
 
           ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
@@ -112,7 +112,9 @@ public class Ls implements Command{
           }
 
           messages = fileNames;
-
+        }
+        else {
+          System.out.println("Path does not exist.");
         }
       }
       // If the path is not a directory, return the file instead.
@@ -122,7 +124,6 @@ public class Ls implements Command{
 
         if (file != null) {
           messages = file.getFileName();          
-
         }
       }
     }
