@@ -139,10 +139,6 @@ public class Commands {
         }
       }
     }
-
-    for (int i = 0; i < splits.size(); i++) {
-      System.out.println(splits.get(i));
-    }
     
     return splits;
   }
