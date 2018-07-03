@@ -35,7 +35,9 @@ import shell.JShellWindow;
 
 public class Commands {
 
-  // This is a list of the valid commands
+  /**
+   * commands[] The list of valid commands
+   */
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
       new Find(), new Cat(), new Man(), new Pushd(), new Popd()};

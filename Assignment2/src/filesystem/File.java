@@ -30,8 +30,17 @@
 package filesystem;
 
 public class File {
+  /**
+   * fileName the name of the file
+   */
   protected String fileName;
+  /**
+   * directoryName the name of the dir that the file belongs to
+   */
   protected Directory fileDirectory;
+  /**
+   * fileContents the contents in the file
+   */
   protected Object fileContents;
 
   public File(String name, Directory directory, Object contents) {

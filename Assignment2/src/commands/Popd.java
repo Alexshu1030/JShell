@@ -5,7 +5,13 @@ import filesystem.DirectoryStack;
 import shell.JShellWindow;
 
 public class Popd implements Command{
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "popd";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  popd - Sets the current working directory "
       + "to the one at the top of the directory stack.\n" +

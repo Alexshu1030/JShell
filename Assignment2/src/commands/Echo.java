@@ -36,8 +36,13 @@ import filesystem.Directory;
 import filesystem.File;
 
 public class Echo implements Command {
-
+  /**
+   * commandName The command name of the current class
+   */
   private String command = "echo";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText =
       "NAME:\n" + "  echo STRING [> OUTFILE |>> OUTFILE] - "
           + "Print or add STRING to standard output\n" + "DESCRIPTION:\n"

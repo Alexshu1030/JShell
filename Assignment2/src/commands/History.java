@@ -32,9 +32,17 @@ import java.util.ArrayList;
 import shell.JShellWindow;
 
 public class History implements Command{
-
+  /**
+   * singleArg the correct num of arguments (1)
+   */
   private int singleArg = 1;
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "history";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  history [number] - Prints recent commands"
       + " entered\n" +

@@ -34,8 +34,13 @@ import filesystem.*;
 import shell.JShellWindow;
 
 public class Tree implements Command {
-
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "tree";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n" +
       "  tree - Displays the entire file system as a "
       + "tree\n" +
