@@ -56,12 +56,13 @@ public class Pwd implements Command {
       "  /#:              exit\n" +
       "    will terminate JShell because"
           + " JShell will ignore excess spaces.\n";
-  
+
   /**
-  * Checks if the arguments given to the command is valid
-  * @param arguments the list of str arguments passed to the command
-  * @return isValid true if the command is valid and vice versa
-  */
+   * Checks if the arguments given to the command is valid
+   * 
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public boolean areValidArguments(ArrayList<String> arguments) {
     // if there are 0 arguments return true
     boolean isValid = arguments.size() == numOfArguments;
@@ -70,6 +71,7 @@ public class Pwd implements Command {
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "pwd"
    */
   public String getHelpText() {
@@ -78,8 +80,9 @@ public class Pwd implements Command {
   }
 
   /**
-   * Returns true if execution of "pwd" is successful. Execution
-   * prints the current working directory path
+   * Returns true if execution of "pwd" is successful. Execution prints the
+   * current working directory path
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be listed
    * @return result true if execution was successful
@@ -98,6 +101,7 @@ public class Pwd implements Command {
 
   /**
    * Returns the command name, "pwd"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {

@@ -32,37 +32,41 @@ package filesystem;
 import java.util.ArrayList;
 
 public class Directory extends File {
-  // make a new arraylist of files 
+  // make a new arraylist of files
   ArrayList<File> listOfFiles = new ArrayList<File>();
+
   // construct a new directory with its contents as the list of files
-  public Directory (String name, Directory parentDirectory) {
+  public Directory(String name, Directory parentDirectory) {
     super(name, parentDirectory, null);
     this.fileContents = listOfFiles;
   }
-  
+
 
   /**
    * Adds the file into this directory.
+   * 
    * @param file this is the file that will be added to the directory
    */
   public void addFile(File file) {
     listOfFiles.add(file);
-  }     
-  
-  
+  }
+
+
   /**
    * Removes the file from this directory
+   * 
    * @param file this is the file to be removed from the directory
    */
   public void removeFile(File file) {
     listOfFiles.remove(file);
   }
-  
+
   /**
    * Finds and returns the file with the specified name.
+   * 
    * @param fileName the name of the file you are looking for
-   * @return Returns the file with the specified name if found. Otherwise
-   * it returns null.
+   * @return Returns the file with the specified name if found. Otherwise it
+   *         returns null.
    */
   public File getFile(String fileName) {
     // iterate through list of files to find the destination file
@@ -86,21 +90,23 @@ public class Directory extends File {
     // return the found file, or null if nothing is found
     return nextFile;
   }
-  
+
   /**
    * Returns whether or not this is a directory
-   * @return    true
+   * 
+   * @return true
    */
   public boolean isDirectory() {
     return true;
   }
-  
+
   /**
    * Returns whether or not this is the root directory.
+   * 
    * @return result true if this is the root directory and false if it is not
    */
   public boolean isRootDirectory() {
-    
+
     boolean result = (fileDirectory == null);
     return result;
   }

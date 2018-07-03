@@ -63,17 +63,17 @@ public class History implements Command{
   "    2. history\n";
 
   /**
-   * Returns true if execution of command terminates. 
-   * With no parameter, execution prints the whole list of the log of
-   * inputs.
-   * With parameter, execution prints the truncated list according to
-   * the amount specified in integer parameter.
+   * Returns true if execution of command terminates. With no parameter,
+   * execution prints the whole list of the log of inputs. With parameter,
+   * execution prints the truncated list according to the amount specified in
+   * integer parameter.
+   * 
    * @param jShell this is the window that will be printed on
    * @param arguments this is a list containing either null or an int
    * @return true this is true if execution was successful
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     ArrayList<String> log = jShell.getLog();
     int totalInputs = log.size();
     int truncAmount = 0;
@@ -82,22 +82,23 @@ public class History implements Command{
     if (!arguments.isEmpty()) {
       truncAmount = totalInputs - Integer.parseInt((arguments.get(0)));
     }
-    
+
     String message = "";
-    
+
     // iterate through each input in log and print if within truncation
     for (int i = 1; i <= totalInputs; i++) {
       if (truncAmount < i) {
         message += i + ". " + log.get(i - 1) + "\n";
       }
     }
-    
+
     return message;
   }
 
-  
+
   /**
    * Returns the name of this command, "history"
+   * 
    * @return commandName this is the command's name
    */
   public String getCommandName() {
@@ -105,9 +106,10 @@ public class History implements Command{
     return commandName;
   }
 
-  
+
   /**
    * Returns true if arguments are valid for "history", o/w false
+   * 
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
    */
@@ -131,12 +133,12 @@ public class History implements Command{
     return isValid;
   }
 
-  
+
   /**
    * Prints help text that includes documentation of History
    */
   public String getHelpText() {
-    
+
     return helpText;
   }
 }

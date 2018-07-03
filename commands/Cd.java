@@ -39,30 +39,23 @@ public class Cd implements Command {
 
   private int numOfArguments = 1;
   private String commandName = "cd";
-  private String helpText = "NAME:" +
-      "  cd DIR - Change the current directory\n" +
-      "DESCRIPTION:\n" +
-      "  Changes the current directory to DIR.\n" +
-      "PARAMETERS:\n" +
-      "  DIR - The directory to be changed to.\n"
-      + " It may be a full path or a relative path.\n" +
-      "RETURNS:\n" +
-      "  This command does not return anything.\n" +
-      "EXAMPLE USAGE:\n" +
-      "  /#: cd /Dir1\n" +
-      "    will change the current directory to Dir1"
-      + " in the root directory.\n" +
-      "  /#: cd ./Dir1/Dir2\n" +
-      "    will change the current directory to Dir2, "
+  private String helpText = "NAME:"
+      + "  cd DIR - Change the current directory\n" + "DESCRIPTION:\n"
+      + "  Changes the current directory to DIR.\n" + "PARAMETERS:\n"
+      + "  DIR - The directory to be changed to.\n"
+      + " It may be a full path or a relative path.\n" + "RETURNS:\n"
+      + "  This command does not return anything.\n" + "EXAMPLE USAGE:\n"
+      + "  /#: cd /Dir1\n" + "    will change the current directory to Dir1"
+      + " in the root directory.\n" + "  /#: cd ./Dir1/Dir2\n"
+      + "    will change the current directory to Dir2, "
       + " which is located in Dir1 which is located in the current"
-      + "directory.\n" +
-      "  /#: cd ..\n" +
-      "    will change the current directory to its"
-      + "parent directory.\n";
+      + "directory.\n" + "  /#: cd ..\n"
+      + "    will change the current directory to its" + "parent directory.\n";
 
   /**
-   * Returns true if execution of "cd" is successful. Execution
-   * changes current directory to the one specified in arguments
+   * Returns true if execution of "cd" is successful. Execution changes current
+   * directory to the one specified in arguments
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directory to be changed into
    * @return result true if execution was successful
@@ -84,14 +77,14 @@ public class Cd implements Command {
         // Set the working directory to be the parent directory
         explorer.setWorkingDirectory(newDir);
       }
-    // If the user wants to change to the current directory
+      // If the user wants to change to the current directory
     } else if (path.equals(".")) {
       succeeded = true;
     } else {
       try {
         // Set the working directory to the directory given by the path
         if (!explorer.getFile(path).equals(null)) {
-          Directory newDir = (Directory)explorer.getFile(path);
+          Directory newDir = (Directory) explorer.getFile(path);
           explorer.setWorkingDirectory(newDir);
           succeeded = true;
         }
@@ -99,12 +92,12 @@ public class Cd implements Command {
         succeeded = false;
       }
     }
-
     return "";
   }
 
   /**
    * Returns the command name, "cd"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
@@ -113,6 +106,7 @@ public class Cd implements Command {
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
@@ -128,6 +122,7 @@ public class Cd implements Command {
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "cd"
    */
   public String getHelpText() {

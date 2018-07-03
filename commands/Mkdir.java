@@ -70,31 +70,32 @@ public class Mkdir implements Command {
       + "be found, the command will fail.\n";
 
   /**
-   * Returns true if execution of "mkdir" is successful. Execution
-   * creates new directories for each argument passed in the arguments
+   * Returns true if execution of "mkdir" is successful. Execution creates new
+   * directories for each argument passed in the arguments
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be created
    * @return result true if execution was successful
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     FileExplorer explorer = jShell.getFileExplorer();
     // for each element in arguments, create a new directory
     for (int i = 0; i < arguments.size(); i++) {
       String path = arguments.get(i);
       if (Path.isDirectory(path)) {
         explorer.addDirectory(path);
-      }
-      else {
+      } else {
         System.out.println("The path " + path + " is not a directory.");
       }
     }
-    
+
     return "";
   }
 
   /**
    * Returns the command name, "mkdir"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
@@ -104,6 +105,7 @@ public class Mkdir implements Command {
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
@@ -116,15 +118,14 @@ public class Mkdir implements Command {
     }
     // base case: 1 arg and contains alphanumeric chars
     if (arguments.size() == 1) {
-      String name = arguments.get(0); 
+      String name = arguments.get(0);
       if (name.matches("[A-Za-z0-9-/]+")) {
         isValid = true;
-        
-      } 
+
+      }
     } else {
       // recursive step: run on first argument and the rest of the arguments
-      ArrayList<String> part1 =
-          new ArrayList<String>(arguments.subList(0, 1));
+      ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
       ArrayList<String> tail =
           new ArrayList<String>(arguments.subList(1, numOfArgs));
       return areValidArguments(part1) && areValidArguments(tail);
@@ -138,6 +139,7 @@ public class Mkdir implements Command {
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "mkdir"
    */
   public String getHelpText() {

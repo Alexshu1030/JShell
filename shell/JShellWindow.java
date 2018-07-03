@@ -28,19 +28,21 @@
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
 package shell;
+
 import java.util.Scanner;
 import commands.Commands;
 import filesystem.FileExplorer;
 import java.util.ArrayList;
 
 public class JShellWindow {
-  
+
   private FileExplorer fileExplorer = new FileExplorer();
   private boolean terminate = false;
   private ArrayList<String> log = new ArrayList<String>();
 
   /**
    * Appends input to the log ArrayList
+   * 
    * @param input this is the entry from the command line
    */
   public void addInputtoLog(String input) {
@@ -50,16 +52,18 @@ public class JShellWindow {
 
   /**
    * Returns the log of the entries from the command line
+   * 
    * @return log this is ArrayList holding the entries from command line
    */
   public ArrayList<String> getLog() {
     return log;
   }
 
-  
+
   /**
-   * Changes termination state of this window to true if parameter is
-   * true, else; false
+   * Changes termination state of this window to true if parameter is true,
+   * else; false
+   * 
    * @param terminate this is the state of termination
    */
   public void setTerminate(boolean terminate) {
@@ -68,6 +72,7 @@ public class JShellWindow {
 
   /**
    * Returns the state of termination of this window
+   * 
    * @return
    */
   public boolean getTerminate() {
@@ -76,10 +81,11 @@ public class JShellWindow {
 
   /**
    * Returns the file explorer system used by this window
+   * 
    * @return fileExplorer this is the file explorer system
    */
   public FileExplorer getFileExplorer() {
-    
+
     return fileExplorer;
   }
 }

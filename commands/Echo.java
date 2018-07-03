@@ -34,45 +34,38 @@ import shell.JShellWindow;
 import filesystem.FileExplorer;
 import filesystem.Directory;
 import filesystem.File;
+
 public class Echo implements Command {
 
   private String command = "echo";
-  private String helpText = "NAME:\n" +
-      "  echo STRING [> OUTFILE |>> OUTFILE] - "
-      + "Print or add STRING to standard output\n" +
-      "DESCRIPTION:\n" +
-      "  Prints STRING to the JShell if STRING is the"
-      + " only parameter provided. If OUTFILE is provided, STRING will"
-      + " overwrite whatever is in OUTFILE if > is used, or append "
-      + "to OUTFILE if >> is used. If OUTFILE does not exist, it "
-      + "will be created.\n" +
-      "PARAMETERS:\n" +
-      "  STRING - The string that will be sent to"
-      + " standard output. Must be surrounded by double quotes\n" +
-      "  >  - Overwrite OUTFILE's contents with STRING. "
-      + "Optional parameter.\n" +
-      "  >>  - Append OUTFILE's contents with STRING. "
-      + "Optional parameter.\n" +
-      "  OUTFILE  - The file that STRING will output to"
-      + "depending on whether > or >> is used. OUTFILE will be created"
-      + " if it does not already exist. Optional parameter\n" +
-      "RETURNS:\n" +
-      "  Will print STRING if STRING is the only "
-      + "parameter.\n" +
-      "EXAMPLE USAGE:\n" +
-      "  /#: echo \"Hello\"\n" +
-      "    will display Hello\n" +
-      "If FILE1 contains 'hello'\n" +
-      "  /#: echo \"Hello\" > FILE1\n" +
-      "    FILE1 will contain Hello\n" +
-      "If FILE1 contains 'hello'\n" +
-      "  /#: echo \"Hello\" >> FILE1\n" +
-      "    FILE1 will contain helloHello.\n";
+  private String helpText =
+      "NAME:\n" + "  echo STRING [> OUTFILE |>> OUTFILE] - "
+          + "Print or add STRING to standard output\n" + "DESCRIPTION:\n"
+          + "  Prints STRING to the JShell if STRING is the"
+          + " only parameter provided. If OUTFILE is provided, STRING will"
+          + " overwrite whatever is in OUTFILE if > is used, or append "
+          + "to OUTFILE if >> is used. If OUTFILE does not exist, it "
+          + "will be created.\n" + "PARAMETERS:\n"
+          + "  STRING - The string that will be sent to"
+          + " standard output. Must be surrounded by double quotes\n"
+          + "  >  - Overwrite OUTFILE's contents with STRING. "
+          + "Optional parameter.\n"
+          + "  >>  - Append OUTFILE's contents with STRING. "
+          + "Optional parameter.\n"
+          + "  OUTFILE  - The file that STRING will output to"
+          + "depending on whether > or >> is used. OUTFILE will be created"
+          + " if it does not already exist. Optional parameter\n" + "RETURNS:\n"
+          + "  Will print STRING if STRING is the only " + "parameter.\n"
+          + "EXAMPLE USAGE:\n" + "  /#: echo \"Hello\"\n"
+          + "    will display Hello\n" + "If FILE1 contains 'hello'\n"
+          + "  /#: echo \"Hello\" > FILE1\n" + "    FILE1 will contain Hello\n"
+          + "If FILE1 contains 'hello'\n" + "  /#: echo \"Hello\" >> FILE1\n"
+          + "    FILE1 will contain helloHello.\n";
 
   /**
-   * Returns true if execution of "echo" is successful. Execution
-   * print or add string to standard output, or overwrites or appends a string
-   * to a file
+   * Returns true if execution of "echo" is successful. Execution print or add
+   * string to standard output, or overwrites or appends a string to a file
+   * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directories to be listed
    * @return result true if execution was successful
@@ -91,7 +84,7 @@ public class Echo implements Command {
       String arg2 = arguments.get(1);
       String arg3 = arguments.get(2);
 
-      if (arg2.equals(">")){
+      if (arg2.equals(">")) {
         Directory dir = explorer.getWorkingDirectory();
         // If the file exists
         if (dir.getFile(arg3) != null) {
@@ -129,6 +122,7 @@ public class Echo implements Command {
 
   /**
    * Returns the command name, "echo"
+   * 
    * @return commandName the command name
    */
   public String getCommandName() {
@@ -137,6 +131,7 @@ public class Echo implements Command {
 
   /**
    * Checks if the arguments given to the command is valid
+   * 
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
@@ -147,8 +142,8 @@ public class Echo implements Command {
       String arg = arguments.get(0);
       int secArgLen = arg.length();
       // echo's STRING input must have quotations around it
-      if (arg.substring(0, 1).equals("\"") &&
-          arg.substring(secArgLen - 1, secArgLen).equals("\"")) {
+      if (arg.substring(0, 1).equals("\"")
+          && arg.substring(secArgLen - 1, secArgLen).equals("\"")) {
         isValid = true;
       }
     } else if (numOfArgs == 3) {
@@ -158,8 +153,8 @@ public class Echo implements Command {
       int secArgLen = arg1.length();
       if (arg2.equals(">>") || arg2.equals(">")) {
         // echo's STRING input must have quotations around it
-        if (arg1.substring(0, 1).equals("\"") &&
-            arg1.substring(secArgLen - 1, secArgLen).equals("\"")) {
+        if (arg1.substring(0, 1).equals("\"")
+            && arg1.substring(secArgLen - 1, secArgLen).equals("\"")) {
           isValid = true;
         }
       }
@@ -169,6 +164,7 @@ public class Echo implements Command {
 
   /**
    * Gets the help text of the command
+   * 
    * @return helpText the help text of command "echo"
    */
   public String getHelpText() {

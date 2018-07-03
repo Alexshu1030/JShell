@@ -35,86 +35,92 @@ public class FileExplorer {
   // access to the same file system .
   private static Directory rootDirectory = new Directory("", null);
   private Directory workingDirectory;
-  
+
   public FileExplorer() {
-    
+
     setWorkingDirectory(rootDirectory);
   }
-  
+
   /**
    * Gets the root directory of the FileExplorer
+   * 
    * @return returns the root directory
    */
   public static Directory getRootDirectory() {
-    
+
     return rootDirectory;
   }
-  
+
   /**
    * Gets the working directory for this FileExplorer
+   * 
    * @return returns the working directory
    */
   public Directory getWorkingDirectory() {
-    
+
     return workingDirectory;
   }
-  
+
   /**
    * Sets the working directory for this FileExplorer
+   * 
    * @param newWD the new working directory
    */
   public void setWorkingDirectory(Directory newWD) {
-    
+
     workingDirectory = newWD;
   }
 
   /**
    * Gets the file at the specified path
+   * 
    * @param path the path of the file
    * @return the file at that path
    */
   public File getFile(String path) {
-    
+
     // Get the directory the file is in
     Directory dir = getParentDirectory(path);
     // Get the name of the file and get it from the directory.
     String fileName = Path.getFileName(path);
     File file = dir.getFile(fileName);
-    
+
     return file;
   }
-  
+
   /**
    * Gets the directory at the specified path
+   * 
    * @param path the path of the directory
    * @return the directory at that path
    */
   public Directory getDirectory(String path) {
-    
+
     File file = getFile(path);
     Directory dir = null;
-    
+
     if (file.isDirectory())
-      dir = (Directory)file;
-    
+      dir = (Directory) file;
+
     return dir;
   }
-  
+
   /**
    * Returns the directory that the file at the specified path is in.
+   * 
    * @param path the path of the file
    * @return the directory that the file is in
    */
   public Directory getParentDirectory(String path) {
-    
+
     // Get the path of the directory that the file is in
     // Note that at this point the file may not actually exist but we will
     // still return the directory that it would be contained in as if it did.
     String dirPath = Path.removeFileName(path);
-    
+
     // Stores the root directory of this path
     Directory rootDir;
-    
+
     if (Path.isAbsolute(path)) {
       // The path is absolute so we want to start at the root directory and
       // work our way to the file.
@@ -123,54 +129,52 @@ public class FileExplorer {
       // length 0, then it is the root directory.
       if (dirPath.length() > 0)
         dirPath = dirPath.substring(1);
-    }
-    else {
+    } else {
       // The path is relative so we want to start in the working directory
       // and work our way to the file.
       rootDir = workingDirectory;
     }
-    
+
     // Use the helper method.
     return getDirectoryHelper(rootDir, dirPath);
   }
-  
+
   private Directory getDirectoryHelper(Directory curDir, String relPath) {
-    
+
     Directory dir;
 
     if (relPath.equals("")) {
       // Base case. We are at the end of the relative path. The current
       // The current directory that we are in is the one we are looking for.
       dir = curDir;
-    }
-    else {
-      
+    } else {
+
       // Get the next directory we want to look in
       String nextDirName = Path.getRootDirectory(relPath);
-      Directory nextDir = (Directory)curDir.getFile(nextDirName);
-      
+      Directory nextDir = (Directory) curDir.getFile(nextDirName);
+
       if (nextDir != null) {
         // We now want to get the path relative to this directory. And then
         // run the method again on that path with that directory.
         String newRelPath = Path.getSubPath(relPath);
         dir = getDirectoryHelper(nextDir, newRelPath);
-      }
-      else {
+      } else {
         // The path doesn't exit. Return null.
         dir = null;
       }
     }
-    
+
     return dir;
   }
 
   /**
    * Adds the file into the FileExplorer at the specified path
+   * 
    * @param dirPath the path to the directory you want to add the file in
    * @param file the file being added to the FileExplorer
    */
   public void addFile(String dirPath, File file) {
-    
+
     // The full path of the file
     String path = dirPath + "/" + file.getFileName();
     // Makes sure there isn't already a file with the same name at that path
@@ -181,13 +185,14 @@ public class FileExplorer {
       dir.addFile(file);
     }
   }
-  
+
   /**
    * Adds the directory into the FileExplorer at the specified path
+   * 
    * @param path the path to the directory
    */
   public void addDirectory(String path) {
-    
+
     String dirName = Path.getFileName(path);
     String dirPath = Path.removeFileName(path);
     // Makes sure there isn't already a directory with the same name at that
@@ -196,21 +201,22 @@ public class FileExplorer {
       // Get the parent directory path and then add the new directory into it
       Directory parentDir = getParentDirectory(path);
       Directory childDir = new Directory(dirName, parentDir);
-      
+
       parentDir.addFile(childDir);
     }
   }
-  
+
   /**
    * Returns whether the specified path exists
+   * 
    * @param path the path you want to check exists
    * @return is true if the path exists and false otherwise
    */
   public boolean pathExists(String path) {
-    
-    //Get the file and check that it isn't null.
+
+    // Get the file and check that it isn't null.
     File file = getFile(path);
-    
+
     return file != null;
   }
 }

@@ -33,29 +33,30 @@ import java.util.ArrayList;
 import filesystem.Directory;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
+
 public class DirectoryStack {
   private ArrayList<Directory> directoryStack = new ArrayList<Directory>();
   public static DirectoryStack stack = new DirectoryStack();
-  
+
   public void pushd(JShellWindow jShell, Directory directory) {
     FileExplorer explorer = jShell.getFileExplorer();
-    // Add the current directory to the top of the stack 
-    directoryStack.add(0,explorer.getWorkingDirectory());
+    // Add the current directory to the top of the stack
+    directoryStack.add(0, explorer.getWorkingDirectory());
     // Sets the current directory to the one we added
     explorer.setWorkingDirectory(directory);
   }
+
   public void popd(JShellWindow jShell) {
     FileExplorer explorer = jShell.getFileExplorer();
-    
+
     if (directoryStack.isEmpty()) {
       System.out.println("The directory stack is empty. Can't pop");
-    }
-    else {
+    } else {
       // Sets the directory at the top of the stack to be the current directory
       explorer.setWorkingDirectory(directoryStack.get(0));
       // Remove the directory at the top of the stack
       directoryStack.remove(0);
     }
   }
-  
+
 }
