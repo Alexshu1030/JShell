@@ -73,6 +73,7 @@ public class Ls implements Command{
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
     String messages = null;
     // If no argument was given, list all files and directories
     if (arguments.size() == 0) {
@@ -97,7 +98,7 @@ public class Ls implements Command{
 
       if (Path.isDirectory(path)) {
 
-        Directory dir = jShell.getFileExplorer().getParentDirectory(path);
+        Directory dir = jShell.getFileExplorer().getDirectory(path);
 
         if (dir != null) {
 
