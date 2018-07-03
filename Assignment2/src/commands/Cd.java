@@ -61,8 +61,8 @@ public class Cd implements Command {
       + "    will change the current directory to its" + "parent directory.\n";
 
   /**
-   * Returns true if execution of "cd" is successful. Execution changes current
-   * directory to the one specified in arguments
+   * Returns true if execution of the command  is successful. Execution changes
+   * current directory to the one specified in arguments
    * 
    * @param jShell the window that will be printed on
    * @param arguments a list containing the directory to be changed into
