@@ -92,9 +92,12 @@ public class Mkdir implements Command {
       if (Path.isDirectory(path)) {
         Directory parentDir = explorer.getParentDirectory(path);
         if (parentDir != null)
-          explorer.addDirectory(path);
+          if (!explorer.pathExists(path))
+            explorer.addDirectory(path);
+          else
+            System.out.println("A file already exists at that path.");
         else
-          System.out.println("The parent directory does not exist.");
+          System.out.println("The path does not exist.");
       } else {
         System.out.println("The path " + path + " is not a directory.");
       }
