@@ -88,7 +88,7 @@ public class Exit implements Command{
 
 
   /**
-   * Returns true if arguments are valid for "exit", o/w false
+   * Returns true if arguments are valid, o/w false
    * 
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
