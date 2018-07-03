@@ -93,9 +93,9 @@ public class Cat implements Command {
   }
 
   /**
-   * Returns the name of this command
+   * Returns the command name
    * 
-   * @return commandName this is the command's name
+   * @return commandName the command name
    */
   public String getCommandName() {
     return command;
