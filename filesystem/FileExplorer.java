@@ -29,6 +29,8 @@
 // *********************************************************
 package filesystem;
 
+import exceptions.*;
+
 public class FileExplorer {
 
   // This is static so multiple instances of the FileExplorer will have
@@ -80,7 +82,7 @@ public class FileExplorer {
    * @param path the path of the file
    * @return the file at that path
    */
-  public File getFile(String path) {
+  public File getFile(String path) throws FileNotFoundException{
 
     // Get the directory the file is in
     Directory dir = getParentDirectory(path);
@@ -101,7 +103,7 @@ public class FileExplorer {
    * @param path the path of the directory
    * @return the directory at that path
    */
-  public Directory getDirectory(String path) {
+  public Directory getDirectory(String path) throws FileNotFoundException{
 
     File file = getFile(path);
     Directory dir = null;
@@ -119,7 +121,8 @@ public class FileExplorer {
    * @param path the path of the file
    * @return the directory that the file is in
    */
-  public Directory getParentDirectory(String path) {
+  public Directory getParentDirectory(String path)
+      throws FileNotFoundException{
 
     // Get the path of the directory that the file is in
     // Note that at this point the file may not actually exist but we will
@@ -147,7 +150,8 @@ public class FileExplorer {
     return getDirectoryHelper(rootDir, dirPath);
   }
 
-  private Directory getDirectoryHelper(Directory curDir, String relPath) {
+  private Directory getDirectoryHelper(Directory curDir, String relPath) 
+      throws FileNotFoundException{
 
     Directory dir;
 
@@ -175,13 +179,36 @@ public class FileExplorer {
     return dir;
   }
 
+  public File getFileNEW(Directory currentDirectory, String relativePath)
+      throws FileNotFoundException {
+
+    File dir;
+
+    if (relativePath.equals("")) {
+      // We are at the end of the path. The directory we are in is the file we
+      // are looking for.
+      dir = currentDirectory;
+    } else {
+
+      // Get the next directory we want to look in
+      String nextDirName = Path.getRootDirectory(relativePath);
+      Directory nextDir = (Directory) currentDirectory.getFile(nextDirName);
+      // We now want to get the path relative to this directory. And then
+      // run the method again on that path with that directory.
+      String newRelPath = Path.getSubPath(relativePath);
+      dir = getDirectoryHelper(nextDir, newRelPath);
+    }
+
+    return dir;
+  }
+
   /**
    * Adds the file into the FileExplorer at the specified path
    * 
    * @param dirPath the path to the directory you want to add the file in
    * @param file the file being added to the FileExplorer
    */
-  public void addFile(String dirPath, File file) {
+  public void addFile(String dirPath, File file) throws FileNotFoundException{
 
     // The full path of the file
     String path = dirPath + "/" + file.getFileName();
@@ -199,7 +226,7 @@ public class FileExplorer {
    * 
    * @param path the path to the directory
    */
-  public void addDirectory(String path) {
+  public void addDirectory(String path) throws FileNotFoundException{
 
     String dirName = Path.getFileName(path);
     String dirPath = Path.removeFileName(path);
@@ -224,9 +251,17 @@ public class FileExplorer {
    */
   public boolean pathExists(String path) {
 
-    // Get the file and check that it isn't null.
-    File file = getFile(path);
+    boolean exists = true;
+    
+    try {
+      // Attempt to get the file at the path
+      File file = getFile(path);
+    }
+    catch (FileNotFoundException e) {
+      // The file was not found so it doesn't exist
+      exists = false;
+    }
 
-    return file != null;
+    return exists;
   }
 }
