@@ -30,6 +30,7 @@
 package filesystem;
 
 import java.util.ArrayList;
+import exceptions.*;
 
 public class Directory extends File {
   // make a new arraylist of files
@@ -70,8 +71,9 @@ public class Directory extends File {
    * @param fileName the name of the file you are looking for
    * @return Returns the file with the specified name if found. Otherwise it
    *         returns null.
+   * @throws FileNotFoundException 
    */
-  public File getFile(String fileName) {
+  public File getFile(String fileName) throws FileNotFoundException {
     // iterate through list of files to find the destination file
     int index = 0;
     // set the file to be returned to be null
@@ -90,6 +92,10 @@ public class Directory extends File {
       else
         index++;
     }
+    
+    if (nextFile == null)
+      throw new FileNotFoundException();
+    
     // return the found file, or null if nothing is found
     return nextFile;
   }
