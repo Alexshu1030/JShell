@@ -81,7 +81,7 @@ public class Ls implements Command {
         fileNames += files.get(i).getFileName() + "\n";
       }
 
-      messages = fileNames;
+      return fileNames;
 
     } else {
       // Get the contents of the given path
@@ -110,9 +110,13 @@ public class Ls implements Command {
       else {
         messages = file.getFileName();
       }
+      arguments.remove(0);
     }
+    if (arguments.isEmpty()) {
+      return messages;
+    }
+    return messages + "\n" + this.run(jShell, arguments);
 
-    return messages;
   }
 
   /**
