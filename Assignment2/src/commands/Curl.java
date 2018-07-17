@@ -34,10 +34,15 @@ import java.util.ArrayList;
 import shell.JShellWindow;
 
 public class Curl implements Command {
+  
   private String commandName = "curl";
   private int numOfArguments = 1;
+  
   @Override
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
+    
     String url = arguments.get(0);
     String arr[] = url.split("/");
     String outfile = arr[arr.length - 1];
@@ -46,7 +51,8 @@ public class Curl implements Command {
     String contents = web.run(jShell, arguments);
     // Echo the contents into the file
     Commands.run(jShell, "echo " + contents + " > " + outfile);
-    return null;
+    
+    return "";
   }
 
   @Override
