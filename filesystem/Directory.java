@@ -30,7 +30,7 @@
 package filesystem;
 
 import java.util.ArrayList;
-import exceptions.*;
+import Exceptions.*;
 
 public class Directory extends File {
   // make a new arraylist of files
