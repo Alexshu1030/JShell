@@ -41,6 +41,7 @@ public class Web implements Command {
   private int numOfArguments = 1;
   @Override
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
     String result = "";
     String url = arguments.get(0);
     boolean valid;

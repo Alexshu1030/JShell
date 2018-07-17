@@ -65,11 +65,17 @@ public class Man implements Command {
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
+    
     String messages = null;
     String cmdName = arguments.get(0);
+    
     Command command = Commands.getCommand(cmdName);
+    
     if (command != null) {
       messages = command.getHelpText();
+      result.addMessage(command.getHelpText());
     }
     return messages;
   }
