@@ -52,10 +52,21 @@ public class Directory extends File {
    * @param file this is the file that will be added to the directory
    */
   public void addFile(File file) throws PathExistsException{
-    
-    file.setFileDirectory(this);
 
+    // Make sure this directory doesn't already contain a file of the same
+    // name.
     if (!containsFile(file.getFileName())) {
+      
+      Directory dir = file.getFileDirectory();
+      
+      if (dir != null) {
+        // The file is in another directory. We want to remove it from this
+        // directory before adding it to the new one.
+        dir.removeFile(file);
+      }
+      
+      file.setFileDirectory(this);
+      
       listOfFiles.add(file);
     }
     else
