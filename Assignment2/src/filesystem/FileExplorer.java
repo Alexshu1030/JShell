@@ -226,7 +226,8 @@ public class FileExplorer {
    * 
    * @param path the path to the directory
    */
-  public void addDirectory(String path) throws FileNotFoundException{
+  public void addDirectory(String path) throws FileNotFoundException, 
+  PathExistsException{
 
     String dirName = Path.getFileName(path);
     String dirPath = Path.removeFileName(path);
@@ -240,6 +241,9 @@ public class FileExplorer {
         Directory childDir = new Directory(dirName, parentDir);
         parentDir.addFile(childDir);
       }
+    }
+    else {
+      throw new PathExistsException();
     }
   }
 

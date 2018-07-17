@@ -50,14 +50,14 @@ public class Commands {
    * @param arguments a list containing the directories to be listed
    * @return result true if execution was successful
    */
-  public static String run(JShellWindow jShell, String commandText) {
+  public static Result run(JShellWindow jShell, String commandText) {
     // split at quotations for echo parameter 1
     commandText.split("\"");
     // Split the command into it's parts (i.e. separate blocks of text, quotes
     // and etc.)
     ArrayList<String> arguments = split(commandText);
 
-    String message = "";
+    Result result = null;
 
     // There must be at least one element in the arguments for it to be a
     // valid command
@@ -93,7 +93,7 @@ public class Commands {
 
           // if there is no > or >> found, run the command normally
           if (outFile.equals("")) {
-            message = command.run(jShell, arguments);
+            result = command.run(jShell, arguments);
           // otherwise
           } else {
             // get the part of the list before the > or >>
@@ -102,7 +102,7 @@ public class Commands {
             // run the part of the list and see if its false
             boolean invalid = false;
             try {
-              message = command.run(jShell, putFile);
+              result = command.run(jShell, putFile);
             } catch (Exception e) {
               invalid = true;
             }
@@ -111,21 +111,21 @@ public class Commands {
               // setup a list of commands to be used with echo
               ArrayList<String> echoInto = new ArrayList<String>();
               // add the message, type of write, and file name into the list
-              echoInto.add(message);
+              echoInto.add(result.getMessage());
               echoInto.add(outFile);
               echoInto.add(fileName);
               // get the echo command and run it
               command = getCommand("echo");
               command.run(jShell, echoInto);
               // set return to null
-              return null;
+              return new Result();
             }
           }
         }
       }
     }
 
-    return message;
+    return result;
   }
 
   /**
