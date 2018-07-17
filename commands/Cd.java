@@ -34,6 +34,7 @@ import filesystem.*;
 import shell.JShellWindow;
 import java.util.ArrayList;
 import java.util.Arrays;
+import exceptions.FileNotFoundException;
 
 public class Cd implements Command {
   /**
@@ -71,14 +72,19 @@ public class Cd implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
+    
     FileExplorer explorer = jShell.getFileExplorer();
     Directory currentDirectory = explorer.getWorkingDirectory();
 
     String path = arguments.get(0);
     boolean succeeded = false;
-    // If the user wants to change to the parent directory
-    if (path.equals("..")) {
-      succeeded = true;
+    
+    if (path.equals(".")) {
+      // If the user wants to change to the current directory
+    }
+    else if (path.equals("..")) {
+      // If the user wants to change to the parent directory
       Directory workingDir = currentDirectory;
       if (!workingDir.isRootDirectory()) {
         // Get the parent directory of the working directory
@@ -86,22 +92,20 @@ public class Cd implements Command {
         // Set the working directory to be the parent directory
         explorer.setWorkingDirectory(newDir);
       }
-      // If the user wants to change to the current directory
-    } else if (path.equals(".")) {
-      succeeded = true;
     } else {
-      try {
-        Directory newDir = explorer.getDirectory(path);
-        // Set the working directory to the directory given by the path
-        if (newDir != null) {
-          explorer.setWorkingDirectory(newDir);
-          succeeded = true;
-        } else {
-          System.out.println("The path does not exist.");
+      
+        Directory newDir = null;
+        
+        try {
+          newDir = explorer.getDirectory(path);
         }
-      } catch (Exception NullPointerException) {
-        succeeded = false;
-      }
+        catch (FileNotFoundException e) {
+          result.registerError(0, "The path does not exist.");
+        }
+        
+        // Set the working directory to the directory given by the path
+        if (newDir != null)
+          explorer.setWorkingDirectory(newDir);
     }
     return "";
   }

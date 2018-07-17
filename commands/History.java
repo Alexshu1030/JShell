@@ -72,6 +72,8 @@ public class History implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
+    
     ArrayList<String> log = jShell.getLog();
     int totalInputs = log.size();
     int truncAmount = 0;
@@ -87,6 +89,7 @@ public class History implements Command {
     for (int i = 1; i <= totalInputs; i++) {
       if (truncAmount < i) {
         message += i + ". " + log.get(i - 1) + "\n";
+        result.addMessage(i + ". " + log.get(i - 1));
       }
     }
 

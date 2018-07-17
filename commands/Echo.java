@@ -81,6 +81,7 @@ public class Echo implements Command {
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result r = new Result(arguments);
+    
     String result = "";
     int numOfArgs = arguments.size();
 

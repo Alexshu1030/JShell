@@ -71,6 +71,8 @@ public class Cat implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
+    
     FileExplorer explorer = jShell.getFileExplorer();
 
     String message = "";
@@ -89,6 +91,7 @@ public class Cat implements Command {
       }
       catch (FileNotFoundException e) {
         message = "The file does not exist.";
+        result.registerError(i, "The path does not exist.");
       }
       
       // If the file exists, add it's contents onto the end of our message.
@@ -99,6 +102,8 @@ public class Cat implements Command {
         if (i != arguments.size() - 1) {
           message += "\n\n\n";
         }
+        
+        result.addMessage((String)file.getFileContents(), "\n\n\n\n");
       }
     }
     return message;
