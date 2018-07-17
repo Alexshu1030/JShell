@@ -156,29 +156,23 @@ public class Find implements Command {
     boolean valid = false;
     int size = arguments.size();
 
-    // if the 2nd last argument is -name
-    if (arguments.get(size - 2).equals("-name")) {
-      // if the 3rd last argument is either d or f
-      if (arguments.get(size - 3).equals("d")
-          || arguments.get(size - 3).equals("f")) {
-        // if the 4th last argument is -type
-        if (arguments.get(size - 4).equals("-type")) {
-          // if arguments have >= 6 elements
-          if (arguments.size() >= 5) {
-            // the command is valid
-            valid = true;
-          }
-          else
-            result.logError("Invalid number of arguments.");
-        }
-        else
-          result.logError(size - 4, "Invalid argument.");
-      }
-      else
-        result.logError(size - 3, "Invalid argument.");
+    if (arguments.size() == 5) {
+      
+      // The second last arg must be -name
+      if (!arguments.get(size - 2).equals("-name"))
+        result.logError(size - 2, "Invalid argument.");
+      
+      // The third last arg must be either d or f
+      if (!arguments.get(size - 3).equals("d") &&
+          !arguments.get(size - 3).equals("f"))
+          result.logError(size - 3, "Invalid argument.");
+        
+      // The forth last arg must be -type
+      if (arguments.get(size - 4).equals("-type"))
+        result.logError(size - 4, "Invalid argument.");
     }
     else
-      result.logError(size - 2, "Invalid argument.");
+      result.logError("Invalid number of arguments.");
     
     return result;
   }

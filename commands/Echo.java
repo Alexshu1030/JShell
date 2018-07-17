@@ -200,6 +200,8 @@ public class Echo implements Command {
         result.logError(1, "Invalid argument.");
       }
     }
+    else
+      result.logError("Invalid number of arguments.");
     
     return result;
   }

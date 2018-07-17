@@ -140,7 +140,8 @@ public class FileExplorer {
       throw new FileNotFoundException();
   }
 
-  public void addFile(String dirPath, File file) throws InvalidPathException {
+  public void addFile(String dirPath, File file) throws InvalidPathException, 
+  PathExistsException {
 
     try {
       Directory parentDir = getDirectory(dirPath);
@@ -156,7 +157,8 @@ public class FileExplorer {
    * you to just pass in the path and it will create the directory with that
    * path.
    */
-  public void addDirectory(String path) throws InvalidPathException {
+  public void addDirectory(String path) throws InvalidPathException,
+  PathExistsException {
     
     String dirName = Path.getFileName(path);
     String parentDirPath = Path.removeFileName(path);

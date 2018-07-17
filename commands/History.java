@@ -129,11 +129,16 @@ public class History implements Command {
     } else if (arguments.size() == singleArg) {
       // try parsing argument parameter into integer, if success -> int
       try {
-        Integer.parseInt(arguments.get(0));
-        // otherwise, it is not an integer and is not valid
+        int value = Integer.parseInt(arguments.get(0));
+        
+        if (value < 0)
+          result.logError(0, "Argument must be larger than zero.");
+        
       } catch (Exception NumberFormatException) {
         result.logError(0, "Argument must be an integer.");
       }
+      
+      
     }
     else {
       result.logError("Invalid number of arguments.");
