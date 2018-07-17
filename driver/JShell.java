@@ -32,6 +32,7 @@ package driver;
 import java.util.ArrayList;
 import java.util.Scanner;
 import commands.Commands;
+import commands.Result;
 import filesystem.Directory;
 import filesystem.File;
 import filesystem.FileExplorer;
@@ -63,11 +64,11 @@ public class JShell {
       window.addInputtoLog(input);
 
       // Attempt to run the command. If it fails print the error message.
-      String message = Commands.run(window, input);
-      if (message != null)
-        System.out.print(message);
-      else
-        System.out.println(errorMessage);
+      Result result = Commands.run(window, input);
+      System.out.println(result.getMessage());
+      
+      if (result.errorOccured())
+        System.out.println(result.getErrorMessage());
     }
 
     in.close();

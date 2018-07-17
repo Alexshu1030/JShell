@@ -30,6 +30,7 @@
 package filesystem;
 
 import java.util.ArrayList;
+import exceptions.EmptyStackException;
 import filesystem.Directory;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
@@ -49,11 +50,12 @@ public class DirectoryStack {
     explorer.setWorkingDirectory(directory);
   }
 
-  public void popd(JShellWindow jShell) {
+  public void popd(JShellWindow jShell) throws EmptyStackException {
+    
     FileExplorer explorer = jShell.getFileExplorer();
 
     if (directoryStack.isEmpty()) {
-      System.out.println("The directory stack is empty. Can't pop");
+      throw new EmptyStackException();
     } else {
       // Sets the directory at the top of the stack to be the current directory
       explorer.setWorkingDirectory(directoryStack.get(0));
