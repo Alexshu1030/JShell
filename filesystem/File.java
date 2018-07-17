@@ -43,10 +43,9 @@ public class File {
    */
   protected Object fileContents;
 
-  public File(String name, Directory directory, Object contents) {
+  public File(String name, Object contents) {
     // Constructor for file class
     setFileName(name);
-    setFileDirectory(directory);
     setFileContents(contents);
   }
 
