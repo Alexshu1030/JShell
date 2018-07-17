@@ -109,6 +109,41 @@ public class Directory extends File {
     return nextFile;
   }
 
+  public Directory getDirectory(String dirName) throws FileNotFoundException {
+
+    // set the file to be returned to be null
+    Directory dir = null;
+
+    if (dirName == ".") {
+      // We want to get this directory
+      dir = this;
+    } else if (dirName == "..") {
+      // We want to get the parent directory
+      dir = this.fileDirectory;
+    } else {
+      // iterate through list of files to find the destination file
+      int index = 0;
+      // Iterate over the current directory looking for the file with the name
+      // of the next directory
+      while (index < listOfFiles.size() && dir == null) {
+        // Get the name of the current file we are looking at
+        File file = listOfFiles.get(index);
+        // If we have found the next directory exit the loop. Otherwise go to
+        // the next file in the current directory.
+        if (file.isDirectory() && file.getFileName().equals(dirName))
+          dir = (Directory) file;
+        else
+          index++;
+      }
+    }
+
+    if (dir == null)
+      throw new FileNotFoundException();
+
+    // return the found file, or null if nothing is found
+    return dir;
+  } 
+  
   /**
    * Returns whether or not this is a directory
    * 
