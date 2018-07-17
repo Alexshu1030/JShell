@@ -63,9 +63,15 @@ public class Tree implements Command {
    * 
    * @return isValid this is true if there are no arguments, o/w false
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    boolean isValid = arguments.isEmpty();
-    return isValid;
+  public Result areValidArguments(ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
+    
+    if (!arguments.isEmpty()) {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
 
@@ -132,8 +138,7 @@ public class Tree implements Command {
   }
 
   /**
-   * Returns a string containing sufficient indentations to build string
-   * representation of the depth of the current directory
+   * Repeats the string the specified number of times.
    * 
    * @param string this is "\t"
    * @param times this is the amount of indents

@@ -114,12 +114,12 @@ public class History implements Command {
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
+  public Result areValidArguments(ArrayList<String> arguments) {
 
-    boolean isValid = false;
+    Result result = new Result(arguments);
+
     // there is no argument parameter, it is valid
     if (arguments.isEmpty()) {
-      isValid = true;
       // check if argument is a, single, integer
     } else if (arguments.size() == singleArg) {
       // try parsing argument parameter into integer, if success -> int
@@ -127,11 +127,14 @@ public class History implements Command {
         Integer.parseInt(arguments.get(0));
         // otherwise, it is not an integer and is not valid
       } catch (Exception NumberFormatException) {
-        return isValid;
+        result.registerError(0, "Argument must be an integer.");
       }
-      isValid = true;
     }
-    return isValid;
+    else {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
 

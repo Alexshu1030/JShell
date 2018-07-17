@@ -115,31 +115,34 @@ public class Mkdir implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    int numOfArgs = arguments.size();
-    boolean isValid = false;
-    // if there was no argument given
+  public Result areValidArguments(ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
+    
     if (arguments.size() == 0) {
-      return false;
+      // There must be at least one argument (i.e. a directory name) to create
+      // a directory
+      result.registerError("Invalid number of arguments.");
     }
-    // base case: 1 arg and contains alphanumeric chars
-    if (arguments.size() == 1) {
-      String name = arguments.get(0);
-      if (name.matches("[A-Za-z0-9-/]+")) {
-        isValid = true;
+    else {
+      for (int i = 0; i < arguments.size(); i++) {
+        
+        // Gets the name of the directory to be created
+        String dirName = arguments.get(i);
+        
+        // Logs an error if the directory contains an invalid characters
+        if (!containsValidCharacters(dirName)) {
+          result.registerError(i, "Invalid characters in directory name.");
+        }
       }
-    } else {
-      // recursive step: run on first argument and the rest of the arguments
-      ArrayList<String> part1 = new ArrayList<String>(arguments.subList(0, 1));
-      ArrayList<String> tail =
-          new ArrayList<String>(arguments.subList(1, numOfArgs));
-      return areValidArguments(part1) && areValidArguments(tail);
     }
-    // If the argument was not valid
-    if (!isValid) {
-      System.out.println("Error, invalid character(s)");
-    }
-    return isValid;
+    
+    return result;
+  }
+  
+  private boolean containsValidCharacters(String dirName) {
+    
+    return dirName.matches("[A-Za-z0-9-/]+");
   }
 
   /**

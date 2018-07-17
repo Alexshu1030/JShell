@@ -57,7 +57,7 @@ public class Commands {
     // etc.)
     ArrayList<String> arguments = split(commandText);
 
-    Result result = null;
+    Result result = new Result();
 
     // There must be at least one element in the arguments for it to be a
     // valid command
@@ -122,7 +122,13 @@ public class Commands {
             }
           }
         }
+        else {
+          result.registerError("Invalid arguments.");
+        }
       }
+    }
+    else {
+      result.registerError("Invalid input.");
     }
     
     return result;

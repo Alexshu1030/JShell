@@ -116,6 +116,7 @@ public class Cat implements Command {
    * @return commandName the command name
    */
   public String getCommandName() {
+    
     return command;
   }
 
@@ -125,10 +126,15 @@ public class Cat implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
+  public Result areValidArguments(ArrayList<String> arguments) {
 
-    boolean isValid = (arguments.size() >= 1);
-    return isValid;
+    Result result = new Result(arguments);
+    
+    if (arguments.size() < 1) {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
   /**

@@ -157,18 +157,24 @@ public class Echo implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
+  public Result areValidArguments(ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
+    
     boolean isValid = false;
     int numOfArgs = arguments.size();
 
     if (numOfArgs == 1) {
+      
       String arg = arguments.get(0);
       int secArgLen = arg.length();
       // echo's STRING input must have quotations around it
       if (arg.substring(0, 1).equals("\"")
           && arg.substring(secArgLen - 1, secArgLen).equals("\"")) {
         isValid = true;
+      }
+      else {
+        result.registerError(0, "String must be enclosed in quotations.");
       }
     } else if (numOfArgs == 3) {
 
@@ -182,9 +188,16 @@ public class Echo implements Command {
             && arg1.substring(secArgLen - 1, secArgLen).equals("\"")) {
           isValid = true;
         }
+        else {
+          result.registerError(0, "String must be enclosed in quotations.");
+        }
+      }
+      else {
+        result.registerError(1, "Invalid argument.");
       }
     }
-    return isValid;
+    
+    return result;
   }
 
   /**
