@@ -40,6 +40,7 @@ public class Ls implements Command {
    * commandName The command name of the current class
    */
   private String commandName = "ls";
+  private String recurseiveArg = "-R";
   /**
    * helpText The help text for the current class
    */
@@ -68,15 +69,18 @@ public class Ls implements Command {
    * @return result the output to the shell
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
-
+    
     Result result = areValidArguments(arguments);
     
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
-      
+      // Check if recursive argument is implemented
+      if (arguments.get(1).equals(recurseiveArg)) {
+        return runRecursive(jShell, arguments);
+      }
       String messages = "";
       // If no argument was given, list all files and directories
-      if (arguments.size() == 0) {
+      if (arguments.isEmpty()) {
         // The file is a directory. We want to print the contents of the
         // directory.
         Directory dir = jShell.getFileExplorer().getWorkingDirectory();
@@ -126,6 +130,14 @@ public class Ls implements Command {
     
     return result;
 
+  }
+
+  private Result runRecursive(JShellWindow jShell,
+      ArrayList<String> arguments) {
+    Result result = new Result();
+    arguments.remove(0);
+    result.addMessage(run(jShell, arguments).getMessage());
+    return result;
   }
 
   /**
