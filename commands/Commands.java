@@ -62,7 +62,7 @@ public class Commands {
     // There must be at least one element in the arguments for it to be a
     // valid command
     if (arguments.size() > 0) {
-
+      
       // The command name must be the first element
       String commandName = arguments.remove(0);
       Command command = getCommand(commandName);
@@ -71,8 +71,38 @@ public class Commands {
         if (command.areValidArguments(arguments)) {
           // We have found the command and it's arguments are valid. We can
           // now run the command
-          message = command.run(jShell, arguments);
-
+          String outFile = "";
+          String fileName = "";
+          int foundIndex = -1;
+          for (int i = 0; i < arguments.size(); i++) {
+        	  if (arguments.get(i).equals(">")) {
+        		  outFile = ">";
+        		  fileName = arguments.get(i+1);
+        		  foundIndex = i;
+        	  }
+        	  else if (arguments.get(i).equals(">>")) {
+        		  outFile = ">>";
+        		  fileName = arguments.get(i+1);
+        		  foundIndex = i;
+        	  }
+          }
+        
+        
+        
+        if (outFile.equals("")) {
+        	message = command.run(jShell, arguments);
+        }
+        else {
+        	ArrayList<String> putFile = (ArrayList<String>) arguments.subList(0, foundIndex);
+        	message = command.run(jShell, putFile);
+        	ArrayList<String> echoInto = new ArrayList<String>();
+        	echoInto.add(message);
+        	echoInto.add(outFile);
+        	echoInto.add(fileName);
+        	command = getCommand("echo");
+        	command.run(jShell, echoInto);
+        	return null;
+        }
         }
       }
     }
