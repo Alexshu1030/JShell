@@ -30,6 +30,7 @@
 package commands;
 
 import java.util.ArrayList;
+import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class History implements Command {
@@ -72,27 +73,31 @@ public class History implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    ArrayList<String> log = jShell.getLog();
-    int totalInputs = log.size();
-    int truncAmount = 0;
-
-    // Set truncation amount based on input integer
-    if (!arguments.isEmpty()) {
-      truncAmount = totalInputs - Integer.parseInt((arguments.get(0)));
-    }
-
-    String message = "";
-
-    // iterate through each input in log and print if within truncation
-    for (int i = 1; i <= totalInputs; i++) {
-      if (truncAmount < i) {
-        message += i + ". " + log.get(i - 1) + "\n";
-        result.addMessage(i + ". " + log.get(i - 1));
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
+      
+      ArrayList<String> log = jShell.getLog();
+      int totalInputs = log.size();
+      int truncAmount = 0;
+  
+      // Set truncation amount based on input integer
+      if (!arguments.isEmpty()) {
+        truncAmount = totalInputs - Integer.parseInt((arguments.get(0)));
+      }
+  
+      String message = "";
+  
+      // iterate through each input in log and print if within truncation
+      for (int i = 1; i <= totalInputs; i++) {
+        if (truncAmount < i) {
+          message += i + ". " + log.get(i - 1) + "\n";
+          result.addMessage(i + ". " + log.get(i - 1));
+        }
       }
     }
-
+    
     return result;
   }
 

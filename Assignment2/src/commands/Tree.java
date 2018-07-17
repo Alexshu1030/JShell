@@ -96,12 +96,17 @@ public class Tree implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
-    Directory rootDir = FileExplorer.getRootDirectory();
-    // The double back slashes are to add the backslash at the beginning
-    // that represents the root directory
-    String treeRep = "\\" + getTreeRepresentation(rootDir, 0);
-    result.addMessage(treeRep);
+    Result result = areValidArguments(arguments);
+    
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
+    
+      Directory rootDir = FileExplorer.getRootDirectory();
+      // The double back slashes are to add the backslash at the beginning
+      // that represents the root directory
+      String treeRep = "\\" + getTreeRepresentation(rootDir, 0);
+      result.addMessage(treeRep);
+    }
     
     return result;
   }

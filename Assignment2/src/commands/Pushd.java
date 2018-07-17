@@ -75,26 +75,31 @@ public class Pushd implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
-    FileExplorer explorer = jShell.getFileExplorer();
-    String messages = null;
-    // Get the path of the directory that we want to push
-    String path = arguments.get(0);
+    Result result = areValidArguments(arguments);
     
-    // Get the directory at the path
-    Directory newDir = null;
-    
-    try {
-      newDir = explorer.getDirectory(path);
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
+        
+      FileExplorer explorer = jShell.getFileExplorer();
+      String messages = null;
+      // Get the path of the directory that we want to push
+      String path = arguments.get(0);
+      
+      // Get the directory at the path
+      Directory newDir = null;
+      
+      try {
+        newDir = explorer.getDirectory(path);
+      }
+      catch (FileNotFoundException e) {
+        result.registerError(0, "The path does not exist.");
+      }
+      
+      // If the directory exists then add it to the stack
+      if (newDir != null)
+        DirectoryStack.stack.pushd(jShell, newDir);
     }
-    catch (FileNotFoundException e) {
-      result.registerError(0, "The path does not exist.");
-    }
     
-    // If the directory exists then add it to the stack
-    if (newDir != null)
-      DirectoryStack.stack.pushd(jShell, newDir);
-
     return result;
   }
 

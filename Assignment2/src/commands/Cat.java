@@ -71,39 +71,42 @@ public class Cat implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    FileExplorer explorer = jShell.getFileExplorer();
-
-    String message = "";
-
-    for (int i = 0; i < arguments.size(); i++) {
-      
-      // We need to replace the argument at i with a File object
-      String path = arguments.get(i);
-      
-      // Get the file at the given path and print it's contents
-      File file = null;
-      
-      // Attempt to get the file at the given path
-      try {
-        file = explorer.getFile(path);
-      }
-      catch (FileNotFoundException e) {
-        message = "The file does not exist.";
-        result.registerError(i, "The path does not exist.");
-      }
-      
-      // If the file exists, add it's contents onto the end of our message.
-      if (file != null) {
-        message += file.getFileContents() + "\n";
-        // Add a three line break between each file's contents. We do not want
-        // one of the last file.
-        if (i != arguments.size() - 1) {
-          message += "\n\n\n";
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
+      FileExplorer explorer = jShell.getFileExplorer();
+  
+      String message = "";
+  
+      for (int i = 0; i < arguments.size(); i++) {
+        
+        // We need to replace the argument at i with a File object
+        String path = arguments.get(i);
+        
+        // Get the file at the given path and print it's contents
+        File file = null;
+        
+        // Attempt to get the file at the given path
+        try {
+          file = explorer.getFile(path);
+        }
+        catch (FileNotFoundException e) {
+          message = "The file does not exist.";
+          result.registerError(i, "The path does not exist.");
         }
         
-        result.addMessage((String)file.getFileContents(), "\n\n\n\n");
+        // If the file exists, add it's contents onto the end of our message.
+        if (file != null) {
+          message += file.getFileContents() + "\n";
+          // Add a three line break between each file's contents. We do not want
+          // one of the last file.
+          if (i != arguments.size() - 1) {
+            message += "\n\n\n";
+          }
+          
+          result.addMessage((String)file.getFileContents(), "\n\n\n\n");
+        }
       }
     }
     
