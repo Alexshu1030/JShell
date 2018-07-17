@@ -78,7 +78,7 @@ public class Echo implements Command {
    * @param arguments a list containing the directories to be listed
    * @return result the output to the shell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result r = new Result(arguments);
     
@@ -139,7 +139,7 @@ public class Echo implements Command {
       }
     }
 
-    return result;
+    return r;
   }
 
   /**

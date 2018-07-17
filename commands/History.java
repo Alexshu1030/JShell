@@ -70,7 +70,7 @@ public class History implements Command {
    * @param arguments this is a list containing either null or an int
    * @return message the output to the shell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = new Result(arguments);
     
@@ -93,7 +93,7 @@ public class History implements Command {
       }
     }
 
-    return message;
+    return result;
   }
 
 

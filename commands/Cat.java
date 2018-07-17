@@ -69,7 +69,7 @@ public class Cat implements Command {
    *        returned
    * @return result the contents of the file in arguments
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = new Result(arguments);
     
@@ -106,7 +106,8 @@ public class Cat implements Command {
         result.addMessage((String)file.getFileContents(), "\n\n\n\n");
       }
     }
-    return message;
+    
+    return result;
   }
 
   /**

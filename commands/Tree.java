@@ -88,7 +88,7 @@ public class Tree implements Command {
    * @param arguments this a list containing null
    * @return treeRep the output to the shell (representation of the tree)
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = new Result(arguments);
     Directory rootDir = FileExplorer.getRootDirectory();
@@ -97,7 +97,7 @@ public class Tree implements Command {
     String treeRep = "\\" + getTreeRepresentation(rootDir, 0);
     result.addMessage(treeRep);
     
-    return treeRep;
+    return result;
   }
 
   /**

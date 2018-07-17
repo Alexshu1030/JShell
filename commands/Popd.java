@@ -65,7 +65,7 @@ public class Popd implements Command {
    * @param arguments a list containing the directories to be popped
    * @return result the output to the shell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Result result = new Result(arguments);
     
@@ -76,8 +76,7 @@ public class Popd implements Command {
       result.registerError("The directory stack is empty");
     }
     
-    String messages = "";
-    return messages;
+    return result;
   }
 
   /**

@@ -62,12 +62,12 @@ public class Exit implements Command {
    * @param arguments this is a list containing null
    * @return true the output to the shell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Result result = new Result(arguments);
     // Terminate
     jShell.setTerminate(true);
-    return "";
+    return result;
   }
 
 

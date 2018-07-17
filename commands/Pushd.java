@@ -73,7 +73,7 @@ public class Pushd implements Command {
    * @param arguments a list containing the directories to be pushed
    * @return result the output to the shell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = new Result(arguments);
     FileExplorer explorer = jShell.getFileExplorer();
@@ -95,7 +95,7 @@ public class Pushd implements Command {
     if (newDir != null)
       DirectoryStack.stack.pushd(jShell, newDir);
 
-    return "";
+    return result;
   }
 
   /**

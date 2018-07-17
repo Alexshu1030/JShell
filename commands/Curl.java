@@ -39,7 +39,7 @@ public class Curl implements Command {
   private int numOfArguments = 1;
   
   @Override
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Result result = new Result(arguments);
     
@@ -52,7 +52,7 @@ public class Curl implements Command {
     // Echo the contents into the file
     Commands.run(jShell, "echo " + contents + " > " + outfile);
     
-    return "";
+    return result;
   }
 
   @Override
