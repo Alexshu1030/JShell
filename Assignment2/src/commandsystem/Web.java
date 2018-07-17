@@ -28,7 +28,7 @@
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
 
-package commands;
+package commandsystem;
 
 import java.util.ArrayList;
 import java.util.Scanner;

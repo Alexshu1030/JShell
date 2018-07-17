@@ -31,8 +31,8 @@ package driver;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import commands.Commands;
-import commands.Result;
+import commandsystem.Commands;
+import commandsystem.Result;
 import filesystem.Directory;
 import filesystem.File;
 import filesystem.FileExplorer;

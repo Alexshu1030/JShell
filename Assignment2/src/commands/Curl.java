@@ -31,6 +31,10 @@
 package commands;
 
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Commands;
+import commandsystem.Result;
+import commandsystem.Web;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
 

@@ -1,6 +1,8 @@
 package commands;
 
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Result;
 import exceptions.*;
 import filesystem.*;
 import shell.JShellWindow;

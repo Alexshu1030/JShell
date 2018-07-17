@@ -30,6 +30,8 @@
 package commands;
 
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Result;
 import exceptions.FileNotFoundException;
 import filesystem.FileExplorer;
 import filesystem.Directory;
