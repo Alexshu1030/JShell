@@ -34,6 +34,8 @@ import filesystem.*;
 import shell.JShellWindow;
 import java.util.ArrayList;
 import java.util.Arrays;
+import commandsystem.Command;
+import commandsystem.Result;
 import exceptions.FileNotFoundException;
 
 public class Cd implements Command {

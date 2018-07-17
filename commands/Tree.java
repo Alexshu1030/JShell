@@ -30,6 +30,8 @@
 package commands;
 
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Result;
 import filesystem.*;
 import shell.JShellWindow;
 

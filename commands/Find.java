@@ -31,6 +31,8 @@ package commands;
 
 import java.awt.List;
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Result;
 import exceptions.FileNotFoundException;
 import shell.JShellWindow;
 import filesystem.*;

@@ -29,6 +29,8 @@
 package commands;
 
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Result;
 import exceptions.EmptyStackException;
 import filesystem.DirectoryStack;
 import filesystem.FileExplorer;
