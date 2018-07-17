@@ -44,7 +44,7 @@ public class JShell {
   private static String prompt = "/# ";
 
   public static void main(String[] args) {
-
+    
     // Create a new JShell window and scanner
     JShellWindow window = new JShellWindow();
     Scanner in = new Scanner(System.in);

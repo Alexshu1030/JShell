@@ -40,8 +40,8 @@ public class Directory extends File {
   ArrayList<File> listOfFiles = new ArrayList<File>();
 
   // construct a new directory with its contents as the list of files
-  public Directory(String name, Directory parentDirectory) {
-    super(name, parentDirectory, null);
+  public Directory(String name) {
+    super(name, null);
     this.fileContents = listOfFiles;
   }
 
@@ -52,6 +52,7 @@ public class Directory extends File {
    * @param file this is the file that will be added to the directory
    */
   public void addFile(File file) {
+    file.setFileDirectory(this);
     listOfFiles.add(file);
   }
 
@@ -62,6 +63,7 @@ public class Directory extends File {
    * @param file this is the file to be removed from the directory
    */
   public void removeFile(File file) {
+    file.setFileDirectory(null);
     listOfFiles.remove(file);
   }
 
@@ -77,13 +79,12 @@ public class Directory extends File {
 
     // set the file to be returned to be null
     File nextFile = null;
-    if (fileName == ".") {
-      // We want to get this directory
+    
+    if (fileName.equals("."))
       nextFile = this;
-    } else if (fileName == "..") {
-      // We want to get the parent directory
+    else if (fileName.equals(".."))
       nextFile = this.fileDirectory;
-    } else {
+    else {
       // iterate through list of files to find the destination file
       int index = 0;
       // Iterate over the current directory looking for the file with the name
@@ -110,38 +111,12 @@ public class Directory extends File {
   }
 
   public Directory getDirectory(String dirName) throws FileNotFoundException {
-
-    // set the file to be returned to be null
-    Directory dir = null;
-
-    if (dirName == ".") {
-      // We want to get this directory
-      dir = this;
-    } else if (dirName == "..") {
-      // We want to get the parent directory
-      dir = this.fileDirectory;
-    } else {
-      // iterate through list of files to find the destination file
-      int index = 0;
-      // Iterate over the current directory looking for the file with the name
-      // of the next directory
-      while (index < listOfFiles.size() && dir == null) {
-        // Get the name of the current file we are looking at
-        File file = listOfFiles.get(index);
-        // If we have found the next directory exit the loop. Otherwise go to
-        // the next file in the current directory.
-        if (file.isDirectory() && file.getFileName().equals(dirName))
-          dir = (Directory) file;
-        else
-          index++;
-      }
-    }
-
-    if (dir == null)
+    
+    File file = getFile(dirName);
+    if (file.isDirectory())
+      return (Directory)file;
+    else
       throw new FileNotFoundException();
-
-    // return the found file, or null if nothing is found
-    return dir;
   } 
   
   /**

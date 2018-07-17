@@ -65,8 +65,9 @@ public class Path {
     // Get the first slash in the path
     int firstSlash = path.indexOf('/');
 
-    String result = "";
-
+    //String result = "";
+    String result = path;
+    
     if (firstSlash != -1)
       // Return everything up to the slash. This is the root directory of the
       // path.

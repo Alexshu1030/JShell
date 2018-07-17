@@ -35,7 +35,7 @@ public class FileExplorer {
 
   // This is static so multiple instances of the FileExplorer will have
   // access to the same file system .
-  private static Directory rootDirectory = new Directory("", null);
+  private static Directory rootDirectory = new Directory("");
   /**
    * workingDirectory a Directory object that is currently used
    */
@@ -75,28 +75,8 @@ public class FileExplorer {
 
     workingDirectory = newWD;
   }
-
-  /**
-   * Gets the file at the specified path
-   * 
-   * @param path the path of the file
-   * @return the file at that path
-   */
+  
   public File getFile(String path) throws FileNotFoundException {
-
-    /*
-    // Get the directory the file is in
-    Directory dir = getParentDirectory(path);
-    File file = null;
-
-    if (dir != null) {
-      // Get the name of the file and get it from the directory.
-      String fileName = Path.getFileName(path);
-      file = dir.getFile(fileName);
-    }
-
-    return file;
-    */
     
     Directory rootDir;
 
@@ -120,14 +100,14 @@ public class FileExplorer {
 
   private File getFileHelper(File file, String path)
       throws FileNotFoundException {
-
+    
     if (path.equals("")) {
       // We have reached the end of the path. The current file is the one we
       // are looking for.
       return file;
     }
     else if (file.isDirectory()) {
-
+      
       // We are not at the end of the path. As such, we must be in a directory
       // as a non directory can not contain a file.
       Directory dir = (Directory) file;
@@ -150,145 +130,36 @@ public class FileExplorer {
 
   }
 
-  /**
-   * Gets the directory at the specified path
-   * 
-   * @param path the path of the directory
-   * @return the directory at that path
-   */
   public Directory getDirectory(String path) throws FileNotFoundException {
-
+    
     File file = getFile(path);
-    Directory dir = null;
-
-    if (file != null && file.isDirectory()) {
-      dir = (Directory) file;
-    }
-
-    return dir;
+    
+    if (file.isDirectory())
+      return (Directory)file;
+    else
+      throw new FileNotFoundException();
   }
 
-  /**
-   * Returns the directory that the file at the specified path is in.
-   * 
-   * @param path the path of the file
-   * @return the directory that the file is in
-   */
-  public Directory getParentDirectory(String path)
-      throws FileNotFoundException {
-
-    // Get the path of the directory that the file is in
-    // Note that at this point the file may not actually exist but we will
-    // still return the directory that it would be contained in as if it did.
-    String dirPath = Path.removeFileName(path);
-
-    // Stores the root directory of this path
-    Directory rootDir;
-
-    if (Path.isAbsolute(path)) {
-      // The path is absolute so we want to start at the root directory and
-      // work our way to the file.
-      rootDir = rootDirectory;
-      // Make the path relative to the root directory. If the path is of
-      // length 0, then it is the root directory.
-      if (dirPath.length() > 0)
-        dirPath = dirPath.substring(1);
-    } else {
-      // The path is relative so we want to start in the working directory
-      // and work our way to the file.
-      rootDir = workingDirectory;
-    }
-
-    // Use the helper method.
-    return getDirectoryHelper(rootDir, dirPath);
-  }
-
-  private Directory getDirectoryHelper(Directory curDir, String relPath)
-      throws FileNotFoundException {
-
-    Directory dir;
-
-    if (relPath.equals("")) {
-      // Base case. We are at the end of the relative path.
-      // The current directory that we are in is the one we are looking for.
-      dir = curDir;
-    } else {
-
-      // Get the next directory we want to look in
-      String nextDirName = Path.getRootDirectory(relPath);
-      Directory nextDir = (Directory) curDir.getFile(nextDirName);
-      // We want to run the method again using this directory and the path
-      // relative to it.
-      String newRelPath = Path.getSubPath(relPath);
-      dir = getDirectoryHelper(nextDir, newRelPath);
-    }
-
-    return dir;
-  }
-
-  /**
-   * Adds the file into the FileExplorer at the specified path
-   * 
-   * @param dirPath the path to the directory you want to add the file in
-   * @param file the file being added to the FileExplorer
-   */
-  public void addFile(String dirPath, File file) throws FileNotFoundException {
-
-    // The full path of the file
-    String path = dirPath + "/" + file.getFileName();
-    // Makes sure there isn't already a file with the same name at that path
-    if (!pathExists(path)) {
-      // Get the parent directory path and then add the file into that
-      // directory.
-      Directory dir = getParentDirectory(path);
-      dir.addFile(file);
-    }
-  }
-
-  /**
-   * Adds the directory into the FileExplorer at the specified path
-   * 
-   * @param path the path to the directory
-   */
-  public void addDirectory(String path)
-      throws FileNotFoundException, PathExistsException {
-
-    String dirName = Path.getFileName(path);
-    String dirPath = Path.removeFileName(path);
-    // Makes sure there isn't already a directory with the same name at that
-    // path
-    if (!pathExists(path)) {
-      // Get the parent directory path and then add the new directory into it
-      Directory parentDir = getParentDirectory(path);
-      // Check if the parent directory exists.
-      if (parentDir != null) {
-        Directory childDir = new Directory(dirName, parentDir);
-        parentDir.addFile(childDir);
-      }
-    } else {
-      throw new PathExistsException();
-    }
-  }
-
-  /**
-   * Returns whether the specified path exists
-   * 
-   * @param path the path you want to check exists
-   * @return is true if the path exists and false otherwise
-   */
-  public boolean pathExists(String path) {
-
-    boolean exists = true;
+  public void addFile(String dirPath, File file) throws InvalidPathException {
 
     try {
-      // Attempt to get the file at the path
-      File file = getFile(path);
-    } catch (FileNotFoundException e) {
-      // The file was not found so it doesn't exist
-      exists = false;
+      Directory parentDir = getDirectory(dirPath);
+      parentDir.addFile(file);
     }
-
-    return exists;
+    catch (FileNotFoundException e) {
+      throw new InvalidPathException();
+    }
   }
 
+  /*
+   * This method is just a specialized case of the addFile method. It allows
+   * you to just pass in the path and it will create the directory with that
+   * path.
+   */
+  public void addDirectory(String path) throws InvalidPathException {
+    
+    String dirName = Path.getFileName(path);
+    String parentDirPath = Path.removeFileName(path);
+    addFile(parentDirPath, new Directory(dirName));
+  }
 }

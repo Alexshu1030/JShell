@@ -31,7 +31,7 @@
 package commands;
 
 import java.util.ArrayList;
-import exceptions.FileNotFoundException;
+import exceptions.*;
 import exceptions.PathExistsException;
 import filesystem.*;
 import shell.JShellWindow;
@@ -93,7 +93,7 @@ public class Mkdir implements Command {
   
         try {
           explorer.addDirectory(path);
-        } catch (FileNotFoundException e) {
+        } catch (InvalidPathException e) {
           result.logError(i, "The path does not exist.");
         } catch (PathExistsException e) {
           result.logError(i, "A directory already exists at that path.");
@@ -147,7 +147,7 @@ public class Mkdir implements Command {
   
   private boolean containsValidCharacters(String dirName) {
     
-    return dirName.matches("[A-Za-z0-9-/]+");
+    return dirName.matches("[A-Za-z0-9-/.]+");
   }
 
   /**
