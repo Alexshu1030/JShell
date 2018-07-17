@@ -80,66 +80,68 @@ public class Echo implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result r = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    String result = "";
-    int numOfArgs = arguments.size();
-
-    String text = arguments.get(0);
-
-    // Remove the quotation marks from the argument
-    text = text.substring(1, text.length() - 1);
-
-    FileExplorer explorer = jShell.getFileExplorer();
-
-    if (numOfArgs == 1) {
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
       
-      result = text + "\n";
-      r.addMessage(text);
-      
-    } else if (numOfArgs == 3) {
-      
-      // Assign arguments from the arraylist to proper variables
-      String operationType = arguments.get(1);
-      String outFilePath = arguments.get(2);
-      
-      File outFile = null;
-      
-      try {
-        outFile = explorer.getFile(outFilePath);
-      }
-      catch (FileNotFoundException e) {
-        // If the file does not exist we will create it below
-      }
-
-      // No file exists at the path so we need to create our own
-      if (outFile == null) {
-        // Create a new file with path as its name, parent directory, and
-        // empty contents
+      int numOfArgs = arguments.size();
+  
+      String text = arguments.get(0);
+  
+      // Remove the quotation marks from the argument
+      text = text.substring(1, text.length() - 1);
+  
+      FileExplorer explorer = jShell.getFileExplorer();
+  
+      if (numOfArgs == 1) {
+        
+        result.addMessage(text);
+        
+      } else if (numOfArgs == 3) {
+        
+        // Assign arguments from the arraylist to proper variables
+        String operationType = arguments.get(1);
+        String outFilePath = arguments.get(2);
+        
+        File outFile = null;
+        
         try {
-          String fileName = Path.getFileName(outFilePath);
-          Directory parentDir = explorer.getParentDirectory(outFilePath);
-          outFile = new File(fileName, parentDir, "");
-          explorer.addFile(Path.removeFileName(outFilePath), outFile);
+          outFile = explorer.getFile(outFilePath);
         }
         catch (FileNotFoundException e) {
-          // The directory the file would be in does not exist.
-          r.registerError(2, "The directory does not exist.");
+          // If the file does not exist we will create it below
         }
-      }
-      
-      // If the file exists and we want to overwrite
-      if (operationType.equals(">")) {
-        outFile.setFileContents(text);
-      }
-      // If the file exists and we want to append
-      else if (operationType.equals(">>")) {
-        String currentContents = (String) outFile.getFileContents();
-        outFile.setFileContents(currentContents + text);
+  
+        // No file exists at the path so we need to create our own
+        if (outFile == null) {
+          // Create a new file with path as its name, parent directory, and
+          // empty contents
+          try {
+            String fileName = Path.getFileName(outFilePath);
+            Directory parentDir = explorer.getParentDirectory(outFilePath);
+            outFile = new File(fileName, parentDir, "");
+            explorer.addFile(Path.removeFileName(outFilePath), outFile);
+          }
+          catch (FileNotFoundException e) {
+            // The directory the file would be in does not exist.
+            result.registerError(2, "The directory does not exist.");
+          }
+        }
+        
+        // If the file exists and we want to overwrite
+        if (operationType.equals(">")) {
+          outFile.setFileContents(text);
+        }
+        // If the file exists and we want to append
+        else if (operationType.equals(">>")) {
+          String currentContents = (String) outFile.getFileContents();
+          outFile.setFileContents(currentContents + text);
+        }
       }
     }
 
-    return r;
+    return result;
   }
 
   /**

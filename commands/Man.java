@@ -31,6 +31,7 @@
 package commands;
 
 import java.util.ArrayList;
+import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class Man implements Command {
@@ -66,17 +67,22 @@ public class Man implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    Result result = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    String messages = null;
-    String cmdName = arguments.get(0);
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
     
-    Command command = Commands.getCommand(cmdName);
-    
-    if (command != null) {
-      messages = command.getHelpText();
-      result.addMessage(command.getHelpText());
+      String messages = null;
+      String cmdName = arguments.get(0);
+      
+      Command command = Commands.getCommand(cmdName);
+      
+      if (command != null) {
+        messages = command.getHelpText();
+        result.addMessage(command.getHelpText());
+      }
     }
+    
     return result;
   }
 

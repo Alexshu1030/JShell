@@ -75,51 +75,56 @@ public class Find implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
-    FileExplorer explorer = jShell.getFileExplorer();
-
-    int numOfPaths = arguments.size() - 4;
-    ArrayList<Directory> directories = new ArrayList<Directory>();
-
-    for (int i = 0; i < numOfPaths; i++) {
+    Result result = areValidArguments(arguments);
+    
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
       
-      Directory dir = null;
-      
-      try {
-        dir = explorer.getDirectory(arguments.get(i));
+      FileExplorer explorer = jShell.getFileExplorer();
+  
+      int numOfPaths = arguments.size() - 4;
+      ArrayList<Directory> directories = new ArrayList<Directory>();
+  
+      for (int i = 0; i < numOfPaths; i++) {
+        
+        Directory dir = null;
+        
+        try {
+          dir = explorer.getDirectory(arguments.get(i));
+        }
+        catch (FileNotFoundException e) {
+          result.registerError(i, "The file does not exist.");
+        }
+  
+        if (dir != null)
+          directories.add(dir);
       }
-      catch (FileNotFoundException e) {
-        result.registerError(i, "The file does not exist.");
-      }
-
-      if (dir != null)
-        directories.add(dir);
-    }
-
-    String type = arguments.get(arguments.size() - 3);
-    String name = arguments.get(arguments.size() - 1);
-    // We need to remove the quotations around the name
-    name = name.substring(1, name.length() - 1);
-
-    boolean isDir = type.equals("d");
-
-    String message = "";
-
-    for (int i = 0; i < directories.size(); i++) {
-
-      Directory dir = directories.get(i);
-      ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
-
-      // Iterate over the files in each directory and check if the meet our
-      // requirements
-      for (int f = 0; f < files.size(); f++) {
-        File file = files.get(f);
-        if (file.isDirectory() && isDir || !file.isDirectory() && !isDir) {
-          // The file matches the type we want
-          if (file.getFileName().equals(name)) {
-            // The file has the same name.
-            message += file.getFullPath() + "\n";
-            result.addMessage(file.getFullPath());
+  
+      String type = arguments.get(arguments.size() - 3);
+      String name = arguments.get(arguments.size() - 1);
+      // We need to remove the quotations around the name
+      name = name.substring(1, name.length() - 1);
+  
+      boolean isDir = type.equals("d");
+  
+      String message = "";
+  
+      for (int i = 0; i < directories.size(); i++) {
+  
+        Directory dir = directories.get(i);
+        ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
+  
+        // Iterate over the files in each directory and check if the meet our
+        // requirements
+        for (int f = 0; f < files.size(); f++) {
+          File file = files.get(f);
+          if (file.isDirectory() && isDir || !file.isDirectory() && !isDir) {
+            // The file matches the type we want
+            if (file.getFileName().equals(name)) {
+              // The file has the same name.
+              message += file.getFullPath() + "\n";
+              result.addMessage(file.getFullPath());
+            }
           }
         }
       }

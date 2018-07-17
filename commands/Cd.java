@@ -72,40 +72,44 @@ public class Cd implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    FileExplorer explorer = jShell.getFileExplorer();
-    Directory currentDirectory = explorer.getWorkingDirectory();
-
-    String path = arguments.get(0);
-    boolean succeeded = false;
-    
-    if (path.equals(".")) {
-      // If the user wants to change to the current directory
-    }
-    else if (path.equals("..")) {
-      // If the user wants to change to the parent directory
-      Directory workingDir = currentDirectory;
-      if (!workingDir.isRootDirectory()) {
-        // Get the parent directory of the working directory
-        Directory newDir = workingDir.getFileDirectory();
-        // Set the working directory to be the parent directory
-        explorer.setWorkingDirectory(newDir);
-      }
-    } else {
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
       
-        Directory newDir = null;
-        
-        try {
-          newDir = explorer.getDirectory(path);
-        }
-        catch (FileNotFoundException e) {
-          result.registerError(0, "The path does not exist.");
-        }
-        
-        // Set the working directory to the directory given by the path
-        if (newDir != null)
+      FileExplorer explorer = jShell.getFileExplorer();
+      Directory currentDirectory = explorer.getWorkingDirectory();
+  
+      String path = arguments.get(0);
+      boolean succeeded = false;
+      
+      if (path.equals(".")) {
+        // If the user wants to change to the current directory
+      }
+      else if (path.equals("..")) {
+        // If the user wants to change to the parent directory
+        Directory workingDir = currentDirectory;
+        if (!workingDir.isRootDirectory()) {
+          // Get the parent directory of the working directory
+          Directory newDir = workingDir.getFileDirectory();
+          // Set the working directory to be the parent directory
           explorer.setWorkingDirectory(newDir);
+        }
+      } else {
+        
+          Directory newDir = null;
+          
+          try {
+            newDir = explorer.getDirectory(path);
+          }
+          catch (FileNotFoundException e) {
+            result.registerError(0, "The path does not exist.");
+          }
+          
+          // Set the working directory to the directory given by the path
+          if (newDir != null)
+            explorer.setWorkingDirectory(newDir);
+      }
     }
     
     return result;

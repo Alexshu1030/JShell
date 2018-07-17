@@ -31,6 +31,7 @@
 package commands;
 
 import java.util.ArrayList;
+import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class Curl implements Command {
@@ -38,19 +39,22 @@ public class Curl implements Command {
   private String commandName = "curl";
   private int numOfArguments = 1;
   
-  @Override
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    Result result = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    String url = arguments.get(0);
-    String arr[] = url.split("/");
-    String outfile = arr[arr.length - 1];
-    Web web = new Web();
-    // Get the contents of the web page
-    String contents = web.grabContents(jShell, arguments);
-    // Echo the contents into the file
-    Commands.run(jShell, "echo " + contents + " > " + outfile);
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
+    
+      String url = arguments.get(0);
+      String arr[] = url.split("/");
+      String outfile = arr[arr.length - 1];
+      Web web = new Web();
+      // Get the contents of the web page
+      String contents = web.grabContents(jShell, arguments);
+      // Echo the contents into the file
+      Commands.run(jShell, "echo " + contents + " > " + outfile);
+    }
     
     return result;
   }

@@ -79,23 +79,28 @@ public class Mkdir implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
-    FileExplorer explorer = jShell.getFileExplorer();
+    Result result = areValidArguments(arguments);
     
-    // for each element in arguments, create a new directory
-    for (int i = 0; i < arguments.size(); i++) {
-      
-      String path = arguments.get(i);
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
 
-      try {
-        explorer.addDirectory(path);
-      } catch (FileNotFoundException e) {
-        result.registerError(i, "The path does not exist.");
-      } catch (PathExistsException e) {
-        result.registerError(i, "A directory already exists at that path.");
+      FileExplorer explorer = jShell.getFileExplorer();
+      
+      // for each element in arguments, create a new directory
+      for (int i = 0; i < arguments.size(); i++) {
+        
+        String path = arguments.get(i);
+  
+        try {
+          explorer.addDirectory(path);
+        } catch (FileNotFoundException e) {
+          result.registerError(i, "The path does not exist.");
+        } catch (PathExistsException e) {
+          result.registerError(i, "A directory already exists at that path.");
+        }
       }
     }
-
+    
     return result;
   }
 

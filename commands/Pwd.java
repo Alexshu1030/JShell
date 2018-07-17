@@ -94,16 +94,21 @@ public class Pwd implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    Result result = new Result(arguments);
-    String messages = null;
-    // Get the file explorer
-    FileExplorer fileExplorer = jShell.getFileExplorer();
-    // Get the path to the working directory
-    String workingDirPath = fileExplorer.getWorkingDirectory().getFullPath();
-    // Print this path
-    messages = workingDirPath;
-    result.addMessage(workingDirPath);
+    Result result = areValidArguments(arguments);
+    
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
 
+      String messages = null;
+      // Get the file explorer
+      FileExplorer fileExplorer = jShell.getFileExplorer();
+      // Get the path to the working directory
+      String workingDirPath = fileExplorer.getWorkingDirectory().getFullPath();
+      // Print this path
+      messages = workingDirPath;
+      result.addMessage(workingDirPath);
+    }
+    
     return result;
   }
 

@@ -69,54 +69,58 @@ public class Ls implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
-    Result result = new Result(arguments);
+    Result result = areValidArguments(arguments);
     
-    String messages = "";
-    // If no argument was given, list all files and directories
-    if (arguments.size() == 0) {
-      // The file is a directory. We want to print the contents of the
-      // directory.
-      Directory dir = jShell.getFileExplorer().getWorkingDirectory();
-      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
       
-      for (int f = 0; f < files.size(); f++) {
-        result.addMessage(files.get(f).getFileName());
-      }
-    } 
-    else {
-      // Iterate over the paths and print the contents of each
-      for (int i = 0; i < arguments.size(); i++) {
-        // Get the contents of the given path
-        String path = arguments.get(i);
-        File file = null;
+      String messages = "";
+      // If no argument was given, list all files and directories
+      if (arguments.size() == 0) {
+        // The file is a directory. We want to print the contents of the
+        // directory.
+        Directory dir = jShell.getFileExplorer().getWorkingDirectory();
+        ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
         
-        try {
-          file = jShell.getFileExplorer().getFile(path);
+        for (int f = 0; f < files.size(); f++) {
+          result.addMessage(files.get(f).getFileName());
         }
-        catch (FileNotFoundException e) {
-          result.registerError(0, "The path does not exist.");
-        }
-        
-        if (file != null) {
-          if (file.isDirectory()) {
-            // The file is a directory. We want to print the contents of the
-            // directory.
-            result.addMessage(file.getFileName() + ":");
-            ArrayList<File> files = (ArrayList<File>)file.getFileContents();
-            
-            
-            for (int f = 0; f < files.size(); f++) {
-              result.addMessage(files.get(f).getFileName());
+      } 
+      else {
+        // Iterate over the paths and print the contents of each
+        for (int i = 0; i < arguments.size(); i++) {
+          // Get the contents of the given path
+          String path = arguments.get(i);
+          File file = null;
+          
+          try {
+            file = jShell.getFileExplorer().getFile(path);
+          }
+          catch (FileNotFoundException e) {
+            result.registerError(0, "The path does not exist.");
+          }
+          
+          if (file != null) {
+            if (file.isDirectory()) {
+              // The file is a directory. We want to print the contents of the
+              // directory.
+              result.addMessage(file.getFileName() + ":");
+              ArrayList<File> files = (ArrayList<File>)file.getFileContents();
+              
+              
+              for (int f = 0; f < files.size(); f++) {
+                result.addMessage(files.get(f).getFileName());
+              }
+            }
+            else {
+              // The file is just a file. We want to print it's name.
+              result.addMessage(file.getFileName());
             }
           }
-          else {
-            // The file is just a file. We want to print it's name.
-            result.addMessage(file.getFileName());
-          }
+          
+          if (i != arguments.size() - 1)
+            result.addMessage("");
         }
-        
-        if (i != arguments.size() - 1)
-          result.addMessage("");
       }
     }
     

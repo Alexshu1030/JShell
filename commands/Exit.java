@@ -30,6 +30,7 @@
 package commands;
 
 import java.util.ArrayList;
+import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class Exit implements Command {
@@ -64,9 +65,14 @@ public class Exit implements Command {
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
-    Result result = new Result(arguments);
-    // Terminate
-    jShell.setTerminate(true);
+    Result result = areValidArguments(arguments);
+    
+    // If there were no errors in the arguments then we can run the command
+    if (!result.errorOccured()) {
+      // Terminate
+      jShell.setTerminate(true);
+    }
+    
     return result;
   }
 
