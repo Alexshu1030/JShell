@@ -64,7 +64,7 @@ public class Man implements Command {
    * @param arguments a list containing the command to have its manual printed
    * @return result the output to the shell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
     Result result = new Result(arguments);
     
@@ -77,7 +77,7 @@ public class Man implements Command {
       messages = command.getHelpText();
       result.addMessage(command.getHelpText());
     }
-    return messages;
+    return result;
   }
 
   /**

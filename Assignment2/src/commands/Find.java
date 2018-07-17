@@ -73,7 +73,7 @@ public class Find implements Command {
    *        command
    * @return the result to be printed to the JShell
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = new Result(arguments);
     FileExplorer explorer = jShell.getFileExplorer();
@@ -125,7 +125,7 @@ public class Find implements Command {
       }
     }
 
-    return message;
+    return result;
   }
 
   /**

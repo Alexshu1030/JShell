@@ -43,7 +43,7 @@ public interface Command {
    * @param arguments a list of arguments for the command
    * @return the output of the command
    */
-  public String run(JShellWindow jShell, ArrayList<String> arguments);
+  public Result run(JShellWindow jShell, ArrayList<String> arguments);
 
   /**
    * Gets the name of the command.
