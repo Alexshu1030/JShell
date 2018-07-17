@@ -31,6 +31,7 @@ package commands;
 
 import java.awt.List;
 import java.util.ArrayList;
+import exceptions.FileNotFoundException;
 import shell.JShellWindow;
 import filesystem.*;
 
@@ -74,19 +75,25 @@ public class Find implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
     FileExplorer explorer = jShell.getFileExplorer();
 
     int numOfPaths = arguments.size() - 4;
     ArrayList<Directory> directories = new ArrayList<Directory>();
 
     for (int i = 0; i < numOfPaths; i++) {
-      Directory dir = explorer.getDirectory(arguments.get(i));
+      
+      Directory dir = null;
+      
+      try {
+        dir = explorer.getDirectory(arguments.get(i));
+      }
+      catch (FileNotFoundException e) {
+        result.registerError(i, "The file does not exist.");
+      }
 
       if (dir != null)
         directories.add(dir);
-      else
-        System.out
-            .println("The directory " + arguments.get(i) + " does not exist");
     }
 
     String type = arguments.get(arguments.size() - 3);
@@ -112,6 +119,7 @@ public class Find implements Command {
           if (file.getFileName().equals(name)) {
             // The file has the same name.
             message += file.getFullPath() + "\n";
+            result.addMessage(file.getFullPath());
           }
         }
       }
