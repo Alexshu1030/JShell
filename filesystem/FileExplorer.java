@@ -29,7 +29,7 @@
 // *********************************************************
 package filesystem;
 
-import exceptions.*;
+import Exceptions.*;
 
 public class FileExplorer {
 
