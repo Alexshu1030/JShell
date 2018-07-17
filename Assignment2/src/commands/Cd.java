@@ -145,4 +145,9 @@ public class Cd implements Command {
 
     return helpText;
   }
+  
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }

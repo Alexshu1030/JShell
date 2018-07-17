@@ -74,8 +74,14 @@ public class Ls implements Command {
     String messages = "";
     // If no argument was given, list all files and directories
     if (arguments.size() == 0) {
-
+      // The file is a directory. We want to print the contents of the
+      // directory.
+      Directory dir = jShell.getFileExplorer().getWorkingDirectory();
+      ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
       
+      for (int f = 0; f < files.size(); f++) {
+        result.addMessage(files.get(f).getFileName());
+      }
     } 
     else {
       // Iterate over the paths and print the contents of each
@@ -95,7 +101,9 @@ public class Ls implements Command {
           if (file.isDirectory()) {
             // The file is a directory. We want to print the contents of the
             // directory.
+            result.addMessage(file.getFileName() + ":");
             ArrayList<File> files = (ArrayList<File>)file.getFileContents();
+            
             
             for (int f = 0; f < files.size(); f++) {
               result.addMessage(files.get(f).getFileName());
@@ -108,7 +116,7 @@ public class Ls implements Command {
         }
         
         if (i != arguments.size() - 1)
-          result.addMessage("\n");
+          result.addMessage("");
       }
     }
     
@@ -151,5 +159,10 @@ public class Ls implements Command {
   public String getHelpText() {
 
     return helpText;
+  }
+  
+  public boolean canBeRedirected() {
+    
+    return true;
   }
 }

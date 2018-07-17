@@ -140,4 +140,9 @@ public class Cat implements Command {
 
     return helpText;
   }
+
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }

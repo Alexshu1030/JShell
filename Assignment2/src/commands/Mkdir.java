@@ -127,7 +127,6 @@ public class Mkdir implements Command {
       String name = arguments.get(0);
       if (name.matches("[A-Za-z0-9-/]+")) {
         isValid = true;
-
       }
     } else {
       // recursive step: run on first argument and the rest of the arguments
@@ -151,5 +150,10 @@ public class Mkdir implements Command {
   public String getHelpText() {
 
     return helpText;
+  }
+  
+  public boolean canBeRedirected() {
+    
+    return true;
   }
 }

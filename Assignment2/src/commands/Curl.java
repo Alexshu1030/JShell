@@ -73,4 +73,8 @@ public class Curl implements Command {
     return null;
   }
 
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }

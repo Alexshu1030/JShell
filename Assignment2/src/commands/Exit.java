@@ -101,4 +101,9 @@ public class Exit implements Command {
 
     return helpText;
   }
+  
+  public boolean canBeRedirected() {
+    
+    return false;
+  }
 }

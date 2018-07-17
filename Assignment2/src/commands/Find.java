@@ -178,4 +178,8 @@ public class Find implements Command {
     return helpText;
   }
 
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }
