@@ -82,8 +82,9 @@ public class FileExplorer {
    * @param path the path of the file
    * @return the file at that path
    */
-  public File getFile(String path) throws FileNotFoundException{
+  public File getFile(String path) throws FileNotFoundException {
 
+    /*
     // Get the directory the file is in
     Directory dir = getParentDirectory(path);
     File file = null;
@@ -95,6 +96,58 @@ public class FileExplorer {
     }
 
     return file;
+    */
+    
+    Directory rootDir;
+
+    if (Path.isAbsolute(path)) {
+      // The path is absolute so we want to start at the root directory and
+      // work our way to the file.
+      rootDir = rootDirectory;
+      // Make the path relative to the root directory. If the path is of
+      // length 0, then it is the root directory.
+      if (path.length() > 0)
+        path = path.substring(1);
+    } else {
+      // The path is relative so we want to start in the working directory
+      // and work our way to the file.
+      rootDir = workingDirectory;
+    }
+
+    // Use the helper method.
+    return getFileHelper(rootDir, path);
+  }
+
+  private File getFileHelper(File file, String path)
+      throws FileNotFoundException {
+
+    if (path.equals("")) {
+      // We have reached the end of the path. The current file is the one we
+      // are looking for.
+      return file;
+    }
+    else if (file.isDirectory()) {
+
+      // We are not at the end of the path. As such, we must be in a directory
+      // as a non directory can not contain a file.
+      Directory dir = (Directory) file;
+      
+      // Get the next directory in the path
+      String nextDirName = Path.getRootDirectory(path);
+      Directory nextDir = dir.getDirectory(nextDirName);
+      
+      // Get the path relative to nextDir
+      String relPath = Path.getSubPath(path);
+      
+      // Rerun the method on this directory using the path relative to it
+      return getFileHelper(nextDir, relPath);
+    }
+    else {
+      // The file is not a directory and we are not at the end of the path. The
+      // path does not exist.
+      throw new FileNotFoundException();
+    }
+
   }
 
   /**
@@ -103,7 +156,7 @@ public class FileExplorer {
    * @param path the path of the directory
    * @return the directory at that path
    */
-  public Directory getDirectory(String path) throws FileNotFoundException{
+  public Directory getDirectory(String path) throws FileNotFoundException {
 
     File file = getFile(path);
     Directory dir = null;
@@ -122,7 +175,7 @@ public class FileExplorer {
    * @return the directory that the file is in
    */
   public Directory getParentDirectory(String path)
-      throws FileNotFoundException{
+      throws FileNotFoundException {
 
     // Get the path of the directory that the file is in
     // Note that at this point the file may not actually exist but we will
@@ -150,13 +203,13 @@ public class FileExplorer {
     return getDirectoryHelper(rootDir, dirPath);
   }
 
-  private Directory getDirectoryHelper(Directory curDir, String relPath) 
-      throws FileNotFoundException{
+  private Directory getDirectoryHelper(Directory curDir, String relPath)
+      throws FileNotFoundException {
 
     Directory dir;
 
     if (relPath.equals("")) {
-      // Base case. We are at the end of the relative path. The current
+      // Base case. We are at the end of the relative path.
       // The current directory that we are in is the one we are looking for.
       dir = curDir;
     } else {
@@ -164,38 +217,9 @@ public class FileExplorer {
       // Get the next directory we want to look in
       String nextDirName = Path.getRootDirectory(relPath);
       Directory nextDir = (Directory) curDir.getFile(nextDirName);
-
-      if (nextDir != null) {
-        // We now want to get the path relative to this directory. And then
-        // run the method again on that path with that directory.
-        String newRelPath = Path.getSubPath(relPath);
-        dir = getDirectoryHelper(nextDir, newRelPath);
-      } else {
-        // The path doesn't exit. Return null.
-        dir = null;
-      }
-    }
-
-    return dir;
-  }
-
-  public File getFileNEW(Directory currentDirectory, String relativePath)
-      throws FileNotFoundException {
-
-    File dir;
-
-    if (relativePath.equals("")) {
-      // We are at the end of the path. The directory we are in is the file we
-      // are looking for.
-      dir = currentDirectory;
-    } else {
-
-      // Get the next directory we want to look in
-      String nextDirName = Path.getRootDirectory(relativePath);
-      Directory nextDir = (Directory) currentDirectory.getFile(nextDirName);
-      // We now want to get the path relative to this directory. And then
-      // run the method again on that path with that directory.
-      String newRelPath = Path.getSubPath(relativePath);
+      // We want to run the method again using this directory and the path
+      // relative to it.
+      String newRelPath = Path.getSubPath(relPath);
       dir = getDirectoryHelper(nextDir, newRelPath);
     }
 
@@ -208,7 +232,7 @@ public class FileExplorer {
    * @param dirPath the path to the directory you want to add the file in
    * @param file the file being added to the FileExplorer
    */
-  public void addFile(String dirPath, File file) throws FileNotFoundException{
+  public void addFile(String dirPath, File file) throws FileNotFoundException {
 
     // The full path of the file
     String path = dirPath + "/" + file.getFileName();
@@ -226,8 +250,8 @@ public class FileExplorer {
    * 
    * @param path the path to the directory
    */
-  public void addDirectory(String path) throws FileNotFoundException, 
-  PathExistsException{
+  public void addDirectory(String path)
+      throws FileNotFoundException, PathExistsException {
 
     String dirName = Path.getFileName(path);
     String dirPath = Path.removeFileName(path);
@@ -241,8 +265,7 @@ public class FileExplorer {
         Directory childDir = new Directory(dirName, parentDir);
         parentDir.addFile(childDir);
       }
-    }
-    else {
+    } else {
       throw new PathExistsException();
     }
   }
@@ -256,16 +279,16 @@ public class FileExplorer {
   public boolean pathExists(String path) {
 
     boolean exists = true;
-    
+
     try {
       // Attempt to get the file at the path
       File file = getFile(path);
-    }
-    catch (FileNotFoundException e) {
+    } catch (FileNotFoundException e) {
       // The file was not found so it doesn't exist
       exists = false;
     }
 
     return exists;
   }
+
 }

@@ -62,12 +62,6 @@ public class Path {
    */
   public static String getRootDirectory(String path) {
 
-    // If the path is absolute then we want to ignore the first character
-    // (which is a slash)
-    if (isAbsolute(path))
-      path = path.substring(1);
-
-
     // Get the first slash in the path
     int firstSlash = path.indexOf('/');
 
@@ -77,28 +71,8 @@ public class Path {
       // Return everything up to the slash. This is the root directory of the
       // path.
       result = path.substring(0, firstSlash);
-    else {
-      // Since there is no slash in the path, this must be a file or folder
-      // name. If it is a folder then we want to return it. Otherwise we just
-      // want to return the root directory.
-      if (getFileExtension(path) == "")
-        result = path;
-    }
 
     return result;
-  }
-
-
-  /**
-   * Determines whether the specified path is a directory
-   * 
-   * @param path the path that you want to know whether it is a directory
-   * @return true if it is a directory and false otherwise
-   */
-  public static boolean isDirectory(String path) {
-
-    // If the file has no extension then it is a folder
-    return getFileExtension(path).equals("");
   }
 
   /**
@@ -115,28 +89,6 @@ public class Path {
     int nameStartIndex = path.lastIndexOf('/') + 1;
 
     return path.substring(nameStartIndex);
-  }
-
-  /**
-   * Returns the extension of the file at the specified path. If it is a folder
-   * then an empty string will be returned.
-   * 
-   * @param path the path to the file
-   * @return the extension of the file
-   */
-  public static String getFileExtension(String path) {
-
-    // Get the last decimal in the path.
-    int decimalIndex = path.lastIndexOf('.');
-
-    String result = "";
-
-    // We want to return all of the text after the decimal. If there is no
-    // decimal, then it is a folder and we want to return an empty string.
-    if (decimalIndex != -1)
-      result = path.substring(decimalIndex);
-
-    return result;
   }
 
   /**
