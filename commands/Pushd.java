@@ -92,7 +92,7 @@ public class Pushd implements Command {
         newDir = explorer.getDirectory(path);
       }
       catch (FileNotFoundException e) {
-        result.registerError(0, "The path does not exist.");
+        result.logError(0, "The path does not exist.");
       }
       
       // If the directory exists then add it to the stack
@@ -124,7 +124,7 @@ public class Pushd implements Command {
     Result result = new Result(arguments);
     
     if (arguments.size() != numOfArguments) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

@@ -94,9 +94,9 @@ public class Mkdir implements Command {
         try {
           explorer.addDirectory(path);
         } catch (FileNotFoundException e) {
-          result.registerError(i, "The path does not exist.");
+          result.logError(i, "The path does not exist.");
         } catch (PathExistsException e) {
-          result.registerError(i, "A directory already exists at that path.");
+          result.logError(i, "A directory already exists at that path.");
         }
       }
     }
@@ -127,7 +127,7 @@ public class Mkdir implements Command {
     if (arguments.size() == 0) {
       // There must be at least one argument (i.e. a directory name) to create
       // a directory
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     else {
       for (int i = 0; i < arguments.size(); i++) {
@@ -137,7 +137,7 @@ public class Mkdir implements Command {
         
         // Logs an error if the directory contains an invalid characters
         if (!containsValidCharacters(dirName)) {
-          result.registerError(i, "Invalid characters in directory name.");
+          result.logError(i, "Invalid characters in directory name.");
         }
       }
     }

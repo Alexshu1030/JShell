@@ -69,7 +69,7 @@ public class Curl implements Command {
     Result result = new Result(arguments);
     
     if (arguments.size() != numOfArguments) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

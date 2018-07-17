@@ -82,7 +82,7 @@ public class Result {
     return errorOccured;
   }
   
-  public void registerError(String errorMessage) {
+  public void logError(String errorMessage) {
     
     errorOccured = true;
     
@@ -94,7 +94,7 @@ public class Result {
       this.errorMessage += "\n" + errorMessage;
   }
   
-  public void registerError(int argument, String errorMessage) {
+  public void logError(int argument, String errorMessage) {
     
     errorOccured = true;
     

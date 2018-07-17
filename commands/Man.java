@@ -108,7 +108,7 @@ public class Man implements Command {
 
     // return true if there is 1 argument
     if (arguments.size() != numOfArguments) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

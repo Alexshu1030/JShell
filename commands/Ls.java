@@ -97,7 +97,7 @@ public class Ls implements Command {
             file = jShell.getFileExplorer().getFile(path);
           }
           catch (FileNotFoundException e) {
-            result.registerError(0, "The path does not exist.");
+            result.logError(0, "The path does not exist.");
           }
           
           if (file != null) {
