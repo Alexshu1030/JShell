@@ -30,6 +30,7 @@
 package commands;
 
 import java.util.ArrayList;
+import exceptions.FileNotFoundException;
 import filesystem.FileExplorer;
 import filesystem.Directory;
 import filesystem.DirectoryStack;
@@ -74,17 +75,25 @@ public class Pushd implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
     FileExplorer explorer = jShell.getFileExplorer();
     String messages = null;
     // Get the path of the directory that we want to push
     String path = arguments.get(0);
+    
     // Get the directory at the path
-    Directory newDir = explorer.getDirectory(path);
+    Directory newDir = null;
+    
+    try {
+      newDir = explorer.getDirectory(path);
+    }
+    catch (FileNotFoundException e) {
+      result.registerError(0, "The path does not exist.");
+    }
+    
     // If the directory exists then add it to the stack
     if (newDir != null)
       DirectoryStack.stack.pushd(jShell, newDir);
-    else
-      System.out.println("The directory does not exist.");
 
     return "";
   }
