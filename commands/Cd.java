@@ -126,14 +126,15 @@ public class Cd implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
+  public Result areValidArguments(ArrayList<String> arguments) {
 
-    boolean isValid = false;
-    // if there is 1 argument return true
-    if (arguments.size() == numOfArguments) {
-      isValid = true;
+    Result result = new Result(arguments);
+    
+    if (arguments.size() != numOfArguments) {
+      result.registerError("Invalid number of arguments.");
     }
-    return isValid;
+    
+    return result;
   }
 
   /**

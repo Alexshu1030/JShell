@@ -87,9 +87,15 @@ public class Exit implements Command {
    * @param arguments this is a list containing the arguments input
    * @return isValid this is true if arguments are valid, o/w false
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    boolean isValid = arguments.isEmpty();
-    return isValid;
+  public Result areValidArguments(ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
+    
+    if (!arguments.isEmpty()) {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
   /**

@@ -63,10 +63,15 @@ public class Pwd implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    // if there are 0 arguments return true
-    boolean isValid = arguments.size() == numOfArguments;
-    return isValid;
+  public Result areValidArguments(ArrayList<String> arguments) {
+
+    Result result = new Result(arguments);
+    
+    if (arguments.size() != numOfArguments) {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
   /**

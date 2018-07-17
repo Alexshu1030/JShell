@@ -114,10 +114,15 @@ public class Pushd implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
+  public Result areValidArguments(ArrayList<String> arguments) {
     // return true if there are 1 arguments
-    boolean isValid = arguments.size() == numOfArguments;
-    return isValid;
+    Result result = new Result(arguments);
+    
+    if (arguments.size() != numOfArguments) {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
   /**

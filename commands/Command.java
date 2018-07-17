@@ -59,7 +59,7 @@ public interface Command {
    * @param arguments the arguments
    * @return true if the args are valid and false otherwise.
    */
-  public boolean areValidArguments(ArrayList<String> arguments);
+  public Result areValidArguments(ArrayList<String> arguments);
 
   /**
    * Returns the help text for this command.

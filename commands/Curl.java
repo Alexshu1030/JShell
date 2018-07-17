@@ -55,21 +55,24 @@ public class Curl implements Command {
     return result;
   }
 
-  @Override
   public String getCommandName() {
-    // TODO Auto-generated method stub
+
     return commandName;
   }
 
-  @Override
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    // TODO Auto-generated method stub
-    return (arguments.size() == numOfArguments);
+  public Result areValidArguments(ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
+    
+    if (arguments.size() != numOfArguments) {
+      result.registerError("Invalid number of arguments.");
+    }
+    
+    return result;
   }
 
-  @Override
   public String getHelpText() {
-    // TODO Auto-generated method stub
+
     return null;
   }
 

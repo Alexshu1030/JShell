@@ -140,15 +140,11 @@ public class Ls implements Command {
    * @param arguments the list of str arguments passed to the command
    * @return isValid true if the command is valid and vice versa
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    boolean isValid = false;
-    // if there are 0 or more arguments return true
-    int numOfArgs = arguments.size();
-    if (numOfArgs >= 0) {
-      isValid = true;
-    }
+  public Result areValidArguments(ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
 
-    return isValid;
+    return result;
   }
 
   /**

@@ -144,8 +144,10 @@ public class Find implements Command {
    * @param arguments the list of arguments for the command
    * @return is true if the args are valid. Otherwise false.
    */
-  public boolean areValidArguments(ArrayList<String> arguments) {
+  public Result areValidArguments(ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
+    
     boolean valid = false;
     int size = arguments.size();
 
@@ -161,11 +163,19 @@ public class Find implements Command {
             // the command is valid
             valid = true;
           }
+          else
+            result.registerError("Invalid number of arguments.");
         }
+        else
+          result.registerError(size - 4, "Invalid argument.");
       }
+      else
+        result.registerError(size - 3, "Invalid argument.");
     }
-    // return the valid bool
-    return valid;
+    else
+      result.registerError(size - 2, "Invalid argument.");
+    
+    return result;
   }
 
   /**
