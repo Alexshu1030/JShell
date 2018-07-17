@@ -30,6 +30,7 @@
 package commands;
 
 import java.util.ArrayList;
+import exceptions.FileNotFoundException;
 import shell.JShellWindow;
 import filesystem.FileExplorer;
 import filesystem.Path;
@@ -79,6 +80,7 @@ public class Echo implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result r = new Result(arguments);
     String result = "";
     int numOfArgs = arguments.size();
 
@@ -90,22 +92,41 @@ public class Echo implements Command {
     FileExplorer explorer = jShell.getFileExplorer();
 
     if (numOfArgs == 1) {
+      
       result = text + "\n";
+      r.addMessage(text);
+      
     } else if (numOfArgs == 3) {
+      
       // Assign arguments from the arraylist to proper variables
       String operationType = arguments.get(1);
       String outFilePath = arguments.get(2);
-      File outFile = explorer.getFile(outFilePath);
+      
+      File outFile = null;
+      
+      try {
+        outFile = explorer.getFile(outFilePath);
+      }
+      catch (FileNotFoundException e) {
+        // If the file does not exist we will create it below
+      }
 
       // No file exists at the path so we need to create our own
       if (outFile == null) {
         // Create a new file with path as its name, parent directory, and
         // empty contents
-        String fileName = Path.getFileName(outFilePath);
-        Directory parentDir = explorer.getParentDirectory(outFilePath);
-        outFile = new File(fileName, parentDir, "");
-        explorer.addFile(Path.removeFileName(outFilePath), outFile);
+        try {
+          String fileName = Path.getFileName(outFilePath);
+          Directory parentDir = explorer.getParentDirectory(outFilePath);
+          outFile = new File(fileName, parentDir, "");
+          explorer.addFile(Path.removeFileName(outFilePath), outFile);
+        }
+        catch (FileNotFoundException e) {
+          // The directory the file would be in does not exist.
+          r.registerError(2, "The directory does not exist.");
+        }
       }
+      
       // If the file exists and we want to overwrite
       if (operationType.equals(">")) {
         outFile.setFileContents(text);
