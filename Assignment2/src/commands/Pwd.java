@@ -55,7 +55,7 @@ public class Pwd implements Command {
       + "  /#: exit p\n" + "    will not terminate JShell because of the"
       + " additional parameter 'p'.\n" + "  /#:              exit\n"
       + "    will terminate JShell because"
-      + " JShell will ignore excess spaces.\n";
+      + " JShell will ignore excess spaces.";
 
   /**
    * Checks if the arguments given to the command is valid

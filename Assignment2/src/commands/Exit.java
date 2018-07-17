@@ -53,7 +53,7 @@ public class Exit implements Command {
           + "    will not terminate JShell because of the"
           + " additional parameter 'p'.\n" + "  /#:              exit\n"
           + "    will terminate JShell because"
-          + " JShell will ignore excess spaces.\n";
+          + " JShell will ignore excess spaces.";
 
   /**
    * Returns true if successfully terminated the jShell

@@ -56,7 +56,7 @@ public class Tree implements Command {
           + "      B\n" + "If the root directory contains 2 subdirectories A"
           + " and B with a sub directory C in A\n" + "  /#: tree\n"
           + "   will return: \n" + "   /\n" + "      A\n" + "          C\n"
-          + "      B\n";
+          + "      B";
 
   /**
    * Returns true if there are no arguments given

@@ -62,7 +62,7 @@ public class Pushd implements Command {
       + " stack.\n" + "RETURNS:\n"
       + "  This command does not return anything.\n" + "EXAMPLE USAGE:\n"
       + "  /#: pushd Dir1\n" + "    will add the current working directory to"
-      + " the stack and change the current working directory to Dir1.\n";
+      + " the stack and change the current working directory to Dir1.";
 
   /**
    * Returns true if execution of the command is successful. Execution pushes

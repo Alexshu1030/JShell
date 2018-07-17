@@ -57,7 +57,7 @@ public class Ls implements Command {
       + "    will recursively return all files and"
       + "directories in the directory /PATH/.\n" + "  /#: ls /PATH1/ /PATH2/\n"
       + "    will recursively return all files and"
-      + "directories in the directory /PATH1/ and /PATH2/.\n";
+      + "directories in the directory /PATH1/ and /PATH2/.";
 
   /**
    * Returns true if execution of the command is successful. Execution prints

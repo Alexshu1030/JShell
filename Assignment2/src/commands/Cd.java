@@ -60,7 +60,7 @@ public class Cd implements Command {
       + " which is located in Dir1 which is located in the current"
       + "directory.\n" + "  /#: cd ..\n"
       + "    will change the current directory to its" 
-      + "parent directory.\n";
+      + "parent directory.";
 
   /**
    * Returns true if execution of the command is successful. Execution changes

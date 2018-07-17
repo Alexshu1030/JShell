@@ -67,7 +67,7 @@ public class Mkdir implements Command {
       + " directory named Dir2 that is located in the current" + " directory.\n"
       + " If Dir2 does not exist in the current directory,"
       + " it will look for Dir2 in the root directory. If Dir2 can not "
-      + "be found, the command will fail.\n";
+      + "be found, the command will fail.";
 
   /**
    * Returns true if execution of command is successful. Execution creates new
