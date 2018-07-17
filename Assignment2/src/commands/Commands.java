@@ -53,8 +53,8 @@ public class Commands {
   public static Result run(JShellWindow jShell, String commandText) {
     // split at quotations for echo parameter 1
     commandText.split("\"");
-    // Split the command into it's parts (i.e. separate blocks of text, quotes
-    // and etc.)
+    // Split the command into it's parts (i.e. separate blocks of text, quotes,
+    // etc.)
     ArrayList<String> arguments = split(commandText);
 
     Result result = null;
@@ -124,7 +124,7 @@ public class Commands {
         }
       }
     }
-
+    
     return result;
   }
 
@@ -152,6 +152,20 @@ public class Commands {
     }
 
     return command;
+  }
+  
+  private static boolean isRedirected(ArrayList<String> arguments) {
+    
+    boolean isRedirected = false;
+    
+    if (arguments.size() > 1) {
+      if (arguments.get(arguments.size() - 2).equals(">") ||
+          arguments.get(arguments.size() - 2).equals(">>")) {
+        isRedirected = true;
+      }
+    }
+    
+    return isRedirected;
   }
 
   /**
