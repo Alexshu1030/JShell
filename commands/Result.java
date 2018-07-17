@@ -21,6 +21,14 @@ public class Result {
     return message;
   }
   
+  public void addMessage(String message) {
+    
+    if (this.message.equals(""))
+      this.message = message;
+    else
+      this.message += "\n" + message;
+  }
+  
   public void addMessage(String message, String spacing) {
     
     if (this.message.equals(""))
@@ -34,7 +42,7 @@ public class Result {
     return errorOccured;
   }
   
-  public void RegisterError(String errorMessage) {
+  public void registerError(String errorMessage) {
     
     errorOccured = true;
     
@@ -46,7 +54,7 @@ public class Result {
       this.errorMessage += "\n" + errorMessage;
   }
   
-  public void RegisterError(int argument, String errorMessage) {
+  public void registerError(int argument, String errorMessage) {
     
     errorOccured = true;
     
