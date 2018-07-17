@@ -54,7 +54,7 @@ public class Man implements Command {
       + "EXAMPLE USAGE:\n" + "  /#: man man\n"
       + "    will display documentation for man.\n" + "  /#: man nam\n"
       + "    Will return an error message because nam"
-      + " is not a valid command.\n";
+      + " is not a valid command.";
 
   /**
    * Returns true if execution of command is successful. Execution prints the

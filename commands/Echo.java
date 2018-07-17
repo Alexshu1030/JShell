@@ -68,7 +68,7 @@ public class Echo implements Command {
           + "    will display Hello\n" + "If FILE1 contains 'hello'\n"
           + "  /#: echo \"Hello\" > FILE1\n" + "    FILE1 will contain Hello\n"
           + "If FILE1 contains 'hello'\n" + "  /#: echo \"Hello\" >> FILE1\n"
-          + "    FILE1 will contain helloHello.\n";
+          + "    FILE1 will contain helloHello.";
 
   /**
    * Returns true if execution of command is successful. Execution print or add

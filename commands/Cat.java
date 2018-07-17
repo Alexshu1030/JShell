@@ -58,7 +58,7 @@ public class Cat implements Command {
           + "EXAMPLE USAGE:\n" + "If FILE1 contains 'hello'\n"
           + "  /#: cat FILE1\n" + "    will return 'hello'\n"
           + "If FILE1 contains 'hello' and FILE2 contains " + "'there'\n"
-          + "  /#: cat FILE1 FILE2\n" + "    Will return 'hellothere'.\n";
+          + "  /#: cat FILE1 FILE2\n" + "    Will return 'hellothere'.";
 
   /**
    * Returns true if execution of command is successful. Execution returns the

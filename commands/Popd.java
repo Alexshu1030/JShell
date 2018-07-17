@@ -55,7 +55,7 @@ public class Popd implements Command {
           + "    will change the current working directory to "
           + "the one at the top of the stack.\n"
           + "If the directory stack is empty.\n" + "  /#: popd\n"
-          + "    Will return an error message.\n";
+          + "    Will return an error message.";
 
   /**
    * Returns true if execution of command is successful. Execution sets current

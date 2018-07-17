@@ -42,13 +42,11 @@ import shell.JShellWindow;
 public class JShell {
 
   private static String prompt = "/# ";
-  private static String errorMessage = "Invalid command";
 
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
 
+    // Create a new JShell window and scanner
     JShellWindow window = new JShellWindow();
-
     Scanner in = new Scanner(System.in);
 
     // While the window hasn't been terminated, continuously read user input

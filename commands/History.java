@@ -58,7 +58,7 @@ public class History implements Command {
           + "    1. history\n" + "If we were to enter the pwd command first.\n"
           + "  /#: history\n" + "    1. pwd\n" + "    2. history\n"
           + "If we were to enter the pwd command twice first.\n"
-          + "  /#: history 2\n" + "    1. pwd\n" + "    2. history\n";
+          + "  /#: history 2\n" + "    1. pwd\n" + "    2. history";
 
   /**
    * Returns true if execution of command terminates. With no parameter,
