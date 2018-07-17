@@ -29,6 +29,7 @@
 package commands;
 
 import java.util.ArrayList;
+import exceptions.EmptyStackException;
 import filesystem.DirectoryStack;
 import shell.JShellWindow;
 
@@ -65,8 +66,16 @@ public class Popd implements Command {
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
-    // Returns "" if it succeeds
-    DirectoryStack.stack.popd(jShell);
+    
+    Result result = new Result(arguments);
+    
+    try {
+      DirectoryStack.stack.popd(jShell);
+    }
+    catch (EmptyStackException e) {
+      result.registerError("The directory stack is empty");
+    }
+    
     String messages = "";
     return messages;
   }

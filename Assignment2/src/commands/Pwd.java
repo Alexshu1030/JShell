@@ -88,6 +88,8 @@ public class Pwd implements Command {
    * @return result the output to the shell
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
+    
+    Result result = new Result(arguments);
     String messages = null;
     // Get the file explorer
     FileExplorer fileExplorer = jShell.getFileExplorer();
@@ -95,6 +97,7 @@ public class Pwd implements Command {
     String workingDirPath = fileExplorer.getWorkingDirectory().getFullPath();
     // Print this path
     messages = workingDirPath;
+    result.addMessage(workingDirPath);
 
     return messages + "\n";
   }
