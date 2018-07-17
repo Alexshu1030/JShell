@@ -36,11 +36,9 @@ import shell.JShellWindow;
 import java.io.IOException;
 import java.net.URL;
 
-public class Web implements Command {
-  private String commandName = "web";
-  private int numOfArguments = 1;
-  @Override
-  public String run(JShellWindow jShell, ArrayList<String> arguments) {
+public class Web {
+
+  public String grabContents(JShellWindow jShell, ArrayList<String> arguments) {
     
     String result = "";
     String url = arguments.get(0);
@@ -68,24 +66,6 @@ public class Web implements Command {
       }
     }
     return result;
-  }
-
-  @Override
-  public String getCommandName() {
-    // TODO Auto-generated method stub
-    return commandName;
-  }
-
-  @Override
-  public boolean areValidArguments(ArrayList<String> arguments) {
-    // TODO Auto-generated method stub
-    return numOfArguments == arguments.size();
-  }
-
-  @Override
-  public String getHelpText() {
-    // TODO Auto-generated method stub
-    return null;
   }
 
 }
