@@ -30,6 +30,7 @@
 package commands;
 
 import java.util.ArrayList;
+import exceptions.*;
 import filesystem.File;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
@@ -75,18 +76,29 @@ public class Cat implements Command {
     String message = "";
 
     for (int i = 0; i < arguments.size(); i++) {
+      
       // We need to replace the argument at i with a File object
       String path = arguments.get(i);
+      
       // Get the file at the given path and print it's contents
-      File file = explorer.getFile(path);
+      File file = null;
+      
+      // Attempt to get the file at the given path
+      try {
+        file = explorer.getFile(path);
+      }
+      catch (FileNotFoundException e) {
+        message = "The file does not exist.";
+      }
+      
+      // If the file exists, add it's contents onto the end of our message.
       if (file != null) {
         message += file.getFileContents() + "\n";
-        // make sure we do not print 3 line breaks for the last file
+        // Add a three line break between each file's contents. We do not want
+        // one of the last file.
         if (i != arguments.size() - 1) {
           message += "\n\n\n";
         }
-      } else {
-        System.out.println("The file does not exist.");
       }
     }
     return message;
