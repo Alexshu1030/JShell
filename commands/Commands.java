@@ -62,7 +62,7 @@ public class Commands {
     // There must be at least one element in the arguments for it to be a
     // valid command
     if (arguments.size() > 0) {
-      
+
       // The command name must be the first element
       String commandName = arguments.remove(0);
       Command command = getCommand(commandName);
@@ -71,38 +71,56 @@ public class Commands {
         if (command.areValidArguments(arguments)) {
           // We have found the command and it's arguments are valid. We can
           // now run the command
+          // set type of write into file and file name to null
           String outFile = "";
           String fileName = "";
+          // set the found index of > or >> to -1
           int foundIndex = -1;
+          // iterate through arguments and get type of write in file, file name
+          // and found index
           for (int i = 0; i < arguments.size(); i++) {
-        	  if (arguments.get(i).equals(">")) {
-        		  outFile = ">";
-        		  fileName = arguments.get(i+1);
-        		  foundIndex = i;
-        	  }
-        	  else if (arguments.get(i).equals(">>")) {
-        		  outFile = ">>";
-        		  fileName = arguments.get(i+1);
-        		  foundIndex = i;
-        	  }
+            if (arguments.get(i).equals(">")) {
+              outFile = ">";
+              fileName = arguments.get(i + 1);
+              foundIndex = i;
+            } else if (arguments.get(i).equals(">>")) {
+              outFile = ">>";
+              fileName = arguments.get(i + 1);
+              foundIndex = i;
+            }
           }
-        
-        
-        
-        if (outFile.equals("")) {
-        	message = command.run(jShell, arguments);
-        }
-        else {
-        	ArrayList<String> putFile = (ArrayList<String>) arguments.subList(0, foundIndex);
-        	message = command.run(jShell, putFile);
-        	ArrayList<String> echoInto = new ArrayList<String>();
-        	echoInto.add(message);
-        	echoInto.add(outFile);
-        	echoInto.add(fileName);
-        	command = getCommand("echo");
-        	command.run(jShell, echoInto);
-        	return null;
-        }
+
+
+          // if there is no > or >> found, run the command normally
+          if (outFile.equals("")) {
+            message = command.run(jShell, arguments);
+          // otherwise
+          } else {
+            // get the part of the list before the > or >>
+            ArrayList<String> putFile =
+                (ArrayList<String>) arguments.subList(0, foundIndex);
+            // run the part of the list and see if its false
+            boolean invalid = false;
+            try {
+              message = command.run(jShell, putFile);
+            } catch (Exception e) {
+              invalid = true;
+            }
+            // if the run was successful
+            if (!invalid) {
+              // setup a list of commands to be used with echo
+              ArrayList<String> echoInto = new ArrayList<String>();
+              // add the message, type of write, and file name into the list
+              echoInto.add(message);
+              echoInto.add(outFile);
+              echoInto.add(fileName);
+              // get the echo command and run it
+              command = getCommand("echo");
+              command.run(jShell, echoInto);
+              // set return to null
+              return null;
+            }
+          }
         }
       }
     }
