@@ -31,6 +31,8 @@
 package commands;
 
 import java.util.ArrayList;
+import exceptions.FileNotFoundException;
+import exceptions.PathExistsException;
 import filesystem.*;
 import shell.JShellWindow;
 
@@ -51,8 +53,7 @@ public class Mkdir implements Command {
       + " created in the current directory.\n" + "PARAMETERS:\n"
       + "  DIR1 - The name of the directory. The only valid"
       + " characters for the name are from a-z, A-Z, 0-9.\n"
-      + "  DIR2 - The name of a second directory." 
-      + " An optional parameter.\n"
+      + "  DIR2 - The name of a second directory." + " An optional parameter.\n"
       + "  [PATH] - The path that the user wants the "
       + "directory(ies) to be created in. The path may be a relative"
       + " path or a full path. An optional parameter.\n" + "RETURNS:\n"
@@ -63,8 +64,7 @@ public class Mkdir implements Command {
       + "a directory named Dir2, a directory named Dir3 in the"
       + " current directory.\n" + "  /#: mkdir Dir1 /Dir2/\n"
       + "    will create a directory named Dir1 inside the"
-      + " directory named Dir2 that is located in the current" 
-      + " directory.\n"
+      + " directory named Dir2 that is located in the current" + " directory.\n"
       + " If Dir2 does not exist in the current directory,"
       + " it will look for Dir2 in the root directory. If Dir2 can not "
       + "be found, the command will fail.\n";
@@ -79,21 +79,20 @@ public class Mkdir implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
     FileExplorer explorer = jShell.getFileExplorer();
+    
     // for each element in arguments, create a new directory
     for (int i = 0; i < arguments.size(); i++) {
+      
       String path = arguments.get(i);
-      if (Path.isDirectory(path)) {
-        Directory parentDir = explorer.getParentDirectory(path);
-        if (parentDir != null)
-          if (!explorer.pathExists(path))
-            explorer.addDirectory(path);
-          else
-            System.out.println("A file already exists at that path.");
-        else
-          System.out.println("The path does not exist.");
-      } else {
-        System.out.println("The path " + path + " is not a directory.");
+
+      try {
+        explorer.addDirectory(path);
+      } catch (FileNotFoundException e) {
+        result.registerError(i, "The path does not exist.");
+      } catch (PathExistsException e) {
+        result.registerError(i, "A directory already exists at that path.");
       }
     }
 
