@@ -161,4 +161,8 @@ public class Tree implements Command {
     return commandName;
   }
 
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }

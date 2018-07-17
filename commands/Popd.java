@@ -110,4 +110,8 @@ public class Popd implements Command {
     return helpText;
   }
 
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }

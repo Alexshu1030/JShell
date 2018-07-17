@@ -67,4 +67,6 @@ public interface Command {
    * @return the help text for this command.
    */
   public String getHelpText();
+  
+  public boolean canBeRedirected();
 }

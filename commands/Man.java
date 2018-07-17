@@ -116,4 +116,8 @@ public class Man implements Command {
     return helpText;
   }
 
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }

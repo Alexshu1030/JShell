@@ -60,10 +60,13 @@ public class Result {
   
   public void addMessage(String message) {
     
+    /*
     if (this.message.equals(""))
       this.message = message;
     else
       this.message += "\n" + message;
+     */
+    this.message += message + "\n";
   }
   
   public void addMessage(String message, String spacing) {

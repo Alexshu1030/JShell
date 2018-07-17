@@ -111,4 +111,9 @@ public class Pwd implements Command {
 
     return commandName;
   }
+  
+  public boolean canBeRedirected() {
+    
+    return true;
+  }
 }
