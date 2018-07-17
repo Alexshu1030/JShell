@@ -31,6 +31,7 @@
 package commands;
 
 import java.util.ArrayList;
+import exceptions.FileNotFoundException;
 import filesystem.*;
 import shell.JShellWindow;
 
@@ -68,6 +69,7 @@ public class Ls implements Command {
    */
   public String run(JShellWindow jShell, ArrayList<String> arguments) {
 
+    Result result = new Result(arguments);
     String messages = "";
     // If no argument was given, list all files and directories
     if (arguments.size() == 0) {
@@ -86,35 +88,46 @@ public class Ls implements Command {
     } else {
       // Get the contents of the given path
       String path = arguments.get(0);
-      File file = jShell.getFileExplorer().getFile(path);
+      File file = null;
+      
+      try {
+        file = jShell.getFileExplorer().getFile(path);
+      }
+      catch (FileNotFoundException e) {
+        result.registerError(0, "The path does not exist.");
+      }
 
-      // Check that the file exists
-      if (file == null)
-        System.out.println("The path does not exist.");
-      // Check if the file is a directory
-      else if (file.isDirectory()) {
-
-        Directory dir = (Directory) file;
-
-        ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
-        String fileNames = "";
-
-        // Iterate over the file contents and print the file names
-        for (int i = 0; i < files.size(); i++) {
-          fileNames += files.get(i).getFileName() + "\n";
+      if (file != null) {
+        // Check if the file is a directory
+        if (file.isDirectory()) {
+  
+          Directory dir = (Directory) file;
+  
+          ArrayList<File> files = (ArrayList<File>) dir.getFileContents();
+          String fileNames = "";
+  
+          // Iterate over the file contents and print the file names
+          for (int i = 0; i < files.size(); i++) {
+            fileNames += files.get(i).getFileName() + "\n";
+            result.addMessage(files.get(i).getFileName());
+          }
+  
+          messages = fileNames;
         }
-
-        messages = fileNames;
+        else {
+          // If the path is not a directory, return the file instead.
+          messages = file.getFileName();
+          result.addMessage(file.getFileName());
+        }
       }
-      // If the path is not a directory, return the file instead.
-      else {
-        messages = file.getFileName();
-      }
+      
       arguments.remove(0);
     }
+    
     if (arguments.isEmpty()) {
       return messages;
     }
+    
     return messages + "\n" + this.run(jShell, arguments);
 
   }
