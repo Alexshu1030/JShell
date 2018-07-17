@@ -71,31 +71,40 @@ public class Directory extends File {
    * @param fileName the name of the file you are looking for
    * @return Returns the file with the specified name if found. Otherwise it
    *         returns null.
-   * @throws FileNotFoundException 
+   * @throws FileNotFoundException
    */
   public File getFile(String fileName) throws FileNotFoundException {
-    // iterate through list of files to find the destination file
-    int index = 0;
+
     // set the file to be returned to be null
     File nextFile = null;
-    // Iterate over the current directory looking for the file with the name
-    // of the next directory
-    while (index < listOfFiles.size() && nextFile == null) {
+    if (fileName == ".") {
+      // We want to get this directory
+      nextFile = this;
+    } else if (fileName == "..") {
+      // We want to get the parent directory
+      nextFile = this.fileDirectory;
+    } else {
+      // iterate through list of files to find the destination file
+      int index = 0;
+      // Iterate over the current directory looking for the file with the name
+      // of the next directory
+      while (index < listOfFiles.size() && nextFile == null) {
 
-      // Get the name of the current file we are looking at
-      String nextFileName = listOfFiles.get(index).getFileName();
+        // Get the name of the current file we are looking at
+        String nextFileName = listOfFiles.get(index).getFileName();
 
-      // If we have found the next directory exit the loop. Otherwise go to
-      // the next file in the current directory.
-      if (fileName.equals(nextFileName))
-        nextFile = listOfFiles.get(index);
-      else
-        index++;
+        // If we have found the next directory exit the loop. Otherwise go to
+        // the next file in the current directory.
+        if (fileName.equals(nextFileName))
+          nextFile = listOfFiles.get(index);
+        else
+          index++;
+      }
     }
-    
+
     if (nextFile == null)
       throw new FileNotFoundException();
-    
+
     // return the found file, or null if nothing is found
     return nextFile;
   }
