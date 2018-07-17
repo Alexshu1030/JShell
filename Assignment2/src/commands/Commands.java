@@ -40,7 +40,7 @@ public class Commands {
    */
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
-      new Find(), new Cat(), new Man(), new Pushd(), new Popd()};
+      new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv()};
 
   /**
    * Returns true if execution of this class is successful. Execution print or
@@ -121,6 +121,8 @@ public class Commands {
           }
         }
       }
+      else
+        result.logError("Command does not exist.");
     }
     else {
       result.logError("Invalid input.");
