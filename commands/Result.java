@@ -10,6 +10,9 @@ public class Result {
 
   private ArrayList<String> arguments;
  
+  public Result() {
+    
+  }
   
   public Result(ArrayList<String> arguments) {
     
@@ -19,6 +22,11 @@ public class Result {
   public String getMessage() {
     
     return message;
+  }
+  
+  public String getErrorMessage() {
+    
+    return errorMessage;
   }
   
   public void addMessage(String message) {
