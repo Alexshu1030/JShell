@@ -132,11 +132,11 @@ public class History implements Command {
         Integer.parseInt(arguments.get(0));
         // otherwise, it is not an integer and is not valid
       } catch (Exception NumberFormatException) {
-        result.registerError(0, "Argument must be an integer.");
+        result.logError(0, "Argument must be an integer.");
       }
     }
     else {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

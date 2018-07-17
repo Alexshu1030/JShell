@@ -125,7 +125,7 @@ public class Echo implements Command {
           }
           catch (FileNotFoundException e) {
             // The directory the file would be in does not exist.
-            result.registerError(2, "The directory does not exist.");
+            result.logError(2, "The directory does not exist.");
           }
         }
         
@@ -176,7 +176,7 @@ public class Echo implements Command {
         isValid = true;
       }
       else {
-        result.registerError(0, "String must be enclosed in quotations.");
+        result.logError(0, "String must be enclosed in quotations.");
       }
     } else if (numOfArgs == 3) {
 
@@ -191,11 +191,11 @@ public class Echo implements Command {
           isValid = true;
         }
         else {
-          result.registerError(0, "String must be enclosed in quotations.");
+          result.logError(0, "String must be enclosed in quotations.");
         }
       }
       else {
-        result.registerError(1, "Invalid argument.");
+        result.logError(1, "Invalid argument.");
       }
     }
     

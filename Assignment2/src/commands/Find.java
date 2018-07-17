@@ -93,7 +93,7 @@ public class Find implements Command {
           dir = explorer.getDirectory(arguments.get(i));
         }
         catch (FileNotFoundException e) {
-          result.registerError(i, "The file does not exist.");
+          result.logError(i, "The file does not exist.");
         }
   
         if (dir != null)
@@ -169,16 +169,16 @@ public class Find implements Command {
             valid = true;
           }
           else
-            result.registerError("Invalid number of arguments.");
+            result.logError("Invalid number of arguments.");
         }
         else
-          result.registerError(size - 4, "Invalid argument.");
+          result.logError(size - 4, "Invalid argument.");
       }
       else
-        result.registerError(size - 3, "Invalid argument.");
+        result.logError(size - 3, "Invalid argument.");
     }
     else
-      result.registerError(size - 2, "Invalid argument.");
+      result.logError(size - 2, "Invalid argument.");
     
     return result;
   }

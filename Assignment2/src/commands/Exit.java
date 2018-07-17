@@ -98,7 +98,7 @@ public class Exit implements Command {
     Result result = new Result(arguments);
     
     if (!arguments.isEmpty()) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

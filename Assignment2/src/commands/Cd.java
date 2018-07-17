@@ -103,7 +103,7 @@ public class Cd implements Command {
             newDir = explorer.getDirectory(path);
           }
           catch (FileNotFoundException e) {
-            result.registerError(0, "The path does not exist.");
+            result.logError(0, "The path does not exist.");
           }
           
           // Set the working directory to the directory given by the path
@@ -135,7 +135,7 @@ public class Cd implements Command {
     Result result = new Result(arguments);
     
     if (arguments.size() != numOfArguments) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

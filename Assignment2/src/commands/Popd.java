@@ -76,7 +76,7 @@ public class Popd implements Command {
         DirectoryStack.stack.popd(jShell);
       }
       catch (EmptyStackException e) {
-        result.registerError("The directory stack is empty");
+        result.logError("The directory stack is empty");
       }
     }
     
@@ -103,7 +103,7 @@ public class Popd implements Command {
     Result result = new Result(arguments);
     
     if (arguments.size() != 0) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;

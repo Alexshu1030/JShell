@@ -93,7 +93,7 @@ public class Cat implements Command {
         }
         catch (FileNotFoundException e) {
           message = "The file does not exist.";
-          result.registerError(i, "The path does not exist.");
+          result.logError(i, "The path does not exist.");
         }
         
         // If the file exists, add it's contents onto the end of our message.
@@ -134,7 +134,7 @@ public class Cat implements Command {
     Result result = new Result(arguments);
     
     if (arguments.size() < 1) {
-      result.registerError("Invalid number of arguments.");
+      result.logError("Invalid number of arguments.");
     }
     
     return result;
