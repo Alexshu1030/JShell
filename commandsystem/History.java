@@ -74,10 +74,8 @@ public class History implements Command {
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = areValidArguments(arguments);
-    
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
-      
       ArrayList<String> log = jShell.getLog();
       int totalInputs = log.size();
       int truncAmount = 0;

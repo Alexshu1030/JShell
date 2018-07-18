@@ -38,41 +38,40 @@ import commandsystem.Commands;
 import commandsystem.Result;
 
 public class Number implements Command {
-
+  /**
+   * commandName The command name of the current class
+   */
+  private String commandName = "!number";
   @Override
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     Result result = areValidArguments(arguments);
-    // Get history of JShell using history command
-    String history = Commands.run(jShell, "history").getMessage();
-    // Put history and all commands into an array
-    String[] cmds = history.split("\n");
     try {
       int cmdnumber = Integer.parseInt(arguments.get(0));
-      if (cmds.length >= cmdnumber) {
-        // Remove the number indicating the command's order
-        String[] cmd = cmds[cmdnumber-1].split(" ", 2);
-        // Run the command
-        Commands.run(jShell, cmd[1]);
-      }
+      
+      String history = jShell.getLog().get(cmdnumber-1);
+      // Now we make sure to change the log accordingly
+      ArrayList<String> log = jShell.getLog();
+      // Replace !number with the command run by !number
+      log.remove(log.size()-1);
+      log.add(history);
+      result = Commands.run(jShell, history);
+      
     }
     catch (Exception e) {
       result.logError("Invalid argument.");
     }
-     
-    
-    return null;
+    return result;
   }
 
   @Override
   public String getCommandName() {
-    // TODO Auto-generated method stub
-    return null;
+    return commandName;
   }
 
   @Override
   public Result areValidArguments(ArrayList<String> arguments) {
     Result result = new Result(arguments);
-    if (arguments.size() != 0) {
+    if (arguments.size() != 1) {
       result.logError("Invalid number of arguments.");
     }
     
@@ -87,8 +86,7 @@ public class Number implements Command {
 
   @Override
   public boolean canBeRedirected() {
-    // TODO Auto-generated method stub
-    return false;
+    return true;
   }
 
   
