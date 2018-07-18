@@ -80,7 +80,7 @@ public class Commands {
       String commandName;
       // if the first character is ! then Number is the command name
       if (arguments.get(0).charAt(0) == '!') {
-        commandName = "Number";
+        commandName = "!number";
         // set the rest of the command as the actual argument
         String arg = arguments.get(0).substring(1);
         arguments.set(0, arg);
@@ -90,8 +90,8 @@ public class Commands {
         commandName = arguments.remove(0);
       }
       Command command = getCommand(commandName);
-
       if (command != null) {
+        
      // We have found the command and it's arguments are valid. We can
         // now run the command
         // set type of write into file and file name to null
@@ -166,7 +166,6 @@ public class Commands {
     int i = 0;
     boolean found = false;
     Command command = null;
-
     // Iterate over the commands until the correct one has been found
     while (i < commands.length && !found) {
       // Check if the name of the current command is the one we want
