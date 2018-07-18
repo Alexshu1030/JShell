@@ -33,7 +33,7 @@ package commands;
 import java.util.ArrayList;
 import commandsystem.Command;
 import commandsystem.Result;
-import Exceptions.FileNotFoundException;
+import exceptions.FileNotFoundException;
 import filesystem.*;
 import shell.JShellWindow;
 
