@@ -30,7 +30,7 @@
 package filesystem;
 
 import java.util.ArrayList;
-import Exceptions.EmptyStackException;
+import exceptions.EmptyStackException;
 import filesystem.Directory;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
