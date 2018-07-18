@@ -40,6 +40,7 @@ import commands.Ls;
 import commands.Man;
 import commands.Mkdir;
 import commands.Mv;
+import commands.Number;
 import commands.Popd;
 import commands.Pushd;
 import commands.Pwd;
@@ -53,7 +54,8 @@ public class Commands {
    */
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
-      new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv()};
+      new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv(),
+      new Number()};
 
   /**
    * Returns true if execution of this class is successful. Execution print or
@@ -75,9 +77,18 @@ public class Commands {
     // There must be at least one element in the arguments for it to be a
     // valid command
     if (arguments.size() > 0) {
-
+      String commandName;
+      // if the first character is ! then Number is the command name
+      if (arguments.get(0).charAt(0) == '!') {
+        commandName = "Number";
+        // set the rest of the command as the actual argument
+        String arg = arguments.get(0).substring(1);
+        arguments.set(0, arg);
+      }
       // The command name must be the first element
-      String commandName = arguments.remove(0);
+      else {
+        commandName = arguments.remove(0);
+      }
       Command command = getCommand(commandName);
 
       if (command != null) {
