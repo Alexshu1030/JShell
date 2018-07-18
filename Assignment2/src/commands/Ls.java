@@ -71,23 +71,27 @@ public class Ls implements Command {
    * @return result the output to the shell
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     Result result = areValidArguments(arguments);
-    
+
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
       // Check if recursive argument is implemented
-      if (arguments.get(1).equals(recurseiveArg)) {
-        return runRecursive(jShell, arguments);
+      try {
+        if (arguments.get(0).equals(recurseiveArg)) {
+          arguments.remove(0);
+          return runRecursive(jShell, arguments);
+        }
+      } catch (IndexOutOfBoundsException x) {
+        // There is no -R argument
       }
-      String messages = "";
       // If no argument was given, list all files and directories
       if (arguments.isEmpty()) {
         // The file is a directory. We want to print the contents of the
         // directory.
         Directory dir = jShell.getFileExplorer().getWorkingDirectory();
         ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
-        
+
         for (int f = 0; f < files.size(); f++) {
           result.addMessage(files.get(f).getFileName());
         }
@@ -98,22 +102,22 @@ public class Ls implements Command {
           // Get the contents of the given path
           String path = arguments.get(i);
           File file = null;
-          
+
           try {
             file = jShell.getFileExplorer().getFile(path);
           }
           catch (FileNotFoundException e) {
             result.logError(0, "The path does not exist.");
           }
-          
+
           if (file != null) {
             if (file.isDirectory()) {
               // The file is a directory. We want to print the contents of the
               // directory.
               result.addMessage(file.getFileName() + ":");
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
-              
-              
+
+
               for (int f = 0; f < files.size(); f++) {
                 result.addMessage(files.get(f).getFileName());
               }
@@ -123,22 +127,76 @@ public class Ls implements Command {
               result.addMessage(file.getFileName());
             }
           }
-          
+
           if (i != arguments.size() - 1)
             result.addMessage("");
         }
       }
     }
-    
     return result;
-
   }
 
   private Result runRecursive(JShellWindow jShell,
       ArrayList<String> arguments) {
     Result result = new Result();
-    arguments.remove(0);
-    result.addMessage(run(jShell, arguments).getMessage());
+    if (!result.errorOccured()) {
+      // If no argument was given, list all files and directories
+      if (arguments.isEmpty()) {
+        // The file is a directory. We want to print the contents of the
+        // directory.
+        Directory dir = jShell.getFileExplorer().getWorkingDirectory();
+        ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
+
+        for (int f = 0; f < files.size(); f++) {
+          result.addMessage(files.get(f).getFileName());
+        }
+      } 
+      else {
+        // Iterate over the paths & subpaths & print contents of each
+        for (int i = 0; i < arguments.size(); i++) {
+          // Get the contents of the given path
+          String path = arguments.get(i);
+          File file = null;
+
+          try {
+            file = jShell.getFileExplorer().getFile(path);
+          }
+          catch (FileNotFoundException e) {
+            result.logError(0, "The path does not exist.");
+          }
+
+          if (file != null) {
+            if (file.isDirectory()) {
+              // The file is a directory. We want to print the contents
+              // of the directory and it's subdirectories
+              result.addMessage(file.getFileName() + ":");
+              ArrayList<File> files = (ArrayList<File>)file.getFileContents();
+
+              for (int f = 0; f < files.size(); f++) {
+                File curFile = files.get(f);
+                result.addMessage(curFile.getFileName());
+                if (curFile.isDirectory()) {
+                  ArrayList<String> curFileContentsStr = new ArrayList<String>();
+                  ArrayList<File> curFileContents = (ArrayList<File>)file.getFileContents();
+                  for (int g = 0; g < curFileContents.size(); g++) {
+                    curFileContentsStr.add(curFileContents.get(g).getFullPath());
+                  }
+                  result.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
+                }
+              }
+              
+            }
+            else {
+              // The file is just a file. We want to print it's name.
+              result.addMessage(file.getFileName());
+            }
+          }
+
+          if (i != arguments.size() - 1)
+            result.addMessage("");
+        }
+      }
+    }
     return result;
   }
 
@@ -159,7 +217,7 @@ public class Ls implements Command {
    * @return isValid true if the command is valid and vice versa
    */
   public Result areValidArguments(ArrayList<String> arguments) {
-    
+
     Result result = new Result(arguments);
 
     return result;
@@ -174,9 +232,9 @@ public class Ls implements Command {
 
     return helpText;
   }
-  
+
   public boolean canBeRedirected() {
-    
+
     return true;
   }
 }
