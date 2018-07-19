@@ -42,6 +42,17 @@ public class Curl implements Command {
   
   private String commandName = "curl";
   private int numOfArguments = 1;
+  private String helpText = "NAME:\n"
+      + "  curl URL - Adds file at URL to current working directory \n" +
+      "DESCRIPTION:\n" + "  Retrieves the file at the URL and adds it's"
+      + " contents to a file of the same name in the current working directory"
+      + "\n"
+      + "PARAMETERS:\n" + "  URL - The url containing the file to be retrieved"
+      + "\n" + "RETURNS:\n" + "  This command does not return anything\n"
+      + "EXAMPLE USAGE:\n" + "  /#: curl"
+          + " http://www.cs.cmu.edu/~spok/grimmtmp/073.txt\n"
+      + "    will get the contents of the file and put it into a file named"
+      + " 073.txt in the current working directory.";
   
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
@@ -81,7 +92,7 @@ public class Curl implements Command {
 
   public String getHelpText() {
 
-    return null;
+    return helpText;
   }
 
   public boolean canBeRedirected() {

@@ -42,6 +42,14 @@ public class Number implements Command {
    * commandName The command name of the current class
    */
   private String commandName = "!number";
+  private String helpText = "NAME:\n"
+      + "  !n - Runs n-th command entered\n" + "DESCRIPTION:\n"
+      + "  Executes the n-th command in this history of the current JShell"
+      + "instance.\n"
+      + "PARAMETERS:\n" + "  n - The n-th command in history to be executed.\n"
+      + "RETURNS:\n" + "  Documentation for CMD\n"
+      + "EXAMPLE USAGE:\n" + "  /#: echo \"hi\"\n  /#: !1 \n"
+      + "  hi\n  hi";
   @Override
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     Result result = areValidArguments(arguments);
@@ -81,7 +89,7 @@ public class Number implements Command {
   @Override
   public String getHelpText() {
     // TODO Auto-generated method stub
-    return null;
+    return helpText;
   }
 
   @Override

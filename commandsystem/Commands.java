@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import commands.Cat;
 import commands.Cd;
+import commands.Curl;
 import commands.Echo;
 import commands.Exit;
 import commands.Find;
@@ -55,7 +56,7 @@ public class Commands {
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
       new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv(),
-      new Number()};
+      new Number(), new Curl()};
 
   /**
    * Returns true if execution of this class is successful. Execution print or
