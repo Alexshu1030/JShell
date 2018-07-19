@@ -10,7 +10,18 @@ import shell.JShellWindow;
 public class Mv implements Command{
   
   private String commandName = "mv";
-  private String helpText = "No implemented yet...";
+  private String helpText = "NAME:\n"
+      + "  mv OLDPATH NEWPATH - Moves OLDPATH to NEWPATH\n"
+      + "DESCRIPTION:\n"
+      + "  Will move the file or directory given by OLDPATH to NEWPATH or"
+      + " replace . OLDPATH and NEWPATH can be relative to the current path"
+      + " or an absolute path.\n "
+      + "PARAMETERS:\n" + "  OLDPATH - The file or directory to be moved.\n "
+      + "  NEWPATH - The file to be replaced or directory to be moved to.\n"
+      + "RETURNS:\n" + "  This command does not return anything.\n"
+      + "EXAMPLE USAGE:\n" + "  /#: mv A1 A2\n"
+      + "    Will move A1 inside A2.\n" + "  /#: mv A1 A2/A1\n"
+      + "    Will replace the A1 inside A2 with A1 in the current directory.";
 
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     
