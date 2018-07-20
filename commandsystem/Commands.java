@@ -122,7 +122,7 @@ public class Commands {
         } else {
           // get the part of the list before the > or >>
           ArrayList<String> putFile =
-              (ArrayList<String>) arguments.subList(0, foundIndex);
+              new ArrayList<String>(arguments.subList(0, foundIndex));
           // run the part of the list and see if its false
           boolean invalid = false;
           try {
