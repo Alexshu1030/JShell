@@ -27,9 +27,11 @@
 // I have also read the plagiarism section in the course info
 // sheet of CSC B07 and understand the consequences.
 // *********************************************************
-package commandsystem;
+package commands;
 
 import java.util.ArrayList;
+import commandsystem.Command;
+import commandsystem.Result;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
 
