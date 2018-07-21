@@ -139,6 +139,7 @@ public class Ls implements Command {
   private Result runRecursive(JShellWindow jShell,
       ArrayList<String> arguments) {
     Result result = new Result();
+    Result nextRecurseResult = new Result();
     if (!result.errorOccured()) {
       // If no argument was given, list all files and directories
       if (arguments.isEmpty()) {
@@ -181,7 +182,7 @@ public class Ls implements Command {
                   for (int g = 0; g < curFileContents.size(); g++) {
                     curFileContentsStr.add(curFileContents.get(g).getFullPath());
                   }
-                  result.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
+                  nextRecurseResult.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
                 }
               }
               
@@ -197,6 +198,7 @@ public class Ls implements Command {
         }
       }
     }
+    result.addMessage(nextRecurseResult.getMessage());
     return result;
   }
 
