@@ -38,6 +38,7 @@ import commands.Curl;
 import commands.Echo;
 import commands.Exit;
 import commands.Find;
+import commands.History;
 import commands.Ls;
 import commands.Man;
 import commands.Mkdir;
