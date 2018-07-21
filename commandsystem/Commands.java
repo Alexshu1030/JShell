@@ -31,6 +31,7 @@ package commandsystem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 import commands.Cat;
 import commands.Cd;
 import commands.Curl;
@@ -58,6 +59,28 @@ public class Commands {
       new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv(),
       new Number(), new Curl()};
 
+
+  private static Hashtable<String, String> commandHashTable =
+      new Hashtable<String, String>();
+
+  public static void initializeCommandHashTable() {
+
+    commandHashTable.put("cat", "Cat");
+    commandHashTable.put("cd", "Cd");
+    commandHashTable.put("curl", "Curl");
+    commandHashTable.put("echo", "Echo");
+    commandHashTable.put("exit", "Exit");
+    commandHashTable.put("find", "Find");
+    commandHashTable.put("ls", "Ls");
+    commandHashTable.put("man", "Man");
+    commandHashTable.put("mkdir", "Mkdir");
+    commandHashTable.put("mv", "Mv");
+    commandHashTable.put("popd", "Popd");
+    commandHashTable.put("pushd", "Pushd");
+    commandHashTable.put("pwd", "Pwd");
+    commandHashTable.put("tree", "Tree");
+  }
+  
   /**
    * Returns true if execution of this class is successful. Execution print or
    * add string to standard output, or overwrites or appends a string to a file
