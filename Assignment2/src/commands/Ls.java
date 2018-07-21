@@ -171,21 +171,16 @@ public class Ls implements Command {
               // The file is a directory. We want to print the contents
               // of the directory and it's subdirectories
               result.addMessage(file.getFileName() + ":");
+              ArrayList<String> curFileContentsStr = new ArrayList<String>();
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
 
               for (int f = 0; f < files.size(); f++) {
                 File curFile = files.get(f);
                 result.addMessage(curFile.getFileName());
-                if (curFile.isDirectory()) {
-                  ArrayList<String> curFileContentsStr = new ArrayList<String>();
-                  ArrayList<File> curFileContents = (ArrayList<File>)file.getFileContents();
-                  for (int g = 0; g < curFileContents.size(); g++) {
-                    curFileContentsStr.add(curFileContents.get(g).getFullPath());
-                  }
-                  nextRecurseResult.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
-                }
+                curFileContentsStr.add(curFile.getFullPath());
               }
-              
+              nextRecurseResult.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
+
             }
             else {
               // The file is just a file. We want to print it's name.
