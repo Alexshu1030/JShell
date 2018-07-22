@@ -70,24 +70,10 @@ public class Ls implements Command {
    * @param arguments a list containing the directories to be listed
    * @return result the output to the shell
    */
-  public Result run(JShellWindow jShell, ArrayList<String> arguments) {
-
-    Result result = areValidArguments(arguments);
-
-    // If there were no errors in the arguments then we can run the command
+  public Result run(JShellWindow jShell,
+      ArrayList<String> arguments) {
+    Result result = new Result(arguments);
     if (!result.errorOccured()) {
-      // Check if recursive argument is implemented
-      try {
-        if (arguments.get(0).equals(recurseiveArg)) {
-          arguments.remove(0);
-          Directory wd = jShell.getFileExplorer().getWorkingDirectory();
-          result = runRecursive(jShell, arguments);
-          jShell.getFileExplorer().setWorkingDirectory(wd);
-          return result;
-        }
-      } catch (IndexOutOfBoundsException x) {
-        // There is no -R argument
-      }
       // If no argument was given, list all files and directories
       if (arguments.isEmpty()) {
         // The file is a directory. We want to print the contents of the
@@ -96,11 +82,11 @@ public class Ls implements Command {
         ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
 
         for (int f = 0; f < files.size(); f++) {
-          result.addMessage(files.get(f).getFileName());
+          result.addMessage(files.get(f).getFileName(), "\t");
         }
       } 
       else {
-        // Iterate over the paths and print the contents of each
+        // Iterate over the paths & print contents of each
         for (int i = 0; i < arguments.size(); i++) {
           // Get the contents of the given path
           String path = arguments.get(i);
@@ -115,15 +101,15 @@ public class Ls implements Command {
 
           if (file != null) {
             if (file.isDirectory()) {
-              // The file is a directory. We want to print the contents of the
-              // directory.
+              // The file is a directory. We want to print the contents
+              // of the directory
               result.addMessage(file.getFullPath() + ":");
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
-
-
               for (int f = 0; f < files.size(); f++) {
-                result.addMessage(files.get(f).getFileName());
+                File curFile = files.get(f);
+                result.addMessage(curFile.getFileName(), "\t");
               }
+              result.addMessage("");
             }
             else {
               // The file is just a file. We want to print it's name.
@@ -141,7 +127,7 @@ public class Ls implements Command {
 
   private Result runRecursive(JShellWindow jShell,
       ArrayList<String> arguments) {
-    Result result = new Result();
+    Result result = new Result(arguments);
     Result nextRecurseResult = new Result();
     if (!result.errorOccured()) {
       // If no argument was given, list all files and directories
