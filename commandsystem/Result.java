@@ -72,9 +72,9 @@ public class Result {
   public void addMessage(String message, String spacing) {
     
     if (this.message.equals(""))
-      this.message = message;
+      this.message += message;
     else
-      this.message += spacing + message;
+      this.message += message + spacing;
   }
   
   public boolean errorOccured() {
