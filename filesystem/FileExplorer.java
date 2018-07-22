@@ -109,7 +109,7 @@ public class FileExplorer {
       // are looking for.
       return file;
     }
-    else if (file.isDirectory()) {
+    else if (file != null && file.isDirectory()) {
       
       // We are not at the end of the path. As such, we must be in a directory
       // as a non directory can not contain a file.
