@@ -179,6 +179,7 @@ public class Ls implements Command {
                 result.addMessage(curFile.getFileName());
                 curFileContentsStr.add(curFile.getFullPath());
               }
+              jShell.getFileExplorer().setWorkingDirectory((Directory) file);
               nextRecurseResult.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
 
             }
