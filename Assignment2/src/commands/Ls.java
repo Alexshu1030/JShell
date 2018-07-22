@@ -80,7 +80,10 @@ public class Ls implements Command {
       try {
         if (arguments.get(0).equals(recurseiveArg)) {
           arguments.remove(0);
-          return runRecursive(jShell, arguments);
+          Directory wd = jShell.getFileExplorer().getWorkingDirectory();
+          result = runRecursive(jShell, arguments);
+          jShell.getFileExplorer().setWorkingDirectory(wd);
+          return result;
         }
       } catch (IndexOutOfBoundsException x) {
         // There is no -R argument
@@ -114,7 +117,7 @@ public class Ls implements Command {
             if (file.isDirectory()) {
               // The file is a directory. We want to print the contents of the
               // directory.
-              result.addMessage(file.getFileName() + ":");
+              result.addMessage(file.getFullPath() + ":");
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
 
 
@@ -149,7 +152,7 @@ public class Ls implements Command {
         ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
 
         for (int f = 0; f < files.size(); f++) {
-          result.addMessage(files.get(f).getFileName());
+          result.addMessage(files.get(f).getFileName(), "\t");
         }
       } 
       else {
@@ -170,13 +173,13 @@ public class Ls implements Command {
             if (file.isDirectory()) {
               // The file is a directory. We want to print the contents
               // of the directory and it's subdirectories
-              result.addMessage(file.getFileName() + ":");
+              result.addMessage(file.getFullPath() + ":");
               ArrayList<String> curFileContentsStr = new ArrayList<String>();
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
 
               for (int f = 0; f < files.size(); f++) {
                 File curFile = files.get(f);
-                result.addMessage(curFile.getFileName());
+                result.addMessage(curFile.getFileName(), "\t");
                 curFileContentsStr.add(curFile.getFullPath());
               }
               jShell.getFileExplorer().setWorkingDirectory((Directory) file);
@@ -194,7 +197,7 @@ public class Ls implements Command {
         }
       }
     }
-    result.addMessage(nextRecurseResult.getMessage());
+    result.addMessage(nextRecurseResult.getMessage(), "");
     return result;
   }
 
