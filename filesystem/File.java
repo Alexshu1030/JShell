@@ -138,7 +138,7 @@ public class File {
     return path;
   }
   
-  private File createCopy() {
+  public File createCopy() {
     
     return new File(fileName, fileContents);
   }
