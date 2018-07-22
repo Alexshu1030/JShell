@@ -68,7 +68,7 @@ public class Curl implements Command {
       // Get the contents of the web page
       String contents = web.grabContents(jShell, arguments);
       // Echo the contents into the file
-      Commands.run(jShell, "echo " + contents + " > " + outfile);
+      Commands.run(jShell, "echo \"" + contents + "\" > " + outfile);
     }
     
     return result;
