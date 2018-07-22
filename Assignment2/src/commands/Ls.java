@@ -182,8 +182,9 @@ public class Ls implements Command {
                 result.addMessage(curFile.getFileName(), "\t");
                 curFileContentsStr.add(curFile.getFullPath());
               }
+              result.addMessage("");
               jShell.getFileExplorer().setWorkingDirectory((Directory) file);
-              nextRecurseResult.addMessage(runRecursive(jShell, curFileContentsStr).getMessage());
+              nextRecurseResult.addMessage(runRecursive(jShell, curFileContentsStr).getMessage(), "");
 
             }
             else {
