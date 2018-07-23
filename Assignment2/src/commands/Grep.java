@@ -48,7 +48,21 @@ public class Grep implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "helptext placeholder";
+  private String helpText = "NAME:\n"
+      + "grep [-R] REGEX PATH - print lines matching a pattern described by"
+      + "REGEX in PATH. Prints lines from a file if no -R is supplied or from"
+      + " a folder if -R is supplied and the PATH is a folder. \n"
+      + "PARAMETERS:\n"
+      + "-R - The option to search recursively through a folder (scanning "
+      + "all files).\n"
+      + "REGEX - The expression that we are looking for in the PATH.\n"
+      + "PATH - The file or folder that we are searching from.\n" 
+      + "RETURNS:\n"
+      + "All lines containing REGEX inside PATH.\n" + "EXAMPLE USAGE:\n"
+      + "grep -R a b\n"
+      + "This will recursively return all lines containing a in all files "
+      + "inside b\n"
+      + "grep a b.txt\n" + "This will return all lines containing a in b.txt";
 
   /**
    * Returns true if successfully terminated the jShell
@@ -61,7 +75,9 @@ public class Grep implements Command {
 
     Result result = areValidArguments(arguments);
     if (!result.errorOccured()) {
-      
+      if (arguments.get(0).equals("-R")) {
+
+      }
     }
     return result;
   }
