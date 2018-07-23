@@ -35,7 +35,7 @@ public class FileExplorer {
 
   // This is static so multiple instances of the FileExplorer will have
   // access to the same file system .
-  private static Directory rootDirectory;
+  private static Directory rootDirectory = new Directory("");
   /**
    * workingDirectory a Directory object that is currently used
    */
