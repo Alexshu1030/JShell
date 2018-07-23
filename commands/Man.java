@@ -74,18 +74,17 @@ public class Man implements Command {
     
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
-    
-      String messages = null;
       String cmdName = arguments.get(0);
       
       Command command = Commands.getCommand(cmdName);
       
       if (command != null) {
-        messages = command.getHelpText();
         result.addMessage(command.getHelpText());
       }
+      else {
+        result.logError(cmdName + " is not a valid command.");
+      }
     }
-    
     return result;
   }
 
