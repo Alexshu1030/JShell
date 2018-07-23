@@ -41,7 +41,7 @@ public class Number implements Command {
   /**
    * commandName The command name of the current class
    */
-  private String commandName = "!number";
+  private String commandName = "!";
   private String helpText = "NAME:\n"
       + "  !n - Runs n-th command entered\n" + "DESCRIPTION:\n"
       + "  Executes the n-th command in this history of the current JShell"
