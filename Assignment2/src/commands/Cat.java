@@ -94,19 +94,11 @@ public class Cat implements Command {
           file = explorer.getFile(path);
         }
         catch (FileNotFoundException e) {
-          message = "The file does not exist.";
           result.logError(i, "The path does not exist.");
         }
         
         // If the file exists, add it's contents onto the end of our message.
         if (file != null) {
-          message += file.getFileContents() + "\n";
-          // Add a three line break between each file's contents. We do not want
-          // one of the last file.
-          if (i != arguments.size() - 1) {
-            message += "\n\n\n";
-          }
-          
           result.addMessage((String)file.getFileContents(), "\n\n\n\n");
         }
       }
