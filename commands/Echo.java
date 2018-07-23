@@ -84,9 +84,7 @@ public class Echo implements Command {
    * @return result the output to the shell
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
-
     Result result = areValidArguments(arguments);
-
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
       
@@ -137,7 +135,6 @@ public class Echo implements Command {
    * @return isValid true if the command is valid and vice versa
    */
   public Result areValidArguments(ArrayList<String> arguments) {
-
     Result result = new Result(arguments);
     
     boolean isValid = false;

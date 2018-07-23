@@ -70,7 +70,7 @@ public class Web {
         in.close();
         s.close();
       } catch (IOException e) {
-        e.printStackTrace();
+        result = "Invalid URL";
       }
     }
     return result;

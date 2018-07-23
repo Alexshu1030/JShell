@@ -74,7 +74,6 @@ public class Cat implements Command {
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = areValidArguments(arguments);
-    
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
       FileExplorer explorer = jShell.getFileExplorer();
@@ -85,7 +84,6 @@ public class Cat implements Command {
         
         // We need to replace the argument at i with a File object
         String path = arguments.get(i);
-        
         // Get the file at the given path and print it's contents
         File file = null;
         
@@ -98,7 +96,9 @@ public class Cat implements Command {
         }
         
         // If the file exists, add it's contents onto the end of our message.
+        
         if (file != null) {
+          
           result.addMessage((String)file.getFileContents(), "\n\n\n\n");
         }
       }

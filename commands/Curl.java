@@ -67,8 +67,14 @@ public class Curl implements Command {
       Web web = new Web();
       // Get the contents of the web page
       String contents = web.grabContents(jShell, arguments);
-      // Echo the contents into the file
-      Commands.run(jShell, "echo \"" + contents + "\" > " + outfile);
+      if (contents == "Invalid URL") {
+        result.logError("Invalid URL");
+      }
+      else {
+        result.addMessage(contents);
+        // Echo the contents into the file
+        Commands.run(jShell, "echo \"" + contents + "\" > " + outfile);
+      }
     }
     
     return result;
