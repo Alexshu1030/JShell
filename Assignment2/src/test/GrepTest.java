@@ -52,4 +52,13 @@ public class GrepTest {
     String expected = ("Invalid number of arguments.");
     assertEquals(actual, expected);
   }
+  
+  @Test
+  public void noArgs() {
+    JShellWindow jShell = new JShellWindow();
+    Result test = Commands.run(jShell, "grep");
+    String actual = test.getErrorMessage();
+    String expected = ("Invalid number of arguments.");
+    assertEquals(actual, expected);
+  }
 }
