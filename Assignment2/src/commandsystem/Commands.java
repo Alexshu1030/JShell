@@ -102,19 +102,10 @@ public class Commands {
     // There must be at least one element in the arguments for it to be a
     // valid command
     if (arguments.size() > 0) {
-      String commandName;
-      // if the first character is ! then Number is the command name
-      if (arguments.get(0).charAt(0) == '!') {
-        commandName = "!number";
-        // set the rest of the command as the actual argument
-        String arg = arguments.get(0).substring(1);
-        arguments.set(0, arg);
-      }
-      // The command name must be the first element
-      else {
-        commandName = arguments.remove(0);
-      }
+      
+      String commandName = arguments.remove(0);
       Command command = getCommand(commandName);
+      
       if (command != null) {
         
      // We have found the command and it's arguments are valid. We can
