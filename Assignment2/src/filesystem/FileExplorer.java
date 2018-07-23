@@ -35,7 +35,7 @@ public class FileExplorer {
 
   // This is static so multiple instances of the FileExplorer will have
   // access to the same file system .
-  private static Directory rootDirectory = new Directory("");
+  private static Directory rootDirectory;
   /**
    * workingDirectory a Directory object that is currently used
    */
@@ -66,6 +66,9 @@ public class FileExplorer {
    */
   public Directory getWorkingDirectory() {
 
+    if (workingDirectory == null)
+      workingDirectory = getRootDirectory();
+ 
     return workingDirectory;
   }
 
@@ -106,10 +109,10 @@ public class FileExplorer {
     
     Directory rootDir;
 
-    if (Path.isAbsolute(path)) {
+    if (Path.isAbsolute(path) || path.equals("")) {
       // The path is absolute so we want to start at the root directory and
       // work our way to the file.
-      rootDir = rootDirectory;
+      rootDir = getRootDirectory();
       // Make the path relative to the root directory. If the path is of
       // length 0, then it is the root directory.
       if (path.length() > 0)
@@ -117,7 +120,7 @@ public class FileExplorer {
     } else {
       // The path is relative so we want to start in the working directory
       // and work our way to the file.
-      rootDir = workingDirectory;
+      rootDir = getWorkingDirectory();
     }
 
     // Use the helper method.
