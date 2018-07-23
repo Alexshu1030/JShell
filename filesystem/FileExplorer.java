@@ -79,6 +79,29 @@ public class FileExplorer {
     workingDirectory = newWD;
   }
   
+  public File getOrCreateFile(String path) throws InvalidPathException {
+    
+    File file;
+    
+    // Try to get the file at the path. If it does not exist then create it.
+    try {
+      file = getFile(path);
+    }
+    catch (FileNotFoundException e) {
+      // The file does not exist. Create a new one that is empty.
+      file = new File(Path.getFileName(path), "");
+      // Try to add the new file into the FileExplorer
+      try {
+        addFile(Path.removeFileName(path), file);
+      }
+      catch (PathExistsException e1) {
+        throw new InvalidPathException();
+      }
+    }
+    
+    return file;
+  }
+  
   public File getFile(String path) throws FileNotFoundException {
     
     Directory rootDir;
@@ -116,14 +139,14 @@ public class FileExplorer {
       Directory dir = (Directory) file;
       
       // Get the next directory in the path
-      String nextDirName = Path.getRootDirectory(path);
-      Directory nextDir = dir.getDirectory(nextDirName);
+      String nextFileName = Path.getRootDirectory(path);
+      File nextFile = dir.getFile(nextFileName);
       
       // Get the path relative to nextDir
       String relPath = Path.getSubPath(path);
       
       // Rerun the method on this directory using the path relative to it
-      return getFileHelper(nextDir, relPath);
+      return getFileHelper(nextFile, relPath);
     }
     else {
       // The file is not a directory and we are not at the end of the path. The
