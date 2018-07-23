@@ -76,6 +76,18 @@ public class Ls implements Command {
     Result result = new Result(arguments);
     
     if (!result.errorOccured()) {
+      // Check if recursive argument is implemented
+      try {
+        if (arguments.get(0).equals(recurseiveArg)) {
+          arguments.remove(0);
+          Directory wd = jShell.getFileExplorer().getWorkingDirectory();
+          result = runRecursive(jShell, arguments);
+          jShell.getFileExplorer().setWorkingDirectory(wd);
+          return result;
+        }
+      } catch (IndexOutOfBoundsException x) {
+        // There is no -R argument
+      }
       // If no argument was given, list all files and directories
       if (arguments.isEmpty()) {
         // The file is a directory. We want to print the contents of the
@@ -84,7 +96,10 @@ public class Ls implements Command {
         ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
 
         for (int f = 0; f < files.size(); f++) {
-          result.addMessage(files.get(f).getFileName(), "\t");
+          if (f == 0) 
+            result.addMessage(files.get(f).getFileName(), "");
+          else
+            result.addMessage(files.get(f).getFileName(), "\t");
         }
         
         result.addMessage("");
@@ -111,7 +126,10 @@ public class Ls implements Command {
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
               for (int f = 0; f < files.size(); f++) {
                 File curFile = files.get(f);
-                result.addMessage(curFile.getFileName(), "\t");
+                if (f == 0)
+                  result.addMessage(curFile.getFileName(), "");
+                else
+                  result.addMessage(curFile.getFileName(), "\t");
               }
               result.addMessage("");
             }
@@ -139,7 +157,10 @@ public class Ls implements Command {
         ArrayList<File> files = (ArrayList<File>)dir.getFileContents();
 
         for (int f = 0; f < files.size(); f++) {
-          result.addMessage(files.get(f).getFileName(), "\t");
+          if (f == 0) 
+            result.addMessage(files.get(f).getFileName(), "");
+          else
+            result.addMessage(files.get(f).getFileName(), "\t");
         }
       } 
       else {
@@ -166,7 +187,10 @@ public class Ls implements Command {
 
               for (int f = 0; f < files.size(); f++) {
                 File curFile = files.get(f);
-                result.addMessage(curFile.getFileName(), "\t");
+                if (f == 0)
+                  result.addMessage(curFile.getFileName(), "");
+                else
+                  result.addMessage(curFile.getFileName(), "\t");
                 curFileContentsStr.add(curFile.getFullPath());
               }
               result.addMessage("");
