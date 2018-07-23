@@ -9,7 +9,7 @@ import shell.JShellWindow;
 
 public class Cp implements Command{
   
-  private String commandName = "mv";
+  private String commandName = "cp";
   private String helpText = "";
 
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
