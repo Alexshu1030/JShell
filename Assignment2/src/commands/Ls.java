@@ -81,7 +81,7 @@ public class Ls implements Command {
         if (arguments.get(0).equals(recurseiveArg)) {
           arguments.remove(0);
           if (arguments.isEmpty()) {
-            arguments.add("/");
+            arguments.add(jShell.getFileExplorer().getWorkingDirectory().getFullPath());
           }
           Directory wd = jShell.getFileExplorer().getWorkingDirectory();
           result = runRecursive(jShell, arguments);
