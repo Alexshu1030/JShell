@@ -8,8 +8,19 @@ import commandsystem.Commands;
 import shell.JShellWindow;
 
 public class LsTest {
+  @Before
   public void setup() {
     Commands.initializeCommandHashTable();
+  }
+
+  @Test
+  public void testMultiPathDir() {
+    JShellWindow jShell = new JShellWindow();
+    Commands.run(jShell, "mkdir top top/middle1 top/middle2 top/middle1/bottom");
+    Result resultActual = Commands.run(jShell, "ls top");
+    String actual = resultActual.getMessage();
+    String expected = "/top:\nmiddle1\tmiddle2\n";
+    assertEquals(expected, actual);
   }
   
   @Test
@@ -20,4 +31,5 @@ public class LsTest {
     String expected = "";
     assertEquals(expected, actual);
   }
+
 }
