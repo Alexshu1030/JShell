@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import commandsystem.Command;
 import commandsystem.Result;
 import exceptions.FileNotFoundException;
+import exceptions.InvalidPathException;
+import exceptions.PathExistsException;
 import shell.JShellWindow;
 import filesystem.FileExplorer;
 import filesystem.Path;
@@ -83,8 +85,7 @@ public class Echo implements Command {
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
 
     Result result = areValidArguments(arguments);
-    return result;
-    /*
+
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
       
@@ -120,15 +121,18 @@ public class Echo implements Command {
         if (outFile == null) {
           // Create a new file with path as its name, parent directory, and
           // empty contents
+          String fileName = Path.getFileName(outFilePath);
+          outFile = new File(fileName, "");
+           
           try {
-            String fileName = Path.getFileName(outFilePath);
-            Directory parentDir = explorer.getParentDirectory(outFilePath);
-            outFile = new File(fileName, parentDir, "");
             explorer.addFile(Path.removeFileName(outFilePath), outFile);
           }
-          catch (FileNotFoundException e) {
-            // The directory the file would be in does not exist.
-            result.logError(2, "The directory does not exist.");
+          catch (InvalidPathException e) {
+            result.logError(2, "Invalid path.");
+          } 
+          catch (PathExistsException e) {
+            result.logError(2, "A file of the same name already exists at"
+                + " that path.");
           }
         }
         
@@ -145,7 +149,6 @@ public class Echo implements Command {
     }
 
     return result;
-    */
   }
 
   /**
