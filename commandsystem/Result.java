@@ -60,13 +60,13 @@ public class Result {
   
   public void addMessage(String message) {
     
-    /*
+    
     if (this.message.equals(""))
       this.message = message;
     else
       this.message += "\n" + message;
-     */
-    this.message += message + "\n";
+    
+    //this.message += message + "\n";
   }
   
   public void addMessage(String message, String spacing) {
@@ -108,5 +108,17 @@ public class Result {
       this.errorMessage = errorMessage;
     else
       this.errorMessage += "\n" + errorMessage;
+  }
+  
+  public void addErrors(Result result) {
+
+    // If either an error has already occurred in this class or in the class
+    // we are combining with then this should be true.
+    errorOccured = errorOccured || result.errorOccured;
+    
+    if (this.errorMessage.equals(""))
+      errorMessage = result.errorMessage;
+    else
+      errorMessage += "\n" + result.errorMessage;
   }
 }

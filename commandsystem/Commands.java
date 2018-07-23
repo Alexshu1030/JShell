@@ -32,22 +32,8 @@ package commandsystem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
-import commands.Cat;
-import commands.Cd;
-import commands.Curl;
-import commands.Echo;
-import commands.Exit;
-import commands.Find;
-import commands.History;
-import commands.Ls;
-import commands.Man;
-import commands.Mkdir;
-import commands.Mv;
+import commands.*;
 import commands.Number;
-import commands.Popd;
-import commands.Pushd;
-import commands.Pwd;
-import commands.Tree;
 import exceptions.FileNotFoundException;
 import exceptions.InvalidPathException;
 import filesystem.File;
@@ -61,7 +47,7 @@ public class Commands {
   private static Command[] commands = new Command[] {new History(), new Exit(),
       new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
       new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv(),
-      new Number(), new Curl()};
+      new Number(), new Curl(), new Cp()};
 
 
   private static Hashtable<String, String> commandHashTable =
@@ -109,23 +95,28 @@ public class Commands {
       String commandName = arguments.remove(0);
       Command command = getCommand(commandName);
       
-      if (command != null) {
-        
+      if (command != null) {      
         if (isRedirected(arguments)) {
           if (command.canBeRedirected()) {
             // The command can be redirected and it has been.
+            // Get the redirection arguments
             String outFilePath = arguments.remove(arguments.size() - 1);
             String operationType = arguments.remove(arguments.size() - 1);
             // Run the command storing the result in a separate class
             Result redirectResult = command.run(jShell, arguments);
             
-            // Try and write the result message to the outFile path
+            // Try to write the result message to the outFile path
             try {
               TextEditor.writeText(jShell.getFileExplorer(), outFilePath,
                   redirectResult.getMessage(), operationType.equals(">>"));
+              // If we reach this point the text was successfully written.
+              // We now want to added any errors that occurred during this
+              // process to the return of this command so it is forwarded
+              // to the JShellWindow
+              result.addErrors(redirectResult);
             }
             catch (InvalidPathException e) {
-              result.logError(2, "Invalid outFile path.");
+              result.logError("Invalid outFile path.");
             }
           }
           else
