@@ -28,8 +28,8 @@ public class CdTest {
   public void cdUp() {
     JShellWindow jShell = new JShellWindow();
     Commands.run(jShell, "mkdir folder");
-    Commands.run(jShell, "cd folder");
-    Commands.run(jShell, "mkdir subfolder");
+    Commands.run(jShell, "mkdir folder/subfolder");
+    Commands.run(jShell, "cd folder/subfolder");
     Commands.run(jShell, "cd ..");
     String expected = "folder";
     String actual = 
@@ -43,7 +43,7 @@ public class CdTest {
     Result test = Commands.run(jShell, "cd");
     String actual = test.getErrorMessage();
     String expected = ("Invalid number of arguments.");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
   
   @Test
@@ -52,6 +52,6 @@ public class CdTest {
     Result test = Commands.run(jShell, "cd a b c");
     String actual = test.getErrorMessage();
     String expected = ("Invalid number of arguments.");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }
