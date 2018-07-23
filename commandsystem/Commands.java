@@ -57,13 +57,17 @@ public class Commands {
 
     commandHashTable.put("cat", "Cat");
     commandHashTable.put("cd", "Cd");
+    commandHashTable.put("cp", "Cp");
     commandHashTable.put("curl", "Curl");
     commandHashTable.put("echo", "Echo");
     commandHashTable.put("exit", "Exit");
     commandHashTable.put("find", "Find");
+    commandHashTable.put("grep", "Grep");
+    commandHashTable.put("history", "History");
     commandHashTable.put("ls", "Ls");
     commandHashTable.put("man", "Man");
     commandHashTable.put("mkdir", "Mkdir");
+    commandHashTable.put("!", "Number");
     commandHashTable.put("mv", "Mv");
     commandHashTable.put("popd", "Popd");
     commandHashTable.put("pushd", "Pushd");
