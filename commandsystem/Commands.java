@@ -49,7 +49,8 @@ public class Commands {
       new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv(),
       new Number(), new Curl(), new Cp()};
 
-
+  
+  private static String commandsPackage = "commands";
   private static Hashtable<String, String> commandHashTable =
       new Hashtable<String, String>();
 
@@ -140,13 +141,36 @@ public class Commands {
     
     return result;
   }
-
+  
   /**
    * Returns the command with the specified name.
    * 
    * @param name the name of the command
    * @return the command with the specified name
    */
+  public static Command getCommand(String name) {
+    
+    Command command = null;
+    String commClassName = commandsPackage + "." + commandHashTable.get(name);
+    
+    try {
+      Class<?> commandClass = Class.forName(commClassName);
+      command = (Command)commandClass.newInstance();
+    }
+    catch (ClassNotFoundException e) {
+      
+    }
+    catch (InstantiationException e) {
+      
+    }
+    catch (IllegalAccessException e) {
+      
+    } 
+    
+    return command;
+  }
+
+  /*
   public static Command getCommand(String name) {
 
     int i = 0;
@@ -165,6 +189,7 @@ public class Commands {
 
     return command;
   }
+  */
   
   private static boolean isRedirected(ArrayList<String> arguments) {
     
