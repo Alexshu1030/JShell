@@ -48,6 +48,9 @@ import commands.Popd;
 import commands.Pushd;
 import commands.Pwd;
 import commands.Tree;
+import exceptions.FileNotFoundException;
+import exceptions.InvalidPathException;
+import filesystem.File;
 import shell.JShellWindow;
 
 public class Commands {
@@ -108,57 +111,29 @@ public class Commands {
       
       if (command != null) {
         
-     // We have found the command and it's arguments are valid. We can
-        // now run the command
-        // set type of write into file and file name to null
-        String outFile = "";
-        String fileName = "";
-        // set the found index of > or >> to -1
-        int foundIndex = -1;
-        // iterate through arguments and get type of write in file, file name
-        // and found index
-        for (int i = 0; i < arguments.size(); i++) {
-          if (arguments.get(i).equals(">")) {
-            outFile = ">";
-            fileName = arguments.get(i + 1);
-            foundIndex = i;
-          } else if (arguments.get(i).equals(">>")) {
-            outFile = ">>";
-            fileName = arguments.get(i + 1);
-            foundIndex = i;
+        if (isRedirected(arguments)) {
+          if (command.canBeRedirected()) {
+            // The command can be redirected and it has been.
+            String outFilePath = arguments.remove(arguments.size() - 1);
+            String operationType = arguments.remove(arguments.size() - 1);
+            // Run the command storing the result in a separate class
+            Result redirectResult = command.run(jShell, arguments);
+            
+            // Try and write the result message to the outFile path
+            try {
+              TextEditor.writeText(jShell.getFileExplorer(), outFilePath,
+                  redirectResult.getMessage(), operationType.equals(">>"));
+            }
+            catch (InvalidPathException e) {
+              result.logError(2, "Invalid outFile path.");
+            }
           }
+          else
+            result.logError("Command can not be redirected.");
         }
-
-
-        // if there is no > or >> found, run the command normally
-        if (outFile.equals("")) {
+        else {
+          // The command has not been redirected so we can run it normally
           result = command.run(jShell, arguments);
-        // otherwise
-        } else {
-          // get the part of the list before the > or >>
-          ArrayList<String> putFile =
-              new ArrayList<String>(arguments.subList(0, foundIndex));
-          // run the part of the list and see if its false
-          boolean invalid = false;
-          try {
-            result = command.run(jShell, putFile);
-          } catch (Exception e) {
-            invalid = true;
-          }
-          // if the run was successful
-          if (!invalid) {
-            // setup a list of commands to be used with echo
-            ArrayList<String> echoInto = new ArrayList<String>();
-            // add the message, type of write, and file name into the list
-            echoInto.add(result.getMessage());
-            echoInto.add(outFile);
-            echoInto.add(fileName);
-            // get the echo command and run it
-            command = getCommand("echo");
-            command.run(jShell, echoInto);
-            // set return to null
-            return new Result();
-          }
         }
       }
       else
