@@ -33,11 +33,12 @@ public class LsTest {
 
   @Test
   public void testNoArguments() {
+    explorer.setWorkingDirectory(explorer.getRootDirectory());
     Result resultActual = Commands.run(jShell, "ls");
 
     String actual = resultActual.getMessage();
     
-    String expected = "";
+    String expected = "\n";
     
     assertEquals(expected, actual);
   }
