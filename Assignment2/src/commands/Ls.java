@@ -72,7 +72,9 @@ public class Ls implements Command {
    */
   public Result run(JShellWindow jShell,
       ArrayList<String> arguments) {
+    
     Result result = new Result(arguments);
+    
     if (!result.errorOccured()) {
       // If no argument was given, list all files and directories
       if (arguments.isEmpty()) {
@@ -84,6 +86,8 @@ public class Ls implements Command {
         for (int f = 0; f < files.size(); f++) {
           result.addMessage(files.get(f).getFileName(), "\t");
         }
+        
+        result.addMessage("");
       } 
       else {
         // Iterate over the paths & print contents of each
@@ -102,7 +106,7 @@ public class Ls implements Command {
           if (file != null) {
             if (file.isDirectory()) {
               // The file is a directory. We want to print the contents
-              // of the directory
+              // of the directory.
               result.addMessage(file.getFullPath() + ":");
               ArrayList<File> files = (ArrayList<File>)file.getFileContents();
               for (int f = 0; f < files.size(); f++) {
@@ -116,9 +120,6 @@ public class Ls implements Command {
               result.addMessage(file.getFileName());
             }
           }
-
-          if (i != arguments.size() - 1)
-            result.addMessage("");
         }
       }
     }
