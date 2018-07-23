@@ -3,13 +3,15 @@ package test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import commands.Curl;
 import commandsystem.Result;
 import commandsystem.Commands;
 import shell.JShellWindow;
 
 public class CurlTest {
-
+  @BeforeClass
+  public static void setup() {
+    Commands.initializeCommandHashTable();
+  }
   @Test
   public void testStandard() {
     JShellWindow jShell = new JShellWindow();
