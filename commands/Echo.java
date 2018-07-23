@@ -32,6 +32,7 @@ package commands;
 import java.util.ArrayList;
 import commandsystem.Command;
 import commandsystem.Result;
+import commandsystem.TextEditor;
 import exceptions.FileNotFoundException;
 import exceptions.InvalidPathException;
 import exceptions.PathExistsException;
@@ -97,53 +98,22 @@ public class Echo implements Command {
       text = text.substring(1, text.length() - 1);
   
       FileExplorer explorer = jShell.getFileExplorer();
-  
       if (numOfArgs == 1) {
         
         result.addMessage(text);
-        
-      } else if (numOfArgs == 3) {
+      } 
+      else if (numOfArgs == 3) {
         
         // Assign arguments from the arraylist to proper variables
         String operationType = arguments.get(1);
         String outFilePath = arguments.get(2);
         
-        File outFile = null;
-        
         try {
-          outFile = explorer.getFile(outFilePath);
+          TextEditor.writeText(explorer, outFilePath, text,
+              operationType.equals(">>"));
         }
-        catch (FileNotFoundException e) {
-          // If the file does not exist we will create it below
-        }
-  
-        // No file exists at the path so we need to create our own
-        if (outFile == null) {
-          // Create a new file with path as its name, parent directory, and
-          // empty contents
-          String fileName = Path.getFileName(outFilePath);
-          outFile = new File(fileName, "");
-           
-          try {
-            explorer.addFile(Path.removeFileName(outFilePath), outFile);
-          }
-          catch (InvalidPathException e) {
-            result.logError(2, "Invalid path.");
-          } 
-          catch (PathExistsException e) {
-            result.logError(2, "A file of the same name already exists at"
-                + " that path.");
-          }
-        }
-        
-        // If the file exists and we want to overwrite
-        if (operationType.equals(">")) {
-          outFile.setFileContents(text);
-        }
-        // If the file exists and we want to append
-        else if (operationType.equals(">>")) {
-          String currentContents = (String) outFile.getFileContents();
-          outFile.setFileContents(currentContents + text);
+        catch (InvalidPathException e) {
+          result.logError(2, "Invalid outFile path.");
         }
       }
     }
