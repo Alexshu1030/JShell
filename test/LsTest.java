@@ -55,4 +55,17 @@ public class LsTest {
 
     assertEquals(expected, actual);
   }
+  
+  @Test
+  public void testRecursiveMultiPathDir() {
+    Commands.run(jShell, "mkdir t t/1 t/2 t/1/b");
+    
+    Result resultActual = Commands.run(jShell, "ls -R t");
+
+    String actual = resultActual.getMessage();
+
+    String expected = "/t:\n1\t2\n/t/1:\nb\n\n/t/2:\n\n/t/1/b:\n\n";
+
+    assertEquals(expected, actual);
+  }
 }
