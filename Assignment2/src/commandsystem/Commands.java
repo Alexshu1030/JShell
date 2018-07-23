@@ -96,7 +96,7 @@ public class Commands {
     // Split the command into it's parts (i.e. separate blocks of text, quotes,
     // etc.)
     ArrayList<String> arguments = split(commandText);
-
+    
     Result result = new Result();
 
     // There must be at least one element in the arguments for it to be a
@@ -236,6 +236,12 @@ public class Commands {
 
       char currentChar = text.charAt(i);
 
+      if (i == 0 && currentChar == '!') {
+        // If the first char is a exclamation point then we want to create a
+        // split for it
+        splits.add("!");
+        lastSplitIndex = i + 1;
+      }
       if (i == text.length() - 1) {
         // If we are at the end of the string then we want to split here no
         // matter what
