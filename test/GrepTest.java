@@ -22,7 +22,7 @@ public class GrepTest {
     Result test = Commands.run(jShell, "grep -R one folder");
     String actual = test.getMessage();
     String expected = ("onetwo\nonethree\n");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
   
   @Test
@@ -32,7 +32,7 @@ public class GrepTest {
     Result test = Commands.run(jShell, "grep a file.txt");
     String actual = test.getMessage();
     String expected = ("a\nasd\n");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
   
   @Test
@@ -41,7 +41,7 @@ public class GrepTest {
     Result test = Commands.run(jShell, "grep a file.txt");
     String actual = test.getErrorMessage();
     String expected = ("The path does not exist.");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
   
   @Test
@@ -50,7 +50,7 @@ public class GrepTest {
     Result test = Commands.run(jShell, "grep file.txt");
     String actual = test.getErrorMessage();
     String expected = ("Invalid number of arguments.");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
   
   @Test
@@ -59,6 +59,6 @@ public class GrepTest {
     Result test = Commands.run(jShell, "grep");
     String actual = test.getErrorMessage();
     String expected = ("Invalid number of arguments.");
-    assertEquals(actual, expected);
+    assertEquals(expected, actual);
   }
 }
