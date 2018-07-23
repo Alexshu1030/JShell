@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import commandsystem.Command;
 import commandsystem.Result;
 import filesystem.File;
-import Exceptions.FileNotFoundException;
+import exceptions.FileNotFoundException;
 import shell.JShellWindow;
 
 public class Grep implements Command {
@@ -134,7 +134,8 @@ public class Grep implements Command {
               currFolder.clear();
             }
             // catch exception and log error if the invalid path
-          } catch (FileNotFoundException e) {
+          } 
+          catch (FileNotFoundException e) {
             result.logError(0, "The path does not exist.");
           }
         }
