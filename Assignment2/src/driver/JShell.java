@@ -45,6 +45,8 @@ public class JShell {
 
   public static void main(String[] args) {
     
+    // Initializes the command hash table
+    Commands.initializeCommandHashTable();
     // Create a new JShell window and scanner
     JShellWindow window = new JShellWindow();
     Scanner in = new Scanner(System.in);
@@ -60,7 +62,7 @@ public class JShell {
       input = input.trim();
       // Log the input
       window.addInputtoLog(input);
-
+      
       // Attempt to run the command. If it fails print the error message.
       Result result = Commands.run(window, input);
       System.out.print(result.getMessage());
