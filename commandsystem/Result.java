@@ -74,7 +74,7 @@ public class Result {
     if (this.message.equals(""))
       this.message += message;
     else
-      this.message += message + spacing;
+      this.message += spacing + message;
   }
   
   public boolean errorOccured() {
