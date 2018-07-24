@@ -49,11 +49,13 @@ public class GrepTest {
   public void recursiveCase() {
     JShellWindow jShell = new JShellWindow();
     Commands.run(jShell, "mkdir folder");
+    Commands.run(jShell, "cd folder");
     try {
-      TextEditor.writeText(jShell.getFileExplorer(), "folder/file.txt", "three\ntwo", false);
+      TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "three\ntwo", false);
     } catch (InvalidPathException e) {
       
     }
+    Commands.run(jShell, "cd ..");
     Result test = Commands.run(jShell, "grep -R one folder");
     String actual = test.getMessage();
     String expected = ("three");
