@@ -67,9 +67,9 @@ public class CpTest {
   }
   
   @Test
-  public void testWithArgument() {
-    
-    Result resultActual = Commands.run(jShell, "cp A");
+  public void testPathRelativeToWD() {
+    Commands.run(jShell, "mkdir A B");
+    Result resultActual = Commands.run(jShell, "cp A B");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
