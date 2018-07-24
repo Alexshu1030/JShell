@@ -40,20 +40,20 @@ import filesystem.File;
 import shell.JShellWindow;
 
 public class Commands {
-
-  /**
-   * commands[] The list of valid commands
-   */
-  private static Command[] commands = new Command[] {new History(), new Exit(),
-      new Pwd(), new Ls(), new Mkdir(), new Cd(), new Tree(), new Echo(),
-      new Find(), new Cat(), new Man(), new Pushd(), new Popd(), new Mv(),
-      new Number(), new Curl(), new Cp()};
-
   
+  /**
+   * commandsPackage The package that the commands are in
+   */
   private static String commandsPackage = "commands";
+  /**
+   * commandHashTable A hashtable mapping the command's code to it's class name
+   */
   private static Hashtable<String, String> commandHashTable =
       new Hashtable<String, String>();
 
+  /**
+   * Initializes the command hash table with it's values.
+   */
   public static void initializeCommandHashTable() {
 
     commandHashTable.put("cat", "Cat");
@@ -77,12 +77,13 @@ public class Commands {
   }
   
   /**
-   * Returns true if execution of this class is successful. Execution print or
-   * add string to standard output, or overwrites or appends a string to a file
+   * Returns the result of a command's execution. The result contains the
+   * message from the command and any error's that occurred during the
+   * process. Can redirect the output of a command to a text file.
    * 
    * @param jShell the window that will be printed on
-   * @param arguments a list containing the directories to be listed
-   * @return result true if execution was successful
+   * @param commandText the command being run
+   * @return the result of the command
    */
   public static Result run(JShellWindow jShell, String commandText) {
     
@@ -168,28 +169,14 @@ public class Commands {
     
     return command;
   }
-
-  /*
-  public static Command getCommand(String name) {
-
-    int i = 0;
-    boolean found = false;
-    Command command = null;
-    // Iterate over the commands until the correct one has been found
-    while (i < commands.length && !found) {
-      // Check if the name of the current command is the one we want
-      if (commands[i].getCommandName().equals(name)) {
-        // It is. We can now exit the loop
-        command = commands[i];
-        found = true;
-      } else
-        i++; // It isn't. Go to the next command
-    }
-
-    return command;
-  }
-  */
   
+  /**
+   * Returns whether the command with the specified arguments is being
+   * redirected.
+   * 
+   * @param arguments the arguments of the command
+   * @return whether the command is being redirected
+   */
   private static boolean isRedirected(ArrayList<String> arguments) {
     
     boolean isRedirected = false;
