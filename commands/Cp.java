@@ -45,7 +45,16 @@ public class Cp implements Command {
   /**
    * helpText The help text for the current class
    */
-  private String helpText = "";
+  private String helpText = "NAME:\n"
+      + "cp OLDPATH NEWPATH - copy files and directories.\n" + "DESCRIPTION:\n"
+      + "copy files and directories from OLDPATH to NEWPATH, copies "
+      + "recursively if OLDPATH is a folder.\n"
+      + "RETURNS:\n" + "This command does not return anything.\n"
+      + "EXAMPLE USAGE:\n" + "/#: cp path1 path2\n"
+      + "This will copy the file from path1 to path2\n"
+      + "/#: cp folder1 path2\n"
+      + "This will copy the folder1 and all its contents from its path"
+      + " into path2\n";
 
   /**
    * Returns true if execution of the command is successful. Execution changes
