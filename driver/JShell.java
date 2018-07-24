@@ -41,8 +41,19 @@ import shell.JShellWindow;
 
 public class JShell {
 
+  /**
+   * prompt the prompt for the user to start typing
+   */
   private static String prompt = "/# ";
 
+  /**
+   * The main method. It intialized the command has table and contains an
+   * instance of the JShellWindow.
+   * 
+   * @param args the args for the method
+   * @param arguments the arguments of the command the first of which is a URL
+   * @return the content from the URL as a string
+   */
   public static void main(String[] args) {
     
     // Initializes the command hash table
