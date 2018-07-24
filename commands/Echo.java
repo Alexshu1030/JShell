@@ -88,32 +88,11 @@ public class Echo implements Command {
     // If there were no errors in the arguments then we can run the command
     if (!result.errorOccured()) {
       
-      int numOfArgs = arguments.size();
-  
       String text = arguments.get(0);
   
       // Remove the quotation marks from the argument
       text = text.substring(1, text.length() - 1);
-  
-      FileExplorer explorer = jShell.getFileExplorer();
-      if (numOfArgs == 1) {
-        
-        result.addMessage(text);
-      } 
-      else if (numOfArgs == 3) {
-        
-        // Assign arguments from the arraylist to proper variables
-        String operationType = arguments.get(1);
-        String outFilePath = arguments.get(2);
-        
-        try {
-          TextEditor.writeText(explorer, outFilePath, text,
-              operationType.equals(">>"));
-        }
-        catch (InvalidPathException e) {
-          result.logError(2, "Invalid outFile path.");
-        }
-      }
+      result.addMessage(text);
     }
 
     return result;
@@ -141,7 +120,6 @@ public class Echo implements Command {
     int numOfArgs = arguments.size();
 
     if (numOfArgs == 1) {
-      
       String arg = arguments.get(0);
       int secArgLen = arg.length();
       // echo's STRING input must have quotations around it
@@ -151,25 +129,6 @@ public class Echo implements Command {
       }
       else {
         result.logError(0, "String must be enclosed in quotations.");
-      }
-    } else if (numOfArgs == 3) {
-
-      String arg1 = arguments.get(0);
-      String arg2 = arguments.get(1);
-      // Otherwise the second argument must be the > or >>
-      int secArgLen = arg1.length();
-      if (arg2.equals(">>") || arg2.equals(">")) {
-        // echo's STRING input must have quotations around it
-        if (arg1.substring(0, 1).equals("\"")
-            && arg1.substring(secArgLen - 1, secArgLen).equals("\"")) {
-          isValid = true;
-        }
-        else {
-          result.logError(0, "String must be enclosed in quotations.");
-        }
-      }
-      else {
-        result.logError(1, "Invalid argument.");
       }
     }
     else

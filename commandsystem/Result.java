@@ -51,6 +51,12 @@ public class Result {
   public String getMessage() {
     
     return message;
+    /*
+    if (message.equals(""))
+      return "";
+    else
+      return message + "\n";
+      */
   }
   
   public String getErrorMessage() {
