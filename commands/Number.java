@@ -55,14 +55,20 @@ public class Number implements Command {
     Result result = areValidArguments(arguments);
     try {
       int cmdnumber = Integer.parseInt(arguments.get(0));
-      
-      String history = jShell.getLog().get(cmdnumber-1);
-      // Now we make sure to change the log accordingly
       ArrayList<String> log = jShell.getLog();
-      // Replace !number with the command run by !number
-      log.remove(log.size()-1);
-      log.add(history);
-      result = Commands.run(jShell, history);
+      String history;
+      // Make sure the cmdnumber is within the bounds of the log's size
+      if (log.size()-1 >= cmdnumber) {
+        history = jShell.getLog().get(cmdnumber-1);
+        // Replace !number with the command run by !number
+        log.remove(log.size()-1);
+        log.add(history);
+        result = Commands.run(jShell, history);
+      }
+      else {
+        result.logError("Command "+ cmdnumber +" does not exist.");
+      }
+      
       
     }
     catch (Exception e) {
