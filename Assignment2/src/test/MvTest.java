@@ -67,9 +67,9 @@ public class MvTest {
   }
   
   @Test
-  public void testWithArgument() {
+  public void testWithInvalidArguments() {
     
-    Result resultActual = Commands.run(jShell, "pwd A");
+    Result resultActual = Commands.run(jShell, "mv A B C");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
@@ -82,34 +82,164 @@ public class MvTest {
   }
   
   @Test
-  public void testAtRootDirectory() {
+  public void testWithNonExistantOldPath() {
     
-    Result resultActual = Commands.run(jShell, "pwd");
+    Commands.run(jShell, "mkdir B");
+    Result resultActual = Commands.run(jShell, "mv A B");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
     
-    String expectedMessage = "/\n";
-    String expectedErrorMessage = "";
+    String expectedMessage = "";
+    String expectedErrorMessage = "The old path does not exist. " + 
+    "(Argument 0: A)";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   
   @Test
-  public void testAtNonRootDirectory() {
+  public void testWithNonExistantNewPath() {
     
-    Commands.run(jShell, "mkdir /A /A/A1 /A/A1/A11");
-    Commands.run(jShell, "cd /A/A1/A11");
-    Result resultActual = Commands.run(jShell, "pwd");
+    Commands.run(jShell, "mkdir A");
+    Result resultActual = Commands.run(jShell, "mv A B");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
     
-    String expectedMessage = "/A/A1/A11\n";
+    String expectedMessage = "";
+    String expectedErrorMessage = "A file of the same name already " + 
+    "exists at the new path. (Argument 1: B)";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+  }
+  
+  @Test
+  public void testMovingDirToDir() {
+    
+    Commands.run(jShell, "mkdir /A /A/A1 /B");
+    Result resultActual = Commands.run(jShell, "mv /A/A1 B");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
     String expectedErrorMessage = "";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    try {
+      assertEquals(explorer.getDirectory("/B/A1").getFileName(), "A1");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testMovingDirWithSubDirToAnotherDir() {
+    
+    Commands.run(jShell, "mkdir /A /A/A1 /B");
+    Result resultActual = Commands.run(jShell, "mv /A /B");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    try {
+      assertEquals(explorer.getDirectory("/B/A/A1").getFileName(), "A1");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testMovingFileToDir() {
+    
+    Commands.run(jShell, "mkdir /A /B");
+    Commands.run(jShell, "echo \"test\" > /A/a");
+    
+    Result resultActual = Commands.run(jShell, "mv /A/a /B");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    try {
+      assertEquals(explorer.getFile("/B/a").getFileName(), "a");
+    }
+    catch (FileNotFoundException e) {
+      fail("File not moved.");
+    }
+  }
+  
+  @Test
+  public void testMovingFromRelPath() {
+    
+    Commands.run(jShell, "mkdir /A /A/A1 /B");
+    Commands.run(jShell, "cd A");
+    
+    Result resultActual = Commands.run(jShell, "mv A1 /B");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    try {
+      assertEquals(explorer.getFile("/B/A1").getFileName(), "A1");
+    }
+    catch (FileNotFoundException e) {
+      fail("File not moved.");
+    }
+  }
+  
+  @Test
+  public void testChangeFileName() {
+    
+    Commands.run(jShell, "mkdir /A /B");
+    Commands.run(jShell, "echo \"test\" > /A/a");
+    
+    Result resultActual = Commands.run(jShell, "mv /A/a /B/b");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    try {
+      assertEquals(explorer.getFile("/B/b").getFileName(), "b");
+    }
+    catch (FileNotFoundException e) {
+      fail("File not moved and renamed.");
+    }
+    
+    try {
+      assertEquals(explorer.getFile("/B/b").getFileContents(), "test\n");
+    }
+    catch (FileNotFoundException e) {
+      fail("File content not transfered.");
+    }
   }
 }
