@@ -38,7 +38,7 @@ public class LsTest {
 
     String actual = resultActual.getMessage();
     
-    String expected = "\n";
+    String expected = "";
     
     assertEquals(expected, actual);
   }
