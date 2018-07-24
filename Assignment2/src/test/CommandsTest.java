@@ -160,4 +160,28 @@ public class CommandsTest {
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
+  
+  @Test
+  public void testSpacesBetweenArgs() {
+    
+    Result resultActual = Commands.run(jShell, "   mkdir  A   B   C   ");
+    System.out.println("HERE:" + Commands.run(jShell, "ls").getMessage());
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    try {
+      assertEquals(explorer.getDirectory("/A").getFileName(), "A");
+      assertEquals(explorer.getDirectory("/B").getFileName(), "B");
+      assertEquals(explorer.getDirectory("/C").getFileName(), "C");
+    }
+    catch (FileNotFoundException e) {
+      fail("Command args separated by multiple spaces were not recognized.");
+    }
+  }
 }
