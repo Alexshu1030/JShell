@@ -147,6 +147,11 @@ public class Mkdir implements Command {
     return result;
   }
   
+  /**
+   * Returns whether if the dirname contains valid chars
+   * 
+   * @return whether if the dirname contains valid chars
+   */
   private boolean containsValidCharacters(String dirName) {
     
     return dirName.matches("[A-Za-z0-9-/.]+");
@@ -162,6 +167,11 @@ public class Mkdir implements Command {
     return helpText;
   }
   
+  /**
+   * Returns whether if the output can be redirected or not
+   * 
+   * @return whether if the output can be redirected or not
+   */
   public boolean canBeRedirected() {
     
     return true;

@@ -126,6 +126,11 @@ public class Man implements Command {
     return helpText;
   }
 
+  /**
+   * Returns whether if the output can be redirected or not
+   * 
+   * @return whether if the output can be redirected or not
+   */
   public boolean canBeRedirected() {
     
     return true;

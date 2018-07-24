@@ -98,6 +98,11 @@ public class Number implements Command {
     return helpText;
   }
 
+  /**
+   * Returns whether if the output can be redirected or not
+   * 
+   * @return whether if the output can be redirected or not
+   */
   @Override
   public boolean canBeRedirected() {
     return true;
