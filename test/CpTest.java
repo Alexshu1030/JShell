@@ -106,4 +106,28 @@ public class CpTest {
     assertEquals(expectedErrorMessage, actualErrorMessage);
     assertEquals(expectedLsMessage, actualLsMessage);
   }
+
+  @Test
+  public void testCpDirOutPathRelativeToWD() {
+    Commands.run(jShell, "mkdir A B");
+    Commands.run(jShell, "cd A");
+    Commands.run(jShell, "echo \"contents of text\" > TextFile");
+    Commands.run(jShell, "mkdir A1");
+    Commands.run(jShell, "cd ..");
+    Result resultActual = Commands.run(jShell, "cp A B");
+    Result tree = Commands.run(jShell, "tree");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    String actualTree = tree.getMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    String expectedTree = "\\\n\tTextFile\n\tA\n\t\tTextFile\n\n";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    assertEquals(expectedTree, actualTree);
+  }
+  
 }
