@@ -81,6 +81,12 @@ public class FileExplorer {
     workingDirectory = newWD;
   }
   
+  /**
+   * Either gets (retrieves) a file or creates a file if it does not exist
+   * 
+   * @param path the path to the file is created or retrieved
+   * @return file the file that we created or retrieved
+   */
   public File getOrCreateFile(String path) throws InvalidPathException {
     
     File file;
@@ -104,6 +110,12 @@ public class FileExplorer {
     return file;
   }
   
+  /**
+   * Gets (retrieves) a file
+   * 
+   * @param path the path to the file that is being retrieved
+   * @return file the file that we retrieved
+   */
   public File getFile(String path) throws FileNotFoundException {
     
     Directory rootDir;
@@ -126,6 +138,12 @@ public class FileExplorer {
     return getFileHelper(rootDir, path);
   }
 
+  /**
+   * Helper function for get file, gets the full path
+   * 
+   * @param file the file we are looking for
+   * @return recursively calls itself to retrieve full path
+   */
   private File getFileHelper(File file, String path)
       throws FileNotFoundException {
     
@@ -158,6 +176,12 @@ public class FileExplorer {
 
   }
 
+  /**
+   * Gets (retrieves) a directory
+   * 
+   * @param path the path to the dir that is retrieved
+   * @return file the directory that we created or retrieved
+   */
   public Directory getDirectory(String path) throws FileNotFoundException {
     
     File file = getFile(path);
@@ -168,6 +192,12 @@ public class FileExplorer {
       throw new FileNotFoundException();
   }
 
+  /**
+   * Adds a file to a directory
+   * 
+   * @param dirPath the path to the dir that we are putting the file in
+   * @param file the file that we are putting in
+   */
   public void addFile(String dirPath, File file) throws InvalidPathException, 
   PathExistsException {
 
@@ -180,10 +210,12 @@ public class FileExplorer {
     }
   }
 
-  /*
+  /**
    * This method is just a specialized case of the addFile method. It allows
    * you to just pass in the path and it will create the directory with that
    * path.
+   * 
+   * @param the path we are creating
    */
   public void addDirectory(String path) throws InvalidPathException,
   PathExistsException {
