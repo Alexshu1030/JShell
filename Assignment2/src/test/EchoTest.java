@@ -67,9 +67,9 @@ public class EchoTest {
   }
   
   @Test
-  public void testWithArgument() {
+  public void testInvalidNumberOfArguments() {
     
-    Result resultActual = Commands.run(jShell, "pwd A");
+    Result resultActual = Commands.run(jShell, "echo \"string1\" \"string2\"");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
@@ -82,14 +82,14 @@ public class EchoTest {
   }
   
   @Test
-  public void testAtRootDirectory() {
+  public void testValidString() {
     
-    Result resultActual = Commands.run(jShell, "pwd");
+    Result resultActual = Commands.run(jShell, "echo \"this is a string\"");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
     
-    String expectedMessage = "/\n";
+    String expectedMessage = "this is a string\n";
     String expectedErrorMessage = "";
     
     assertEquals(expectedMessage, actualMessage);
@@ -97,17 +97,16 @@ public class EchoTest {
   }
   
   @Test
-  public void testAtNonRootDirectory() {
+  public void testStringWithoutQuotes() {
     
-    Commands.run(jShell, "mkdir /A /A/A1 /A/A1/A11");
-    Commands.run(jShell, "cd /A/A1/A11");
-    Result resultActual = Commands.run(jShell, "pwd");
+    Result resultActual = Commands.run(jShell, "echo string");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
     
-    String expectedMessage = "/A/A1/A11\n";
-    String expectedErrorMessage = "";
+    String expectedMessage = "";
+    String expectedErrorMessage = "String must be enclosed in quotations. " +
+    "(Argument 0: string)";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
