@@ -127,6 +127,12 @@ public class File {
     return path;
   }
 
+  /**
+   * Helper to get the full path of a file
+   * 
+   * @param file the file that is being used to get the full path
+   * @return path the full path of the file
+   */
   private String getFullPathHelper(File file) {
 
     String path = file.getFileName();
@@ -138,6 +144,11 @@ public class File {
     return path;
   }
   
+  /**
+   * Creates a new copy
+   * 
+   * @return a new copy of a file with the same contents
+   */
   public File createCopy() {
     
     return new File(fileName, fileContents);
