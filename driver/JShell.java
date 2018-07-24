@@ -58,8 +58,6 @@ public class JShell {
       System.out.print(prompt);
       // Get user input
       String input = in.nextLine();
-      // Remove any leading or trailing spaces
-      input = input.trim();
       // Log the input
       window.addInputtoLog(input);
       
