@@ -35,6 +35,7 @@ import org.junit.Test;
 import commandsystem.Result;
 import commandsystem.TextEditor;
 import exceptions.InvalidPathException;
+import filesystem.Directory;
 import filesystem.File;
 import commandsystem.Commands;
 import shell.JShellWindow;
@@ -49,14 +50,14 @@ public class GrepTest {
   public void recursiveCase() {
     JShellWindow jShell = new JShellWindow();
     Commands.run(jShell, "mkdir folder");
-    Commands.run(jShell, "cd folder");
     try {
+      Directory directory = new Directory("folder");
+      jShell.getFileExplorer().setWorkingDirectory(directory);
       TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "three\ntwo",
           false);
     } catch (InvalidPathException e) {
 
     }
-    Commands.run(jShell, "cd ..");
     Result test = Commands.run(jShell, "grep -R one folder");
     String actual = test.getMessage();
     String expected = ("three");

@@ -112,6 +112,7 @@ public class Grep implements Command {
                   String fileCont[] =
                       ((String) currFile.getFileContents()).split("\\n");
                   // if each line contains the regex add it to the message
+                  result.addMessage(filesInDir[0]);
                   for (int a = 0; a < fileCont.length; a++) {
                     if (fileCont[a].contains(regex)) {
                       result.addMessage(fileCont[a]);
