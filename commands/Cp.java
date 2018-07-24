@@ -48,20 +48,19 @@ public class Cp implements Command {
   private String helpText = "NAME:\n"
       + "cp OLDPATH NEWPATH - copy files and directories.\n" + "DESCRIPTION:\n"
       + "copy files and directories from OLDPATH to NEWPATH, copies "
-      + "recursively if OLDPATH is a folder.\n"
-      + "RETURNS:\n" + "This command does not return anything.\n"
-      + "EXAMPLE USAGE:\n" + "/#: cp path1 path2\n"
-      + "This will copy the file from path1 to path2\n"
+      + "recursively if OLDPATH is a folder.\n" + "RETURNS:\n"
+      + "This command does not return anything.\n" + "EXAMPLE USAGE:\n"
+      + "/#: cp path1 path2\n" + "This will copy the file from path1 to path2\n"
       + "/#: cp folder1 path2\n"
       + "This will copy the folder1 and all its contents from its path"
       + " into path2\n";
 
   /**
-   * Returns true if execution of the command is successful. Execution changes
-   * current directory to the one specified in arguments
+   * Returns true if execution of the command is successful.
    * 
    * @param jShell the window that will be printed on
-   * @param arguments a list containing the directory to be changed into
+   * @param arguments two paths that we will be copying and pasting into
+   *        respectively
    * @return result the output to the shell
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
