@@ -109,7 +109,8 @@ public class Grep implements Command {
                 // if the current file is a file not directory
                 if (!currFile.isDirectory()) {
                   // split its contents into separate lines
-                  String fileCont[] = ((String) currFile.getFileContents()).split("\\n");
+                  String fileCont[] =
+                      ((String) currFile.getFileContents()).split("\\n");
                   // if each line contains the regex add it to the message
                   for (int a = 0; a < fileCont.length; a++) {
                     if (fileCont[a].contains(regex)) {
