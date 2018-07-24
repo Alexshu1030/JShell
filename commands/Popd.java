@@ -78,7 +78,7 @@ public class Popd implements Command {
         DirectoryStack.stack.popd(jShell);
       }
       catch (EmptyStackException e) {
-        result.logError("The directory stack is empty");
+        result.logError("The directory stack is empty.");
       }
     }
     
