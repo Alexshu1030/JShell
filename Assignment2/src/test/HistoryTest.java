@@ -75,8 +75,8 @@ public class HistoryTest {
     String expectedMessage = "1. history\n";
     String expectedErrorMessage = "";
     
-    assertEquals(actualMessage, expectedMessage);
-    assertEquals(actualErrorMessage, expectedErrorMessage);
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   @Test
   public void testNoArgumentsWithErrorInLog() {
@@ -92,8 +92,8 @@ public class HistoryTest {
         "2. history\n";
     String expectedErrorMessage = "";
     
-    assertEquals(actualMessage, expectedMessage);
-    assertEquals(actualErrorMessage, expectedErrorMessage);
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   @Test
   public void testStandardNoArgument() {
@@ -110,8 +110,8 @@ public class HistoryTest {
         "3. history\n";
     String expectedErrorMessage = "";
     
-    assertEquals(actualMessage, expectedMessage);
-    assertEquals(actualErrorMessage, expectedErrorMessage);
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   @Test
   public void testStandardWithArgument() {
@@ -128,8 +128,8 @@ public class HistoryTest {
         "3. history\n";
     String expectedErrorMessage = "";
     
-    assertEquals(actualMessage, expectedMessage);
-    assertEquals(actualErrorMessage, expectedErrorMessage);
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   @Test
   public void testTooManyArguments() {
@@ -144,7 +144,7 @@ public class HistoryTest {
     String expectedMessage = "";
     String expectedErrorMessage = "Invalid number of arguments.";
     
-    assertEquals(actualMessage, expectedMessage);
-    assertEquals(actualErrorMessage, expectedErrorMessage);
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
   }
 }
