@@ -86,12 +86,9 @@ public class Grep implements Command {
       if (arguments.get(0).equals("-R")) {
         // get the regex we're looking for
         String regex = arguments.get(1);
-        // remove the -R and the regex respectively
-        files.remove(0);      
-        files.remove(0);
         
         // for each folder in the list
-        for (int i = 0; i < files.size(); i++) {
+        for (int i = 2; i < files.size(); i++) {
           // try to go thru each file and add their matching lines to the msg
           try {
             // if each of the args is an directory
@@ -110,12 +107,10 @@ public class Grep implements Command {
                 File currFile = jShell.getFileExplorer().getFile(filesInDir[k]);
                 // if the currfile is not a directory
                 if (!currFile.isDirectory()) {
-                  // run cat on the file
-                  ArrayList<String> getCat = new ArrayList<String>();
-                  getCat.add(filesInDir[k]);
+                  String fileCont = (String) currFile.getFileContents();
+
                   // split the contents by new lines
-                  String fileContents[] =
-                      checkFile.run(jShell, getCat).getMessage().split("\\n");
+                  String fileContents[] = fileCont.split("\\n");
                   // for each line in the file's cat
                   for (int g = 0; g < fileContents.length; g++) {
                     // add the line to result if it contains the regex
@@ -123,8 +118,6 @@ public class Grep implements Command {
                       result.addMessage(fileContents[g]);
                     }
                   }
-                  // clear getcat
-                  getCat.clear();
                 } else {
                   // if the currfile is a folder, call the method itself again
                   ArrayList<String> recursiveFolder = new ArrayList<String>();
@@ -145,26 +138,19 @@ public class Grep implements Command {
       } else {
         // set regex to the first word in the argument
         String regex = arguments.get(0);
-        // remove the regex so that files contains the file names
-        files.remove(0);
         // for each file in files
-        for (int j = 0; j < files.size(); j++) {
+        for (int j = 1; j < files.size(); j++) {
           // try to get each file
           try {
-            
-            File fileObj = jShell.getFileExplorer().getFile(files.get(j));
+            File fileObj = jShell.getFileExplorer().getFile(arguments.get(j));
             if (!fileObj.isDirectory()) {
-              // set current file's name
-              String currFile = files.get(j);
               // get the content of the file by running cat
-              String fileCont = Commands.run(jShell, 
-                  "cat " + currFile).getMessage();
+              String fileCont = (String) fileObj.getFileContents();
               // split the content into separate lines
-              String fileLines[] = fileCont.split("\\n");
+              String [] fileLines = fileCont.split("\\n");
               // if a line contains the regex add it to the result
               for (int h = 0; h < fileLines.length; h++) {
                 if (fileLines[h].contains(regex)) {
-                  System.out.println(fileLines[h]);
                   result.addMessage(fileLines[h]);
                 }
               }

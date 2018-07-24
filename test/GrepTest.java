@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import commandsystem.Result;
+import filesystem.File;
 import commandsystem.Commands;
 import shell.JShellWindow;
 
@@ -59,6 +60,27 @@ public class GrepTest {
     Result test = Commands.run(jShell, "grep");
     String actual = test.getErrorMessage();
     String expected = ("Invalid number of arguments.");
+    assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void noneCase() {
+    JShellWindow jShell = new JShellWindow();
+    Commands.run(jShell, "echo sdfgh > file.txt");
+    Result test = Commands.run(jShell, "grep a file.txt");
+    String actual = test.getMessage();
+    String expected = ("");
+    assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void oneCase() {
+    JShellWindow jShell = new JShellWindow();
+    File a = new File("file.txt", "asd\nas");
+    File b = new File("file.txt", "a");
+    Result test = Commands.run(jShell, "grep a file.txt file1.txt");
+    String actual = test.getMessage();
+    String expected = ("asd");
     assertEquals(expected, actual);
   }
 }
