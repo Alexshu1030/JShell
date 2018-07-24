@@ -111,6 +111,7 @@ public class Cd implements Command {
           // Set the working directory to the directory given by the path
           if (newDir != null)
             explorer.setWorkingDirectory(newDir);
+          
       }
     }
     
