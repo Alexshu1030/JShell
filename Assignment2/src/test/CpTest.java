@@ -75,7 +75,7 @@ public class CpTest {
     String actualErrorMessage = resultActual.getErrorMessage();
     
     String expectedMessage = "";
-    String expectedErrorMessage = "Invalid number of arguments.";
+    String expectedErrorMessage = "";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
