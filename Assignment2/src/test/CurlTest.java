@@ -2,22 +2,33 @@ package test;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import commandsystem.Result;
+import filesystem.FileExplorer;
 import commandsystem.Commands;
 import shell.JShellWindow;
 
 public class CurlTest {
-  @Before
-  public void setup() {
+  private static JShellWindow jShell;
+  
+  @BeforeClass
+  public static void setUpClass() {
+    
     Commands.initializeCommandHashTable();
+  }
+  
+  @Before
+  public void setUp() {
+
+    jShell = new JShellWindow();
   }
   @Test
   public void testStandard() {
-    JShellWindow jShell = new JShellWindow();
-    Result resultActual = Commands.run(jShell,
-        "curl http://www.cs.cmu.edu/~spok/grimmtmp/073.txt");
+    Commands.run(jShell, "curl http://www.cs.cmu.edu/~spok/grimmtmp/073.txt");
+    Result resultActual = Commands.run(jShell, "cat 073.txt");
     String actual = resultActual.getMessage();
+
     String expected = "There was once a king who had an illness, and no one "
         + "believed that he\n"
         + "would come out of it with his life.  He had three sons who were"
@@ -340,20 +351,19 @@ public class CurlTest {
         + "betrayed him, and how he had nevertheless kept silence.  The old"
         + " king\n"
         + "wished to punish them, but they had put to sea, and never "
-        + "came back\n" + "as long as they lived.\n" + "\n";
+        + "came back\n" + "as long as they lived.\n";
     assertEquals(expected, actual);
   }
 
 
   @Test
   public void testNoFileNameGiven() {
-    JShellWindow jShell = new JShellWindow();
 
     Commands.run(jShell, "curl https://idp.utorauth.utoronto.ca/");
     Result resultActual = Commands.run(jShell, "cat idp.utorauth.utoronto.ca");
     String actual = resultActual.getMessage();
     Result resultExpected = new Result();
-    resultExpected.addMessage("<pre>\n" + "hello\n" + "</pre>\n");
+    resultExpected.addMessage("<pre>\n" + "hello\n" + "</pre>");
     String expected = resultExpected.getMessage();
     assertEquals(expected, actual);
   }
@@ -361,30 +371,33 @@ public class CurlTest {
 
   @Test
   public void testNoArguments() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "curl");
     String actual = resultActual.getErrorMessage();
     String expected = "Invalid number of arguments.";
+    String actualOutput = resultActual.getMessage();
     assertEquals(expected, actual);
+    assertEquals("", actualOutput);
   }
 
   @Test
   public void testTooManyArguments() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "curl idp.utorauth.utoronto.ca"
         + " https://www.utsc.utoronto.ca/~nick/cscB36/185/t1sol.txt");
     String actual = resultActual.getErrorMessage();
     String expected = "Invalid number of arguments.";
+    String actualOutput = resultActual.getMessage();
     assertEquals(expected, actual);
+    assertEquals("", actualOutput);
   }
 
   @Test
   public void testInvalid() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "curl http://eba1e.com/");
     String actual = resultActual.getErrorMessage();
     String expected = "Invalid URL";
+    String actualOutput = resultActual.getMessage();
     assertEquals(expected, actual);
+    assertEquals("", actualOutput);
   }
 
 }

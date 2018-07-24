@@ -34,7 +34,9 @@ import java.util.ArrayList;
 import commandsystem.Command;
 import commandsystem.Commands;
 import commandsystem.Result;
+import commandsystem.TextEditor;
 import commandsystem.Web;
+import exceptions.InvalidPathException;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
 
@@ -55,7 +57,7 @@ public class Curl implements Command {
       + " 073.txt in the current working directory.";
   
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+    FileExplorer explorer = jShell.getFileExplorer();
     Result result = areValidArguments(arguments);
     
     // If there were no errors in the arguments then we can run the command
@@ -71,9 +73,12 @@ public class Curl implements Command {
         result.logError("Invalid URL");
       }
       else {
-        result.addMessage(contents);
         // Echo the contents into the file
-        Commands.run(jShell, "echo \"" + contents + "\" > " + outfile);
+        try {
+          TextEditor.writeText(explorer, outfile, contents, false);
+        } catch (InvalidPathException e) {
+          result.logError("Invalid Path Exception.");
+        }
       }
     }
     
