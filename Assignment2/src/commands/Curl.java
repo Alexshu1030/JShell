@@ -39,6 +39,14 @@ import exceptions.InvalidPathException;
 import filesystem.FileExplorer;
 import shell.JShellWindow;
 
+/**
+ * Returns the content from the webpage if execution of the command is
+ * successful.
+ * 
+ * @param jShell the window that will be printed on
+ * @param arguments the url that we will be fetching from
+ * @return result the output to the shell
+ */
 public class Curl implements Command {
   
   private String commandName = "curl";
@@ -85,11 +93,22 @@ public class Curl implements Command {
     return result;
   }
 
+  /**
+   * Returns the name of this command
+   * 
+   * @return commandName this is the command's name
+   */
   public String getCommandName() {
 
     return commandName;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * 
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public Result areValidArguments(ArrayList<String> arguments) {
     
     Result result = new Result(arguments);
@@ -100,12 +119,22 @@ public class Curl implements Command {
     
     return result;
   }
-
+  
+  /**
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
+   */
   public String getHelpText() {
 
     return helpText;
   }
-
+  
+  /**
+   * Returns whether if the output can be redirected or not
+   * 
+   * @return whether if the output can be redirected or not
+   */
   public boolean canBeRedirected() {
     
     return true;
