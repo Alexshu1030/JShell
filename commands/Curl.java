@@ -48,9 +48,17 @@ import shell.JShellWindow;
  * @return result the output to the shell
  */
 public class Curl implements Command {
-  
+  /**
+   * numOfArguments The correct number of args in the current class
+   */
   private String commandName = "curl";
+  /**
+   * commandName The command name of the current class
+   */
   private int numOfArguments = 1;
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n"
       + "  curl URL - Adds file at URL to current working directory \n" +
       "DESCRIPTION:\n" + "  Retrieves the file at the URL and adds it's"
@@ -63,6 +71,13 @@ public class Curl implements Command {
       + "    will get the contents of the file and put it into a file named"
       + " 073.txt in the current working directory.";
   
+  /**
+   * Returns true if execution of the command is successful.
+   * 
+   * @param jShell the window that will be printed on
+   * @param arguments the url we will be fetching from
+   * @return result the output to the shell
+   */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     FileExplorer explorer = jShell.getFileExplorer();
     Result result = areValidArguments(arguments);
