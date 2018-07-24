@@ -87,34 +87,23 @@ public class CpTest {
   }
   
   @Test
-  public void testAtRootDirectory() {
-    
-    Result resultActual = Commands.run(jShell, "cp");
-    
-    String actualMessage = resultActual.getMessage();
-    String actualErrorMessage = resultActual.getErrorMessage();
-    
-    String expectedMessage = "/\n";
-    String expectedErrorMessage = "";
-    
-    assertEquals(expectedMessage, actualMessage);
-    assertEquals(expectedErrorMessage, actualErrorMessage);
-  }
-  
-  @Test
   public void testAtNonRootDirectory() {
-    
-    Commands.run(jShell, "mkdir /A /A/A1 /A/A1/A11");
-    Commands.run(jShell, "cd /A/A1/A11");
-    Result resultActual = Commands.run(jShell, "cp");
+    Commands.run(jShell, "cd A/A1");
+    Commands.run(jShell, "mkdir A A/A1 A/A1/A11 B");
+    Commands.run(jShell, "echo \"contents of text\" > TextFile");
+    Result resultActual = Commands.run(jShell, "cp TextFile /B");
+    Result lsActual = Commands.run(jShell, "ls /B");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
+    String actualLsMessage = lsActual.getMessage();
     
-    String expectedMessage = "/A/A1/A11\n";
+    String expectedMessage = "";
     String expectedErrorMessage = "";
+    String expectedLsMessage = "/B:\nTextFile\n";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
+    assertEquals(expectedLsMessage, actualLsMessage);
   }
 }
