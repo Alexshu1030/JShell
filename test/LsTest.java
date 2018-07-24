@@ -42,6 +42,18 @@ public class LsTest {
     
     assertEquals(expected, actual);
   }
+  
+  @Test
+  public void testRecursiveNoArguments() {
+    explorer.setWorkingDirectory(explorer.getRootDirectory());
+    Result resultActual = Commands.run(jShell, "ls -R");
+
+    String actual = resultActual.getMessage();
+    
+    String expected = "/:\n\n";
+    
+    assertEquals(expected, actual);
+  }
 
   @Test
   public void testMultiPathDir() {
