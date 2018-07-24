@@ -1,20 +1,34 @@
 package test;
 
 import static org.junit.Assert.*;
+import java.lang.reflect.Field;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import commandsystem.Commands;
 import commandsystem.Result;
+import filesystem.FileExplorer;
 import shell.JShellWindow;
 
 public class ManTest {
-  @Before
-  public void setup() {
+  private static JShellWindow jShell;
+  private static FileExplorer explorer;
+  
+  @BeforeClass
+  public static void setUpClass() {
+    
     Commands.initializeCommandHashTable();
+  }
+  
+  @Before
+  public void setUp() {
+
+    jShell = new JShellWindow();
+    explorer = jShell.getFileExplorer();
   }
   @Test
   public void testStandard() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "man man");
     String actual = resultActual.getMessage();
     String expected = "NAME:\n"
@@ -31,27 +45,38 @@ public class ManTest {
   }
   @Test
   public void testWrongCommand() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "man nam");
     String actual = resultActual.getErrorMessage();
     String expected = "nam is not a valid command.";
+    String actualOutput = resultActual.getMessage();
     assertEquals(expected, actual);
+    assertEquals("", actualOutput);
   }
   @Test
   public void testNoArguments() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "man");
     String actual = resultActual.getErrorMessage();
     String expected = "Invalid number of arguments.";
+    String actualOutput = resultActual.getMessage();
     assertEquals(expected, actual);
+    assertEquals("", actualOutput);
   }
   @Test
   public void testTooManyArguments() {
-    JShellWindow jShell = new JShellWindow();
     Result resultActual = Commands.run(jShell, "man man cat");
     String actual = resultActual.getErrorMessage();
     String expected = "Invalid number of arguments.";
+    String actualOutput = resultActual.getMessage();
     assertEquals(expected, actual);
+    assertEquals("", actualOutput);
+  }
+  @After
+  public void tearDown() throws NoSuchFieldException, SecurityException,
+  IllegalArgumentException, IllegalAccessException {
+    // Reset the static self reference in the FileExplorer class
+    Field field = (explorer.getClass()).getDeclaredField("rootDirectory");
+    field.setAccessible(true);
+    field.set(null, null);
   }
 
 }
