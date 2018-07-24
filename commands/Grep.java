@@ -67,11 +67,11 @@ public class Grep implements Command {
       + "This will return all lines containing a in b.txt";
 
   /**
-   * Returns true if successfully terminated the jShell
+   * Returns message if no errors occur during execution
    * 
    * @param jShell this is the window that will be printed on
-   * @param arguments this is a list containing null
-   * @return true the output to the shell
+   * @param arguments this is a list containing the arguments
+   * @return message the output to the shell
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     // instantiate a new cat object
@@ -83,7 +83,7 @@ public class Grep implements Command {
     // if the arguments are valid
     if (!result.errorOccured()) {
       // if the recursive arg is provided (recursively go thru folder
-      if (arguments.get(0).equals("-R")) {
+      if (arguments.get(0).equals(recursiveArg)) {
         // get the regex we're looking for
         String regex = arguments.get(1);
 
