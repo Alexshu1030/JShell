@@ -33,9 +33,18 @@ import exceptions.InvalidPathException;
 import filesystem.*;
 
 public class TextEditor {
-  
-  private static String separator = "/n/n/n";
 
+  /**
+   * Writes the specified text into the file at filePath. If not file exists
+   * at that path one is created. If a file exists and append is true the
+   * the text is added to the end of the file. If append is false then the
+   * file is overwritten.
+   * 
+   * @param explorer the FileExplorer being used.
+   * @param filePath the path of the file.
+   * @param text the text to be written.
+   * @param append whether to append or overwrite the text
+   */
   public static void writeText(FileExplorer explorer, String filePath, 
       String text, boolean append) throws InvalidPathException {
     
