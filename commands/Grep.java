@@ -86,7 +86,7 @@ public class Grep implements Command {
       if (arguments.get(0).equals("-R")) {
         // get the regex we're looking for
         String regex = arguments.get(1);
-        
+
         // for each folder in the list
         for (int i = 2; i < files.size(); i++) {
           // try to go thru each file and add their matching lines to the msg
@@ -94,47 +94,43 @@ public class Grep implements Command {
             // if each of the args is an directory
             if (jShell.getFileExplorer().getFile(files.get(i)).isDirectory()) {
               // set the current folder to be used with cat
-              ArrayList<String> currFolder = new ArrayList<String>();
-              currFolder.add(files.get(i));
+              String currFolder = files.get(i);
               // make a new ls object
-              Ls folderCont = new Ls();
               // get all the file names in the folder in eachFile
-              String eachFile = folderCont.run(jShell, currFolder).getMessage();
+              // cd into current folder
+              Commands.run(jShell, "cd " + currFolder);
+              String eachFile = Commands.run(jShell, "ls").getMessage();
               // split the file names into an array
-              String filesInDir[] = eachFile.split("\\s+");
+              String filesInDir[] = eachFile.split("\\s");
               // for each file name in the array
               for (int k = 0; k < filesInDir.length; k++) {
+                // get the current file we're working with
                 File currFile = jShell.getFileExplorer().getFile(filesInDir[k]);
-                // if the currfile is not a directory
+                // if the current file is a file not directory
                 if (!currFile.isDirectory()) {
-                  String fileCont = (String) currFile.getFileContents();
-
-                  // split the contents by new lines
-                  String fileContents[] = fileCont.split("\\n");
-                  // for each line in the file's cat
-                  for (int g = 0; g < fileContents.length; g++) {
-                    // add the line to result if it contains the regex
-                    if (fileContents[g].contains(regex)) {
-                      result.addMessage(fileContents[g]);
+                  // split its contents into separate lines
+                  String fileCont[] = ((String) currFile.getFileContents()).split("\\n");
+                  // if each line contains the regex add it to the message
+                  for (int a = 0; a < fileCont.length; a++) {
+                    if (fileCont[a].contains(regex)) {
+                      result.addMessage(fileCont[a]);
                     }
                   }
                 } else {
                   // if the currfile is a folder, call the method itself again
-                  ArrayList<String> recursiveFolder = new ArrayList<String>();
-                  recursiveFolder.add(currFile.getFileName());
-                  run(jShell, recursiveFolder);
+                  String recursiveFolder = currFile.getFileName();
+                  Commands.run(jShell, "grep " + recursiveFolder);
                 }
               }
-              // clear currfolder
-              currFolder.clear();
+              Commands.run(jShell, "cd ..");
             }
-            // catch exception and log error if the invalid path
-          } 
+          }
+          // catch exception and log error if the invalid path
           catch (FileNotFoundException e) {
             result.logError(0, "The path does not exist.");
           }
         }
-      // if no -R is provided
+        // if no -R is provided
       } else {
         // set regex to the first word in the argument
         String regex = arguments.get(0);
@@ -147,7 +143,7 @@ public class Grep implements Command {
               // get the content of the file by running cat
               String fileCont = (String) fileObj.getFileContents();
               // split the content into separate lines
-              String [] fileLines = fileCont.split("\\n");
+              String[] fileLines = fileCont.split("\\n");
               // if a line contains the regex add it to the result
               for (int h = 0; h < fileLines.length; h++) {
                 if (fileLines[h].contains(regex)) {
