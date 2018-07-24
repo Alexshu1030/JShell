@@ -5,6 +5,9 @@ import java.lang.reflect.Field;
 import org.junit.*;
 import filesystem.*;
 import commandsystem.*;
+import exceptions.FileNotFoundException;
+import exceptions.InvalidPathException;
+import exceptions.PathExistsException;
 import shell.JShellWindow;
 
 public class MkdirTest {
@@ -50,15 +53,173 @@ public class MkdirTest {
   }
   
   @Test
-  public void testOneAbsolutePath() {
+  public void testOneAbsolutePathFromRD() {
     
     Result resultActual = Commands.run(jShell, "mkdir /A");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A").getFileName(), "A");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testAbsolutePathFromNonRootWD() {
+    
+    try {
+      explorer.addDirectory("/A");
+      explorer.setWorkingDirectory(explorer.getDirectory("/A"));
+    }
+    catch (InvalidPathException | PathExistsException |
+        FileNotFoundException e1) {
+      fail("Failed test setup");
+    }
+
+    Result resultActual = Commands.run(jShell, "mkdir /A/A1");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A/A1").getFileName(), "A1");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testRelativePathFromNonRootWD() {
+    
+    try {
+      explorer.addDirectory("/A");
+      explorer.setWorkingDirectory(explorer.getDirectory("/A"));
+    }
+    catch (InvalidPathException | PathExistsException |
+        FileNotFoundException e1) {
+      fail("Failed test setup");
+    }
+    
+    Result resultActual = Commands.run(jShell, "mkdir A1");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A/A1").getFileName(), "A1");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testMultipleAbsolutePathsFromRD() {
+    
+    Result resultActual = Commands.run(jShell, "mkdir /A /A/A1 /A/A1/A11");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A").getFileName(), "A");
+      assertEquals(explorer.getDirectory("/A/A1").getFileName(), "A1");
+      assertEquals(explorer.getDirectory("/A/A1/A11").getFileName(), "A11");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testOneRelativePathFromRD() {
+    
+    Result resultActual = Commands.run(jShell, "mkdir A");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A").getFileName(), "A");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testMultipleRelativePathsFromRD() {
+    
+    Result resultActual = Commands.run(jShell, "mkdir A A/A1 A/A1/A11");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A").getFileName(), "A");
+      assertEquals(explorer.getDirectory("/A/A1").getFileName(), "A1");
+      assertEquals(explorer.getDirectory("/A/A1/A11").getFileName(), "A11");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testComplexRelativePathFromRD() {
+    
+    Result resultActual = Commands.run(jShell,
+        "mkdir /A /A/A1 /A/A1/A11 /A/../././A/A1/../A1/A12");
+    
+    String actualMessage = resultActual.getMessage();
+    String expectedMessage = "";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertFalse(resultActual.errorOccured());
+    
+    try {
+      assertEquals(explorer.getDirectory("/A/A1/A12").getFileName(), "A12");
+    }
+    catch (FileNotFoundException e) {
+      fail("Directory not created.");
+    }
+  }
+  
+  @Test
+  public void testInvalidCharacterInName() {
+    
+    Result resultActual = Commands.run(jShell,
+        "mkdir A#");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
     
     String expectedMessage = "";
-    String expectedErrorMessage = "";
+    String expectedErrorMessage = "Invalid characters in directory name." +
+    " (Argument 0: A#)";
     
     assertEquals(actualMessage, expectedMessage);
     assertEquals(actualErrorMessage, expectedErrorMessage);
