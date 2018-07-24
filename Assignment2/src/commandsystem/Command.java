@@ -36,12 +36,13 @@ import shell.JShellWindow;
 public interface Command {
 
   /**
-   * Runs a command using the given arguments and the shell window to returns
-   * the output of the command.
+   * Runs a command using the given arguments and the shell window and returns
+   * the result of the command logging any error's that occurred
+   * during the process.
    * 
    * @param jShell the window that called the command
    * @param arguments a list of arguments for the command
-   * @return the output of the command
+   * @return the result of the command being run.
    */
   public Result run(JShellWindow jShell, ArrayList<String> arguments);
 
@@ -53,11 +54,11 @@ public interface Command {
   public String getCommandName();
 
   /**
-   * Returns whether the specified arguments are valid. i.e. if there are the
-   * correct number of args, they are in the correct format, etc.
+   * Returns a result logging any errors with the arguments. i.e. if there are
+   * the correct number of args, they are in the correct format, etc.
    * 
    * @param arguments the arguments
-   * @return true if the args are valid and false otherwise.
+   * @return the result of the command
    */
   public Result areValidArguments(ArrayList<String> arguments);
 
@@ -68,5 +69,10 @@ public interface Command {
    */
   public String getHelpText();
   
+  /**
+   * Returns whether this command's output can be redirected.
+   * 
+   * @return whether this command's output can be redirected.
+   */
   public boolean canBeRedirected();
 }
