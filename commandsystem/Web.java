@@ -41,6 +41,13 @@ import java.net.URLConnection;
 
 public class Web {
 
+  /**
+   * Grabs the content from the specified URL as a string and returns it.
+   * 
+   * @param jShell the window the command is being run on.
+   * @param arguments the arguments of the command the first of which is a URL
+   * @return the content from the URL as a string
+   */
   public String grabContents(JShellWindow jShell, ArrayList<String> arguments) {
     
     String result = "";
