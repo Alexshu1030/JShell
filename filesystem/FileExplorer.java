@@ -108,7 +108,7 @@ public class FileExplorer {
     
     Directory rootDir;
 
-    if (Path.isAbsolute(path) || path.equals("")) {
+    if (Path.isAbsolute(path)) {
       // The path is absolute so we want to start at the root directory and
       // work our way to the file.
       rootDir = getRootDirectory();
