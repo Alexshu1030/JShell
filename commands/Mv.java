@@ -37,97 +37,102 @@ import exceptions.*;
 import filesystem.*;
 import shell.JShellWindow;
 
-public class Mv implements Command{
-  
+public class Mv implements Command {
+  /**
+   * commandName The command name of the current class
+   */
   private String commandName = "mv";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n"
-      + "  mv OLDPATH NEWPATH - Moves OLDPATH to NEWPATH\n"
-      + "DESCRIPTION:\n"
+      + "  mv OLDPATH NEWPATH - Moves OLDPATH to NEWPATH\n" + "DESCRIPTION:\n"
       + "  Will move the file or directory given by OLDPATH to NEWPATH or"
       + " replace . OLDPATH and NEWPATH can be relative to the current path"
-      + " or an absolute path.\n "
-      + "PARAMETERS:\n" + "  OLDPATH - The file or directory to be moved.\n "
+      + " or an absolute path.\n " + "PARAMETERS:\n"
+      + "  OLDPATH - The file or directory to be moved.\n "
       + "  NEWPATH - The file to be replaced or directory to be moved to.\n"
       + "RETURNS:\n" + "  This command does not return anything.\n"
       + "EXAMPLE USAGE:\n" + "  /#: mv A1 A2\n"
       + "    Will move A1 inside A2.\n" + "  /#: mv A1 A2/A1\n"
       + "    Will replace the A1 inside A2 with A1 in the current directory.";
 
+  /**
+   * Returns true if execution of command is successful. Execution moves a file
+   * from one path into another
+   * 
+   * @param jShell the window that will be printed on
+   * @param arguments the list of paths we're moving from and into
+   * @return result the output to shell
+   */
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
-    
+
     Result result = areValidArguments(arguments);
-    
+
     if (!result.errorOccured()) {
-      
+
       FileExplorer explorer = jShell.getFileExplorer();
-      
+
       String oldPath = arguments.get(0);
       String newPath = arguments.get(1);
-      
+
       File oldFile = null;
-      
+
       try {
         oldFile = explorer.getFile(oldPath);
-      }
-      catch (FileNotFoundException e) {
+      } catch (FileNotFoundException e) {
         result.logError(0, "The old path does not exist.");
       }
-      
+
       if (oldFile != null) {
-        
+
         File newFile = null;
-        
+
         try {
           newFile = explorer.getFile(newPath);
+        } catch (FileNotFoundException e) {
+
         }
-        catch (FileNotFoundException e) {
-          
-        }
-        
+
         if (newFile == null) {
           // We are moving oldFile to newPath and renaming it
           String newPathDir = Path.removeFileName(newPath);
           String newFileName = Path.getFileName(newPath);
-          
+
           Directory dir = null;
-          
+
           try {
             dir = explorer.getDirectory(newPathDir);
-          }
-          catch (FileNotFoundException e) {
+          } catch (FileNotFoundException e) {
             result.logError(1, "Invalid path.");
           }
-          
+
           if (dir != null) {
 
             String prevName = oldFile.getFileName();
             oldFile.setFileName(newFileName);
-            
+
             try {
               dir.addFile(oldFile);
-            } 
-            catch (PathExistsException e) {
+            } catch (PathExistsException e) {
               oldFile.setFileName(prevName);
-              result.logError(1, "A file of the same name already exists at" +
-                  " the new path.");
+              result.logError(1, "A file of the same name already exists at"
+                  + " the new path.");
             }
           }
-        }
-        else {
+        } else {
           if (newFile.isDirectory()) {
             // The newFile exists and is a directory
             try {
-              ((Directory)newFile).addFile(oldFile);
+              ((Directory) newFile).addFile(oldFile);
+            } catch (PathExistsException e) {
+              result.logError(1, "A file of the same name already exists at"
+                  + " the new path.");
             }
-            catch (PathExistsException e) {
-              result.logError(1, "A file of the same name already exists at" +
-                  " the new path.");
-            }
-          }
-          else {
+          } else {
             // The newFile exists and is another file
-            result.logError(1, "A file of the same name already exists at" +
-            " the new path.");
+            result.logError(1,
+                "A file of the same name already exists at" + " the new path.");
           }
         }
       }
@@ -135,24 +140,40 @@ public class Mv implements Command{
     return result;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * 
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   public Result areValidArguments(ArrayList<String> arguments) {
-    
+
     Result result = new Result(arguments);
-    
+
     if (arguments.size() != 2) {
       result.logError("Invalid number of arguments.");
     }
-    
+
     return result;
   }
-  
+
+  /**
+   * Returns the name of this command
+   * 
+   * @return commandName this is the command's name
+   */
   public String getCommandName() {
-    
+
     return commandName;
   }
 
+  /**
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
+   */
   public String getHelpText() {
-    
+
     return helpText;
   }
 
@@ -162,7 +183,7 @@ public class Mv implements Command{
    * @return whether if the output can be redirected or not
    */
   public boolean canBeRedirected() {
-    
+
     return true;
   }
 

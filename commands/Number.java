@@ -42,6 +42,9 @@ public class Number implements Command {
    * commandName The command name of the current class
    */
   private String commandName = "!";
+  /**
+   * helpText The help text for the current class
+   */
   private String helpText = "NAME:\n"
       + "  !n - Runs n-th command entered\n" + "DESCRIPTION:\n"
       + "  Executes the n-th command in this history of the current JShell"
@@ -50,6 +53,14 @@ public class Number implements Command {
       + "RETURNS:\n" + "  Documentation for CMD\n"
       + "EXAMPLE USAGE:\n" + "  /#: echo \"hi\"\n  /#: !1 \n"
       + "  hi\n  hi";
+  /**
+   * Returns true if execution of command is successful. Execution returns the
+   * recent x number of commands that was executed
+   * 
+   * @param jShell the window that will be printed on
+   * @param arguments the number of commands being recalled
+   * @return result the output to shell
+   */
   @Override
   public Result run(JShellWindow jShell, ArrayList<String> arguments) {
     Result result = areValidArguments(arguments);
@@ -77,11 +88,22 @@ public class Number implements Command {
     return result;
   }
 
+  /**
+   * Returns the name of this command
+   * 
+   * @return commandName this is the command's name
+   */
   @Override
   public String getCommandName() {
     return commandName;
   }
 
+  /**
+   * Checks if the arguments given to the command is valid
+   * 
+   * @param arguments the list of str arguments passed to the command
+   * @return isValid true if the command is valid and vice versa
+   */
   @Override
   public Result areValidArguments(ArrayList<String> arguments) {
     Result result = new Result(arguments);
@@ -92,6 +114,11 @@ public class Number implements Command {
     return result;
   }
 
+  /**
+   * Returns the help text for this command.
+   * 
+   * @return the help text for this command
+   */
   @Override
   public String getHelpText() {
     // TODO Auto-generated method stub
