@@ -104,6 +104,7 @@ public class Ls implements Command {
           else
             result.addMessage(files.get(f).getFileName(), "\t");
         }
+        result.addMessage("");
       } 
       else {
         // Iterate over the paths & print contents of each
