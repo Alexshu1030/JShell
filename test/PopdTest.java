@@ -40,7 +40,7 @@ public class PopdTest {
   @Test
   public void testWithInvalidNumberOfArguments() {
     
-    Result resultActual = Commands.run(jShell, "pushd A B");
+    Result resultActual = Commands.run(jShell, "popd A");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
@@ -53,56 +53,36 @@ public class PopdTest {
   }
   
   @Test
-  public void testPathThatDoesNotExist() {
+  public void testWithEmptyStack() {
     
-    Result resultActual = Commands.run(jShell, "pushd A");
+    Result resultActual = Commands.run(jShell, "popd");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
     
     String expectedMessage = "";
-    String expectedErrorMessage = "The path does not exist. (Argument 0: A)";
+    String expectedErrorMessage = "The directory stack is empty";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   
   @Test
-  public void testWithAbsolutePath() {
+  public void testStackFollowsLIFO() {
     
-    Commands.run(jShell, "mkdir /A /A/A1 /A/A1/A11");
-    Result resultActual = Commands.run(jShell, "pushd /A/A1/A11");
+    Commands.run(jShell, "mkdir /A /A/A1 /A/A2 /A/A1/A11 /B /B/B1");
+    Commands.run(jShell, "cd /A/A1/A11");
+    Commands.run(jShell, "pushd /B/B1");
+    Commands.run(jShell, "pushd /A/A2");
     
-    String actualMessage = resultActual.getMessage();
-    String actualErrorMessage = resultActual.getErrorMessage();
+    Commands.run(jShell, "popd");
+       
+    String workingDir = Commands.run(jShell, "pwd").getMessage();
+    assertEquals("/B/B1\n", workingDir);
     
-    String expectedMessage = "";
-    String expectedErrorMessage = "";
+    Commands.run(jShell, "popd");
     
-    assertEquals(expectedMessage, actualMessage);
-    assertEquals(expectedErrorMessage, actualErrorMessage);
-    
-    Result workingDirResult = Commands.run(jShell, "pwd");
-    assertEquals("/A/A1/A11\n", workingDirResult.getMessage());
+    workingDir = Commands.run(jShell, "pwd").getMessage();
+    assertEquals("/A/A1/A11\n", workingDir);
   }
-  
-  @Test
-  public void testWithRelativePath() {
-    
-    Commands.run(jShell, "mkdir /A /A/A1 /A/A1/A11");
-    Commands.run(jShell, "cd /A");
-    Result resultActual = Commands.run(jShell, "pushd A1/A11");
-    
-    String actualMessage = resultActual.getMessage();
-    String actualErrorMessage = resultActual.getErrorMessage();
-    
-    String expectedMessage = "";
-    String expectedErrorMessage = "";
-    
-    assertEquals(expectedMessage, actualMessage);
-    assertEquals(expectedErrorMessage, actualErrorMessage);
-    
-    Result workingDirResult = Commands.run(jShell, "pwd");
-    assertEquals("/A/A1/A11\n", workingDirResult.getMessage());
-  }
-}
+ }
