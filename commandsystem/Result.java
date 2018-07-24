@@ -33,48 +33,80 @@ import java.util.ArrayList;
 
 public class Result {
   
+  /**
+   * message the message being stored by the command
+   */
   private String message = "";
+  /**
+   * errorMessage all of the error messages produced during execution of the
+   * command
+   */
   private String errorMessage = "";
+  /**
+   * errorOccured whether an error occurred during execution of the command
+   */
   private boolean errorOccured = false;
 
+  /**
+   * arguments the arguments used with the command
+   */
   private ArrayList<String> arguments;
  
+  /**
+   * The default constructor.
+   */
   public Result() {
     
   }
   
+  /**
+   * A constructor using the arguments of the command being run
+   * 
+   * @param arguments the arguments
+   */
   public Result(ArrayList<String> arguments) {
     
     this.arguments = arguments;
   }
   
+  
+  /**
+   * Returns the message stored by the command.
+   * 
+   * @return the message store by the command.
+   */
   public String getMessage() {
     
     return message;
-    /*
-    if (message.equals(""))
-      return "";
-    else
-      return message + "\n";
-      */
   }
   
+  /**
+   * The error message produced by the command.
+   * 
+   * @return the error message produced by the command.
+   */
   public String getErrorMessage() {
     
     return errorMessage;
   }
   
+  /**
+   * Adds a message to the current messages followed by a new line
+   * 
+   * @param message the message
+   */
   public void addMessage(String message) {
     
-    /*
-    if (this.message.equals(""))
-      this.message = message;
-    else
-      this.message += "\n" + message;
-    */
     this.message += message + "\n";
   }
   
+  /**
+   * Adds a message to the current messages with the spacing string
+   * separating them.
+   * 
+   * @param message the message
+   * @param spacing the spacing in between the messages
+   */
   public void addMessage(String message, String spacing) {
     
     if (this.message.equals(""))
@@ -83,11 +115,21 @@ public class Result {
       this.message += spacing + message;
   }
   
+  /**
+   * Returns whether an error occurred.
+   * 
+   * @return whether an error occurred.
+   */
   public boolean errorOccured() {
     
     return errorOccured;
   }
   
+  /**
+   * Logs the specified error setting errorOccurred to true.
+   * 
+   * @param errorMessage the error message
+   */
   public void logError(String errorMessage) {
     
     errorOccured = true;
@@ -100,6 +142,12 @@ public class Result {
       this.errorMessage += "\n" + errorMessage;
   }
   
+  /**
+   * Logs the specified error setting errorOccurred to true. It also adds
+   * some information at the end of the error about the specified argument.
+   * 
+   * @param errorMessage the error message
+   */
   public void logError(int argument, String errorMessage) {
     
     errorOccured = true;
@@ -116,6 +164,11 @@ public class Result {
       this.errorMessage += "\n" + errorMessage;
   }
   
+  /**
+   * Adds the errors from the specified result class to this class.
+   * 
+   * @param result the result class to add the errors from.
+   */
   public void addErrors(Result result) {
 
     // If either an error has already occurred in this class or in the class
