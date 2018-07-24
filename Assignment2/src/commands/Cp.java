@@ -92,9 +92,22 @@ public class Cp implements Command {
               (ArrayList<File>) ((Directory) oldFile).getFileContents();
           // Iterate over the files in the directory and copy them
           for (int i = 0; i < files.size(); i++) {
+            ArrayList<String> subarguments = arguments;
+
             // Get the current file and create a copy of it at the new path
             File currentFile = files.get(i);
             copyFile(explorer, result, currentFile, newPath);
+            if (currentFile.isDirectory()) {
+              File newFile = null;
+              try {
+                newFile = explorer.getFile(newPath);
+              } catch (FileNotFoundException e) {
+                result.logError(0, "The path does not exist.");
+              }
+              subarguments.set(0, currentFile.getFullPath());
+              subarguments.set(1, newFile.getFullPath().concat("/" + currentFile.getFileName()));
+              run(jShell, subarguments);
+            }
           }
         } else {
           // Get the old file and create a copy of it at the new path
