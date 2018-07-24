@@ -68,17 +68,22 @@ public class CpTest {
   
   @Test
   public void testPathRelativeToWD() {
-    Commands.run(jShell, "mkdir A B");
-    Result resultActual = Commands.run(jShell, "cp A B");
+    Commands.run(jShell, "echo \"contents of text\" > TextFile");
+    Commands.run(jShell, "mkdir A");
+    Result resultActual = Commands.run(jShell, "cp TextFile A");
+    Result tree = Commands.run(jShell, "tree");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
+    String actualTree = tree.getMessage();
     
     String expectedMessage = "";
     String expectedErrorMessage = "";
+    String expectedTree = "\\\n\tTextFile\n\tA\n\t\tTextFile\n\n";
     
     assertEquals(expectedMessage, actualMessage);
     assertEquals(expectedErrorMessage, actualErrorMessage);
+    assertEquals(expectedTree, actualTree);
   }
   
   @Test
