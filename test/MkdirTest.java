@@ -224,4 +224,43 @@ public class MkdirTest {
     assertEquals(actualMessage, expectedMessage);
     assertEquals(actualErrorMessage, expectedErrorMessage);
   }
+  
+  @Test
+  public void testDirectoryExistsAtPath() {
+    
+    try {
+      explorer.addDirectory("/A");
+    }
+    catch (InvalidPathException | PathExistsException e) {
+      fail("Failed test setup");
+    }
+    
+    Result resultActual = Commands.run(jShell, "mkdir A");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "A directory already exists at that path." +
+    " (Argument 0: A)";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertEquals(actualErrorMessage, expectedErrorMessage);
+  }
+  
+  @Test
+  public void testInvalidPath() {
+    
+    Result resultActual = Commands.run(jShell, "mkdir /A/A1");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "The path does not exist." + 
+    " (Argument 0: /A/A1)";
+    
+    assertEquals(actualMessage, expectedMessage);
+    assertEquals(actualErrorMessage, expectedErrorMessage);
+  }
 }
