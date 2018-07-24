@@ -32,6 +32,7 @@ package commands;
 
 import java.util.ArrayList;
 import commandsystem.Command;
+import commandsystem.Commands;
 import commandsystem.Result;
 import filesystem.File;
 import exceptions.FileNotFoundException;
@@ -83,11 +84,12 @@ public class Grep implements Command {
     if (!result.errorOccured()) {
       // if the recursive arg is provided (recursively go thru folder
       if (arguments.get(0).equals("-R")) {
+        // get the regex we're looking for
+        String regex = arguments.get(1);
         // remove the -R and the regex respectively
         files.remove(0);      
         files.remove(0);
-        // get the regex we're looking for
-        String regex = arguments.get(1);
+        
         // for each folder in the list
         for (int i = 0; i < files.size(); i++) {
           // try to go thru each file and add their matching lines to the msg
@@ -149,18 +151,20 @@ public class Grep implements Command {
         for (int j = 0; j < files.size(); j++) {
           // try to get each file
           try {
-            if (!(jShell.getFileExplorer().getFile(files.get(j))
-                .isDirectory())) {
+            
+            File fileObj = jShell.getFileExplorer().getFile(files.get(j));
+            if (!fileObj.isDirectory()) {
               // set current file's name
-              ArrayList<String> currFile = new ArrayList<String>();
-              currFile.add(files.get(j));
+              String currFile = files.get(j);
               // get the content of the file by running cat
-              String fileCont = checkFile.run(jShell, currFile).getMessage();
+              String fileCont = Commands.run(jShell, 
+                  "cat " + currFile).getMessage();
               // split the content into separate lines
               String fileLines[] = fileCont.split("\\n");
               // if a line contains the regex add it to the result
               for (int h = 0; h < fileLines.length; h++) {
                 if (fileLines[h].contains(regex)) {
+                  System.out.println(fileLines[h]);
                   result.addMessage(fileLines[h]);
                 }
               }
