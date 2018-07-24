@@ -73,6 +73,12 @@ public class Directory extends File {
       throw new PathExistsException();
   }
   
+  /**
+   * Return whether or not this directory contains a file of that name.
+   * 
+   * @param name the name of the file.
+   * @return whether the directory contains the file.
+   */
   public boolean containsFile(String name) {
     
     int index = 0;
@@ -148,6 +154,13 @@ public class Directory extends File {
     return nextFile;
   }
 
+  
+  /**
+   * Gets a directory of the specified name from this directory.
+   * 
+   * @param dirName the name of the directory.
+   * @return the directory with the specified name.
+   */
   public Directory getDirectory(String dirName) throws FileNotFoundException {
     
     File file = getFile(dirName);
