@@ -38,9 +38,9 @@ public class ExitTest {
   }
   
   @Test
-  public void testNoArguments() {
+  public void testWithArguments() {
     
-    Result resultActual = Commands.run(jShell, "cat");
+    Result resultActual = Commands.run(jShell, "exit a");
     
     String actualMessage = resultActual.getMessage();
     String actualErrorMessage = resultActual.getErrorMessage();
@@ -52,4 +52,36 @@ public class ExitTest {
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
   
+  @Test
+  public void testNoArguments() {
+    
+    Result resultActual = Commands.run(jShell, "exit");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+    
+    assertTrue(jShell.getTerminate());
+  }
+  
+  @Test
+  public void testCanNotBeRedirected() {
+    
+    Commands.run(jShell, "echo \"\" > a");
+    Result resultActual = Commands.run(jShell, "exit > a");
+    
+    String actualMessage = resultActual.getMessage();
+    String actualErrorMessage = resultActual.getErrorMessage();
+    
+    String expectedMessage = "";
+    String expectedErrorMessage = "Command can not be redirected.";
+    
+    assertEquals(expectedMessage, actualMessage);
+    assertEquals(expectedErrorMessage, actualErrorMessage);
+  }
 }
