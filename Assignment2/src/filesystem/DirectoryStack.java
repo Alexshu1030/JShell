@@ -40,6 +40,9 @@ public class DirectoryStack {
    * directoryStack a stack of directories
    */
   private ArrayList<Directory> directoryStack = new ArrayList<Directory>();
+  /**
+   * stack an instance of the stack of directories
+   */
   public static DirectoryStack stack = new DirectoryStack();
 
   public void pushd(JShellWindow jShell, Directory directory) {
@@ -50,6 +53,9 @@ public class DirectoryStack {
     explorer.setWorkingDirectory(directory);
   }
 
+  /**
+   * Pops the directory from the stack
+   */
   public void popd(JShellWindow jShell) throws EmptyStackException {
     
     FileExplorer explorer = jShell.getFileExplorer();
