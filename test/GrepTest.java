@@ -44,16 +44,17 @@ public class GrepTest {
   public void setup() {
     Commands.initializeCommandHashTable();
   }
-  
+
   @Test
   public void recursiveCase() {
     JShellWindow jShell = new JShellWindow();
     Commands.run(jShell, "mkdir folder");
     Commands.run(jShell, "cd folder");
     try {
-      TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "three\ntwo", false);
+      TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "three\ntwo",
+          false);
     } catch (InvalidPathException e) {
-      
+
     }
     Commands.run(jShell, "cd ..");
     Result test = Commands.run(jShell, "grep -R one folder");
@@ -61,21 +62,22 @@ public class GrepTest {
     String expected = ("three");
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void normalCase() {
     JShellWindow jShell = new JShellWindow();
     try {
-      TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "a\nasd\ndd", false);
+      TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "a\nasd\ndd",
+          false);
     } catch (InvalidPathException e) {
-      
+
     }
     Result test = Commands.run(jShell, "grep a file.txt");
     String actual = test.getMessage();
     String expected = ("a\nasd\n");
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void errorCase() {
     JShellWindow jShell = new JShellWindow();
@@ -84,7 +86,7 @@ public class GrepTest {
     String expected = ("The path does not exist. (Argument 0: a)");
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void tooFewArgs() {
     JShellWindow jShell = new JShellWindow();
@@ -93,7 +95,7 @@ public class GrepTest {
     String expected = ("Invalid number of arguments.");
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void noArgs() {
     JShellWindow jShell = new JShellWindow();
@@ -102,28 +104,46 @@ public class GrepTest {
     String expected = ("Invalid number of arguments.");
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void noneCase() {
     JShellWindow jShell = new JShellWindow();
     try {
       TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "sdf", false);
     } catch (InvalidPathException e) {
-      
+
     }
     Result test = Commands.run(jShell, "grep a file.txt");
     String actual = test.getMessage();
     String expected = ("");
     assertEquals(expected, actual);
   }
-  
+
+  @Test
+  public void noneRecCase() {
+    JShellWindow jShell = new JShellWindow();
+    Commands.run(jShell, "mkdir folder");
+    Commands.run(jShell, "cd folder");
+    try {
+      TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "fifty",
+          false);
+    } catch (InvalidPathException e) {
+
+    }
+    Commands.run(jShell, "cd ..");
+    Result test = Commands.run(jShell, "grep -R one folder");
+    String actual = test.getMessage();
+    String expected = ("");
+    assertEquals(expected, actual);
+  }
+
   @Test
   public void oneCase() {
     JShellWindow jShell = new JShellWindow();
     try {
       TextEditor.writeText(jShell.getFileExplorer(), "file.txt", "asd", false);
     } catch (InvalidPathException e) {
-      
+
     }
     Result test = Commands.run(jShell, "grep a file.txt");
     String actual = test.getMessage();
