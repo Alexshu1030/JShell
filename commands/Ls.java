@@ -42,6 +42,9 @@ public class Ls implements Command {
    * commandName The command name of the current class
    */
   private String commandName = "ls";
+  /**
+   * recurseiveArg The str indication for a recursive argument
+   */
   private String recurseiveArg = "-R";
   /**
    * helpText The help text for the current class
