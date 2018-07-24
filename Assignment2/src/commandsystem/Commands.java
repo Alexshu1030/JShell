@@ -85,8 +85,7 @@ public class Commands {
    * @return result true if execution was successful
    */
   public static Result run(JShellWindow jShell, String commandText) {
-    // split at quotations for echo parameter 1
-    commandText.split("\"");
+    
     // Split the command into it's parts (i.e. separate blocks of text, quotes,
     // etc.)
     ArrayList<String> arguments = split(commandText);
@@ -215,6 +214,9 @@ public class Commands {
    */
   private static ArrayList<String> split(String text) {
 
+    // Remove the leading and trailing spaces.
+    text = text.trim();
+    
     ArrayList<String> splits = new ArrayList<String>();
     int lastSplitIndex = 0;
 
@@ -236,8 +238,11 @@ public class Commands {
 
       } else if (currentChar == ' ') {
 
-        String split = text.substring(lastSplitIndex, i);
-        splits.add(split);
+        // If we are not at the beginning of the string, the split it.
+        if (i != 0) {
+          String split = text.substring(lastSplitIndex, i);
+          splits.add(split);
+        }
 
         // The current char is a space. We want to skip to the next non-space
         while (currentChar == ' ' && i != text.length() - 1) {
