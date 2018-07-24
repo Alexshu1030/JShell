@@ -43,7 +43,6 @@ public class FileExplorer {
 
   public FileExplorer() {
 
-    setWorkingDirectory(rootDirectory);
   }
 
   /**
@@ -78,7 +77,8 @@ public class FileExplorer {
    * @param newWD the new working directory
    */
   public void setWorkingDirectory(Directory newWD) {
-
+    
+    System.out.println("YARP: " + newWD.getFileName());
     workingDirectory = newWD;
   }
   
