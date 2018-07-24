@@ -32,7 +32,6 @@ package commands;
 
 import java.util.ArrayList;
 import commandsystem.Command;
-import commandsystem.Commands;
 import commandsystem.Result;
 import commandsystem.TextEditor;
 import commandsystem.Web;
@@ -69,11 +68,12 @@ public class Curl implements Command {
       Web web = new Web();
       // Get the contents of the web page
       String contents = web.grabContents(jShell, arguments);
+      // Make sure it was a valid url first
       if (contents == "Invalid URL") {
         result.logError("Invalid URL");
       }
       else {
-        // Echo the contents into the file
+        // Write contents into the file
         try {
           TextEditor.writeText(explorer, outfile, contents, false);
         } catch (InvalidPathException e) {
