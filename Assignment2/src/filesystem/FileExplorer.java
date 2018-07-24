@@ -78,7 +78,6 @@ public class FileExplorer {
    */
   public void setWorkingDirectory(Directory newWD) {
     
-    System.out.println("YARP: " + newWD.getFileName());
     workingDirectory = newWD;
   }
   
